@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P7-rc.1",
+      "version": "P7-rc.1",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P7-rc.1",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P7-rc.1.ufw",
+        "sha256": "447e185c18f063642c885c5a007bb7ab36f765e254d247ece10d4197b7a14e69",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P7-rc.1/glyph-pks3-101-P7-rc.1.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585097880"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Add read-only connection-scoped audio-verification diagnostics and atomic hash-progress notifications. Retain P6 controls and P5 recording, playback, cleanup, updater and USB behavior; matching Italic defers stalled verification while healthy files continue.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P7-rc.1",
+        "privateManifestSHA256": "68b3e48d6398dc26a2d6dd211cb55840ee90d4822882752e9b3ac770d7582f37"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QNy1yYy4xLnVmdyIsInNoYTI1NiI6IjQ0N2UxODVjMThmMDYzNjQyYzg4NWM1YTAwN2JiN2FiMzZmNzY1ZTI1NGQyNDdlY2UxMGQ0MTk3YjdhMTRlNjkifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQNy1yYy4xIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MzlaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlA3LXJjLjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCIEdCB/Y+VRFYRtph6lMVXGnV7IeG9rtyMSe4f0zCqMVVAiEAvSeaiDILJBrL9FMODt96j/qc3hEVkUXWnNT8Wjl0wnU="
+      }
+    },
+    {
       "id": "P6-rc.1",
       "version": "P6-rc.1",
       "packageRevision": 1,
