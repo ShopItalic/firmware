@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P4-rc.2",
+      "version": "P4-rc.2",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P4-rc.2",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P4-rc.2.ufw",
+        "sha256": "e5fa145dc07b6b80ddafa4f4d8b4c8e9d1abb06533c840b53d758964df6af9f5",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P4-rc.2/glyph-pks3-101-P4-rc.2.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585087590"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Add versioned read-only saved-MP3 inventory, SHA-256 selection and offset reads for Italic. Enable companion BLE at stack startup and preserve the link when entering/leaving factory About/test pages. Wake subscribed Italic for background sync, with snapshot-bound acknowledgement and recording/conversion/USB ownership gates. Retire factory AI/live-stream start paths; preserve P1 save, P2 update UI and P3 USB behavior. Model Glyph Beta / Version P4-rc.2.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P4-rc.2",
+        "privateManifestSHA256": "6f3ba6bfdfaf2538b46ffe55802237a9e878eedf28df1792044917c9c22af636"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QNC1yYy4yLnVmdyIsInNoYTI1NiI6ImU1ZmExNDVkYzA3YjZiODBkZGFmYTRmNGQ4YjRjOGU5ZDFhYmIwNjUzM2M4NDBiNTNkNzU4OTY0ZGY2YWY5ZjUifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQNC1yYy4yIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MzVaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlA0LXJjLjIifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCIQDFIosvpVfA49RARqc506E9vap30xWwhjrnlkCHuEBqvgIgD7nswnMQfPT+D64L/Ya1tHhU8ht/SNW7GyWP76n3row="
+      }
+    },
+    {
       "id": "P4-rc.1",
       "version": "P4-rc.1",
       "packageRevision": 1,
