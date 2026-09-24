@@ -2,5 +2,53 @@
   "schemaVersion": 1,
   "product": "sudo",
   "hardware": "603V1.23.2",
-  "releases": []
+  "releases": [
+    {
+      "id": "6.0.3.3Z62-r1",
+      "version": "6.0.3.3Z62",
+      "packageRevision": 1,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3Z62-r1",
+      "asset": {
+        "bytes": 184715,
+        "name": "BCL603S2P_6.0.3.3Z62.zip",
+        "sha256": "3e928afdfcb402450aea7a527093dba102d08650cc9ffed52cf41cd9f8d1a38f",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3Z62-r1/BCL603S2P_6.0.3.3Z62.zip",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585046743"
+      },
+      "extraAssets": [
+        "manifest.json",
+        "nRF5_Nordic_license.txt",
+        "provenance.json",
+        "upstream-SHA256SUMS"
+      ],
+      "notice": "Original supplier application. The upgrade from 6.0.0.7Z62 and recovery on sealed Rings have not been physically verified. This package does not update the bootloader.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3Z62",
+        "status": "supplier-signed-ota",
+        "otaAvailable": true,
+        "withdrawn": false,
+        "toolchain": "Arm Compiler 5 (preserved supplier distribution)",
+        "notice": "Original supplier application. The upgrade from 6.0.0.7Z62 and recovery on sealed Rings have not been physically verified. This package does not update the bootloader.",
+        "migratedFrom": {
+          "catalog": "https://raw.githubusercontent.com/ShopItalic/sudo/main/tools/firmware-hosting/releases-v9.json",
+          "catalogSHA256": "a46e9d0df7faa9e2c5c4a67f17f930fbdf396a3f23f4efbf770b391359738aff",
+          "repository": "ShopItalic/sudo",
+          "tag": "v6.0.3.3Z62",
+          "url": "https://github.com/ShopItalic/sudo/releases/download/v6.0.3.3Z62/BCL603S2P_6.0.3.3Z62.zip"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTg0NzE1LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNaNjIuemlwIiwic2hhMjU2IjoiM2U5MjhhZmRmY2I0MDI0NTBhZWE3YTUyNzA5M2RiYTEwMmQwODY1MGNjOWZmZWQ1MmNmNDFjZDlmOGQxYTM4ZiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1o2Mi1yMSIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MjdaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1o2MiJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIDTNucQ00CpnkFKqJrtW6O4VvUcfzanu+p4jaH50F0duAiEAmaOrx9CH0y7yKzkrdD4JlK5dNWrz30QXsz26Sb/2mmA="
+      }
+    }
+  ]
 }
