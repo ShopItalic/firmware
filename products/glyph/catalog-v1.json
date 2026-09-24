@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P4-rc.4",
+      "version": "P4-rc.4",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P4-rc.4",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P4-rc.4.ufw",
+        "sha256": "8054e283d7f5a2ab5f990b7f151ac857a0e8527d177e4878a4a38dbb944cacb8",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P4-rc.4/glyph-pks3-101-P4-rc.4.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585091369"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Place factory update/status modals on the system layer and keep standby at child index zero beneath them, preserving its complete lifecycle. Hold automatic idle while an AIBook modal is open. Preserve P4 read-only memo transfer; About/HELLO identify P4-rc.4 with the same API revision 2.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P4-rc.4",
+        "privateManifestSHA256": "b2ac4e2ea33d60d9440f6043c57a422e3b6aa07861fbce13259300738f7fa430"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QNC1yYy40LnVmdyIsInNoYTI1NiI6IjgwNTRlMjgzZDdmNWEyYWI1Zjk5MGI3ZjE1MWFjODU3YTBlODUyN2QxNzdlNDg3OGE0YTM4ZGJiOTQ0Y2FjYjgifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQNC1yYy40IiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MzdaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlA0LXJjLjQifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEQCIAGH7nvQGvCwIBt9g6BbwZjzXY0A2ecZL1o2QdLhhxuvAiBEoEx2EchbXm2TwPNduw0rd01jsAbt7H2B83YE0NWz4A=="
+      }
+    },
+    {
       "id": "P4-rc.3",
       "version": "P4-rc.3",
       "packageRevision": 1,
