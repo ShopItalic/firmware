@@ -4,6 +4,76 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P11-r1",
+      "version": "6.0.3.3P11",
+      "packageRevision": 1,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P11-r1",
+      "asset": {
+        "bytes": 187516,
+        "name": "BCL603S2P_6.0.3.3P11.zip",
+        "sha256": "11cfd46e3f88a37fe6d57f3b7143bb9144074d91aa25ebd4ebed638f49bd2288",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P11-r1/BCL603S2P_6.0.3.3P11.zip",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585054115"
+      },
+      "extraAssets": [
+        "FreeRTOS_license.txt",
+        "NOTICES.txt",
+        "SDK_external_licenses.txt",
+        "SEGGER_RTT_license.txt",
+        "SHA256_Nordic_license.txt",
+        "ST_LSM6DSO_LICENSE.txt",
+        "ci-build-summary.json",
+        "factory_Opus_COPYING.txt",
+        "manifest.json",
+        "nRF5_Nordic_license.txt",
+        "package-verification.json",
+        "provenance.json",
+        "release-notes.html",
+        "retirement-cpu-verification.json",
+        "source-load-verification.json",
+        "toolchain-version.txt",
+        "upstream-SHA256SUMS"
+      ],
+      "notice": "P11-r1 — Factory ADPCM + charging lights. Earlier revision without the reconnect fix. Sample-test package for 603V1.23.2. Requires the P11-capable app. A Ring already reporting P11 accepts Opus r2/r4; ADPCM r1/r3 are blocked because Opus files may exist. Application only. Software and signature checks passed; physical recording, transfer and recovery checks remain.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P11",
+        "packageRevision": 1,
+        "status": "supplier-signed-ota",
+        "otaAvailable": true,
+        "withdrawn": false,
+        "toolchain": "Arm Compiler 5.06 update 7 for Certification (build 960)",
+        "sourceCommit": "31ddf23abe6fd1caec742f82cc7b40bb4f6dd960",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/35070143004",
+        "releaseChannel": "sample-test-prerelease",
+        "physicallyQualified": false,
+        "signing": {
+          "locallyPackaged": true,
+          "keyProvenance": "supplier-dfu-key",
+          "supplierAcceptance": false
+        },
+        "notice": "P11-r1 — Factory ADPCM + charging lights. Earlier revision without the reconnect fix. Sample-test package for 603V1.23.2. Requires the P11-capable app. A Ring already reporting P11 accepts Opus r2/r4; ADPCM r1/r3 are blocked because Opus files may exist. Application only. Software and signature checks passed; physical recording, transfer and recovery checks remain.",
+        "migratedFrom": {
+          "catalog": "https://raw.githubusercontent.com/ShopItalic/sudo/main/tools/firmware-hosting/releases-v9.json",
+          "catalogSHA256": "a46e9d0df7faa9e2c5c4a67f17f930fbdf396a3f23f4efbf770b391359738aff",
+          "repository": "ShopItalic/sudo",
+          "tag": "v6.0.3.3P11-r1",
+          "url": "https://github.com/ShopItalic/sudo/releases/download/v6.0.3.3P11-r1/BCL603S2P_6.0.3.3P11.zip"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTg3NTE2LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMTEuemlwIiwic2hhMjU2IjoiMTFjZmQ0NmUzZjg4YTM3ZmU2ZDU3ZjNiNzE0M2JiOTE0NDA3NGQ5MWFhMjVlYmQ0ZWJlZDYzOGY0OWJkMjI4OCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AxMS1yMSIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDY6NTVaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AxMSJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQC/OBecdA9B47RWZch88s05hKkVo1KWwsRjjin72N0k9gIgG0UtQ3C7b3HbdFmDefzWR7dOnOYTLs8C2ieTnMYYyHk="
+      }
+    },
+    {
       "id": "6.0.3.3P10-r3",
       "version": "6.0.3.3P10",
       "packageRevision": 3,
