@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P8-rc.3",
+      "version": "P8-rc.3",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P8-rc.3",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P8-rc.3.ufw",
+        "sha256": "d06df2b875318f767c3f2c06d957591c20c143971c91148ffaeea0216ce3d09a",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P8-rc.3/glyph-pks3-101-P8-rc.3.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585108421"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Repair the inherited Bluetooth worker startup check against an optimized-away factory mutex return; preserve mutex creation, locking and timer failure handling. Report exact P8-rc.3 over HELLO and About; retain P8-rc.2 USB awake, modal protection and read-only input observation.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P8-rc.3",
+        "privateManifestSHA256": "c5663e763b68726dc09794a8b1bd418db0034fd8d12b91a246001b5abfc8c5ad"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QOC1yYy4zLnVmdyIsInNoYTI1NiI6ImQwNmRmMmI4NzUzMThmNzY3YzNmMmMwNmQ5NTc1OTFjMjBjMTQzOTcxYzkxMTQ4ZmZhZWVhMDIxNmNlM2QwOWEifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQOC1yYy4zIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6NDBaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlA4LXJjLjMifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEYCIQCYIxdPjWpJ/SojDeiMgaGDeRyqU70OUBE8YKQL8hmvoAIhAI2MDChJ3MQX7wLHV0+grfwkpNTwgqGVhDx/PY8o2GXk"
+      }
+    },
+    {
       "id": "P8-rc.2",
       "version": "P8-rc.2",
       "packageRevision": 1,
