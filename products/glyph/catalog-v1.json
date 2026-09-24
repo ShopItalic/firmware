@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P8-rc.2",
+      "version": "P8-rc.2",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P8-rc.2",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P8-rc.2.ufw",
+        "sha256": "89e807e092fe294d416a5f7e2b9190e5f33d22bbbfc1b26aa8da4f3964e21e4e",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P8-rc.2/glyph-pks3-101-P8-rc.2.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585106835"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Keep automatic idle held on every page while USB power is present; resume the configured delay after unplug, retaining manual Power and low-voltage handling. Correct inherited idle-guard overlap before installation; preserve modal protection and bounded read-only button observations with exact P8-rc.2 app negotiation.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P8-rc.2",
+        "privateManifestSHA256": "e2adc104ca0bbdd3e782b48f7231832417bc7b13d507979a53861ef302665ad6"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QOC1yYy4yLnVmdyIsInNoYTI1NiI6Ijg5ZTgwN2UwOTJmZTI5NGQ0MTZhNWY3ZTJiOTE5MGU1ZjMzZDIyYmJiZmMxYjI2YWE4ZGE0ZjM5NjRlMjFlNGUifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQOC1yYy4yIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6NDBaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlA4LXJjLjIifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEQCIEkVBFOd9NPOP/iz+3vGitgLO0gd0YIXpXhKrlNQDuiMAiAsgxWwzyXulxFng25aNbxX9aMb+3atJ+mGODMM4MPtKg=="
+      }
+    },
+    {
       "id": "P7-rc.1",
       "version": "P7-rc.1",
       "packageRevision": 1,
