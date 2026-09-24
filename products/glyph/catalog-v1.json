@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P1-rc.2",
+      "version": "P1-rc.2",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P1-rc.2",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P1-rc.2.ufw",
+        "sha256": "27afb3201204de31a4598cd0326710d8e2f879f1ff9a1192fa0b48c030e02a94",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P1-rc.2/glyph-pks3-101-P1-rc.2.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585078934"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Retain P1 automatic save and Saved popup with recorder code identical to P1-rc.1. Show Model as Glyph Beta and the exact candidate P1-rc.2 in Version; only 25 display-data bytes differ from P1-rc.1.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "device-smoke-tested",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P1-rc.2",
+        "privateManifestSHA256": "c2c12a7216c30ececa7935c4ba88fd8d6e4071597e58effebd87f67e4a53dd61"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QMS1yYy4yLnVmdyIsInNoYTI1NiI6IjI3YWZiMzIwMTIwNGRlMzFhNDU5OGNkMDMyNjcxMGQ4ZTJmODc5ZjFmZjlhMTE5MmZhMGI0OGMwMzBlMDJhOTQifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQMS1yYy4yIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MzNaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlAxLXJjLjIifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCIBA77AXoaWDkZCVyCEPo7JnVrfUTA8U63vw7rcPQmh8BAiEA02ZjsLI20yE+sIEPWncptKfqtIs7RHN1i1OPBCDmfz0="
+      }
+    },
+    {
       "id": "P1-rc.1",
       "version": "P1-rc.1",
       "packageRevision": 1,
