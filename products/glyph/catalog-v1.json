@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P4-rc.1",
+      "version": "P4-rc.1",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P4-rc.1",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P4-rc.1.ufw",
+        "sha256": "203451f667a1f888c5d786c9a49822abb1518909a1c62e6476286d6a76d234e5",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P4-rc.1/glyph-pks3-101-P4-rc.1.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585082874"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Add versioned read-only saved-MP3 inventory, SHA-256 selection and offset reads for Italic. Wake subscribed Italic for background sync, with snapshot-bound acknowledgement and recording/conversion/USB ownership gates. Disable factory cloud/live-audio paths; preserve P1 save, P2 update UI and P3 USB behavior. Model Glyph Beta / Version P4-rc.1.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P4-rc.1",
+        "privateManifestSHA256": "41842531aa472a5ade232d2300e56ee85ee50869cf07c4d0f43b0b3cb6dc87c5"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QNC1yYy4xLnVmdyIsInNoYTI1NiI6IjIwMzQ1MWY2NjdhMWY4ODhjNWQ3ODZjOWE0OTgyMmFiYjE1MTg5MDlhMWM2MmU2NDc2Mjg2ZDZhNzZkMjM0ZTUifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQNC1yYy4xIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MzVaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlA0LXJjLjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCIQD768c471hUP63ffkZYlJt4H4BtELiI+fQO9Q1BZAichwIgM30jVWoMG4GI8xXvFTc9nY9elIGifDvDF8bB0zxsxag="
+      }
+    },
+    {
       "id": "P3-rc.1",
       "version": "P3-rc.1",
       "packageRevision": 1,
