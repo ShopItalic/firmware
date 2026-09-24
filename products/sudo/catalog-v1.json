@@ -4,6 +4,79 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P13-r2",
+      "version": "6.0.3.3P13",
+      "packageRevision": 2,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P13-r2",
+      "asset": {
+        "bytes": 341152,
+        "name": "BCL603S2P_6.0.3.3P13.zip",
+        "sha256": "0b6f5e814435d341b586448b0c29f9cb03d151d24f9dd6cbb0e6755b0fa0cde7",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P13-r2/BCL603S2P_6.0.3.3P13.zip",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585063732"
+      },
+      "extraAssets": [
+        "FreeRTOS_license.txt",
+        "NOTICES.txt",
+        "Opus_1.6.1_COPYING.txt",
+        "SDK_external_licenses.txt",
+        "SEGGER_RTT_license.txt",
+        "SHA256_Nordic_license.txt",
+        "ST_LSM6DSO_LICENSE.txt",
+        "ci-build-summary.json",
+        "clock-cpu-verification.json",
+        "codec-cpu-verification.json",
+        "factory_Opus_COPYING.txt",
+        "manifest.json",
+        "nRF5_Nordic_license.txt",
+        "package-verification.json",
+        "provenance.json",
+        "release-notes.html",
+        "retirement-cpu-verification.json",
+        "source-load-verification.json",
+        "toolchain-version.txt",
+        "upstream-SHA256SUMS"
+      ],
+      "notice": "P13-r2 tester prerelease for 603V1.23.2. Opus recording with support for existing ADPCM files in the app; inherits P12 recording deletion and the 1024 Hz verification clock repair; adds idle BLE negotiation, deadline-based worker sleep, bounded motor cues, lower recording LED brightness and slower idle touch scans, and corrects periodic battery notifications. Application only. Requires the P13-capable Italic app using releases-v3.json. Power savings and touch latency are unmeasured. Software, memory, CPU-model and signature checks passed; physical boot, recording, transfer, discard and recovery remain unqualified. Locally signed with the supplier DFU key; not supplier acceptance. No Ring was flashed by this task.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P13",
+        "packageRevision": 2,
+        "status": "supplier-signed-ota",
+        "otaAvailable": true,
+        "withdrawn": false,
+        "toolchain": "Arm Compiler 5.06 update 7 for Certification (build 960)",
+        "sourceCommit": "87e1d51bd796b33193a00d0257cd5e2b9ca253d8",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/35575920093",
+        "releaseChannel": "sample-test-prerelease",
+        "physicallyQualified": false,
+        "signing": {
+          "locallyPackaged": true,
+          "keyProvenance": "supplier-dfu-key",
+          "supplierAcceptance": false
+        },
+        "notice": "P13-r2 tester prerelease for 603V1.23.2. Opus recording with support for existing ADPCM files in the app; inherits P12 recording deletion and the 1024 Hz verification clock repair; adds idle BLE negotiation, deadline-based worker sleep, bounded motor cues, lower recording LED brightness and slower idle touch scans, and corrects periodic battery notifications. Application only. Requires the P13-capable Italic app using releases-v3.json. Power savings and touch latency are unmeasured. Software, memory, CPU-model and signature checks passed; physical boot, recording, transfer, discard and recovery remain unqualified. Locally signed with the supplier DFU key; not supplier acceptance. No Ring was flashed by this task.",
+        "migratedFrom": {
+          "catalog": "https://raw.githubusercontent.com/ShopItalic/sudo/main/tools/firmware-hosting/releases-v9.json",
+          "catalogSHA256": "a46e9d0df7faa9e2c5c4a67f17f930fbdf396a3f23f4efbf770b391359738aff",
+          "repository": "ShopItalic/sudo",
+          "tag": "v6.0.3.3P13-r2",
+          "url": "https://github.com/ShopItalic/sudo/releases/download/v6.0.3.3P13-r2/BCL603S2P_6.0.3.3P13.zip"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzQxMTUyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMTMuemlwIiwic2hhMjU2IjoiMGI2ZjVlODE0NDM1ZDM0MWI1ODY0NDhiMGMyOWY5Y2IwM2QxNTFkMjRmOWRkNmNiYjBlNjc1NWIwZmEwY2RlNyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AxMy1yMiIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDY6MjFaIiwicGFja2FnZVJldmlzaW9uIjoyLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AxMyJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIDOdpCp+0fRyaz7C42i52tLgucTIfWPcYXqPSs63pIHRAiB1JKjwzgntINFvw32cKuQjpV/oT8wZiloovQvv931aIQ=="
+      }
+    },
+    {
       "id": "6.0.3.3P12-r2",
       "version": "6.0.3.3P12",
       "packageRevision": 2,
