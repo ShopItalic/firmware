@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P10-rc.2",
+      "version": "P10-rc.2",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P10-rc.2",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P10-rc.2.ufw",
+        "sha256": "54408dab94c5dede345345558fe5b637f975962e3d9acfae7160ec7a66f41acf",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P10-rc.2/glyph-pks3-101-P10-rc.2.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585114502"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Add a physical Settings Update action for USB-staged firmware with visible preflight rejection and request-submission messages. Preserve factory loader, validation, boot guard and powered-on unplug path; Bluetooth Install remains Unsupported. Retain P10 Buttons alignment and signed inactive delivery; place code within already retired and replaced extension ranges with exact shared-import verification.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P10-rc.2",
+        "privateManifestSHA256": "e518a75881ee82b4a879cb408fd4258253c18a422c77b76590651b267efaa18b"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QMTAtcmMuMi51ZnciLCJzaGEyNTYiOiI1NDQwOGRhYjk0YzVkZWRlMzQ1MzQ1NTU4ZmU1YjYzN2Y5NzU5NjJlM2Q5YWNmYWU3MTYwZWM3YTY2ZjQxYWNmIn0sImNoYW5uZWwiOiJ0ZXN0IiwiaGFyZHdhcmUiOiJQS1MzLTEwMSIsImlkIjoiUDEwLXJjLjIiLCJpbnN0YWxsYWJsZSI6ZmFsc2UsImlzc3VlZEF0IjoiMjAyNi0wOS0yNFQwMzowNzo0MloiLCJwYWNrYWdlUmV2aXNpb24iOjEsInByb2R1Y3QiOiJnbHlwaCIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiUDEwLXJjLjIifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCIFcrJEcyQTP7sC4rN0l9ACzQWhgWegw9dUBW45/TmZw7AiEAtlzstXosiBOnx6WoR8k8tRX3aUyrmAnujIQoygH28gY="
+      }
+    },
+    {
       "id": "P10-rc.1",
       "version": "P10-rc.1",
       "packageRevision": 1,
