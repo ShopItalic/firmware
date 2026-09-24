@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P9-rc.1",
+      "version": "P9-rc.1",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P9-rc.1",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P9-rc.1.ufw",
+        "sha256": "aa16222641dcdcba4a0580607e32757490c0148ac33e3e88d70df67f8b061467",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P9-rc.1/glyph-pks3-101-P9-rc.1.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585110509"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Add native Settings > Buttons with revisioned Save/readback, draft-only defaults, conflicts and editor navigation. Persist all 16 mappings in two reserved native VM records; execute guarded button actions with queued Clip ownership and durable per-file Clip/Memo kind. Redirect the retired AIBook cloud launcher to the existing local recorder; preserve factory layout, update path and inherited custody/USB guards.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P9-rc.1",
+        "privateManifestSHA256": "d8fd046d44e10f84387887ea931ab37176917ded9d00624929631751f27f3155"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QOS1yYy4xLnVmdyIsInNoYTI1NiI6ImFhMTYyMjI2NDFkY2RjYmE0YTA1ODA2MDdlMzI3NTc0OTBjMDE0OGFjMzNlM2U4OGQ3MGRmNjdmOGIwNjE0NjcifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQOS1yYy4xIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6NDFaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlA5LXJjLjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEQCIDaE6zg/1vH6O5+JKwa21JluBb31RHiTZTP2H52N0ef8AiAtgmZKviU+kP9wT9X+lc8QvCyQboQ/+mi6zhs3PQ42gA=="
+      }
+    },
+    {
       "id": "P8-rc.3",
       "version": "P8-rc.3",
       "packageRevision": 1,
