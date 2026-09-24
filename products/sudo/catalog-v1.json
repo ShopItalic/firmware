@@ -4,6 +4,65 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P13-r4",
+      "version": "6.0.3.3P13",
+      "packageRevision": 4,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P13-r4",
+      "asset": {
+        "bytes": 341808,
+        "name": "BCL603S2P_6.0.3.3P13.zip",
+        "sha256": "a0862f68e75127c70bf4b4be167f1ba65894458c3b9a8bca96445b8d0a45f2b2",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P13-r4/BCL603S2P_6.0.3.3P13.zip",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585067725"
+      },
+      "extraAssets": [
+        "app.bin",
+        "manifest.json",
+        "result.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "notice": "Test release. Available to install for unit testing; physical testing is in progress.",
+      "qualification": "Software and signed-package checks passed. Physical recording, gestures, power and all-settings testing are in progress; this is not a stable release.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P13",
+        "packageRevision": 4,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "sourceCommit": "39b823d4d7d5d29dc648cb12c29cc0a2c15c9f17",
+        "evidence": {
+          "result.json": "3aa803489300815eeeded79b90e92b1a688fde6703885600fd2bafc3342206cd",
+          "signed-package.json": "79929fee5999675a1153b8aa151fa3ab4f2bd8cc9269f6f2a5932a6ab023c515",
+          "source-load-verification.json": "cd92a6657e5651868cb955c2089607b4ed0b4a2c8140efb12f89707ca250ecc0"
+        },
+        "qualification": "Software and signed-package checks passed. Physical recording, gestures, power and all-settings testing are in progress; this is not a stable release.",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/35685912510",
+        "notice": "Test release. Available to install for unit testing; physical testing is in progress.",
+        "migratedFrom": {
+          "catalog": "https://raw.githubusercontent.com/ShopItalic/sudo/main/tools/firmware-hosting/releases-v9.json",
+          "catalogSHA256": "a46e9d0df7faa9e2c5c4a67f17f930fbdf396a3f23f4efbf770b391359738aff",
+          "repository": "ShopItalic/sudo",
+          "tag": "v6.0.3.3P13-r4",
+          "url": "https://github.com/ShopItalic/sudo/releases/download/v6.0.3.3P13-r4/BCL603S2P_6.0.3.3P13.zip"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzQxODA4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMTMuemlwIiwic2hhMjU2IjoiYTA4NjJmNjhlNzUxMjdjNzBiZjRiNGJlMTY3ZjFiYTY1ODk0NDU4YzNiOWE4YmNhOTY0NDViOGQwYTQ1ZjJiMiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AxMy1yNCIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDY6MDlaIiwicGFja2FnZVJldmlzaW9uIjo0LCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AxMyJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQCej1+TcbAP+wWUeQhnuQzQgyF+Lc7FZAEkFW6BqXSWnwIhAJZ+y0wVR6oy46dH7TRYApnIwgL5Xe6FBX52ckSylckR"
+      }
+    },
+    {
       "id": "6.0.3.3P12-r5",
       "version": "6.0.3.3P12",
       "packageRevision": 5,
