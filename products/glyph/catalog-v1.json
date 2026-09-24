@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P10-rc.1",
+      "version": "P10-rc.1",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P10-rc.1",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P10-rc.1.ufw",
+        "sha256": "31af3efb1b6e6ae4e299ff5beda34ca7f734595d6e9662e58e7640740b03b9bc",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P10-rc.1/glyph-pks3-101-P10-rc.1.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585113164"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Fix the missing native Buttons entry and editor positions by correcting the inherited factory center alignment. Add signed physically approved inactive BLE delivery, complete-device SHA-256, explicit resume and metadata-scoped cleanup; wireless activation remains absent. Drain trial file operations before USB admission, fence legacy mutating commands, preserve original loader/layout and inherited recordings/mappings.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P10-rc.1",
+        "privateManifestSHA256": "981fe9b86f9a74a53ae2d4dc77f1411fb0e45e04be21038bcd911228c2fc6870"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QMTAtcmMuMS51ZnciLCJzaGEyNTYiOiIzMWFmM2VmYjFiNmU2YWU0ZTI5OWZmNWJlZGEzNGNhN2Y3MzQ1OTVkNmU5NjYyZTU4ZTc2NDA3NDBiMDNiOWJjIn0sImNoYW5uZWwiOiJ0ZXN0IiwiaGFyZHdhcmUiOiJQS1MzLTEwMSIsImlkIjoiUDEwLXJjLjEiLCJpbnN0YWxsYWJsZSI6ZmFsc2UsImlzc3VlZEF0IjoiMjAyNi0wOS0yNFQwMzowNzo0MVoiLCJwYWNrYWdlUmV2aXNpb24iOjEsInByb2R1Y3QiOiJnbHlwaCIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiUDEwLXJjLjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCIGYABnKq23XEoFLLUErxL0StzmoBpeiUeUtjpTfEZR1/AiEAxcFDCMsv60um/9EeuvMjE06tl2zqT5YJWoDHkKbFugM="
+      }
+    },
+    {
       "id": "P9-rc.1",
       "version": "P9-rc.1",
       "packageRevision": 1,
