@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P3-rc.1",
+      "version": "P3-rc.1",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P3-rc.1",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P3-rc.1.ufw",
+        "sha256": "7ed1443d4a351a69d7c172c10b9fd6e57ab99328b742184fe0e5af37ddbc7a87",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P3-rc.1/glyph-pks3-101-P3-rc.1.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585081894"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Expose factory USB serial presence from every awake application page. Keep shared disk access in Settings; stop the previous USB mode before switching and clean up serial-only unplug. Preserve P1 recording and P2 update UI, with Model Glyph Beta and Version P3-rc.1.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P3-rc.1",
+        "privateManifestSHA256": "28e34d93da545deb14eb22211662e91229117728642055ed1ecc030c3b3d5537"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QMy1yYy4xLnVmdyIsInNoYTI1NiI6IjdlZDE0NDNkNGEzNTFhNjlkN2MxNzJjMTBiOWZkNmU1N2FiOTkzMjhiNzQyMTg0ZmUwZTVhZjM3ZGRiYzdhODcifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQMy1yYy4xIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MzRaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlAzLXJjLjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCICEgpMzRY1pcEijmG9/G72F1THJ43Lm6dIdKR7WdzqigAiEA8ussC9vMER3U+dwJLiCbbgwZcrO0lhD/vYTGLCTNNd0="
+      }
+    },
+    {
       "id": "P2-rc.1",
       "version": "P2-rc.1",
       "packageRevision": 1,
