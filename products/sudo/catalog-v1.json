@@ -4,6 +4,79 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P12-r2",
+      "version": "6.0.3.3P12",
+      "packageRevision": 2,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P12-r2",
+      "asset": {
+        "bytes": 340124,
+        "name": "BCL603S2P_6.0.3.3P12.zip",
+        "sha256": "65bca0179483e8c3a8feda4ce792a148aa188ac25849ac789853cb4ed42463f1",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P12-r2/BCL603S2P_6.0.3.3P12.zip",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585060186"
+      },
+      "extraAssets": [
+        "FreeRTOS_license.txt",
+        "NOTICES.txt",
+        "Opus_1.6.1_COPYING.txt",
+        "SDK_external_licenses.txt",
+        "SEGGER_RTT_license.txt",
+        "SHA256_Nordic_license.txt",
+        "ST_LSM6DSO_LICENSE.txt",
+        "ci-build-summary.json",
+        "clock-cpu-verification.json",
+        "codec-cpu-verification.json",
+        "factory_Opus_COPYING.txt",
+        "manifest.json",
+        "nRF5_Nordic_license.txt",
+        "package-verification.json",
+        "provenance.json",
+        "release-notes.html",
+        "retirement-cpu-verification.json",
+        "source-load-verification.json",
+        "toolchain-version.txt",
+        "upstream-SHA256SUMS"
+      ],
+      "notice": "P12-r2 tester prerelease for 603V1.23.2. Opus recording with support for existing ADPCM files in the app; adds explicit per-recording deletion, repairs stalled receipt verification and confirmation expiry at 1024 Hz, and corrects periodic battery notifications. Application only. Requires the P12-capable Italic app. Software, memory, CPU-model and signature checks passed; physical boot, recording, transfer, discard and recovery remain unqualified. Locally signed with the supplier DFU key; not supplier acceptance. No Ring was flashed by this task.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P12",
+        "packageRevision": 2,
+        "status": "supplier-signed-ota",
+        "otaAvailable": true,
+        "withdrawn": false,
+        "toolchain": "Arm Compiler 5.06 update 7 for Certification (build 960)",
+        "sourceCommit": "b25bc073a24149da39eaef6a08f2cb57ded6c0c5",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/35575631402",
+        "releaseChannel": "sample-test-prerelease",
+        "physicallyQualified": false,
+        "signing": {
+          "locallyPackaged": true,
+          "keyProvenance": "supplier-dfu-key",
+          "supplierAcceptance": false
+        },
+        "notice": "P12-r2 tester prerelease for 603V1.23.2. Opus recording with support for existing ADPCM files in the app; adds explicit per-recording deletion, repairs stalled receipt verification and confirmation expiry at 1024 Hz, and corrects periodic battery notifications. Application only. Requires the P12-capable Italic app. Software, memory, CPU-model and signature checks passed; physical boot, recording, transfer, discard and recovery remain unqualified. Locally signed with the supplier DFU key; not supplier acceptance. No Ring was flashed by this task.",
+        "migratedFrom": {
+          "catalog": "https://raw.githubusercontent.com/ShopItalic/sudo/main/tools/firmware-hosting/releases-v9.json",
+          "catalogSHA256": "a46e9d0df7faa9e2c5c4a67f17f930fbdf396a3f23f4efbf770b391359738aff",
+          "repository": "ShopItalic/sudo",
+          "tag": "v6.0.3.3P12-r2",
+          "url": "https://github.com/ShopItalic/sudo/releases/download/v6.0.3.3P12-r2/BCL603S2P_6.0.3.3P12.zip"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzQwMTI0LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMTIuemlwIiwic2hhMjU2IjoiNjViY2EwMTc5NDgzZThjM2E4ZmVkYTRjZTc5MmExNDhhYTE4OGFjMjU4NDlhYzc4OTg1M2NiNGVkNDI0NjNmMSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AxMi1yMiIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDY6MjhaIiwicGFja2FnZVJldmlzaW9uIjoyLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AxMiJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIFT7y6PE5xY5zN5AKawqRc430KHhC55oszXwqu1ObTj/AiBZGv9FuDdEZIhlu9m8KM+TRB8PMIqQkuueEK4+SV9zMg=="
+      }
+    },
+    {
       "id": "6.0.3.3P11-r4",
       "version": "6.0.3.3P11",
       "packageRevision": 4,
