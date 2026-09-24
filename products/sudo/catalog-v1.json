@@ -4,6 +4,76 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P10-r3",
+      "version": "6.0.3.3P10",
+      "packageRevision": 3,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P10-r3",
+      "asset": {
+        "bytes": 187188,
+        "name": "BCL603S2P_6.0.3.3P10.zip",
+        "sha256": "f36d9ffd513fa82ebdc8d1dfb074722a90deccc00daf8a3d8dfcb7decbbec9bf",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P10-r3/BCL603S2P_6.0.3.3P10.zip",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585052805"
+      },
+      "extraAssets": [
+        "FreeRTOS_license.txt",
+        "NOTICES.txt",
+        "SDK_external_licenses.txt",
+        "SEGGER_RTT_license.txt",
+        "SHA256_Nordic_license.txt",
+        "ST_LSM6DSO_LICENSE.txt",
+        "ci-build-summary.json",
+        "factory_Opus_COPYING.txt",
+        "manifest.json",
+        "nRF5_Nordic_license.txt",
+        "package-verification.json",
+        "provenance.json",
+        "release-notes.html",
+        "retirement-cpu-verification.json",
+        "source-load-verification.json",
+        "toolchain-version.txt",
+        "upstream-SHA256SUMS"
+      ],
+      "notice": "P10-r3 — Four retirements; factory ADPCM. Application-only sample-test prerelease for 603V1.23.2, independently based on released P10 revision 2. BLE/TCP speed tests, motion sampling/tasks, swipe output and firmware duration-based deletion are disabled. Hold/release and optional double/triple-tap recording, transfer and receipt-controlled cleanup remain. Requires the matching P10-capable iPhone app. Software and signed-package checks passed; physical boot, timing, power, custody and recovery remain unproven. Locally signed with the supplier DFU key, without supplier acceptance. No Ring was flashed by this task. The Ring reports the base version only; installed package revision cannot be read back. Older published revisions remain unchanged.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P10",
+        "packageRevision": 3,
+        "status": "supplier-signed-ota",
+        "otaAvailable": true,
+        "withdrawn": false,
+        "toolchain": "Arm Compiler 5.06 update 7 for Certification (build 960)",
+        "sourceCommit": "31ddf23abe6fd1caec742f82cc7b40bb4f6dd960",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/35070143004",
+        "releaseChannel": "sample-test-prerelease",
+        "physicallyQualified": false,
+        "signing": {
+          "locallyPackaged": true,
+          "keyProvenance": "supplier-dfu-key",
+          "supplierAcceptance": false
+        },
+        "notice": "P10-r3 — Four retirements; factory ADPCM. Application-only sample-test prerelease for 603V1.23.2, independently based on released P10 revision 2. BLE/TCP speed tests, motion sampling/tasks, swipe output and firmware duration-based deletion are disabled. Hold/release and optional double/triple-tap recording, transfer and receipt-controlled cleanup remain. Requires the matching P10-capable iPhone app. Software and signed-package checks passed; physical boot, timing, power, custody and recovery remain unproven. Locally signed with the supplier DFU key, without supplier acceptance. No Ring was flashed by this task. The Ring reports the base version only; installed package revision cannot be read back. Older published revisions remain unchanged.",
+        "migratedFrom": {
+          "catalog": "https://raw.githubusercontent.com/ShopItalic/sudo/main/tools/firmware-hosting/releases-v9.json",
+          "catalogSHA256": "a46e9d0df7faa9e2c5c4a67f17f930fbdf396a3f23f4efbf770b391359738aff",
+          "repository": "ShopItalic/sudo",
+          "tag": "v6.0.3.3P10-r3",
+          "url": "https://github.com/ShopItalic/sudo/releases/download/v6.0.3.3P10-r3/BCL603S2P_6.0.3.3P10.zip"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTg3MTg4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMTAuemlwIiwic2hhMjU2IjoiZjM2ZDlmZmQ1MTNmYTgyZWJkYzhkMWRmYjA3NDcyMmE5MGRlY2NjMDBkYWY4YTNkOGRmY2I3ZGVjYmJlYzliZiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AxMC1yMyIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MDFaIiwicGFja2FnZVJldmlzaW9uIjozLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AxMCJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIDnXRxGs6wtZHvcA/kSnVnfKg4ed6JFkC1wL49iZb288AiEA/K52Xkpptw0/GjYalZZpaisyeqgFiCSgSfHCGneDoI0="
+      }
+    },
+    {
       "id": "6.0.3.3P09-r2",
       "version": "6.0.3.3P09",
       "packageRevision": 2,
