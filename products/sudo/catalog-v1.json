@@ -4,6 +4,87 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P16-r2",
+      "version": "6.0.3.3P16",
+      "packageRevision": 2,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P16-r2",
+      "asset": {
+        "bytes": 359432,
+        "name": "BCL603S2P_6.0.3.3P16.zip",
+        "sha256": "6f747211d32d449ca0997d2007449677f9752c0697eb0125ba7a0dd27b8a54ce",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P16-r2/BCL603S2P_6.0.3.3P16.zip",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585070466"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p16-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "notice": "P16-r2 tester update. Fixes recording-list and storage replies that stalled sync and triggered repeated reconnects. Physical unit testing is in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P16",
+        "packageRevision": 2,
+        "buildIdentity": {
+          "revision": 2,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "303acb0aa0f06174e995467847026175"
+        },
+        "sourceCommit": "f79a90378d7a3be6d11cc3352c15e89529dc73eb",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "2c26e5ba0a30757ffb3d2705cb6135c7c29963ef3cc57b3666efa12a291ca448",
+          "command.json": "04870b3ef43b0d1e777e26e724f7945f70ebc25c10d50d7938f650c1eca99a02",
+          "inputs-after.json": "28d1c1c7192d9fb332d0cba79a2f2ca1b5f82684b063fd8272dd9b3af669e01d",
+          "inputs-before.json": "17a865b24fbcccdc615cc20acf5106d45ac89442d89d7f879b3cf9e3d3c63887",
+          "p16-preparation.json": "e1a24863ec398c6c000a2daa1dce960155c2c175c762b39b8d182dc297b84a1c",
+          "result.json": "26cca55faaa581f41752dbb52332dac06e392850a6f4ba96b06c9007fb0303ba",
+          "runtime-verification.json": "6dca6fc57a3592646a9e71a5f5f325b3f5cbdb8bb2851f24d8a32fad220e82d3",
+          "signed-package.json": "80411e81740a103286bc0af26ac8da39ad90f709c784152b036edbad51eaa45a",
+          "source-load-verification.json": "20da20052b3e718f04a7abac3f4ee6a21311f4c616c145230cfaa342153ec20d"
+        },
+        "notice": "P16-r2 tester update. Fixes recording-list and storage replies that stalled sync and triggered repeated reconnects. Physical unit testing is in progress.",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/35748244498",
+        "migratedFrom": {
+          "catalog": "https://raw.githubusercontent.com/ShopItalic/sudo/main/tools/firmware-hosting/releases-v9.json",
+          "catalogSHA256": "a46e9d0df7faa9e2c5c4a67f17f930fbdf396a3f23f4efbf770b391359738aff",
+          "repository": "ShopItalic/sudo",
+          "tag": "v6.0.3.3P16-r2",
+          "url": "https://github.com/ShopItalic/sudo/releases/download/v6.0.3.3P16-r2/BCL603S2P_6.0.3.3P16.zip"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzU5NDMyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMTYuemlwIiwic2hhMjU2IjoiNmY3NDcyMTFkMzJkNDQ5Y2EwOTk3ZDIwMDc0NDk2NzdmOTc1MmMwNjk3ZWIwMTI1YmE3YTBkZDI3YjhhNTRjZSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AxNi1yMiIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDU6NDFaIiwicGFja2FnZVJldmlzaW9uIjoyLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AxNiJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQDNOQrWYCBDHYB467vsl+u0F2BdM13rgxcG4MJPsYuxYgIgcQY6mpLPq/aYa38d7Xmro9J4ASWLHxD1uOESbvgH4y0="
+      }
+    },
+    {
       "id": "6.0.3.3P15-r2",
       "version": "6.0.3.3P15",
       "packageRevision": 2,
