@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P5-rc.2",
+      "version": "P5-rc.2",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P5-rc.2",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P5-rc.2.ufw",
+        "sha256": "59bdcac488e163f4ebfbde371bf696367c13df5d90386a213254fa8fab6392e5",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P5-rc.2/glyph-pks3-101-P5-rc.2.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585095056"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Carry the P4-rc.4 modal layer, standby order and automatic-idle fix into immutable P5-rc.1 without changing transfer/cleanup logic. Retain factory MP3 transfer and verified selected-file cleanup after durable phone audio custody; About/HELLO identify P5-rc.2 with the same P5 revision 1 contract.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P5-rc.2",
+        "privateManifestSHA256": "c748b57aae38ab8909e15909055105f6bb02c9c8c314dae4bb38afd5698b3fb9"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QNS1yYy4yLnVmdyIsInNoYTI1NiI6IjU5YmRjYWM0ODhlMTYzZjRlYmZiZGUzNzFiZjY5NjM2N2MxM2RmNWQ5MDM4NmEyMTMyNTRmYThmYWI2MzkyZTUifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQNS1yYy4yIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MzhaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlA1LXJjLjIifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCICsq1YIfnQFKoxSCjdKcex16/eWV9OmERwLtObCxpI48AiEAuzaW54ErCNg6ctj5bjzPJCLKH79BPUMb/Ld53eoJR3E="
+      }
+    },
+    {
       "id": "P5-rc.1",
       "version": "P5-rc.1",
       "packageRevision": 1,
