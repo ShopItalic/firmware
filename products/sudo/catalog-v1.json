@@ -4,6 +4,62 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P07-r1",
+      "version": "6.0.3.3P07",
+      "packageRevision": 1,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P07-r1",
+      "asset": {
+        "bytes": 187672,
+        "name": "BCL603S2P_6.0.3.3P07.zip",
+        "sha256": "2277d8d75a71906a175f615affb2404b339c5a14a422bf144ac5761e14e5166e",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P07-r1/BCL603S2P_6.0.3.3P07.zip",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585049132"
+      },
+      "extraAssets": [
+        "manifest.json",
+        "package-verification.json",
+        "release-notes.html",
+        "upstream-SHA256SUMS"
+      ],
+      "notice": "P07 sample-test prerelease for 603V1.23.2, based on factory 6.0.3.3Z62. Adds per-direction swipe on/off (default on); hold/release PTT, 0.5–5 second hold delay (default 0.5), optional double/triple tap recording, haptics and recording light controls. Locally signed with the supplier DFU key, not supplier approval. Application only; bootloader unchanged. Software and package checks passed; P07 physical qualification and recovery are not demonstrated. Use the matching P07-capable iPhone app.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P07",
+        "status": "supplier-signed-ota",
+        "otaAvailable": true,
+        "withdrawn": false,
+        "toolchain": "Arm Compiler 5.06 update 7 for Certification (build 960)",
+        "sourceCommit": "25ccc6e6dc3ba2432711d6e3bdb3f2f749fe7fd9",
+        "releaseChannel": "sample-test-prerelease",
+        "physicallyQualified": false,
+        "signing": {
+          "locallyPackaged": true,
+          "keyProvenance": "supplier-dfu-key",
+          "supplierAcceptance": false
+        },
+        "notice": "P07 sample-test prerelease for 603V1.23.2, based on factory 6.0.3.3Z62. Adds per-direction swipe on/off (default on); hold/release PTT, 0.5–5 second hold delay (default 0.5), optional double/triple tap recording, haptics and recording light controls. Locally signed with the supplier DFU key, not supplier approval. Application only; bootloader unchanged. Software and package checks passed; P07 physical qualification and recovery are not demonstrated. Use the matching P07-capable iPhone app.",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/34942388565",
+        "migratedFrom": {
+          "catalog": "https://raw.githubusercontent.com/ShopItalic/sudo/main/tools/firmware-hosting/releases-v9.json",
+          "catalogSHA256": "a46e9d0df7faa9e2c5c4a67f17f930fbdf396a3f23f4efbf770b391359738aff",
+          "repository": "ShopItalic/sudo",
+          "tag": "v6.0.3.3P07",
+          "url": "https://github.com/ShopItalic/sudo/releases/download/v6.0.3.3P07/BCL603S2P_6.0.3.3P07.zip"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTg3NjcyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMDcuemlwIiwic2hhMjU2IjoiMjI3N2Q4ZDc1YTcxOTA2YTE3NWY2MTVhZmZiMjQwNGIzMzljNWExNGE0MjJiZjE0NGFjNTc2MWUxNGU1MTY2ZSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AwNy1yMSIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MTdaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AwNyJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIDBflLHPs41Uz4qQMym+Haigh3+ndCcQ4/ZUIYNLc1z1AiEA4/xNbVdj4O5FLx6zrojLDIBG1xBvpJxuJnpPTqbR9IA="
+      }
+    },
+    {
       "id": "6.0.3.3P05-r1",
       "version": "6.0.3.3P05",
       "packageRevision": 1,
