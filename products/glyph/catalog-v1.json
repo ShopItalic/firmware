@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P4-rc.3",
+      "version": "P4-rc.3",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P4-rc.3",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P4-rc.3.ufw",
+        "sha256": "ad90d8fe08f9b790561bf9aebbfec4bf001b4a8bff05c679b7543dfab7f10949",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P4-rc.3/glyph-pks3-101-P4-rc.3.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585089016"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Keep update/status modals on the system display layer and block screensaver/automatic idle while an AIBook modal is open. Preserve P4 read-only memo transfer; About and HELLO identify P4-rc.3 with the same API revision 2.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P4-rc.3",
+        "privateManifestSHA256": "a12f8e26cef391f781cc940147e487db8420705848869cfb6e65909292865c6c"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QNC1yYy4zLnVmdyIsInNoYTI1NiI6ImFkOTBkOGZlMDhmOWI3OTA1NjFiZjlhZWJiZmVjNGJmMDAxYjRhOGJmZjA1YzY3OWI3NTQzZGZhYjdmMTA5NDkifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQNC1yYy4zIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MzZaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlA0LXJjLjMifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEQCIADWZI8bZnGZRSiTn7TqnsXsC3hTfAq1wezS8yIQmcYPAiB7QPTMHdiYjkOler8GNqvTFpWMRNGAKrTaras0uggavQ=="
+      }
+    },
+    {
       "id": "P4-rc.2",
       "version": "P4-rc.2",
       "packageRevision": 1,
