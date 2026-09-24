@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P11-rc.1",
+      "version": "P11-rc.1",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P11-rc.1",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P11-rc.1.ufw",
+        "sha256": "bed703f908b88f36148d99664db5f0caac83da9099ce6f825f1b2910e67e7bf5",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P11-rc.1/glyph-pks3-101-P11-rc.1.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585115827"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Add opt-in Never automatic shutdown through the existing persistent index 5 and native zero-second timer path. Keep screen standby, manual off, low-battery shutdown, recording custody and update paths unchanged. Report exact P11 identity; companion shutdown value 0 means Never, replacing 20 minutes.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P11-rc.1",
+        "privateManifestSHA256": "448b8adec915559755eab5bfdf783f42bb151c599f48786b642005e9b436b202"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QMTEtcmMuMS51ZnciLCJzaGEyNTYiOiJiZWQ3MDNmOTA4Yjg4ZjM2MTQ4ZDk5NjY0ZGI1ZjBjYWFjODNkYTkwOTljZTZmODI1ZjFiMjkxMGU2N2U3YmY1In0sImNoYW5uZWwiOiJ0ZXN0IiwiaGFyZHdhcmUiOiJQS1MzLTEwMSIsImlkIjoiUDExLXJjLjEiLCJpbnN0YWxsYWJsZSI6ZmFsc2UsImlzc3VlZEF0IjoiMjAyNi0wOS0yNFQwMzowNzo0MloiLCJwYWNrYWdlUmV2aXNpb24iOjEsInByb2R1Y3QiOiJnbHlwaCIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiUDExLXJjLjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCIQCpDQFnH5xrKzYNRugWe6lFWB/EWH8kW1bFJQJ2rJO1oQIgQw+FZXOHKrmnltaQC8EpYBF9gg1BesiCNJLn4mf+W0g="
+      }
+    },
+    {
       "id": "P10-rc.2",
       "version": "P10-rc.2",
       "packageRevision": 1,
