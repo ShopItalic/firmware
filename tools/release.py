@@ -26,6 +26,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import catalog
+import device_index
 import p256
 
 SIGNER = catalog.ROOT / 'tools/sign_release.swift'
@@ -81,6 +82,7 @@ def stage(product, release_id, version, revision, channel, installable, asset, e
     url = catalog.DOWNLOAD + catalog.tag(product, release_id) + '/' + asset.name
     entry = catalog.signed_entry(raw, key_id, der, url, display=display, details=details,
                                  extra_assets=[p.name for p in extras])
+    entry['asset']['md5'] = hashlib.md5((files / asset.name).read_bytes()).hexdigest()
     catalog.verify_entry(product, entry, keys)
     (out / 'entry.json').write_text(json.dumps({'product': product, 'entry': entry}, indent=2) + '\n')
     sums = ''.join(f'{sha256(p)}  {p.name}\n' for p in sorted(files.iterdir()))
@@ -98,6 +100,9 @@ def load_stage(directory, keys=None):
     expected = {s['asset']['name'], *entry['extraAssets']}
     catalog.require({p.name for p in files.iterdir()} == expected, 'staged asset set changed')
     catalog.require(record(files / s['asset']['name']) == s['asset'], 'staged package changed')
+    if 'md5' in entry['asset']:
+        catalog.require(hashlib.md5((files / s['asset']['name']).read_bytes()).hexdigest() == entry['asset']['md5'],
+                        'staged md5 mismatch')
     sums = ''.join(f'{sha256(p)}  {p.name}\n' for p in sorted(files.iterdir()))
     catalog.require((directory / 'SHA256SUMS').read_text() == sums, 'staged SHA256SUMS mismatch')
     return product, entry, s
@@ -153,8 +158,8 @@ def publish(directory, notes=None, push=False, dry_run=False):
     entry['asset']['apiURL'] = api_url
     current['releases'].insert(0, entry)
     catalog.write(product, current)
-    path = catalog.catalog_path(product).relative_to(catalog.ROOT)
-    subprocess.run(['git', '-C', str(catalog.ROOT), 'add', str(path)], check=True)
+    paths = [catalog.catalog_path(product)] + device_index.write(product, current)
+    subprocess.run(['git', '-C', str(catalog.ROOT), 'add', *map(str, paths)], check=True)
     subprocess.run(['git', '-C', str(catalog.ROOT), 'commit', '-q', '-m', f'Publish {product} {s["id"]}'], check=True)
     if push:
         subprocess.run(['git', '-C', str(catalog.ROOT), 'push', '-q'], check=True)
@@ -168,6 +173,7 @@ def withdraw(product, release_id, reason):
     entry = next(e for e in current['releases'] if e['id'] == release_id)
     entry['withdrawn'] = True; entry['withdrawnReason'] = reason
     catalog.write(product, current)
+    device_index.write(product, current)
 
 
 def main(argv=None):

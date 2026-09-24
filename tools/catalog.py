@@ -133,6 +133,8 @@ def verify_entry(product, entry, keys):
         require(asset.get(field) == s['asset'][field], f"{s['id']}: asset {field} disagrees with statement")
     require(entry.get('tag') == tag(product, s['id']), f"{s['id']}: tag mismatch")
     require(asset.get('url') == DOWNLOAD + entry['tag'] + '/' + s['asset']['name'], f"{s['id']}: noncanonical asset URL")
+    if 'md5' in asset:  # unsigned transport check required by Glyph's factory update card
+        require(isinstance(asset['md5'], str) and re.fullmatch(r'[0-9a-f]{32}', asset['md5']), f"{s['id']}: bad md5")
     if 'apiURL' in asset:
         require(re.fullmatch(re.escape(ASSET_API) + r'[1-9][0-9]{0,11}', asset['apiURL'] or ''), f"{s['id']}: bad apiURL")
     require(type(entry.get('withdrawn')) is bool, 'withdrawn must be boolean')

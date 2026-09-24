@@ -16,3 +16,5 @@ jobs:
         run: python3 -m unittest discover -s tests -v
       - name: Verify every catalog entry
         run: python3 tools/catalog.py
+      - name: Device index matches catalog
+        run: python3 tools/device_index.py --check
