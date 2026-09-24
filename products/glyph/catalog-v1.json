@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P2-rc.1",
+      "version": "P2-rc.1",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P2-rc.1",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P2-rc.1.ufw",
+        "sha256": "36cd23bce170b48c3eda9e183d3e849a9ebe7f434f3b8dc7c8556f98ef66873d",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P2-rc.1/glyph-pks3-101-P2-rc.1.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585080436"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Remove the fixed 2-5 minute estimate from both update waiting languages and tell the user to keep power on. Report Installed firmware using the live About Version buffer; remove the unsupported success claim based on the pre-update app flag. Preserve accepted P1 recording behavior and show About Model Glyph Beta / Version P2-rc.1.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P2-rc.1",
+        "privateManifestSHA256": "24b3b267cdf82d62e82fac1ef028e317b7d125994464ed5763b3ae4d35f89095"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QMi1yYy4xLnVmdyIsInNoYTI1NiI6IjM2Y2QyM2JjZTE3MGI0OGMzZWRhOWUxODNkM2U4NDlhOWViZTdmNDM0ZjNiOGRjN2M4NTU2Zjk4ZWY2Njg3M2QifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQMi1yYy4xIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MzRaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlAyLXJjLjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCIC6XBQT11iVEPUFlX7Wyh8JAmxZgigeonWHz/GvLFjU3AiEA4fT8SR8rqXgmM5QCaeH5MH8KUvTseZkymLsL0L49jBw="
+      }
+    },
+    {
       "id": "P1-rc.2",
       "version": "P1-rc.2",
       "packageRevision": 1,
