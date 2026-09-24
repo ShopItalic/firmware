@@ -4,6 +4,71 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P09-r2",
+      "version": "6.0.3.3P09",
+      "packageRevision": 2,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P09-r2",
+      "asset": {
+        "bytes": 189876,
+        "name": "BCL603S2P_6.0.3.3P09.zip",
+        "sha256": "cb6a0adbf84e300546fa3124dedbbcbc9fb942d360cc2a7b45d02971415807e7",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P09-r2/BCL603S2P_6.0.3.3P09.zip",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585051642"
+      },
+      "extraAssets": [
+        "FreeRTOS_license.txt",
+        "NOTICES.txt",
+        "SDK_external_licenses.txt",
+        "SEGGER_RTT_license.txt",
+        "factory_Opus_COPYING.txt",
+        "manifest.json",
+        "nRF5_Nordic_license.txt",
+        "package-verification.json",
+        "provenance.json",
+        "release-notes.html",
+        "source-load-stack-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "notice": "P09 revision 2 includes the battery motor-stop fix and the recording-busy guard when saving controls. Retains short-recording filtering (default 2 seconds) and optional scrolling (default off). P09 settings cannot be downgraded to P08. Application only; bootloader unchanged. Requires the updated P10-capable iPhone app for this catalog. Locally signed with the supplier DFU key, without supplier acceptance. Physical qualification and recovery remain unproven. The Ring reports the base version only; identify this revision by the package digest.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P09",
+        "packageRevision": 2,
+        "status": "supplier-signed-ota",
+        "otaAvailable": true,
+        "withdrawn": false,
+        "toolchain": "Arm Compiler 5.06 update 7 for Certification (build 960)",
+        "sourceCommit": "e9840428b22502f762d5cc596f7c469a2ef71c1e",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/34964669787",
+        "releaseChannel": "sample-test-prerelease",
+        "physicallyQualified": false,
+        "signing": {
+          "locallyPackaged": true,
+          "keyProvenance": "supplier-dfu-key",
+          "supplierAcceptance": false
+        },
+        "notice": "P09 revision 2 includes the battery motor-stop fix and the recording-busy guard when saving controls. Retains short-recording filtering (default 2 seconds) and optional scrolling (default off). P09 settings cannot be downgraded to P08. Application only; bootloader unchanged. Requires the updated P10-capable iPhone app for this catalog. Locally signed with the supplier DFU key, without supplier acceptance. Physical qualification and recovery remain unproven. The Ring reports the base version only; identify this revision by the package digest.",
+        "migratedFrom": {
+          "catalog": "https://raw.githubusercontent.com/ShopItalic/sudo/main/tools/firmware-hosting/releases-v9.json",
+          "catalogSHA256": "a46e9d0df7faa9e2c5c4a67f17f930fbdf396a3f23f4efbf770b391359738aff",
+          "repository": "ShopItalic/sudo",
+          "tag": "v6.0.3.3P09-r2",
+          "url": "https://github.com/ShopItalic/sudo/releases/download/v6.0.3.3P09-r2/BCL603S2P_6.0.3.3P09.zip"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTg5ODc2LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMDkuemlwIiwic2hhMjU2IjoiY2I2YTBhZGJmODRlMzAwNTQ2ZmEzMTI0ZGVkYmJjYmM5ZmI5NDJkMzYwY2MyYTdiNDVkMDI5NzE0MTU4MDdlNyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AwOS1yMiIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MDdaIiwicGFja2FnZVJldmlzaW9uIjoyLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AwOSJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIAbGpI9Kf0VCH6UBnoWbKwK6qqZ3feFxfGmEO5GD/b3SAiBi1CcEzfbCNZQMwo0lsD5YiHqFWBG3cGiDD4CQFWTGew=="
+      }
+    },
+    {
       "id": "6.0.3.3P08-r3",
       "version": "6.0.3.3P08",
       "packageRevision": 3,
