@@ -4,6 +4,75 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P05-r1",
+      "version": "6.0.3.3P05",
+      "packageRevision": 1,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P05-r1",
+      "asset": {
+        "bytes": 187140,
+        "name": "BCL603S2P_6.0.3.3P05.zip",
+        "sha256": "cc7f9c2f24c13ab15dc99d16ba5215db11d650f38892ed6ef8703837a8650a45",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P05-r1/BCL603S2P_6.0.3.3P05.zip",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585047398"
+      },
+      "extraAssets": [
+        "FreeRTOS_license.txt",
+        "LittleFS_LICENSE.txt",
+        "NOTICES.txt",
+        "SDK_external_licenses.txt",
+        "SEGGER_RTT_license.txt",
+        "factory_Opus_COPYING.txt",
+        "load-bounds.json",
+        "manifest.json",
+        "nRF5_Nordic_license.txt",
+        "nrfx_LICENSE.txt",
+        "package-verification.json",
+        "provenance.json",
+        "sample-test-report.html",
+        "source-reproduction.json",
+        "startup-heap-model.json",
+        "toolchain-version.txt",
+        "upstream-SHA256SUMS"
+      ],
+      "notice": "P05 sample-test prerelease for 603V1.23.2 on factory 6.0.3.3Z62. Hold/release PTT; programmable double/triple tap recording off by default; haptics on. Locally packaged with the supplier DFU signing key, not supplier approval. Software checks passed; physical boot, sustained hold, settings persistence and audio transfer remain unqualified. Recovery is not demonstrated. Application only; bootloader unchanged.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P05",
+        "status": "supplier-signed-ota",
+        "otaAvailable": true,
+        "withdrawn": false,
+        "toolchain": "Arm Compiler 5.06 update 7 for Certification (build 960)",
+        "sourceCommit": "82abe9e228df3daae0bb43e80f0d70506b3ffe58",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/34925304323",
+        "releaseChannel": "sample-test-prerelease",
+        "physicallyQualified": false,
+        "signing": {
+          "locallyPackaged": true,
+          "keyProvenance": "supplier-dfu-key",
+          "supplierAcceptance": false
+        },
+        "notice": "P05 sample-test prerelease for 603V1.23.2 on factory 6.0.3.3Z62. Hold/release PTT; programmable double/triple tap recording off by default; haptics on. Locally packaged with the supplier DFU signing key, not supplier approval. Software checks passed; physical boot, sustained hold, settings persistence and audio transfer remain unqualified. Recovery is not demonstrated. Application only; bootloader unchanged.",
+        "migratedFrom": {
+          "catalog": "https://raw.githubusercontent.com/ShopItalic/sudo/main/tools/firmware-hosting/releases-v9.json",
+          "catalogSHA256": "a46e9d0df7faa9e2c5c4a67f17f930fbdf396a3f23f4efbf770b391359738aff",
+          "repository": "ShopItalic/sudo",
+          "tag": "v6.0.3.3P05",
+          "url": "https://github.com/ShopItalic/sudo/releases/download/v6.0.3.3P05/BCL603S2P_6.0.3.3P05.zip"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTg3MTQwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMDUuemlwIiwic2hhMjU2IjoiY2M3ZjljMmYyNGMxM2FiMTVkYzk5ZDE2YmE1MjE1ZGIxMWQ2NTBmMzg4OTJlZDZlZjg3MDM4MzdhODY1MGE0NSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AwNS1yMSIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MjNaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AwNSJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIBjSA6Q6gblb8ADx9t+lsk30+vyDUxXh8FmJgP417lMfAiEAgYUCJMs/zbwMwkVDeztPxxfkT2xaHgHOE4De2xXoXao="
+      }
+    },
+    {
       "id": "6.0.3.3Z62-r1",
       "version": "6.0.3.3Z62",
       "packageRevision": 1,
