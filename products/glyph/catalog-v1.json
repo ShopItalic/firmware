@@ -4,6 +4,43 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P5-rc.1",
+      "version": "P5-rc.1",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P5-rc.1",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P5-rc.1.ufw",
+        "sha256": "66bb170155d0947c194adfdaed7bafc90a6f8dea958715096f427ffe9d5c47f9",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P5-rc.1/glyph-pks3-101-P5-rc.1.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585093161"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Add selected-file cleanup bound to snapshot/index/size/SHA-256 and a fresh device rehash. Italic retains permanent verified MP3 and playback WAV before admission and P5-only cleanup, then confirms fresh inventory absence. Block cleanup while recording, converting, sharing USB storage or playing audio; retry without repeating a verified Bluetooth download. Preserve factory MP3 encoding, P1 save, P2 update UI, P3 USB and P4 BLE transfer. Model Glyph Beta / Version P5-rc.1.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P5-rc.1",
+        "privateManifestSHA256": "6743770ae455581ffbaf4d101bcee6511ef0bf03ca428a9c6329b5ddc2a6d9fc"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QNS1yYy4xLnVmdyIsInNoYTI1NiI6IjY2YmIxNzAxNTVkMDk0N2MxOTRhZGZkYWVkN2JhZmM5MGE2ZjhkZWE5NTg3MTUwOTZmNDI3ZmZlOWQ1YzQ3ZjkifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQNS1yYy4xIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MzdaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlA1LXJjLjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEYCIQCSOtVcy0sq8ZG34OOYhyMcWVCiFh3koWwSJI1K2OZY8QIhAMP/4IpZXhidIyAlCTHuYPXzcCiEtltA+17MaVlL5dPe"
+      }
+    },
+    {
       "id": "P4-rc.4",
       "version": "P4-rc.4",
       "packageRevision": 1,
