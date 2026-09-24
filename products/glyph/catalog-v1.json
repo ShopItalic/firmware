@@ -2,5 +2,43 @@
   "schemaVersion": 1,
   "product": "glyph",
   "hardware": "PKS3-101",
-  "releases": []
+  "releases": [
+    {
+      "id": "P1-rc.1",
+      "version": "P1-rc.1",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "glyph-P1-rc.1",
+      "asset": {
+        "bytes": 11303680,
+        "name": "glyph-pks3-101-P1-rc.1.ufw",
+        "sha256": "73976aed7240ba9ef4c1fc276c930b6132235d519c573de17b4b915de91d6adc",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P1-rc.1/glyph-pks3-101-P1-rc.1.ufw",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585077600"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "On P0, End immediately saves through the factory recorder with no Save/Cancel question or Saving popup; the existing timed popup reports Saved or Save failed after completion. Disable live-recording discard, prevent duplicate End and Start/Pause/Resume during saving, and identify the candidate in About Model as Glyph P1-rc.1.",
+      "notice": "Staged test build; physical qualification varies by release. Not offered for automatic installation.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": null,
+        "privateManifestSHA256": "c3baa907139c9dda4067b223b46e329349085f083fc3ec31053cdfba590ad99b"
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM2ODAsIm5hbWUiOiJnbHlwaC1wa3MzLTEwMS1QMS1yYy4xLnVmdyIsInNoYTI1NiI6IjczOTc2YWVkNzI0MGJhOWVmNGMxZmMyNzZjOTMwYjYxMzIyMzVkNTE5YzU3M2RlMTdiNGI5MTVkZTkxZDZhZGMifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiJQMS1yYy4xIiwiaW5zdGFsbGFibGUiOmZhbHNlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDc6MzJaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0IjoiZ2x5cGgiLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IlAxLXJjLjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCIB8o14sJ/ezF+7+1K7svOwp569ZvAhONuQ9rPYaUYef9AiEAlzm4iURGA/dzGSi9345BZurWEI9FSqVXq5D7TgopcN8="
+      }
+    }
+  ]
 }
