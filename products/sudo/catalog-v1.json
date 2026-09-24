@@ -4,6 +4,90 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P17-r1",
+      "version": "6.0.3.3P17",
+      "packageRevision": 1,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P17-r1",
+      "asset": {
+        "bytes": 360176,
+        "name": "BCL603S2P_6.0.3.3P17.zip",
+        "sha256": "427625750a6fbbd3d06afa4593f9217642fe736744abf33b53d75980e397a832",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P17-r1/BCL603S2P_6.0.3.3P17.zip",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585073986"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p17-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Turns microphone hardware fully off after recording, avoids keeping Bluetooth fast for passive reads, sleeps exhausted cleanup work, and limits battery updates to connection and active transfer events.",
+      "notice": "P17-rc.1 tester update. Reduces standby wakeups and hardens microphone shutdown. Physical battery-life and recording qualification remain in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P17",
+        "packageRevision": 1,
+        "buildIdentity": {
+          "revision": 1,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "547f462cb823e58e308254663ad32118",
+          "generation": 17
+        },
+        "sourceCommit": "adc0babebe1313402be87c57cf69dbbea15f11c4",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "439c716788f47b2ea5f5b2b66ba4b6b663d4bc0b2e90f5ab76050edd19d9e4dd",
+          "command.json": "064022eb86b2a86305511053a967b746bdd715fd1c53556fef207aa3142078f7",
+          "inputs-after.json": "5a1c74da15b4f26a2bba03a40a838ecbaebd9458282058bb3c66d96893427702",
+          "inputs-before.json": "728e81a56069f95e8ea85e6ace41cbbc918379cbf3d6cf833b64867a64d4a1c2",
+          "p17-preparation.json": "7d57c2e48058c914d8679228e456b74ffc69e3fb61f8dd8d59fc0138e5d09624",
+          "result.json": "425e274dc122945aa0cd632ebfb5633e223bd01f773a9c6661f248f1c92c0a8c",
+          "runtime-verification.json": "4a570d78ccd8bc6650597bf610e39066e7f8102c252d33b9faf8d1bea7b8a4d3",
+          "signed-package.json": "4d5156c6e0e002886561d8f5012c24f2cd28f4397bd48fb499ca25a9f82c016c",
+          "source-load-verification.json": "64c46170a37cbab3375571627cd4e325dc1fb20225c5a8e035791f26d7741947"
+        },
+        "notice": "P17-rc.1 tester update. Reduces standby wakeups and hardens microphone shutdown. Physical battery-life and recording qualification remain in progress.",
+        "releaseNotes": "Turns microphone hardware fully off after recording, avoids keeping Bluetooth fast for passive reads, sleeps exhausted cleanup work, and limits battery updates to connection and active transfer events.",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/35824453873",
+        "migratedFrom": {
+          "catalog": "https://raw.githubusercontent.com/ShopItalic/sudo/main/tools/firmware-hosting/releases-v9.json",
+          "catalogSHA256": "a46e9d0df7faa9e2c5c4a67f17f930fbdf396a3f23f4efbf770b391359738aff",
+          "repository": "ShopItalic/sudo",
+          "tag": "v6.0.3.3P17-r1",
+          "url": "https://github.com/ShopItalic/sudo/releases/download/v6.0.3.3P17-r1/BCL603S2P_6.0.3.3P17.zip"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzYwMTc2LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMTcuemlwIiwic2hhMjU2IjoiNDI3NjI1NzUwYTZmYmJkM2QwNmFmYTQ1OTNmOTIxNzY0MmZlNzM2NzQ0YWJmMzNiNTNkNzU5ODBlMzk3YTgzMiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AxNy1yMSIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjRUMDM6MDU6MDBaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AxNyJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIC1B2p+8xDo912yWjbOYy3B53IlQqVeFStTSxqQXblyeAiEA80RqDko1nf1ANlofoIwRMxko1MjGkokbmeQUHWDqJYM="
+      }
+    },
+    {
       "id": "6.0.3.3P16-r2",
       "version": "6.0.3.3P16",
       "packageRevision": 2,
