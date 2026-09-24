@@ -4,6 +4,65 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P15-r2",
+      "version": "6.0.3.3P15",
+      "packageRevision": 2,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": false,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P15-r2",
+      "asset": {
+        "bytes": 344008,
+        "name": "BCL603S2P_6.0.3.3P15.zip",
+        "sha256": "d5fd514aee942422d04832eba5729af2f73176485179cd95be9d2a60b36c0505",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P15-r2/BCL603S2P_6.0.3.3P15.zip",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/585069616"
+      },
+      "extraAssets": [
+        "app.bin",
+        "manifest.json",
+        "result.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "notice": "Tester firmware. Physical recording, power and settings checks are pending. Use the updated developer app for explicit tester preparation.",
+      "qualification": "Software and signed-package checks passed. Physical recording, gestures, power, runtime stack and all-settings update qualification remain required.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P15",
+        "packageRevision": 2,
+        "status": "signed-test-download",
+        "otaAvailable": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "sourceCommit": "d64a1b30f68851fb4c23c517e875648ddcfb7d6a",
+        "qualification": "Software and signed-package checks passed. Physical recording, gestures, power, runtime stack and all-settings update qualification remain required.",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/35690847494",
+        "notice": "Tester firmware. Physical recording, power and settings checks are pending. Use the updated developer app for explicit tester preparation.",
+        "evidence": {
+          "result.json": "5042f56ae82e0e86c57720cb9117a7c4789a6b863cd206e21f1918d0005ccc6f",
+          "signed-package.json": "55396aede877a9413654afea1650b20c3d9ad9a85a640ad00f87062ad8b2287d",
+          "source-load-verification.json": "019ec02da0ad9962c76a59a9f837c934400e8d590b588ae681e3b5d1c3463499"
+        },
+        "migratedFrom": {
+          "catalog": "https://raw.githubusercontent.com/ShopItalic/sudo/main/tools/firmware-hosting/releases-v9.json",
+          "catalogSHA256": "a46e9d0df7faa9e2c5c4a67f17f930fbdf396a3f23f4efbf770b391359738aff",
+          "repository": "ShopItalic/sudo",
+          "tag": "v6.0.3.3P15-r2",
+          "url": "https://github.com/ShopItalic/sudo/releases/download/v6.0.3.3P15-r2/BCL603S2P_6.0.3.3P15.zip"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzQ0MDA4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMTUuemlwIiwic2hhMjU2IjoiZDVmZDUxNGFlZTk0MjQyMmQwNDgzMmViYTU3MjlhZjJmNzMxNzY0ODUxNzljZDk1YmU5ZDJhNjBiMzZjMDUwNSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AxNS1yMiIsImluc3RhbGxhYmxlIjpmYWxzZSwiaXNzdWVkQXQiOiIyMDI2LTA5LTI0VDAzOjA1OjU4WiIsInBhY2thZ2VSZXZpc2lvbiI6MiwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMTUifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIBpyNQIqooHQ6ole6JMYl+Uyed/eQa1Yit/gkTGqVhHrAiAUG+FCZZPXfGz6UdCcthiamwJ1TMyHkjr7EkJj2W26Gg=="
+      }
+    },
+    {
       "id": "6.0.3.3P14-r2",
       "version": "6.0.3.3P14",
       "packageRevision": 2,
