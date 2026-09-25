@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P19-r1",
+      "version": "6.0.3.3P19",
+      "packageRevision": 1,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P19-r1",
+      "asset": {
+        "bytes": 366640,
+        "name": "BCL603S2P_6.0.3.3P19.zip",
+        "sha256": "353bedfcde0ca73482ca22d8482f69066dbd4fd8325b209ea238b4737aaf2c0d",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P19-r1/BCL603S2P_6.0.3.3P19.zip",
+        "md5": "3734946b03f78db06d23eba45a2992f6",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/588946167"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p19-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "One steady Bluetooth connection setting instead of switching between fast and slow; the touch sensor's low-power scanning is now applied on this Ring; idle flash, light and motor pins are held off; pending-delivery advertising backs off after 10 minutes; a touch-sensor recalibration no longer ends a held recording. Adds power diagnostics. Includes everything in P18-rc.2.",
+      "notice": "P19-rc.1 tester update for longer standby battery life. Physical battery-life, touch and connection qualification remain in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P19",
+        "packageRevision": 1,
+        "buildIdentity": {
+          "revision": 1,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "818329710bfebeecdaaf699d6a17eaf4",
+          "generation": 19
+        },
+        "sourceCommit": "e9321f2e29418f307837a4630fea55568e75357b",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "6a3c264f85623ea280dc197b25b73914affb9a3ddd2a938acd8a52edb4ecc724",
+          "command.json": "dad2e8eb1bc36b21d71d4a859627c9141d5167bd1211d4146cf50cf5bab4d4c3",
+          "inputs-after.json": "1c53a2536accf4cc22089269f1d237d0b3e59d29f158cdfdc928003a2cb06c92",
+          "inputs-before.json": "b7df240b5db0e046f200e182ada2b1f09cac202646cb1e3dcdfcf730a7fc2efb",
+          "p19-preparation.json": "5096c631f3a475e976eee6b845fecc8c5bf01e0b7af28231c86e9f7b41392b19",
+          "result.json": "60f6dbb37f3b45dbadd2e82f099765971a107d51600fdb205c61b033029c420c",
+          "runtime-verification.json": "c87fade8dc0873aefe9faf134a9eb26c2b4a11737d372269f4e679f4539be251",
+          "signed-package.json": "553d13f80ba7e5133776636c755d044a78d60bb58bfc404d8391ee090846bce7",
+          "source-load-verification.json": "4d10f249bb233a94895f7222d526baae6f9aa7c347bf7b72525e23fe8dc11441"
+        },
+        "notice": "P19-rc.1 tester update for longer standby battery life. Physical battery-life, touch and connection qualification remain in progress.",
+        "releaseNotes": "One steady Bluetooth connection setting instead of switching between fast and slow; the touch sensor's low-power scanning is now applied on this Ring; idle flash, light and motor pins are held off; pending-delivery advertising backs off after 10 minutes; a touch-sensor recalibration no longer ends a held recording. Adds power diagnostics. Includes everything in P18-rc.2."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzY2NjQwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMTkuemlwIiwic2hhMjU2IjoiMzUzYmVkZmNkZTBjYTczNDgyY2EyMmQ4NDgyZjY5MDY2ZGJkNGZkODMyNWIyMDllYTIzOGI0NzM3YWFmMmMwZCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AxOS1yMSIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjVUMTc6MDI6MjZaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AxOSJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQCE0kw5HSnZiDfC1Q0fy66+TYtAVM+/i0jLOZHZkAYBAwIhAKJ0E9+TOx9sHYRZYkdD13TtEqdypGkP2bYLueM8awmq"
+      }
+    },
+    {
       "id": "6.0.3.3P18-r2",
       "version": "6.0.3.3P18",
       "packageRevision": 2,
