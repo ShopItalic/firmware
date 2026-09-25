@@ -39,8 +39,9 @@ makes it **trustworthy** is a signature from the product's release key:
   anything that is not a release statement for that key's product. Glyph's key is
   its firmware trust anchor (P10 onward), so it is never regenerated.
 
-Glyph firmware downloads over TLS, but it only logs certificate errors instead
-of rejecting them. For Glyph, the signature is therefore the only real protection.
+Glyph firmware is delivered over Bluetooth by the Italic app (no Wi-Fi
+updates). Glyph checks this signature and the package SHA-256 itself before
+installing, because the Bluetooth link does not authenticate the package.
 
 ## Layout
 

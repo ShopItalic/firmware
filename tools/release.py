@@ -26,7 +26,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import catalog
-import device_index
 import p256
 
 SIGNER = catalog.ROOT / 'tools/sign_release.swift'
@@ -158,8 +157,8 @@ def publish(directory, notes=None, push=False, dry_run=False):
     entry['asset']['apiURL'] = api_url
     current['releases'].insert(0, entry)
     catalog.write(product, current)
-    paths = [catalog.catalog_path(product)] + device_index.write(product, current)
-    subprocess.run(['git', '-C', str(catalog.ROOT), 'add', *map(str, paths)], check=True)
+    path = catalog.catalog_path(product).relative_to(catalog.ROOT)
+    subprocess.run(['git', '-C', str(catalog.ROOT), 'add', str(path)], check=True)
     subprocess.run(['git', '-C', str(catalog.ROOT), 'commit', '-q', '-m', f'Publish {product} {s["id"]}'], check=True)
     if push:
         subprocess.run(['git', '-C', str(catalog.ROOT), 'push', '-q'], check=True)
@@ -173,7 +172,6 @@ def withdraw(product, release_id, reason):
     entry = next(e for e in current['releases'] if e['id'] == release_id)
     entry['withdrawn'] = True; entry['withdrawnReason'] = reason
     catalog.write(product, current)
-    device_index.write(product, current)
 
 
 def main(argv=None):
