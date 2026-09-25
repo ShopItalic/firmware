@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P18-r2",
+      "version": "6.0.3.3P18",
+      "packageRevision": 2,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P18-r2",
+      "asset": {
+        "bytes": 365812,
+        "name": "BCL603S2P_6.0.3.3P18.zip",
+        "sha256": "1cba8e563af143dcf3a96bdad8db98f8fb565cc176260bf68d2f0e6ab07fa9b4",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P18-r2/BCL603S2P_6.0.3.3P18.zip",
+        "md5": "a5e5d6d5ac6ce50b03b76bf242592dc5",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/587391574"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p18-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Waits for the encrypted connection to settle before changing Bluetooth settings; no light on routine connects or disconnects; ends a recording cleanly when storage is full and reports recording faults immediately; answers storage-capacity requests; warns at 20, 15 and 10% battery and stops a recording safely before shutdown; keeps settings after an interrupted save; single-use pairing window and removable pairings. Includes P18 on-demand delivery.",
+      "notice": "P18-rc.2 tester update. Fixes Bluetooth reconnect storms, keeps routine connections dark, and makes recording safer when storage is full. Physical battery-life and recording qualification remain in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P18",
+        "packageRevision": 2,
+        "buildIdentity": {
+          "revision": 2,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "7cd6244d5e39c816edacc473b460b6be",
+          "generation": 18
+        },
+        "sourceCommit": "7444a44a0f20ae314e2ed0e282ba6a256df010d3",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "fa541900b9342df977eb5ff27af0552ba4cee70b5adc53b865b12c3ac1d53a64",
+          "command.json": "62db6534350910108d0d2706ca92ebb56261567946adffa0f8797f23160ee71b",
+          "inputs-after.json": "d09dd3c0b7b2de1729fbe1cd9b3107622319377b507c9fcf8212990392d73a10",
+          "inputs-before.json": "1d91d4ec5b7229e3091e5376bb465bbadce6674771fc7f2833540eb164255d2f",
+          "p18-preparation.json": "2a0dc9c2a54231b2c4938fd89bc2b39326dfdcb3b7ac4499994151f487596729",
+          "result.json": "fb5f177a8c535f0f44999a15d8d412e19dcd06e3daf923ce22e503a808535ddf",
+          "runtime-verification.json": "1957164d592b992ebcc59f51d8248d79bed770460c4fd2c0f42d562559cfc8ff",
+          "signed-package.json": "61f0df2ff79bdeaf959cad7a2db4445dd55a5976c252847f81a08ceda0f44ca3",
+          "source-load-verification.json": "ffa2724b00d2502b8d422d9b7154856efb67968dfb70d72c52cbb28d7eb0e715"
+        },
+        "notice": "P18-rc.2 tester update. Fixes Bluetooth reconnect storms, keeps routine connections dark, and makes recording safer when storage is full. Physical battery-life and recording qualification remain in progress.",
+        "releaseNotes": "Waits for the encrypted connection to settle before changing Bluetooth settings; no light on routine connects or disconnects; ends a recording cleanly when storage is full and reports recording faults immediately; answers storage-capacity requests; warns at 20, 15 and 10% battery and stops a recording safely before shutdown; keeps settings after an interrupted save; single-use pairing window and removable pairings. Includes P18 on-demand delivery."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzY1ODEyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMTguemlwIiwic2hhMjU2IjoiMWNiYThlNTYzYWYxNDNkY2YzYTk2YmRhZDhkYjk4ZjhmYjU2NWNjMTc2MjYwYmY2OGQyZjBlNmFiMDdmYTliNCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AxOC1yMiIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjVUMDI6NTg6NDBaIiwicGFja2FnZVJldmlzaW9uIjoyLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AxOCJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQC5J7HA12YxrPn/kKlGWFdcODaJhiR58Htvq+IeqEB7MAIhAJ9gMgBqgIsJDgf9ef843WFb9Yj2ZU0Od0ZGoznW9+fN"
+      }
+    },
+    {
       "id": "6.0.3.3P17-r1",
       "version": "6.0.3.3P17",
       "packageRevision": 1,
