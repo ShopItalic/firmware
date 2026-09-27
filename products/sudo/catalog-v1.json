@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P20-r1",
+      "version": "6.0.3.3P20",
+      "packageRevision": 1,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P20-r1",
+      "asset": {
+        "bytes": 367504,
+        "name": "BCL603S2P_6.0.3.3P20.zip",
+        "sha256": "4040394d90f62c7e0a657f9fd76771cff2a7ecc228785f1ddace8672a197ab1a",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P20-r1/BCL603S2P_6.0.3.3P20.zip",
+        "md5": "fab2ce5b1c373e3a98b15eaafae14243",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/592055790"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p20-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Fewer Bluetooth drops: while connected the Ring listens for the phone twice as often and transmits a stronger signal, and after an unexpected drop it advertises quickly for 30 seconds so the phone reconnects within seconds. With haptics on, a gentle buzz every 30 seconds reminds you a tap or app recording is still running. The charging light stays green once the Ring is full instead of turning amber on top-ups. Adds disconnect diagnostics. Includes everything in P19-rc.1.",
+      "notice": "P20-rc.1 tester update for a steadier Bluetooth connection. Physical connection, battery and charging-light qualification remain in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P20",
+        "packageRevision": 1,
+        "buildIdentity": {
+          "revision": 1,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "dc8e0315b4b1ebe9d2ed3a9a881f9990",
+          "generation": 20
+        },
+        "sourceCommit": "2ef5a647e5bc039e8f9502c8f2a5021dba777515",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "c9b4c0c1cb6bcbb9b934ca1ef762b2d81b75e396887cf3e86a324359c09d39d1",
+          "command.json": "f5dcd56890cc615fa0c036a58621340ea2d1fc860d672340b7e5f6b2371539e9",
+          "inputs-after.json": "121192bb4cd4a643eb5f718c41a0ee12c8815d528044462e042ec26557e6d207",
+          "inputs-before.json": "4262833c6a47992d2bb71522c4aed3bbf8bb0975f7b7c9fcbc1fdbdc827fa465",
+          "p20-preparation.json": "dab803cf93143f6345357a5c826c4f83493e82f8ba8b37bc69b8ec67a929019c",
+          "result.json": "1f48313d646e4528a039c47e4f6103bf055f4dc3d728ccb5a30d406a9a2865bc",
+          "runtime-verification.json": "0bef674645faef7bfdccb1fc52911d5faa9fb9d2f62d7955ea459f284993faa7",
+          "signed-package.json": "4d17998b5b30814fbf7bb2aa42c1f41394684c4e3fe3dfe12ee57c7e3d111d6d",
+          "source-load-verification.json": "66c7deced37ff8f87ebb0dc9e373dab36ef368665b1dff15bb4c7bb38f1e9a28"
+        },
+        "notice": "P20-rc.1 tester update for a steadier Bluetooth connection. Physical connection, battery and charging-light qualification remain in progress.",
+        "releaseNotes": "Fewer Bluetooth drops: while connected the Ring listens for the phone twice as often and transmits a stronger signal, and after an unexpected drop it advertises quickly for 30 seconds so the phone reconnects within seconds. With haptics on, a gentle buzz every 30 seconds reminds you a tap or app recording is still running. The charging light stays green once the Ring is full instead of turning amber on top-ups. Adds disconnect diagnostics. Includes everything in P19-rc.1."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzY3NTA0LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjAuemlwIiwic2hhMjU2IjoiNDA0MDM5NGQ5MGY2MmM3ZTBhNjU3ZjlmZDc2NzcxY2ZmMmE3ZWNjMjI4Nzg1ZjFkZGFjZTg2NzJhMTk3YWIxYSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMC1yMSIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjZUMTg6MTM6NDNaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMCJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIGC7R27ANRLotm1/GJ95cEvjAfmkPlZdnOPNHD2gtyYVAiEA3nQxIYWW6zjaJORDjux0f5rv36AfY+1QwaHrKihmiVI="
+      }
+    },
+    {
       "id": "6.0.3.3P19-r1",
       "version": "6.0.3.3P19",
       "packageRevision": 1,
