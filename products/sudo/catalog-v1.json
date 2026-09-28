@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P20-r5",
+      "version": "6.0.3.3P20",
+      "packageRevision": 5,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P20-r5",
+      "asset": {
+        "bytes": 369888,
+        "name": "BCL603S2P_6.0.3.3P20.zip",
+        "sha256": "0c415947f8d2c48127751521f760ae7c077906d298a70029285109ded0eb7e7b",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P20-r5/BCL603S2P_6.0.3.3P20.zip",
+        "md5": "013ad9adfb3c6dca5ac7921e946de223",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/595248635"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p20-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Fixes a manual storage format so the Ring keeps recordings made afterwards, and confirms the tap sensitivity setting after the touch sensor restarts. The Ring still starts with empty storage after this update, so sync first. Includes everything in P20-rc.4.",
+      "notice": "P20-rc.5 tester update: storage and tap fixes. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P20",
+        "packageRevision": 5,
+        "buildIdentity": {
+          "revision": 5,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "acf03ffad96e9a3f9cdc90cf02250c24",
+          "generation": 20
+        },
+        "sourceCommit": "7ccceb7bd002678daac4da32f221f337c78c688e",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "1b550138abd4c204a49577d7a7741f551e4e07eceb823df0d3979dd775098f76",
+          "command.json": "2d3762e6a8d4dac7be5cdfa24062ccb96515de7339ab32dd01152499c9ded7e7",
+          "inputs-after.json": "c767948b3f46f158b98d6c19d506a4e1dd79efea397523d9c8be66105daaa51d",
+          "inputs-before.json": "d807da2b870319d5cd4829c4d65bfd53c2d399470e6547364b98a316e26d2ee5",
+          "p20-preparation.json": "b6b10cc371dc794ee8352dfa631e436aa68afb9d2f7cb8e76bc14765adcec5e1",
+          "result.json": "9867ce24d941e52a92371fd834adaf0fb3701b994fa002d11d8e1f93af9a092f",
+          "runtime-verification.json": "55e59b9e66bf34041c6024742e395f464c4ade2e20bd25f62d22ca30d8b066df",
+          "signed-package.json": "44420d1554160d86ee063475e9a3223d4783856b2925076a73f71a07be93dad9",
+          "source-load-verification.json": "c006239de2d03b9fa9f70e1981f78499c3eb6fe872a567e723257423124664b4"
+        },
+        "notice": "P20-rc.5 tester update: storage and tap fixes. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Fixes a manual storage format so the Ring keeps recordings made afterwards, and confirms the tap sensitivity setting after the touch sensor restarts. The Ring still starts with empty storage after this update, so sync first. Includes everything in P20-rc.4."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzY5ODg4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjAuemlwIiwic2hhMjU2IjoiMGM0MTU5NDdmOGQyYzQ4MTI3NzUxNTIxZjc2MGFlN2MwNzc5MDZkMjk4YTcwMDI5Mjg1MTA5ZGVkMGViN2U3YiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMC1yNSIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjhUMTE6MTE6MTVaIiwicGFja2FnZVJldmlzaW9uIjo1LCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMCJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQCKnPKr6zLmAQhMePWJbFgfavlC4jCuUAd/FdtMPSHjPAIgeAtB9UDNNEKahtn4RBgwEymLu/JiWQSPKo0r43/w6Ec="
+      }
+    },
+    {
       "id": "6.0.3.3P20-r4",
       "version": "6.0.3.3P20",
       "packageRevision": 4,
