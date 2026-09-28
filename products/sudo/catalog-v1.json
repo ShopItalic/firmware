@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P20-r4",
+      "version": "6.0.3.3P20",
+      "packageRevision": 4,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P20-r4",
+      "asset": {
+        "bytes": 369840,
+        "name": "BCL603S2P_6.0.3.3P20.zip",
+        "sha256": "0c51346fafb3810deca5748244a2a8351289693580843cc73c68ade8b038d5d6",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P20-r4/BCL603S2P_6.0.3.3P20.zip",
+        "md5": "5b8fb79896f89d6f2e6df378589da509",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/595167794"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p20-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "The Ring starts with empty storage after this update and after future updates, so sync first: recordings still on the Ring are erased. Storage that can’t be read is repaired automatically, and a Ring with storage trouble can still be updated. Includes everything in P20-rc.3.",
+      "notice": "P20-rc.4 tester update: storage recovery. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P20",
+        "packageRevision": 4,
+        "buildIdentity": {
+          "revision": 4,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "38bf6c4bd6a8e111259f0cafc2ae4d1a",
+          "generation": 20
+        },
+        "sourceCommit": "5eed2017aaf6f2b803c30d6c00c577a16daa7b47",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "9069c08c4e95f03b58aa4f78e6cfeed900529607399e94361c0252ab0145ded2",
+          "command.json": "78167b82671c4f13e370a4d8d16d553236c69b10aa2b1b4ba204642f6477a8ac",
+          "inputs-after.json": "87da1f2124ac7733881ce93e760f93a5c62c01192b052a57d91008673a2e33bb",
+          "inputs-before.json": "7df4154bc208d65cbed945a32f08ba89dda2df2c8d8122c585596cc8ca2e35d9",
+          "p20-preparation.json": "826a2936cbab9d7d2560bf6bfac6cc862e86daab0b3f5c8b0317d9e16fdfd3c7",
+          "result.json": "46b9531399228f53466f5b64005b04ee6c066145fc4e2748155c6192db651dc7",
+          "runtime-verification.json": "bcd46af8de3e64b34c5674f8f5330cbaa4a0d99f09cecff7bcbb18c7307007f7",
+          "signed-package.json": "73635b439ff942f2a0cfb0659451b5100c2b8c57989be2277a5cd3e56762a946",
+          "source-load-verification.json": "fd2d31dec7d199f1b2cde48402f9d90091554bd8c091397894c2dc1277f44e76"
+        },
+        "notice": "P20-rc.4 tester update: storage recovery. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "The Ring starts with empty storage after this update and after future updates, so sync first: recordings still on the Ring are erased. Storage that can’t be read is repaired automatically, and a Ring with storage trouble can still be updated. Includes everything in P20-rc.3."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzY5ODQwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjAuemlwIiwic2hhMjU2IjoiMGM1MTM0NmZhZmIzODEwZGVjYTU3NDgyNDRhMmE4MzUxMjg5NjkzNTgwODQzY2M3M2M2OGFkZThiMDM4ZDVkNiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMC1yNCIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjhUMDk6NTk6MDRaIiwicGFja2FnZVJldmlzaW9uIjo0LCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMCJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIGiucBGOPgIv4j2JX90T1lod12hGzoulxNbc0rxihStbAiBu2o5AJTBgKqMjEYfR2BSXnmb+zmm8OIKTbUvka4sbBQ=="
+      }
+    },
+    {
       "id": "6.0.3.3P20-r3",
       "version": "6.0.3.3P20",
       "packageRevision": 3,
