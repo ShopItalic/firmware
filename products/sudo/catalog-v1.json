@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P20-r3",
+      "version": "6.0.3.3P20",
+      "packageRevision": 3,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P20-r3",
+      "asset": {
+        "bytes": 368672,
+        "name": "BCL603S2P_6.0.3.3P20.zip",
+        "sha256": "87c8c9b1d799962a94334e51201276c6230bde3783f4def8e284799409654724",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P20-r3/BCL603S2P_6.0.3.3P20.zip",
+        "md5": "32420532672a12bfd2d2511374c7b266",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/594850964"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p20-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Choose how strictly the Ring counts taps in Ring settings: Strict counts only quick taps in quick succession, Standard keeps P20-rc.2’s timing, and Relaxed also counts slower taps. Your choice is saved on the Ring. Includes everything in P20-rc.2.",
+      "notice": "P20-rc.3 tester update: tap sensitivity presets. Physical tap, connection and battery qualification remain in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P20",
+        "packageRevision": 3,
+        "buildIdentity": {
+          "revision": 3,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "b55a1f5a5141b69463a97f9a614fb12f",
+          "generation": 20
+        },
+        "sourceCommit": "1b1508b4e868457f084aaaac5bacefe2e19cc7e7",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "3cde72900c85c24a9fc51a31c1b907e667c73ae4a9ff63ba4db8f7664531bc0b",
+          "command.json": "a05244959ba8f1ab51e2b19616b15be89f50192040c2799a997ae000ea97f6f1",
+          "inputs-after.json": "0090dda3764e8a2c2ca60275f0b8e6f208087d4091dd4d63194cb0f0554b10d3",
+          "inputs-before.json": "f5517eff242ce0d27c7d176daf399d8620bfd098e45294f273d80f18012558f0",
+          "p20-preparation.json": "6df22c7fd173a04a84e595104155fd39e3881d2dd86ad460aab0127a31077601",
+          "result.json": "758f7b0d2d1adba3885f7f3daeecf351c0cc103c36f07d0d65008f47a6624c6a",
+          "runtime-verification.json": "eaf2610a9b0765cb65da2a317ef355c5f6acd3e1d398a481f55f752c7fb33899",
+          "signed-package.json": "99cf07c24a796c29a747efdb3d2bf7fc2555ea8e810cddfcec9be40cd79e9d60",
+          "source-load-verification.json": "f83a636d577275107cd8dd005dd361223622b7514ec16d2ed65beefa49207c7d"
+        },
+        "notice": "P20-rc.3 tester update: tap sensitivity presets. Physical tap, connection and battery qualification remain in progress.",
+        "releaseNotes": "Choose how strictly the Ring counts taps in Ring settings: Strict counts only quick taps in quick succession, Standard keeps P20-rc.2’s timing, and Relaxed also counts slower taps. Your choice is saved on the Ring. Includes everything in P20-rc.2."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzY4NjcyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjAuemlwIiwic2hhMjU2IjoiODdjOGM5YjFkNzk5OTYyYTk0MzM0ZTUxMjAxMjc2YzYyMzBiZGUzNzgzZjRkZWY4ZTI4NDc5OTQwOTY1NDcyNCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMC1yMyIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjhUMDY6NTg6MTNaIiwicGFja2FnZVJldmlzaW9uIjozLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMCJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQDECGmuoo/WPIQf0zqJ5lc589IqGDBiQwiVOxrpvQYKrAIgH8yatXNt3Ia+yf7GeNUmI5ZZ77vMLs1nUcIgbWvt60E="
+      }
+    },
+    {
       "id": "6.0.3.3P20-r1",
       "version": "6.0.3.3P20",
       "packageRevision": 1,
