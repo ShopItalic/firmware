@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r1",
+      "version": "6.0.3.3P21",
+      "packageRevision": 1,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r1",
+      "asset": {
+        "bytes": 334316,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "3b1caac1abb79a37cb4e2dbd8509a4bcffa69726244837043db7e8c3efcad94f",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r1/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "73ef4dd1975df9f097a21efbe25396ed",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/597825544"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Removes unused supplier code and debug logging; no feature changes. Updating erases recordings still on the Ring, so sync first. Includes everything in P20-rc.9.",
+      "notice": "P21-rc.1 tester update: leaner firmware. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 1,
+        "buildIdentity": {
+          "revision": 1,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "9e3c365161ca88b153a1282d6e80345a",
+          "generation": 21
+        },
+        "sourceCommit": "aeadbcfee712c4418f3f53af87608b651c77717a",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "92e32b015b3244365d03815a492c3ae0083546192385ef0fc7fd6ee665e04f20",
+          "command.json": "5b953bed4cafa66569262f02958aac279d535f0448019cd4695f96f3605c75eb",
+          "inputs-after.json": "12cc8b48c983c622867cdec1b881deea341441f39ce6ab7525785328aec7875d",
+          "inputs-before.json": "fc101df4feff430152b1b43146da4e7b3e2ec57d417c2f8406fef3ba5e671bdc",
+          "p21-preparation.json": "a3bc1806d9c8ec48b47f6dfa3bcbecb5761d14035c88e96a73a5da5109aaee1a",
+          "result.json": "4c016560cfbb965122c38c5db830e26ce2af425299cb04693cb7d44f6e2790d4",
+          "runtime-verification.json": "96a4bc39f8c4ac1855c51a839c445204e23b8d20541bf7a9020f6d7e72c8f1b8",
+          "signed-package.json": "90bd5e19b011b6c27238b58ecd27d28c5dc10c251014fcc3d7f9c6567b5b36a7",
+          "source-load-verification.json": "a4f05fc634117b47b44a4c05026821f94def6802de96a8750454ffacb1edfd5e"
+        },
+        "notice": "P21-rc.1 tester update: leaner firmware. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Removes unused supplier code and debug logging; no feature changes. Updating erases recordings still on the Ring, so sync first. Includes everything in P20-rc.9."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzM0MzE2LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiM2IxY2FhYzFhYmI3OWEzN2NiNGUyZGJkODUwOWE0YmNmZmE2OTcyNjI0NDgzNzA0M2RiN2U4YzNlZmNhZDk0ZiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMSIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjlUMDk6MzU6MjNaIiwicGFja2FnZVJldmlzaW9uIjoxLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMSJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIACX1BqCtl1XoAqlC3/Q6MQHMYJE/pxhkPb+EFQbr9dlAiBL989TCyZ86Au5rbEzj4z1F1jCp3+EMgnsK0wTLb9Q2w=="
+      }
+    },
+    {
       "id": "6.0.3.3P20-r9",
       "version": "6.0.3.3P20",
       "packageRevision": 9,
