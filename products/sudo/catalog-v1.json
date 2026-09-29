@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P20-r9",
+      "version": "6.0.3.3P20",
+      "packageRevision": 9,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P20-r9",
+      "asset": {
+        "bytes": 372696,
+        "name": "BCL603S2P_6.0.3.3P20.zip",
+        "sha256": "97bb1c6f921c80df5555da6e5611fa8b0489a024ac13f304f8005e4569a7021b",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P20-r9/BCL603S2P_6.0.3.3P20.zip",
+        "md5": "df67e7dcbf37d6b15697f6c7c98fb31c",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/597702027"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p20-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Recording start and stop buzzes are stronger and crisper, and you can pick Strong or Soft vibration in the app. Updating erases recordings still on the Ring, so sync first. Includes everything in P20-rc.8.",
+      "notice": "P20-rc.9 tester update: stronger vibration. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P20",
+        "packageRevision": 9,
+        "buildIdentity": {
+          "revision": 9,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "c485323ba6313e1cf9b39cda25d28ae4",
+          "generation": 20
+        },
+        "sourceCommit": "8da87ea0e027b8d10b9e4d492381100f3316874a",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "49cd7d867f8b82da7ea817972893feca8713a4470cd0fbb8315e38a234f598b3",
+          "command.json": "873e555191da9665cc29e5634657cca3cbe372b09d7b115174d7932d52bdefae",
+          "inputs-after.json": "e37d84af4fcb4f94e73bf912d466496e9e6426481ed027ccd700890fbd015be7",
+          "inputs-before.json": "7964975aa42ad1b338a2b427544a1b417c2ea20eddd01d252bbd62b2e77f5477",
+          "p20-preparation.json": "3fe090cf0e3b50efcfbfd5dd7637eb6acd9bec3c557b11570cd277743e60f199",
+          "result.json": "909709cbe3626019d23ebbaf3e7334ccd097c3f8d5b0b5c712236ab54ebbe600",
+          "runtime-verification.json": "76be81ccd06027f5c43766b3b66d4a1aa4f2d22f2abc73dafd1a73d23489bf6e",
+          "signed-package.json": "5230021218eb803874f697e0a86043e15df100b2cb5921326c95f59b9e8f355f",
+          "source-load-verification.json": "3fbe4abe7370284c911a446163c0c843ace8187ec8028fdd99f04919fdab1460"
+        },
+        "notice": "P20-rc.9 tester update: stronger vibration. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Recording start and stop buzzes are stronger and crisper, and you can pick Strong or Soft vibration in the app. Updating erases recordings still on the Ring, so sync first. Includes everything in P20-rc.8."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzcyNjk2LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjAuemlwIiwic2hhMjU2IjoiOTdiYjFjNmY5MjFjODBkZjU1NTVkYTZlNTYxMWZhOGIwNDg5YTAyNGFjMTNmMzA0ZjgwMDVlNDU2OWE3MDIxYiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMC1yOSIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjlUMDg6MzM6MzZaIiwicGFja2FnZVJldmlzaW9uIjo5LCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMCJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQCaswIqAgmc2IghKJzrRue9tUjhfdOCv0VVBa3wNZP57wIhAPQhnVcS9XUitOSHqKXt3KDaFhipn8t/k+RmaXO1EqWp"
+      }
+    },
+    {
       "id": "6.0.3.3P20-r8",
       "version": "6.0.3.3P20",
       "packageRevision": 8,
