@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r2",
+      "version": "6.0.3.3P21",
+      "packageRevision": 2,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r2",
+      "asset": {
+        "bytes": 334628,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "1fdd5f659abac1923460dbfb3e832d0c2e24ffb89f41cdc2591712362b48a655",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r2/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "eac18fca110c646a483035f1025acb3e",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/598013059"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Find My now flashes the Ring's light as it buzzes, and starts right away. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.1.",
+      "notice": "P21-rc.2 tester update: Find My flashes the light. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 2,
+        "buildIdentity": {
+          "revision": 2,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "92701c8e4f39c347534a3dfb0db7b033",
+          "generation": 21
+        },
+        "sourceCommit": "f3ae96352c5f410440a30c284e110ddf6ad1a07a",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "0fe9234a1904c3f78a8f7b712b0e09b8702f0ddc0907d475e95c302401488bd3",
+          "command.json": "35b19a816118408512254106fcbb96d5eb75e8ab4eeafbacebc4986801c8df0e",
+          "inputs-after.json": "6a30108746456b53f60babee0924e6b886ff76b24398bcd50691b3c6eae2250a",
+          "inputs-before.json": "b808030a5030a64dd2da5ee47b83d6078122fdcd9ce5f7d162dc24916f8ce8b6",
+          "p21-preparation.json": "8c585aa7cf2a5985f231cbbcfbe93fd3241a1440ee03555b8226fc0962301015",
+          "result.json": "187cbcef80a95f12023e7058a2c88613fcff7a7a11f75006e495fc41aca9ebf1",
+          "runtime-verification.json": "ec5fb0883d30e2af8ca91da4451ead96a6532edc10996c55bd06f727539cc1bc",
+          "signed-package.json": "87b5258b4ab151dd5a7f3da63dda361659346fac30eab89872962c6e7667264e",
+          "source-load-verification.json": "c56065446c1a83175f63b9201258c883b84169bbdc2c67b03d6bbff823eac232"
+        },
+        "notice": "P21-rc.2 tester update: Find My flashes the light. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Find My now flashes the Ring's light as it buzzes, and starts right away. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.1."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzM0NjI4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiMWZkZDVmNjU5YWJhYzE5MjM0NjBkYmZiM2U4MzJkMGMyZTI0ZmZiODlmNDFjZGMyNTkxNzEyMzYyYjQ4YTY1NSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMiIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjlUMTE6MDk6NTBaIiwicGFja2FnZVJldmlzaW9uIjoyLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMSJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQDBnmaf2IGxpo/HnOLSBLCMHd5rmzZo39hn9vXnrjlE2QIhANx9kPGkT0+Y4mOL3kTMx2K/30ACb8FiNoXuJkJRGLSX"
+      }
+    },
+    {
       "id": "6.0.3.3P21-r1",
       "version": "6.0.3.3P21",
       "packageRevision": 1,
