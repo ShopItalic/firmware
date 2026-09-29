@@ -4,6 +4,54 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P17-rc.6",
+      "version": "P17-rc.6",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "glyph-P17-rc.6",
+      "asset": {
+        "bytes": 11303841,
+        "name": "glyph-P17-rc.6-install.glyphota",
+        "sha256": "e5e0b40ad58cbd1ad3a1ff0e0b906cb7481c9ce80f75682260846249e9da723e",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P17-rc.6/glyph-P17-rc.6-install.glyphota",
+        "md5": "f874e9bc91e41ab72a2257ac23bc9909",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/597161204"
+      },
+      "extraAssets": [
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Fixes P17-rc.3 restarting over and over when plugged into a computer: Glyph no longer reads its USB serial port. Glyph's Chat tab is Italic's own Chat: the same conversation on both devices, asked by holding Chat on Glyph. Keeps rc.4's Home with recordings, larger tab bar and Sleep on a charger. Installs over Bluetooth from Italic on Glyph running P17-rc.3 to rc.5; tap Allow, then Install, on Glyph.",
+      "notice": "Test build, not physically qualified. Installs over Bluetooth from Italic after you approve it on Glyph.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P17-rc.6",
+        "privateManifestSHA256": "2a78e47f52cc5df4a33e3b670f933032308a02d2cbbe5b1dc87f333ba21417be",
+        "delivery": "bluetooth",
+        "runningMajors": [
+          17,
+          17
+        ],
+        "descriptorSequence": 11706,
+        "firmware": {
+          "name": "glyph-pks3-101-P17-rc.6.ufw",
+          "bytes": 11303680,
+          "sha256": "fbfa4b1d2237905b68c5577432df427c2e42b8aeb7fc1ff6528cd4d07e62acfb"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM4NDEsIm5hbWUiOiJnbHlwaC1QMTctcmMuNi1pbnN0YWxsLmdseXBob3RhIiwic2hhMjU2IjoiZTVlMGI0MGFkNThjYmQxYWQzYTFmZjBlMGI5MDZjYjc0ODFjOWNlODBmNzU2ODIyNjA4NDYyNDllOWRhNzIzZSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiUEtTMy0xMDEiLCJpZCI6IlAxNy1yYy42IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0wOS0yOVQwMzozOTozMFoiLCJwYWNrYWdlUmV2aXNpb24iOjEsInByb2R1Y3QiOiJnbHlwaCIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJzb3VyY2VWZXJzaW9ucyI6WyJQMTctcmMuMyIsIlAxNy1yYy40IiwiUDE3LXJjLjUiXSwidmVyc2lvbiI6IlAxNy1yYy42In0=",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEQCIDzjhGqtLluws9lJ3yuuUfj3N0UUhnfG5GCQgMT1mdNHAiA4qqIdGKgY4fDnooK8U4W5ImgFFhaJlBGKukbhq/xcOg=="
+      }
+    },
+    {
       "id": "P11-rc.1",
       "version": "P11-rc.1",
       "packageRevision": 1,
