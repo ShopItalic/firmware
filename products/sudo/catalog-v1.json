@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r3",
+      "version": "6.0.3.3P21",
+      "packageRevision": 3,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r3",
+      "asset": {
+        "bytes": 334792,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "a47117294aee98d6f968e65fff652e289326fb93442cdfd4e22aea464b12ed9a",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r3/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "8e741c0d358d195048b60274523dc1dc",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/598909879"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "The Ring checks light colors and other settings after every save, and a Ring whose colors went back to the defaults can save them again. It also stops rewriting its settings on every connection. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.2.",
+      "notice": "P21-rc.3 tester update: verified settings saves. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 3,
+        "buildIdentity": {
+          "revision": 3,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "bbdd1fdbfe51a6bd0e2531e22edc56fb",
+          "generation": 21
+        },
+        "sourceCommit": "f1614499efe08a34ae70fb4daed5d7775ab1a13b",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "164ff1277af5dc0c74395259301515637a86531789af4b6a466fb39dd3a7c792",
+          "command.json": "df9097825a0706152ab3ee68d1c472577daaa16ccfb52ec3ce567989c66a3a3c",
+          "inputs-after.json": "3c605196ec6d83d8a6419da898f16774acbb79d4f19a47b1ac9061763452c985",
+          "inputs-before.json": "e88ae8d2f1e8d9a1d9381849d6fd74d8c251634d6f2bece80b3b90c4772513c7",
+          "p21-preparation.json": "30cf7dbe396911c54489ceaa53b1c9743a4cc0ed5e117ae70be7b35760c37f9d",
+          "result.json": "d75737652bba7db86293a974cd58f580947a17f488d2c9a0f42e56997e113ea2",
+          "runtime-verification.json": "b3ed6ace741e419f1ca575d2421b5754deea80efb91daa6262b14cf0498e1774",
+          "signed-package.json": "050dae3140f357d19d7e55081c26fb9d8c62eacd3b7fa0e7b56a41c72a9d1fec",
+          "source-load-verification.json": "068f04f9128b487124f1cb87f8fbf4aa90d52ca9eb5828ef45b1a7b4acaa2c0d"
+        },
+        "notice": "P21-rc.3 tester update: verified settings saves. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "The Ring checks light colors and other settings after every save, and a Ring whose colors went back to the defaults can save them again. It also stops rewriting its settings on every connection. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.2."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzM0NzkyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiYTQ3MTE3Mjk0YWVlOThkNmY5NjhlNjVmZmY2NTJlMjg5MzI2ZmI5MzQ0MmNkZmQ0ZTIyYWVhNDY0YjEyZWQ5YSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMyIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjlUMTg6Mjc6NDFaIiwicGFja2FnZVJldmlzaW9uIjozLCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMSJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQDx8PACZhHuRtdVOBNCsSreWd4Lco3trFDAnCpaMI+0tQIhAJQtA89ASJ1FEH8Lz0Z6An9ud7p+T0qI+6wor4sx6l8q"
+      }
+    },
+    {
       "id": "6.0.3.3P21-r2",
       "version": "6.0.3.3P21",
       "packageRevision": 2,
