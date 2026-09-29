@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P20-r8",
+      "version": "6.0.3.3P20",
+      "packageRevision": 8,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P20-r8",
+      "asset": {
+        "bytes": 371152,
+        "name": "BCL603S2P_6.0.3.3P20.zip",
+        "sha256": "2ca71404735f273c7903c64e47f389ff55abe393a776b69c05975a91c06284d0",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P20-r8/BCL603S2P_6.0.3.3P20.zip",
+        "md5": "710a3f5dd182c4031d7be13488b022d1",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/597446139"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p20-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Placing the Ring on its charger ends and saves a recording, and the Ring won't record while it's on its charger. Updating erases recordings still on the Ring, so sync first. Includes everything in P20-rc.7.",
+      "notice": "P20-rc.8 tester update: no recording on the charger. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P20",
+        "packageRevision": 8,
+        "buildIdentity": {
+          "revision": 8,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "8b49568c088fe742d45fb50008724d85",
+          "generation": 20
+        },
+        "sourceCommit": "28a9e4c2e9555874823c396fe8ab4683a2a3336c",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "9453a184a416658592d4f45d93c9a693f3424708612f31bdbdf32be6a643cc4f",
+          "command.json": "970eec15988fb74e3cb8893743066e13059623ace53a6a34f328f8c9ea7073ef",
+          "inputs-after.json": "82e323c2e1d2ffd5ab79b8759cda0d36e324a87b375c97bc8d4251f296a2aae2",
+          "inputs-before.json": "da58dc5befa57d1cab2cf99544689e587a4130bf1e6d36424af9b977f35ea6a3",
+          "p20-preparation.json": "c47fd8c26cae555a5f394132144f37bf2898046d1f521b53658cf39606cc2b97",
+          "result.json": "a434d0cf47c840178561226b0137f3f1e4544ee590792fe95c7b37857b728311",
+          "runtime-verification.json": "4ba1c69aa1deaa0bc46be7a0797496bc8be5fb1f702ba9f9ce9847f86cc504cd",
+          "signed-package.json": "5b6083a377e83dd11dded635c4732137156a60d222dde7017b004701daffbb67",
+          "source-load-verification.json": "5972ee1ba24ffb4c6feb00804e926a2dc037d9eaa8b878ec0790d88587a19b3a"
+        },
+        "notice": "P20-rc.8 tester update: no recording on the charger. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Placing the Ring on its charger ends and saves a recording, and the Ring won't record while it's on its charger. Updating erases recordings still on the Ring, so sync first. Includes everything in P20-rc.7."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzcxMTUyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjAuemlwIiwic2hhMjU2IjoiMmNhNzE0MDQ3MzVmMjczYzc5MDNjNjRlNDdmMzg5ZmY1NWFiZTM5M2E3NzZiNjljMDU5NzVhOTFjMDYyODRkMCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMC1yOCIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjlUMDY6MTc6NTBaIiwicGFja2FnZVJldmlzaW9uIjo4LCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMCJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQDIvM0iI4OqGp3Ch6oNvUOOTGKuZiAu2R7zxaUCKR0/MgIhAPhV7ebphvDO780XasHu4XrgK84zlqWNIPfZ7jzcF4KZ"
+      }
+    },
+    {
       "id": "6.0.3.3P20-r7",
       "version": "6.0.3.3P20",
       "packageRevision": 7,
