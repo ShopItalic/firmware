@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P20-r6",
+      "version": "6.0.3.3P20",
+      "packageRevision": 6,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P20-r6",
+      "asset": {
+        "bytes": 370360,
+        "name": "BCL603S2P_6.0.3.3P20.zip",
+        "sha256": "5ffe07408621839ae94e7d6d3b5285add39ad02f7ddb82865a6a09c1f25216a4",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P20-r6/BCL603S2P_6.0.3.3P20.zip",
+        "md5": "a3fe07541f600643ffbfbe9acedf39ef",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/597172103"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p20-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Restores the full-length vibration when a recording starts and stops, which an earlier battery change had halved. Adds test vibrations the app can play, so you can report which one feels strongest. The Ring starts with empty storage after this update, so sync first. Includes everything in P20-rc.5.",
+      "notice": "P20-rc.6 tester update: stronger recording vibration and vibration tests. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P20",
+        "packageRevision": 6,
+        "buildIdentity": {
+          "revision": 6,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "9744597d0c923e9ef9c56a99fe6c1407",
+          "generation": 20
+        },
+        "sourceCommit": "edce5fd6202fb4251e8ff88a28f10670e7923c77",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "f729dc6b495fde9f59cbf7600538776636c863880e6b85bf58714b7a4fba36f5",
+          "command.json": "b4c1c9a5011632819c0e982096eddb6088643170f8b245f02917ec715ea37dd5",
+          "inputs-after.json": "1052e3509011fc0d86c21bdbd61461068a25e04725aa84326b2aa020ee37051e",
+          "inputs-before.json": "416c33e025436854d87323a091ac39db15cf2e09fbf8e1c6c7808161e0c4bf39",
+          "p20-preparation.json": "a8d0cfdb4aabc369250e4dae95c547413174a747c57a6036b78dfc0f340bfc09",
+          "result.json": "5d1b1b31f3bde22bf0d2ca8b6919fe75c190fda6a94137968b2c1ce9d8c8f9e8",
+          "runtime-verification.json": "5201676db9f88817c40e66b48412b6828f074227f0a9784caa8bb3619da85654",
+          "signed-package.json": "cb3132346aabe8a921038880fde6c98b3d0b5af93e73c6dd025d725b865abb05",
+          "source-load-verification.json": "85780aa8c57148de3be2b047b61e638cbe8e532fcd4fceea1bbd090d0c5c413e"
+        },
+        "notice": "P20-rc.6 tester update: stronger recording vibration and vibration tests. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Restores the full-length vibration when a recording starts and stops, which an earlier battery change had halved. Adds test vibrations the app can play, so you can report which one feels strongest. The Ring starts with empty storage after this update, so sync first. Includes everything in P20-rc.5."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzcwMzYwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjAuemlwIiwic2hhMjU2IjoiNWZmZTA3NDA4NjIxODM5YWU5NGU3ZDZkM2I1Mjg1YWRkMzlhZDAyZjdkZGI4Mjg2NWE2YTA5YzFmMjUyMTZhNCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMC1yNiIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjhUMTI6NTM6MzNaIiwicGFja2FnZVJldmlzaW9uIjo2LCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMCJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQCYjysrz3TSLCrXvQlcMOnPxQKpEGNujHpwootR3+CdIgIhANyZe+da8SKjtwk5VVMnmPBbWYqR0/depBP0q0+M7EXV"
+      }
+    },
+    {
       "id": "6.0.3.3P20-r5",
       "version": "6.0.3.3P20",
       "packageRevision": 5,
