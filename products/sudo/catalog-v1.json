@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P20-r7",
+      "version": "6.0.3.3P20",
+      "packageRevision": 7,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P20-r7",
+      "asset": {
+        "bytes": 370836,
+        "name": "BCL603S2P_6.0.3.3P20.zip",
+        "sha256": "80466db15b5d2b2f8fad4b25e0ec2f1ab2e1aba8e9476f7aed8b84a31f322219",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P20-r7/BCL603S2P_6.0.3.3P20.zip",
+        "md5": "95eea04c63f132acda38468708bf8e38",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/597354270"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p20-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Play any vibration from the app, choosing its frequency and strength, so you can find one you can feel. Ring deletes after sync are faster. Updating erases recordings still on the Ring, so sync first. Includes everything in P20-rc.6.",
+      "notice": "P20-rc.7 tester update: custom vibration and faster deletes. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P20",
+        "packageRevision": 7,
+        "buildIdentity": {
+          "revision": 7,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "4e6bbc499f0bb538ca7caa8c1ac8f69d",
+          "generation": 20
+        },
+        "sourceCommit": "2c6fd02b4fd128869f682ed6340628ddccf2e5a6",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "c56ffc867aa1e88aec5aa30beb56df3e195af911927b80b640e4f0d406f1028b",
+          "command.json": "46f90a712122f5f698f0176388e2df35043a6b1e2aae7b9bb43c5611589c7ee7",
+          "inputs-after.json": "5f0dee757b66b60df2730b19d673aab91b18f4441a0622f28d73f8c85a96c5f5",
+          "inputs-before.json": "1e84b2fe9189a7c2aa1ec10d2240e514a58b7cfe55867eae81076338bebc056c",
+          "p20-preparation.json": "d3911c77cc78c2227749842e744b6e6755ae5633b354f2c8ed698a7679f2a81c",
+          "result.json": "778ee717632d2952a6349db5aff50cf2526fcfd6e9188acec39986696f72c1dd",
+          "runtime-verification.json": "00c1a341fc53167d24f6b2bd93afb85a6e41f76514611ccfdf3deb7fd8940b17",
+          "signed-package.json": "030508a79a94cc3ffb98355b553ac506799a9208f0a14b615842e859adf2e0eb",
+          "source-load-verification.json": "06e2ec1d6443dab6c53520863b93b9423ca3ed7a30e7b961c5c9ab171b205913"
+        },
+        "notice": "P20-rc.7 tester update: custom vibration and faster deletes. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Play any vibration from the app, choosing its frequency and strength, so you can find one you can feel. Ring deletes after sync are faster. Updating erases recordings still on the Ring, so sync first. Includes everything in P20-rc.6."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzcwODM2LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjAuemlwIiwic2hhMjU2IjoiODA0NjZkYjE1YjVkMmIyZjhmYWQ0YjI1ZTBlYzJmMWFiMmUxYWJhOGU5NDc2ZjdhZWQ4Yjg0YTMxZjMyMjIxOSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMC1yNyIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMjlUMDQ6NDQ6NDhaIiwicGFja2FnZVJldmlzaW9uIjo3LCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMCJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIDhq5ZaZl7wBJXqvyGUP54EDpqzvb6epCKEiA0Dae22ZAiBAj/KRE+ASA4qbo28mGYLrc8Yr9lC/jqWAPKT//aeIHg=="
+      }
+    },
+    {
       "id": "6.0.3.3P20-r6",
       "version": "6.0.3.3P20",
       "packageRevision": 6,
