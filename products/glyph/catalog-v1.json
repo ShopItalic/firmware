@@ -4,6 +4,54 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P17-rc.7",
+      "version": "P17-rc.7",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "glyph-P17-rc.7",
+      "asset": {
+        "bytes": 11303839,
+        "name": "glyph-P17-rc.7-install.glyphota",
+        "sha256": "b2dbc804dec506d6afd41a86f84c8fb075b5651fc670ce1979fc71d20a03bf84",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P17-rc.7/glyph-P17-rc.7-install.glyphota",
+        "md5": "219c1528968644382c7c5efe88aed46a",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/597268524"
+      },
+      "extraAssets": [
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "Chat answers appear on Glyph as Italic writes them: Glyph gets each change as an edit of what it shows, and the page you are reading stays put while an answer grows. Needs an Italic build that accepts P17-rc.7. Keeps rc.6's one chat with Italic, no restarts when plugged into a computer, Home with recordings, the larger tab bar and Sleep on a charger. Installs over Bluetooth from Italic on Glyph running P17-rc.3 to rc.6; tap Allow, then Install, on Glyph.",
+      "notice": "Test build, not physically qualified. Installs over Bluetooth from Italic after you approve it on Glyph.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P17-rc.7",
+        "privateManifestSHA256": "871609a34f14f46f7db9f1e063389992f5e3465cc39a61e86176c11705b638ad",
+        "delivery": "bluetooth",
+        "runningMajors": [
+          17,
+          17
+        ],
+        "descriptorSequence": 11707,
+        "firmware": {
+          "name": "glyph-pks3-101-P17-rc.7.ufw",
+          "bytes": 11303680,
+          "sha256": "2d3caea2c66906d1b42154ef2be880af0ca50de6410aca762d3d03976c1136aa"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM4MzksIm5hbWUiOiJnbHlwaC1QMTctcmMuNy1pbnN0YWxsLmdseXBob3RhIiwic2hhMjU2IjoiYjJkYmM4MDRkZWM1MDZkNmFmZDQxYTg2Zjg0YzhmYjA3NWI1NjUxZmM2NzBjZTE5NzlmYzcxZDIwYTAzYmY4NCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiUEtTMy0xMDEiLCJpZCI6IlAxNy1yYy43IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0wOS0yOVQwNDo0MTozOFoiLCJwYWNrYWdlUmV2aXNpb24iOjEsInByb2R1Y3QiOiJnbHlwaCIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJzb3VyY2VWZXJzaW9ucyI6WyJQMTctcmMuMyIsIlAxNy1yYy40IiwiUDE3LXJjLjUiLCJQMTctcmMuNiJdLCJ2ZXJzaW9uIjoiUDE3LXJjLjcifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEQCIAjQ+n3KuzZeeW6CoWxdg5pA4PxiGGxkRl+i4WmZMKvRAiA/6u2ZHkbH0aiIPmtWpRHN3wmYAiyDFfBaqg2N8KRCLQ=="
+      }
+    },
+    {
       "id": "P17-rc.6",
       "version": "P17-rc.6",
       "packageRevision": 1,
