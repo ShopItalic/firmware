@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r4",
+      "version": "6.0.3.3P21",
+      "packageRevision": 4,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r4",
+      "asset": {
+        "bytes": 334808,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "cab265570d812fac6cb5a9814211436be1ee61db6d5fa576a4b1cad1fb534aa0",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r4/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "6f8f2799d6ceb2de11983e826ab5e457",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/601225607"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Choose Soft, Medium or Strong vibration in the app; Soft is gentler than before. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.3.",
+      "notice": "P21-rc.4 tester update: three vibration levels. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 4,
+        "buildIdentity": {
+          "revision": 4,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "fcf35d488ea1d92ebd18f5ffc6905187",
+          "generation": 21
+        },
+        "sourceCommit": "d49e42ba99d569cdfc69c33935ba9a6b888ccf07",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "95fce9c48c13a318160ab6d4970a8ffa2f89d574986405ae67c72d60ab63cc2a",
+          "command.json": "e100b1ae4e07600849bfe6a63ec1c7b76af831c2b1cc70f67abcf928e24e7bcb",
+          "inputs-after.json": "70c27b8c9d0419c43b36ec5f4117d484315f1b7fe6862280853ba802408061e8",
+          "inputs-before.json": "e6e30190fea35460fbc99185229c029a5163ce835cbb4659ada19b04797a0049",
+          "p21-preparation.json": "10a41e0ba3f65aace9cf0a62f0f88f4fb59d19e3956ffd8103eb3a32b10b924b",
+          "result.json": "aec0111b69575dd624355167ab09bbf696d1b5091c26a0dd773f3c7441216bd8",
+          "runtime-verification.json": "93cf539e2b7e1dc932acbd14488307b6c63b8831b921b05cff342777dbf353fd",
+          "signed-package.json": "52fa59643becde3e78d85c2fb97d34528985b95ea6e8560b35c596b7f504438c",
+          "source-load-verification.json": "609a183d586ac4966fb4e3b8e21162fce075e92eca8c9c8bb42b3781b8da04e5"
+        },
+        "notice": "P21-rc.4 tester update: three vibration levels. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Choose Soft, Medium or Strong vibration in the app; Soft is gentler than before. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.3."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzM0ODA4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiY2FiMjY1NTcwZDgxMmZhYzZjYjVhOTgxNDIxMTQzNmJlMWVlNjFkYjZkNWZhNTc2YTRiMWNhZDFmYjUzNGFhMCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yNCIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMDktMzBUMTU6MjI6MTBaIiwicGFja2FnZVJldmlzaW9uIjo0LCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMSJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQCWE1UqY7RjaZBlXfkhh7SoudTEb1mkdBswWggZr1bjZwIgA6V6lvOQGuuPH4oh+PqL8L2pMwsGAgdjnFyfbBIKITU="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r3",
       "version": "6.0.3.3P21",
       "packageRevision": 3,
