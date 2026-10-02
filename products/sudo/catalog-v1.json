@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r5",
+      "version": "6.0.3.3P21",
+      "packageRevision": 5,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r5",
+      "asset": {
+        "bytes": 334700,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "37ad0aefa342d99d6b3280ffaca04a4d649a4b05cf451d14330eeac8237b623a",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r5/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "287a84faf6ad1fc92b5778ffa3fc8203",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/605252439"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Medium and Soft vibration gave no buzz on P21-rc.4; every level now drives the motor steadily, as it requires. Start and stop buzzes are shorter, and the 30-second recording reminder buzzes again. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.4.",
+      "notice": "P21-rc.5 tester update: vibration drive fixed for Medium and Soft, shorter buzzes. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 5,
+        "buildIdentity": {
+          "revision": 5,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "a2647d6cfe61408a24e45071f459b268",
+          "generation": 21
+        },
+        "sourceCommit": "5ec703d691cc1d754a8d70a7d47d8b3702c6b59c",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "d16f1b52e4eb9fc9ec7470cfd36c17e21220b4f688d57eecff448029910da439",
+          "command.json": "adf66daa5e8c20a595b4e973feb79548df07ef1edf02f372564b883cbb72d947",
+          "inputs-after.json": "542e3eef51be463098871f9d0f422d2a81402c1466fd1db5dd9240530a2513af",
+          "inputs-before.json": "042b39cef76eccf006190197a8b6d1bd780ca50ca1ab3a2c6fabc1dddaba471b",
+          "p21-preparation.json": "f8a82b4cf51d1d3661e71de4304eb823154503882033f90cd7891865aff440d7",
+          "result.json": "ca0ce42e57241e8663bd0686929ceff1a69bab577fcd2ec43a092a4fb1e9073a",
+          "runtime-verification.json": "a49464f0de8d3b66cb58bd33012217c2188866e6f330bc1583374ceb2a437b52",
+          "signed-package.json": "545c4cfe54dc344f06e026743bc9729cd9667bf2550ec2f67b5d4af676be4332",
+          "source-load-verification.json": "5e1b13511e212f0af289c4bfdb5820f45a2a0f6221056a74cef7adadf72bba40"
+        },
+        "notice": "P21-rc.5 tester update: vibration drive fixed for Medium and Soft, shorter buzzes. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Medium and Soft vibration gave no buzz on P21-rc.4; every level now drives the motor steadily, as it requires. Start and stop buzzes are shorter, and the 30-second recording reminder buzzes again. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.4."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzM0NzAwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiMzdhZDBhZWZhMzQyZDk5ZDZiMzI4MGZmYWNhMDRhNGQ2NDlhNGIwNWNmNDUxZDE0MzMwZWVhYzgyMzdiNjIzYSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yNSIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMTAtMDJUMDk6MjQ6MjBaIiwicGFja2FnZVJldmlzaW9uIjo1LCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMSJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQDNWLuOMGh9kn766i5aJaoqcBgFqEgWar1fU50sM+/ENgIhAMXcyc4uST4ZGX43wAOTmsDQg8YWugSIxqLhsmbCjgvK"
+      }
+    },
+    {
       "id": "6.0.3.3P21-r4",
       "version": "6.0.3.3P21",
       "packageRevision": 4,
