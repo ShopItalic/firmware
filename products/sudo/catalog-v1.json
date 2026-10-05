@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r6",
+      "version": "6.0.3.3P21",
+      "packageRevision": 6,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r6",
+      "asset": {
+        "bytes": 334996,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "82baf534bfa91353b9793c7f8bf6cf01f8639262724eac2e9139db9f6ea5cf23",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r6/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "0683d8d2f465fe2bd1fb3c009aaa3665",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/612990806"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "The Ring no longer reports \"charged\" when it could not read its charger, and it stops re-advertising fast after connections that failed before they were secured. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.5.",
+      "notice": "P21-rc.6 tester update: honest charger status, calmer reconnects. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 6,
+        "buildIdentity": {
+          "revision": 6,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "32a1691832d0e4e22cbe1994e3a7ce19",
+          "generation": 21
+        },
+        "sourceCommit": "95620d243b5776cd339d18f9a84cc2744c178482",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "5fe8b8934e524d4ae75764f362306c4b44d7f791f4f579c3d023c2aa47399323",
+          "command.json": "95212c5d8c1f8c195f9ada56ed184bf434732500daeabae511e723fbe6916b75",
+          "inputs-after.json": "a11eb3d010803e4585381e1bd27e47a0d7fb5bdb4cd8a2eaedabd86016330b85",
+          "inputs-before.json": "8c4e19e7e77744caa0d5ff220cb6d60a4025c11014f2252b9a8c20396076710f",
+          "p21-preparation.json": "b6ab78dbf2b090913c467f6eb77883e240eb76b366e0f7402cd17e7caa519b79",
+          "result.json": "1624aba646a9419965c635826242e75526f2088c4fdc2b8d9d3c2caf1c0691f0",
+          "runtime-verification.json": "aff980999bd66d3e97133c672a544bb11042cb532076c08ea58ae7ac6246ff67",
+          "signed-package.json": "d166eab4a644a75583df5d37e88f17fec82ce947740a6c53cccb67124fbbf8a2",
+          "source-load-verification.json": "bb4c5b7310dabd4d5eb0b2369c9cca3487a01fc66cdd10a4a1e20fe05a083be1"
+        },
+        "notice": "P21-rc.6 tester update: honest charger status, calmer reconnects. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "The Ring no longer reports \"charged\" when it could not read its charger, and it stops re-advertising fast after connections that failed before they were secured. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.5."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzM0OTk2LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiODJiYWY1MzRiZmE5MTM1M2I5NzkzYzdmOGJmNmNmMDFmODYzOTI2MjcyNGVhYzJlOTEzOWRiOWY2ZWE1Y2YyMyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yNiIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMTAtMDVUMTU6NDc6NTFaIiwicGFja2FnZVJldmlzaW9uIjo2LCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMSJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQCPmRgH8MaJqfuzJJ8Ow4UMqT4gnGGlblvNAQXh1kkIYgIhALKHNALHQ77Ywe8zZ9ZNzFkw+BRGQDhoiMAps+qKyWSr"
+      }
+    },
+    {
       "id": "6.0.3.3P21-r5",
       "version": "6.0.3.3P21",
       "packageRevision": 5,
