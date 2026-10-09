@@ -4,6 +4,83 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r7",
+      "version": "6.0.3.3P21",
+      "packageRevision": 7,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r7",
+      "asset": {
+        "bytes": 336992,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "d0c267c70c4b12dadabd8569c8d2f533bc785615c37aa5c0d0939d0034ea9fee",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r7/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "cf217d040e0eaf1a2bc565458e70bfd0",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/624095033"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "The Ring now keeps a record of why it last restarted, starts advertising again if its radio goes silent, and reads its charger more reliably. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.6.",
+      "notice": "P21-rc.7 tester update: the Ring records why it restarts and recovers a silent radio. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 7,
+        "buildIdentity": {
+          "revision": 7,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "92fc3d5fd6e99593279c341362c9f8ff",
+          "generation": 21
+        },
+        "sourceCommit": "97e909a5969973a012a2671e2339b7763e733a20",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 5.06u7 (build 960)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "45f22f6987a1caeca51afa88e2483f140d3cf787a375f70eaf0fbb092ed8750e",
+          "command.json": "627e6cb871e5e565a07143a2727c4d84b75e9524e648f61b5f4310ef805d5a2c",
+          "inputs-after.json": "899bfbd7de35000a7976f838136e06b14fa6107e57e9135ca88e9e6c69348347",
+          "inputs-before.json": "91a5ec635d89a24797eabf783253d19b0cfea011204d24c05f0dfbbc9df7bccb",
+          "p21-preparation.json": "683894df60a2bace66514ababa438b45519bf963016bc062221ab354ed4fad6f",
+          "result.json": "d46458b83fea16f474c4fc411403d96ce7af1112b7632c9a8ae5e56b7aa24049",
+          "runtime-verification.json": "178ec29bddf1c09116e6df7b6f9e55cb8f8a5959f08748cc40f8e3b4cb790748",
+          "signed-package.json": "7ec7a12107032fda42174d1a1d07569c75c628e51176380baaeef43da1c94e6f",
+          "source-load-verification.json": "a0d3f571c7957374e12c2a68074e3238a0c18a3c88a46ab24fea6b24ee1f4b6c"
+        },
+        "notice": "P21-rc.7 tester update: the Ring records why it restarts and recovers a silent radio. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "The Ring now keeps a record of why it last restarted, starts advertising again if its radio goes silent, and reads its charger more reliably. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.6."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzM2OTkyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiZDBjMjY3YzcwYzRiMTJkYWRhYmQ4NTY5YzhkMmY1MzNiYzc4NTYxNWMzN2FhNWMwZDA5MzlkMDAzNGVhOWZlZSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yNyIsImluc3RhbGxhYmxlIjp0cnVlLCJpc3N1ZWRBdCI6IjIwMjYtMTAtMDlUMDY6MjA6MjdaIiwicGFja2FnZVJldmlzaW9uIjo3LCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMSJ9",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIA5fWxQKurV9PQG8tyPoOOpNjNTSB9zq5UzZUVetpPYsAiBz0tJHq42CEI8rwQli9gVH32pt2N2S3XBkdRtXonpGlg=="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r6",
       "version": "6.0.3.3P21",
       "packageRevision": 6,
