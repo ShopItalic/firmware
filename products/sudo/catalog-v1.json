@@ -10,7 +10,7 @@
       "hardware": "603V1.23.2",
       "channel": "test",
       "installable": true,
-      "withdrawn": false,
+      "withdrawn": true,
       "tag": "sudo-6.0.3.3P21-r107",
       "asset": {
         "bytes": 322248,
@@ -79,7 +79,8 @@
         "alg": "ES256",
         "keyId": "sudo-release-1",
         "der": "MEUCIQDwcw3D+KapAM3Ba7yK5eegf8cOnW3gBZRxDVu1x6No+AIgJ53lNVrR6wMpySFyEYduuGMgPO/puIcDMZBTz5zbQGw="
-      }
+      },
+      "withdrawnReason": "Touch gestures don't work on this build. Use P21-rc.7."
     },
     {
       "id": "6.0.3.3P21-r7",
