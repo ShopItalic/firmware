@@ -4,6 +4,84 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r107",
+      "version": "6.0.3.3P21",
+      "packageRevision": 107,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r107",
+      "asset": {
+        "bytes": 322248,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "96c25fb5d435f722be27530eda758fc57b7763378e66f108e69ea8cf4ab7fb1d",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r107/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "697b3da525cb2d4852abf774dfcf11fc",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/644947715"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.axf",
+        "app.bin",
+        "app.hex",
+        "app.htm",
+        "command.json",
+        "compiler-version.txt",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "The same features as P21-rc.7, built with Arm Compiler 6.24 instead of Arm Compiler 5. It tests whether a Ring runs a Compiler 6 image the way it runs P21-rc.7, on one Ring first. Updating erases recordings still on the Ring, so sync first.",
+      "notice": "P21-rc.107 test build, for Ring A only: the P21-rc.7 firmware built with Arm Compiler 6.24. After it connects, update straight back to P21-rc.7 first. Updating erases recordings still on the Ring; sync first. Physical qualification is in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 107,
+        "buildIdentity": {
+          "revision": 107,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "44676f35e5e1c7d12cdeffeee2d388e3",
+          "generation": 21
+        },
+        "sourceCommit": "77e45b1a3eb9b143e6d37607380280c3937cf11c",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "7df5766316e020f7da55bfd0d78a0ffe85db1ab5589424423467383975ba2e2a",
+          "command.json": "b27e207169aa5609cb85047da8ddca52f5a039c18345cc2b51a4de5690a92cbc",
+          "inputs-after.json": "e5dc499c63a57668039725c9682a4a9b691763ed85a3aeca43a5d28a42765216",
+          "inputs-before.json": "933aee89301136193d95627dd15455e09a7117daf97e1147c7047d23850279c5",
+          "p21-preparation.json": "3cfcdeec4e984fe9fc63192a674bdcc19144dfc2444c70cf9c063b5ec5e0c053",
+          "result.json": "874931b710c478e87fc5ea3da9bf9a23005516501b9e4395b915c3cc9589c7bb",
+          "runtime-verification.json": "fa3d4935bde7969adbc6f473c8819d7c99cf910f1cd1d1ed16cb5739ac27bb82",
+          "signed-package.json": "93c6d47cba3fe840650d6698c02b909b57ffdfca479ff9582c27358d5eeaf8bd",
+          "source-load-verification.json": "0c4790c74841df6d0636de7214d0703da263e7e0a9e10f61a1e86482345180ba"
+        },
+        "notice": "P21-rc.107 test build, for Ring A only: the P21-rc.7 firmware built with Arm Compiler 6.24. After it connects, update straight back to P21-rc.7 first. Updating erases recordings still on the Ring; sync first. Physical qualification is in progress.",
+        "releaseNotes": "The same features as P21-rc.7, built with Arm Compiler 6.24 instead of Arm Compiler 5. It tests whether a Ring runs a Compiler 6 image the way it runs P21-rc.7, on one Ring first. Updating erases recordings still on the Ring, so sync first."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzIyMjQ4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiOTZjMjVmYjVkNDM1ZjcyMmJlMjc1MzBlZGE3NThmYzU3Yjc3NjMzNzhlNjZmMTA4ZTY5ZWE4Y2Y0YWI3ZmIxZCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTA3IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0xNVQxOTozNjoyNVoiLCJwYWNrYWdlUmV2aXNpb24iOjEwNywicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQDwcw3D+KapAM3Ba7yK5eegf8cOnW3gBZRxDVu1x6No+AIgJ53lNVrR6wMpySFyEYduuGMgPO/puIcDMZBTz5zbQGw="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r7",
       "version": "6.0.3.3P21",
       "packageRevision": 7,
