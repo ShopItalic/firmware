@@ -4,6 +4,82 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r108",
+      "version": "6.0.3.3P21",
+      "packageRevision": 108,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r108",
+      "asset": {
+        "bytes": 322960,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "05ea30652fef186fff5db534004ada0898603256d6d2d243771fe1b02faf1a96",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r108/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "ee51932feda03ad06dae86ce01abb5a5",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/645890993"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "The Ring now reports why it ended a recording early, holds a notification until the phone is ready for it instead of dropping it, and checks a change in its charger status twice. Built with a new compiler, with the touch fix that P21-rc.107 lacked, so taps and holds work. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.7.",
+      "notice": "P21-rc.108 tester update: P21-rc.8 built with a new compiler, with the touch fix P21-rc.107 lacked. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 108,
+        "buildIdentity": {
+          "revision": 108,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "fa737caabb06befae1d8ce1f06dc141c",
+          "generation": 21
+        },
+        "sourceCommit": "94b6f0299f862c2897944944e6085ea3d97bf7ad",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "6d10d64118ef62ac1aa3799de89aec06fa23c59d2e7455125e8949b5a99b47e7",
+          "command.json": "340d854270ff37d7627ef3be9b430202b1d6d06839e817378c42a395c6f97b18",
+          "inputs-after.json": "77cc50f56b780b5c9b22d95a6e37375b33918b850581de3192e6aeafa60d2f90",
+          "inputs-before.json": "7c2500fd76adce1041ad7ffde82376a370a1d6d801eef875714dd73f5b68bca6",
+          "p21-preparation.json": "1eefedef1b76ad68eaa0a95081c9b10f9bfe04f46f1a0ec5a3be78a9b5a04308",
+          "result.json": "dd8f7f7d170d75ad1b9cd2822d9c8fe009883f9914ba14c6bc313822fbbf72f5",
+          "runtime-verification.json": "c2c8250e6bf42dfd97ca3b2dbc6e12ea3878b8baa3f09eabcfc1096db6089447",
+          "signed-package.json": "decf8a7adfba759b10da26c198fcfeebba84cdad3f90f3720d15b540dbbbcfc1",
+          "source-load-verification.json": "1e9a486954a0c0a4d3ad9fba3178bae63c1666268aa0991542810990fb32a4cd"
+        },
+        "notice": "P21-rc.108 tester update: P21-rc.8 built with a new compiler, with the touch fix P21-rc.107 lacked. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "The Ring now reports why it ended a recording early, holds a notification until the phone is ready for it instead of dropping it, and checks a change in its charger status twice. Built with a new compiler, with the touch fix that P21-rc.107 lacked, so taps and holds work. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.7."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzIyOTYwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiMDVlYTMwNjUyZmVmMTg2ZmZmNWRiNTM0MDA0YWRhMDg5ODYwMzI1NmQ2ZDJkMjQzNzcxZmUxYjAyZmFmMWE5NiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTA4IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0xNlQwMjozNDowOVoiLCJwYWNrYWdlUmV2aXNpb24iOjEwOCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQDXDvB6RoOUGoTkXpBV7cqMKfFWzmGVpb/KDlj6EpU1FwIgD/gZhHp8IgSi4BtO8qA9/fhlKdjygUpjdHI2Xf4EVWw="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r107",
       "version": "6.0.3.3P21",
       "packageRevision": 107,
