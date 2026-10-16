@@ -4,6 +4,82 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r110",
+      "version": "6.0.3.3P21",
+      "packageRevision": 110,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r110",
+      "asset": {
+        "bytes": 323528,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "d1d7faf0597b6a657aa3a06fac267f57501bfbfa262116a44f3e8ccbf459f5ed",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r110/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "f419b0449b8ed9a9a7ee2321ce684e9f",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/647431244"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "If the Ring ever fails to start three times in a row, it now opens its update window by itself, so it can be fixed from the phone. Settings save straight after a restart, without touching the Ring first. Includes everything in P21-rc.108. Updating erases recordings still on the Ring, so sync first.",
+      "notice": "P21-rc.110 tester update: P21-rc.10 built with a new compiler. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 110,
+        "buildIdentity": {
+          "revision": 110,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "6b1762f806e31cab6cbac201fcd846ac",
+          "generation": 21
+        },
+        "sourceCommit": "2c6a8b068c9e15d55d8a85a68a3522f00e13f2a9",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "42b55b7b4c1750af89904dd869d329e4b647724b936b97dfe53db790ea3af33a",
+          "command.json": "d37e8950a2ccf16a3712a18acf41920d72a37c829e2db7a0d433a57f15358722",
+          "inputs-after.json": "b875f1b7075c632be5492af563532da112151b39616840b138ea609bff54ee5e",
+          "inputs-before.json": "4d1db08c068f12f7806e12fb94c657f9bed406c30727ec03ab14c06e56d1fc4b",
+          "p21-preparation.json": "810abca0e078d1d63c1e40c8765b34063c8c9ef6bdea27bdf844f1806aa1ae71",
+          "result.json": "afb1ad23b7233b2b489bc686c9f362088ac7c7d183bf416ff212eb0599a1c210",
+          "runtime-verification.json": "a1994773abaf72bfda87559e383704d35de3a8880b8c3153ec2ecbc91ab7caf8",
+          "signed-package.json": "b0e8312a418f2d4de5c16068d1b7a564755f118ca7cabd34a489ade6532a6ac7",
+          "source-load-verification.json": "181a879ac17b79bd3efbb37563a5f1c091af0b60bb51b851680dfabf715eb161"
+        },
+        "notice": "P21-rc.110 tester update: P21-rc.10 built with a new compiler. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "If the Ring ever fails to start three times in a row, it now opens its update window by itself, so it can be fixed from the phone. Settings save straight after a restart, without touching the Ring first. Includes everything in P21-rc.108. Updating erases recordings still on the Ring, so sync first."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzIzNTI4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiZDFkN2ZhZjA1OTdiNmE2NTdhYTNhMDZmYWMyNjdmNTc1MDFiZmJmYTI2MjExNmE0NGYzZThjY2JmNDU5ZjVlZCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTEwIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0xNlQxMzozMDo0MloiLCJwYWNrYWdlUmV2aXNpb24iOjExMCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIEXbgtYiSDDuarC04wV6HXvV/vY+WFDwRe26VJDRVwwFAiEAy9RmRxYfe/mWHMTXyxGGgegjfgxQ8qfHctQLXKO09QM="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r108",
       "version": "6.0.3.3P21",
       "packageRevision": 108,
