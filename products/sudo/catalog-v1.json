@@ -4,6 +4,84 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r111",
+      "version": "6.0.3.3P21",
+      "packageRevision": 111,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r111",
+      "asset": {
+        "bytes": 323576,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "c85f14725fc94f97ac2b7d71f70967a4db11cc1c787a00d7384419b1f9a05a18",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r111/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "1c549534a209aaa3da99c52d5bd73cf0",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/650229513"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "dual-bank-budget.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "A hold recording no longer stops at the first touch reading the Ring cannot read; it ends only if the touch stays unreadable. Also fixes a timing flaw in how the Ring waits for its sensors. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.110.",
+      "notice": "P21-rc.111 tester update: a hold keeps recording through a touch reading the Ring could not read. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 111,
+        "buildIdentity": {
+          "revision": 111,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "10496eb63d48791d01cfcfec5d1aeac0",
+          "generation": 21
+        },
+        "sourceCommit": "12c1175bbc19563a39c95ddfadb0c8037c9f8043",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "059bf9acc5159af9dccd90a6cb044f0e64c2030ec032165fe3a30e694c382624",
+          "command.json": "0faec2decace6558e7cdee8ca8bf40c4169ae00166253729d02520f4f82f085b",
+          "dual-bank-budget.json": "aa9b42ab5dde884ac32e47b94aba9f628178356cf28fef2de5f5635904a49a1c",
+          "inputs-after.json": "a15f91789f97c604f4d58bb20f519912b503e62c7ec626b0836b26641573133c",
+          "inputs-before.json": "4b9d95b27152189b0e5752d37d411c212662414359bf375efa6169fdfea80bea",
+          "p21-preparation.json": "6513a8f6c61686a27073e45cbe4bb6d83ef75b7b40b0023c3a6bc339fe2b9caa",
+          "result.json": "56fe585040f9c572b76c109b59216afff873c06d4cee900fb849d4ed81c5da29",
+          "runtime-verification.json": "b0d126be4f17d3689510a86e326b64a1e3599ad64d43c773a2bfb4296a011afb",
+          "signed-package.json": "07da5183395c762792bac6a542006778706dea14b81f9f30f16732430586aa38",
+          "source-load-verification.json": "7dcb8deaa807472192005f2bf42829e1f285bbc6f4e489f6787fc23b6622b77a"
+        },
+        "notice": "P21-rc.111 tester update: a hold keeps recording through a touch reading the Ring could not read. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "A hold recording no longer stops at the first touch reading the Ring cannot read; it ends only if the touch stays unreadable. Also fixes a timing flaw in how the Ring waits for its sensors. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.110."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzIzNTc2LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiYzg1ZjE0NzI1ZmM5NGY5N2FjMmI3ZDcxZjcwOTY3YTRkYjExY2MxYzc4N2EwMGQ3Mzg0NDE5YjFmOWEwNWExOCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTExIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0xN1QxMDo1MjoyNloiLCJwYWNrYWdlUmV2aXNpb24iOjExMSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIBFYCH5G4DtkTjbuLm6uT3HqnTzwXjte8cGG7BSAzkWOAiA8S/v2lT5OecZD07FuwhMIQfhQXz7zK8tRt6vKzQi4Kg=="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r110",
       "version": "6.0.3.3P21",
       "packageRevision": 110,
