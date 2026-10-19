@@ -4,6 +4,84 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r112",
+      "version": "6.0.3.3P21",
+      "packageRevision": 112,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r112",
+      "asset": {
+        "bytes": 324888,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "d8a2159e53ef8064aa5a7ccae3de53ae6a5874f2bfab389db0bd55c909b2a2d1",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r112/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "954535c03401e33f302bacb504a53c22",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/655937944"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "dual-bank-budget.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Push to talk can start after a quarter of a second, chosen in the Ring’s gestures. Every recording now starts after its start buzz, so the buzz stays strong on a low or cold battery, and lifting your finger during the buzz records nothing. Also fixes a one-byte overflow in the Ring’s sensor code. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.111.",
+      "notice": "P21-rc.112 tester update: an optional quarter-second push-to-talk start, and the start buzz now comes before the recording. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 112,
+        "buildIdentity": {
+          "revision": 112,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "889a1daf251f8987a9ae89f7b2c7ab80",
+          "generation": 21
+        },
+        "sourceCommit": "a6418bc5a05aa18ace05da915c5e19cdfe5e9691",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "7da47a78afa2e26d210626479149c9d5648abfa617de07d6d46d5e95c7d2ebcc",
+          "command.json": "bb4790aa5d8a5027d3d2ccacc62226819cd246b0bc3c3643d3ba10d7d7a24f73",
+          "dual-bank-budget.json": "03183795473c34fbaed588a58bb42c8a6b40b54e925c4a0974f49e6dac7ba41d",
+          "inputs-after.json": "fcd4ad781bb718f3839fc274fa840454e413aeee2ddd0ed7cdc52ddade96573d",
+          "inputs-before.json": "48fc36b64132a7dda1ffedcc41ac3ba6b0b12586f05aabc72a1f338151514441",
+          "p21-preparation.json": "8ea1cd6de4e5ae87ad0e6c5246d830c7cecabd7fe3b09973a348787aa08d9918",
+          "result.json": "906ff27a92e6a1269ad1f81f76ce3339236de043a02c69f5d086269d3107fde0",
+          "runtime-verification.json": "bf832c7cb93790f4e1eb4d71cc827f29ef96779a792e9dcee7a11ffd6be3b961",
+          "signed-package.json": "58fe20005d06a6bb21e9966d9b2da4a6936130386a1e66a7d4c78784aca1db23",
+          "source-load-verification.json": "02c43d40d8067bd1ede87a695f5ab9aeee948672b35bd0cbc97629d18ad64eaf"
+        },
+        "notice": "P21-rc.112 tester update: an optional quarter-second push-to-talk start, and the start buzz now comes before the recording. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Push to talk can start after a quarter of a second, chosen in the Ring’s gestures. Every recording now starts after its start buzz, so the buzz stays strong on a low or cold battery, and lifting your finger during the buzz records nothing. Also fixes a one-byte overflow in the Ring’s sensor code. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.111."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI0ODg4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiZDhhMjE1OWU1M2VmODA2NGFhNWE3Y2NhZTNkZTUzYWU2YTU4NzRmMmJmYWIzODlkYjBiZDU1YzkwOWIyYTJkMSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTEyIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0xOVQxMDoyMDo0OVoiLCJwYWNrYWdlUmV2aXNpb24iOjExMiwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIDBaayXJTxSzVJFx8cLC0z3S158BoZEv43WebgEPkEnEAiAdz7l1vWvTNa4p7mU/PzmuT+iYRjjC2i1ISmysmaJ6Fw=="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r111",
       "version": "6.0.3.3P21",
       "packageRevision": 111,
