@@ -4,6 +4,84 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r114",
+      "version": "6.0.3.3P21",
+      "packageRevision": 114,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r114",
+      "asset": {
+        "bytes": 325736,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "16436e0ff5cbb4b13eaf77d2a3473af80e8256b114b8f5497d4f2ac390718bdc",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r114/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "cfbccacbb42c5d9d3a12ea0eea3a1a6d",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/660688901"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "dual-bank-budget.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "During a recording started by a tap or from the app, the reminder buzz now comes every 30 seconds for the first 2 minutes, then every 2 minutes, with the same 120 ms buzz. Such a recording also keeps going when the Ring’s microphone falters, and Italic files the parts as one recording. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.113.",
+      "notice": "P21-rc.114 tester update: the recording reminder backs off after 2 minutes, and a tap recording keeps going after a microphone fault. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 114,
+        "buildIdentity": {
+          "revision": 114,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "60ca45bc2e03fa350c4f99a557508b90",
+          "generation": 21
+        },
+        "sourceCommit": "59a9cbd08b08b5d6944fed246326e58f59056111",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "33fd021fa16f60fc32a383318c67b347b61c13c60888949d2f2dddbd1da53180",
+          "command.json": "fc329954fa17ff181dead9000ab12ed1f003235474942c4a14b122fa3f08172d",
+          "dual-bank-budget.json": "c3781a970d2d1bc787b9e172bd41c6de6ad71c54c8b47d0fdb468fd8bf5c8fcb",
+          "inputs-after.json": "55d24d74a936a305bb518c66e5455d9461d8e42e3ba4b912d42fc0d8b76d7826",
+          "inputs-before.json": "69414faf68385f2e3e849312c27024b31e751d4e17a3f404f92ed24f1222732e",
+          "p21-preparation.json": "9784ee1ca4c610f8639a4d506c45a199cd83f2951dd5cddab880692a7c6b2b71",
+          "result.json": "1b0a91cf001052ee5214ac8e3ed144ca8e0313bb818381eef2e1d88a72180174",
+          "runtime-verification.json": "54a0ace8b9dade28ff59b5e001231d7f7689f4c3d31285cb01b54e3003048913",
+          "signed-package.json": "1fa68f410f530023895b03a74a394aaa2c2504c81f7eda9c0588e3622dcc6010",
+          "source-load-verification.json": "b94c35adc16f8ba1ed9aba75b29481194e1c584ec929ef6302c52c8f266728d7"
+        },
+        "notice": "P21-rc.114 tester update: the recording reminder backs off after 2 minutes, and a tap recording keeps going after a microphone fault. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "During a recording started by a tap or from the app, the reminder buzz now comes every 30 seconds for the first 2 minutes, then every 2 minutes, with the same 120 ms buzz. Such a recording also keeps going when the Ring’s microphone falters, and Italic files the parts as one recording. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.113."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI1NzM2LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiMTY0MzZlMGZmNWNiYjRiMTNlYWY3N2QyYTM0NzNhZjgwZTgyNTZiMTE0YjhmNTQ5N2Q0ZjJhYzM5MDcxOGJkYyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTE0IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMFQyMjo0MDo0NFoiLCJwYWNrYWdlUmV2aXNpb24iOjExNCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIDoe9gMfHV2mwN0SCK73RrqY+d4povLBkVHEmQHVRkLPAiEA8Y6ZQJo5jVw9kAy9AIVd8Zz87QJzAJDzxShj2+87ndg="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r113",
       "version": "6.0.3.3P21",
       "packageRevision": 113,
