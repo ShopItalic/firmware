@@ -4,6 +4,84 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r113",
+      "version": "6.0.3.3P21",
+      "packageRevision": 113,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r113",
+      "asset": {
+        "bytes": 325720,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "a2c270b160f149f7546ef5c393a5757fa54d71477ff897c2838f0287aefd9dac",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r113/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "a967f064f2e255949bf549aabaaab7bf",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/659746072"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "dual-bank-budget.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "A recording started by a double or triple tap keeps going when the Ring’s microphone falters: the Ring saves what it recorded and goes on in a new file, without the fault buzz, and Italic files the parts as one recording. A third fault within a minute still ends the recording as before. Holds are unchanged. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.112.",
+      "notice": "P21-rc.113 tester update: a double- or triple-tap recording keeps going after a microphone fault. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 113,
+        "buildIdentity": {
+          "revision": 113,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "7259afc9fb81b365b4f191cd179286a8",
+          "generation": 21
+        },
+        "sourceCommit": "6747749da6625daaca6acb0a0d3ee804d42ce3df",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "bce55506dc8b707bfb22b2268eba07789dad7aac1444e81a54becf0cfe9aa0ba",
+          "command.json": "343ffa97dbd7cfefce2d9b338202dc6cb46f856b79e149f5174f850fac5653db",
+          "dual-bank-budget.json": "4a1cfaeac48067bf1ad0f1f38d096d83033fc439013401ff439dd7e55427394d",
+          "inputs-after.json": "a941529ac18a4f616f5bfb32b292174cdb1a4dbca0eb207434b19645431fdb2c",
+          "inputs-before.json": "591c6f0a546557f280a781812fb13012b2cd04bdca4cfdd5f87e09c06cf7ad18",
+          "p21-preparation.json": "3ba8527d7e81e63b4a56a496d5032756fbf4d1534b1dc4304f360e14f9d2ca57",
+          "result.json": "5654e2a9ad5a79c7f8dcf29acdc1543deece17f95b536e7be8a57a9d25c7f9ed",
+          "runtime-verification.json": "c86c794a40cddfa60d369c9d0598c8e3c870ab0673839f06afb9d05325574d83",
+          "signed-package.json": "dad13e5113d21a779c958af6273985d6312669c703f6a590949ce6cd16c1fb78",
+          "source-load-verification.json": "1036a388e4473b078fe8b688a0ddd6bee4f55497f79f8171241c842f104753d6"
+        },
+        "notice": "P21-rc.113 tester update: a double- or triple-tap recording keeps going after a microphone fault. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "A recording started by a double or triple tap keeps going when the Ring’s microphone falters: the Ring saves what it recorded and goes on in a new file, without the fault buzz, and Italic files the parts as one recording. A third fault within a minute still ends the recording as before. Holds are unchanged. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.112."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI1NzIwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiYTJjMjcwYjE2MGYxNDlmNzU0NmVmNWMzOTNhNTc1N2ZhNTRkNzE0NzdmZjg5N2MyODM4ZjAyODdhZWZkOWRhYyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTEzIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMFQxNTo0NTowNFoiLCJwYWNrYWdlUmV2aXNpb24iOjExMywicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIGIJVW/6kpZyC49Q9ChM7EU5/bFYs6H3xaKfO3pmmlkQAiBOm/qI1Ah3L/c+2lXYxqrNOXWuq5RO/Yz/ZDHttOqIew=="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r112",
       "version": "6.0.3.3P21",
       "packageRevision": 112,
