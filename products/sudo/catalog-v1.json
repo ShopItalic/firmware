@@ -4,6 +4,84 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r116",
+      "version": "6.0.3.3P21",
+      "packageRevision": 116,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r116",
+      "asset": {
+        "bytes": 326800,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "eeab24ca1b83527f794be8491f0458e6ae3b846a32e5ab39c21c273aee6d0230",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r116/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "ea6876ca129400482006dc5573e541b4",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/663774084"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "dual-bank-budget.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "The Ring now checks its charger settings when it starts and each time it goes on the charger, and sets them again if they are wrong. Charging and the low-battery cut-off also work when the touch sensor fails its start-up check. Every file of a recording carries one recording ID, so Italic joins a recording that went on past a microphone fault exactly, also just after a 10-minute file boundary. The Ring no longer reports a fault for a recording that keeps going, starts nothing new once it is shutting down for a flat battery, and starts the recording reminder over with each recording. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.114.",
+      "notice": "P21-rc.116 tester update, the factory image candidate: safer charging, and a recording that keeps going after a microphone fault is kept as one. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 116,
+        "buildIdentity": {
+          "revision": 116,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "862dd32c026bd0883351af4f3f69b953",
+          "generation": 21
+        },
+        "sourceCommit": "d0e27a42f3d31c046ed070933dbbee54890cd188",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "85a715dc075c07634399e96e0b84cb38bc8c3f6f81dac27d3358b275fa7beb2f",
+          "command.json": "de099cf37102ed0b9cd0075e09ce8f020458b99e04b40576cce2a8f591a1d5dc",
+          "dual-bank-budget.json": "79d1e8e7f2d32b20b83bdd47846709a03889d6d9371335c4f3757e0b6aeb5628",
+          "inputs-after.json": "10da8249f56032542dbb3b78be9c56b31cb99d827f00227bff4f5da2e3cae678",
+          "inputs-before.json": "27127fdf898d1346bff456eb7618598365a4780b6ed07df0ddba57616171e09b",
+          "p21-preparation.json": "f61704197d2cc98dfc65774b58027b1b7d415ae2ad928ba90070e4e8e821bdc6",
+          "result.json": "ee4c496bc9b86d68a7a4043fc59b980d1b138e6cc499f8fafae9c53aaf5d7ddf",
+          "runtime-verification.json": "8228177558f6bf862ec56437e68cfaf46cb407e04c0f249ed86b666648ac67a2",
+          "signed-package.json": "627ea1964f4ab6e8f50065cfec99ee0c7fcbb73bd50fcf41d1f9e0a5056db5e2",
+          "source-load-verification.json": "b808e861b8ceda84f0cf362a3105d874822cf6244806dda1aa6e92cf5a84506b"
+        },
+        "notice": "P21-rc.116 tester update, the factory image candidate: safer charging, and a recording that keeps going after a microphone fault is kept as one. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "The Ring now checks its charger settings when it starts and each time it goes on the charger, and sets them again if they are wrong. Charging and the low-battery cut-off also work when the touch sensor fails its start-up check. Every file of a recording carries one recording ID, so Italic joins a recording that went on past a microphone fault exactly, also just after a 10-minute file boundary. The Ring no longer reports a fault for a recording that keeps going, starts nothing new once it is shutting down for a flat battery, and starts the recording reminder over with each recording. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.114."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI2ODAwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiZWVhYjI0Y2ExYjgzNTI3Zjc5NGJlODQ5MWYwNDU4ZTZhZTNiODQ2YTMyZTVhYjM5YzIxYzI3M2FlZTZkMDIzMCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTE2IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMVQyMDo1ODo0M1oiLCJwYWNrYWdlUmV2aXNpb24iOjExNiwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIC19s9t4MlssuXlHJRDDnGd1oe2wfIbtRc1L7kH+APPiAiEAhHWTpaUyu4G4ocPDBPQUfnRFY3CF49df27vOAIzeVeY="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r114",
       "version": "6.0.3.3P21",
       "packageRevision": 114,
