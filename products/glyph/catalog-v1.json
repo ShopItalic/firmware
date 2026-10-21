@@ -4,6 +4,54 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P18-rc.9",
+      "version": "P18-rc.9",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "glyph-P18-rc.9",
+      "asset": {
+        "bytes": 11303840,
+        "name": "glyph-P18-rc.9-install.glyphota",
+        "sha256": "495dd2e8588ab2406bfdccf26a1c6a516b5c3d28516a91aecc1f99bc9989ee5b",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P18-rc.9/glyph-P18-rc.9-install.glyphota",
+        "md5": "d8d26d1bf2bed325c45802e09c2fe0cb",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/663256376"
+      },
+      "extraAssets": [
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "The first Glyph build Italic installs over Bluetooth. It is P18-rc.8 with only its version changed: Settings > Restart with a page saying Glyph is off; a safety layer with a start counter, rescue mode, and fuses that turn new features off after a failed start; the buttons' settings loading again; the Bluetooth receiver; Discard when leaving a memo; a plug in the status row on USB power; and the off page when Down is held at start. Installs over Bluetooth from Italic on Glyph running P18-rc.8; tap Allow, then Install, on Glyph. Needs an Italic build that accepts P18-rc.9.",
+      "notice": "Test build, not physically qualified. Installs over Bluetooth from Italic after you approve it on Glyph.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P18-rc.9",
+        "privateManifestSHA256": "d038348904edd7cbe4d7331c69956a96eaa6ee22f7175c025ea375b4fcc79cb7",
+        "delivery": "bluetooth",
+        "runningMajors": [
+          18,
+          18
+        ],
+        "descriptorSequence": 11809,
+        "firmware": {
+          "name": "glyph-pks3-101-P18-rc.9.ufw",
+          "bytes": 11303680,
+          "sha256": "de69bea3503e0cfcd2b1eabd00ac16adf4cfdec7ca355fca18d6bc5093ab6c9c"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM4NDAsIm5hbWUiOiJnbHlwaC1QMTgtcmMuOS1pbnN0YWxsLmdseXBob3RhIiwic2hhMjU2IjoiNDk1ZGQyZTg1ODhhYjI0MDZiZmRjY2YyNmExYzZhNTE2YjVjM2QyODUxNmE5MWFlY2MxZjk5YmM5OTg5ZWU1YiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiUEtTMy0xMDEiLCJpZCI6IlAxOC1yYy45IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMVQxNzoyMToyN1oiLCJwYWNrYWdlUmV2aXNpb24iOjEsInByb2R1Y3QiOiJnbHlwaCIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJzb3VyY2VWZXJzaW9ucyI6WyJQMTgtcmMuOCJdLCJ2ZXJzaW9uIjoiUDE4LXJjLjkifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCIQCFbXIWXe7jjRDOqr5Ubr6IPe79Yc3KYLzfzQwde7oxxQIgTm/3ozO5szckhNOJy57Ax9pWQLwttFtsahqP5oWubqI="
+      }
+    },
+    {
       "id": "P17-rc.7",
       "version": "P17-rc.7",
       "packageRevision": 1,
