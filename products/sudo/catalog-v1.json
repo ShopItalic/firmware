@@ -4,6 +4,84 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r119",
+      "version": "6.0.3.3P21",
+      "packageRevision": 119,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r119",
+      "asset": {
+        "bytes": 328280,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "4d5955c02bd6b6c3530236fc690ba326a65675105448eaccd0428eb206517e03",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r119/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "e39f9784e13c77b4c8c6c3db702c47df",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/666962841"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "dual-bank-budget.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Choose where your Ring responds to touch in its settings in the app: Small, the default, is the top of the Ring only, so a finger resting beside it no longer counts as a tap or a hold; Large is the whole touch strip. Updating erases recordings still on the Ring, so sync first. Includes everything in revision 118.",
+      "notice": "P21 revision 119 tester update, the factory image: a touch-area setting, Small (the top of the Ring, the default) or Large (the whole strip). Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 119,
+        "buildIdentity": {
+          "revision": 119,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "aad142521028e061f1920639c12a4a4b",
+          "generation": 21
+        },
+        "sourceCommit": "da6edcc5886353c7814304bf457a79cb07d069e8",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "68dc26cbc3391349f33f82ab09aafc8c6d436c2a7c0446c2808afa7553b72ae0",
+          "command.json": "475205ba747a5dc536c8d7ef27cb7d1b103cea4095c02bdbf8b18bb239bd7a6d",
+          "dual-bank-budget.json": "2a5f17330a595a426c0becfe3eeb8133960969a9a7793f56c7925a2bb85ea157",
+          "inputs-after.json": "0b5ad7faa4126d53bb0057ed06d00ff63198a246879f56735775b523f7c36ccf",
+          "inputs-before.json": "ec3b067dda7e6dbbdc3dc34640f0d42038a9b1640530a4f27db28d75936f83b7",
+          "p21-preparation.json": "91bd2ffb54f565861e21e1fc0e6efa2198247fe6872514d34f2cb0b3c4eaf7b2",
+          "result.json": "8c282d6d3a55ff45b7fc8e9a0e645a6efd674c4e1a2da213ad009847beb4af7a",
+          "runtime-verification.json": "fbfda9dc93ed4737aa589e10bad8af352adafbc90bce6e85665324883944d600",
+          "signed-package.json": "ffe01bb88f6d3eff9db82922738fa2d34f5fca3f82e906061d682153d4208308",
+          "source-load-verification.json": "42d90de13afbd49d113ec0cc8e7759b91dbcdb3824c2ce40f6cc11a4505da881"
+        },
+        "notice": "P21 revision 119 tester update, the factory image: a touch-area setting, Small (the top of the Ring, the default) or Large (the whole strip). Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Choose where your Ring responds to touch in its settings in the app: Small, the default, is the top of the Ring only, so a finger resting beside it no longer counts as a tap or a hold; Large is the whole touch strip. Updating erases recordings still on the Ring, so sync first. Includes everything in revision 118."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI4MjgwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiNGQ1OTU1YzAyYmQ2YjZjMzUzMDIzNmZjNjkwYmEzMjZhNjU2NzUxMDU0NDhlYWNjZDA0MjhlYjIwNjUxN2UwMyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTE5IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMlQyMDoxMzoxMVoiLCJwYWNrYWdlUmV2aXNpb24iOjExOSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQCaaWmQ2oZrXc4K41Q0bE6D+RQsM20vJan+Jrk1hl1FhgIhAIUkkL8L25gG2Rxq3t91cqisFg/h8LAHsTtxruTdu+lS"
+      }
+    },
+    {
       "id": "6.0.3.3P21-r118",
       "version": "6.0.3.3P21",
       "packageRevision": 118,
