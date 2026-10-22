@@ -4,6 +4,84 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r117",
+      "version": "6.0.3.3P21",
+      "packageRevision": 117,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r117",
+      "asset": {
+        "bytes": 327584,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "19b07ff75238902c145e9cdb13f0e4ccc1db56c4070e754d01dccbb462f51831",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r117/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "ebe60bc22108c2c4a70b64df4f27522b",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/664661452"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "dual-bank-budget.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "A recording no longer stops when the Ring's storage is slow to save it. The Ring holds about 5 seconds of audio while storage catches up, and if storage falls further behind it leaves a short gap in the recording and keeps going. The storage's housekeeping pauses are also shorter as recordings build up. Each recording now notes how it was started: from Italic, a hold, a double tap or a triple tap. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.116.",
+      "notice": "P21 revision 117 tester update, the factory image: a recording no longer ends when the Ring's storage falls behind. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 117,
+        "buildIdentity": {
+          "revision": 117,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "4270004e53ba5b9c1da4e026411d4aa8",
+          "generation": 21
+        },
+        "sourceCommit": "82742a607711c6a79d606c47793a01b445f8ad22",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "bfdc7883ff122e5e094c3eb530523b3f25ecb97795f511b17d77ca7cd58930cb",
+          "command.json": "12cae1d74ec41e8065afbc2a202780f91ffb0d794ff831f0fcee15ae05e5d984",
+          "dual-bank-budget.json": "c164c44fafe79150a1501e6618cb64431e133dc0fc3d63032d2ffac3f7e6dfdd",
+          "inputs-after.json": "db1c4a938b5348e5aeed4f72c9ccb628cae1554285b6429792b9405a04928513",
+          "inputs-before.json": "4b84b70552c71dc796b90bc345992cc6c25a11782986a48e6a07fdf4a59020a8",
+          "p21-preparation.json": "dcd121ba0e42bdad81f3e9936a046bb86833f84c9dec847f682793af59566d7a",
+          "result.json": "ac033f0b612ff27a650819976d58652ad9d466d620d4d4388cb2028a88938014",
+          "runtime-verification.json": "ca2d2871d595b4df7222bdb7da579a451ee1a131763d3f45ebcb5cc72ec042f7",
+          "signed-package.json": "eb007cc34ad33c5e4b7528641d7afd44396480b67a79f538f4fb9a58d44f9841",
+          "source-load-verification.json": "18982ceaa95de198740b07ee51fb94730fe047a7d2485dc261ae8b57b2808ac5"
+        },
+        "notice": "P21 revision 117 tester update, the factory image: a recording no longer ends when the Ring's storage falls behind. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "A recording no longer stops when the Ring's storage is slow to save it. The Ring holds about 5 seconds of audio while storage catches up, and if storage falls further behind it leaves a short gap in the recording and keeps going. The storage's housekeeping pauses are also shorter as recordings build up. Each recording now notes how it was started: from Italic, a hold, a double tap or a triple tap. Updating erases recordings still on the Ring, so sync first. Includes everything in P21-rc.116."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI3NTg0LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiMTliMDdmZjc1MjM4OTAyYzE0NWU5Y2RiMTNmMGU0Y2NjMWRiNTZjNDA3MGU3NTRkMDFkY2NiYjQ2MmY1MTgzMSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTE3IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMlQwNDoyNDozOVoiLCJwYWNrYWdlUmV2aXNpb24iOjExNywicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQCq8zHUYh/5T1yQdq9eb2g0Cug0aMOPWlbleUWvJGqvjQIhAKCbkhOwLiEwdGhYuhHOsbHYFrJIDpkCEbkZkTc3SJEs"
+      }
+    },
+    {
       "id": "6.0.3.3P21-r116",
       "version": "6.0.3.3P21",
       "packageRevision": 116,
