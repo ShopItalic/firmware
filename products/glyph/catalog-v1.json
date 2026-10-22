@@ -4,6 +4,54 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "P19-rc.1",
+      "version": "P19-rc.1",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "glyph-P19-rc.1",
+      "asset": {
+        "bytes": 11303840,
+        "name": "glyph-P19-rc.1-install.glyphota",
+        "sha256": "a4447af11029688ce021a145ce50b4d1aba2f2b4c8b8aa8a4551b29ae6bdb8b4",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-P19-rc.1/glyph-P19-rc.1-install.glyphota",
+        "md5": "15dd935dfc7bddabee4f7303a6ae07d8",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/665962409"
+      },
+      "extraAssets": [
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "The first Glyph build Italic installs over Bluetooth. It is P18-rc.8 with these fixes: the battery level centred in its outline, the new Italic mark, numbers drawn with lining figures so a 1 no longer reads as an i, dialog buttons that keep their label on one line, toasts that fit long messages, and the file icon beside the name. P18-rc.8 brought Settings > Restart with a page saying Glyph is off, a safety layer with rescue mode, the buttons' settings loading again, the Bluetooth receiver, Discard when leaving a memo, a plug in the status row on USB power, and the off page when Down is held at start. Installs over Bluetooth from Italic on Glyph running P18-rc.8; tap Allow, then Install, on Glyph. Needs an Italic build that accepts P19-rc.1.",
+      "notice": "Test build, not physically qualified. Installs over Bluetooth from Italic after you approve it on Glyph.",
+      "details": {
+        "status": "staged-unqualified",
+        "purpose": "factory-modification",
+        "baseRelease": "V4",
+        "deviceVersionExpected": "P19-rc.1",
+        "privateManifestSHA256": "9745aed11c205b9bebc98b9c4ae4e0b36bfd98438670d79d87186544d3c2523e",
+        "delivery": "bluetooth",
+        "runningMajors": [
+          18,
+          18
+        ],
+        "descriptorSequence": 11901,
+        "firmware": {
+          "name": "glyph-pks3-101-P19-rc.1.ufw",
+          "bytes": 11303680,
+          "sha256": "e0507cda7dd808fd13c7bb30e8bf12e4c6bee3c89c682fe7c2dc8e38a43056eb"
+        }
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM4NDAsIm5hbWUiOiJnbHlwaC1QMTktcmMuMS1pbnN0YWxsLmdseXBob3RhIiwic2hhMjU2IjoiYTQ0NDdhZjExMDI5Njg4Y2UwMjFhMTQ1Y2U1MGI0ZDFhYmEyZjJiNGM4YjhhYThhNDU1MWIyOWFlNmJkYjhiNCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiUEtTMy0xMDEiLCJpZCI6IlAxOS1yYy4xIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMlQxMzoyNzoyOVoiLCJwYWNrYWdlUmV2aXNpb24iOjEsInByb2R1Y3QiOiJnbHlwaCIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzEiLCJzb3VyY2VWZXJzaW9ucyI6WyJQMTgtcmMuOCJdLCJ2ZXJzaW9uIjoiUDE5LXJjLjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEUCIQCbn7cI/Hjn00sQb78BAWjWR2KV4vYEVhNoVhRbPUYrZAIgWG7pgun5qQcC60cTBB190C08WvC92+7mbzDp4sikGe0="
+      }
+    },
+    {
       "id": "P18-rc.9",
       "version": "P18-rc.9",
       "packageRevision": 1,
