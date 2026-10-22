@@ -131,7 +131,19 @@ this release, build and image and shows:
 
 - the verifier's settings contract: `recipe.settingsContract` starting
   "unchanged: no protected source is edited and no FDS record is added", and
-  `checks.verifier` passing with nothing pending;
+  `checks.verifier` passing with nothing pending. Or a reviewed migration
+  (Jeremy, October 22, 2026, for Ring 119's touch area): a contract starting
+  "a reviewed migration", with `recipe.settingsMigration` naming the release
+  sudo's settings contract reviewed (`reviewedRevision`, the record's own
+  release), the protected sources it edits, `fdsRecordsAdded` 0 and the
+  settings the app's readback compares (`readback`):
+
+```json
+"settingsMigration": {"reviewedRevision": "P21 revision 119",
+  "protectedSources": ["firmware/bc_ros/bc_application/app_factory_controls.c"],
+  "fdsRecordsAdded": 0, "readback": ["touchArea"]}
+```
+
 - the dual-bank record, `image.dualBankMarginBytes`, beside this tool's own
   check;
 - the release on Rings A and B with their settings and bonds intact:

@@ -300,6 +300,32 @@ def publish(directory, notes=None, push=False, dry_run=False):
 #     after updating to …: all the same as before"), and "bonds": "kept".
 # The catalog names the record's SHA-256; the record itself stays private.
 SETTINGS_CONTRACT = 'unchanged: no protected source is edited and no FDS record is added'
+# Or a reviewed migration (Jeremy, October 22, 2026, for Ring 119's touch area:
+# "accept a reviewed change like this, with the app's after-update check
+# covering the area"): `recipe.settingsContract` starting REVIEWED_MIGRATION,
+# and `recipe.settingsMigration` naming the release sudo's settings contract
+# reviewed (`reviewedRevision`, the record's own), the protected sources it
+# edits, `fdsRecordsAdded` 0, and the settings the app's readback compares
+# (`readback`).
+REVIEWED_MIGRATION = 'a reviewed migration'
+
+
+def settings_contract_kept(q):
+    """The record's settings contract is unchanged, or a reviewed migration that adds no FDS record."""
+    recipe = q.get('recipe') or {}
+    contract = recipe.get('settingsContract')
+    if not isinstance(contract, str):
+        return False
+    if contract.startswith(SETTINGS_CONTRACT):
+        return True
+    migration = recipe.get('settingsMigration')
+    if not contract.startswith(REVIEWED_MIGRATION) or not isinstance(migration, dict):
+        return False
+    named = lambda field: (isinstance(migration.get(field), list) and bool(migration[field])  # noqa: E731
+                           and all(isinstance(item, str) and item for item in migration[field]))
+    return (migration.get('reviewedRevision') == q.get('release') and isinstance(q.get('release'), str)
+            and named('protectedSources') and type(migration.get('fdsRecordsAdded')) is int
+            and migration['fdsRecordsAdded'] == 0 and named('readback'))
 
 
 def stable_evidence(s, identity, asset, record_bytes, source_versions):
@@ -314,9 +340,8 @@ def stable_evidence(s, identity, asset, record_bytes, source_versions):
     catalog.require(q.get('generation') == 21, 'stable settings evidence (option (a)) covers P21 releases only')
     catalog.require(isinstance(identity.get('buildID'), str) and q.get('buildID') == identity['buildID'],
                     'the qualification record names another build')
-    contract = (q.get('recipe') or {}).get('settingsContract')
-    catalog.require(isinstance(contract, str) and contract.startswith(SETTINGS_CONTRACT),
-                    "the record doesn't show the verifier's settings contract unchanged")
+    catalog.require(settings_contract_kept(q),
+                    "the record doesn't show the verifier's settings contract unchanged or a reviewed migration")
     verifier = (q.get('checks') or {}).get('verifier') or {}
     catalog.require(verifier.get('status') == 'pass-source-and-binary-checks' and verifier.get('pendingEvidence') == []
                     and verifier.get('stackBudgetFailures') == [], "the record doesn't show the verifier passing")

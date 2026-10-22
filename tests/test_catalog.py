@@ -122,6 +122,14 @@ def qualification(revision, image, change=None):
     return json.dumps(record).encode()
 
 
+def migrated(record, settingsContract='a reviewed migration, not unchanged: app_factory_controls.c', **terms):
+    """`record` as a reviewed settings migration's (Ring 119's touch area), with `terms` replacing its own."""
+    record['recipe'] = {'settingsContract': settingsContract, 'settingsMigration': {
+        'reviewedRevision': record['release'],
+        'protectedSources': ['firmware/bc_ros/bc_application/app_factory_controls.c'],
+        'fdsRecordsAdded': 0, 'readback': ['touchArea'], **terms}}
+
+
 def sudo_package(path, image_bytes=2048, parts=None):
     """A Nordic DFU package as Sudo's: one application image and its init packet."""
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -250,6 +258,15 @@ class SudoAutomaticTest(unittest.TestCase):
             'preservesAllSettings': True})
         self.assertEqual(catalog.verify_entry('sudo', entry, self.keys)['sourceVersions'], ['6.0.3.3P21'])
 
+    def test_a_reviewed_settings_migration_is_stable_evidence(self):
+        """Jeremy, October 22, for Ring 119's touch area: a reviewed change to
+        a protected source that adds no FDS record, with the app's readback
+        comparing what it changes, counts as option (a)'s settings contract."""
+        record = self.record(change=migrated)
+        entry, _ = self.promote(qualification=record)
+        self.assertEqual(entry['details']['settingsCompatibility']['evidenceSHA256'], hashlib.sha256(record).hexdigest())
+        self.assertTrue(entry['details']['settingsCompatibility']['preservesAllSettings'])
+
     def test_a_stable_release_needs_option_a_evidence(self):
         """Jeremy, October 22: the verifier's settings contract, the dual-bank
         record and Rings A and B on the build with settings and bonds intact.
@@ -269,6 +286,13 @@ class SudoAutomaticTest(unittest.TestCase):
             'another image': change(lambda q: q['image'].update(sha256='0' * 64)),
             'a P20 record': change(lambda q: q.update(generation=20)),
             'a protected source edited': change(lambda q: q['recipe'].update(settingsContract='edited: bc_device_info.c')),
+            'a migration without its terms': change(lambda q: q['recipe'].update(settingsContract='a reviewed migration')),
+            'a migration reviewed for another release': change(lambda q: migrated(q, reviewedRevision='P21 revision 118')),
+            'a migration adding a record': change(lambda q: migrated(q, fdsRecordsAdded=1)),
+            'a migration naming no source': change(lambda q: migrated(q, protectedSources=[])),
+            'a migration the readback never checks': change(lambda q: migrated(q, readback=[])),
+            'migration terms under the unchanged form only': change(
+                lambda q: migrated(q, settingsContract='edited: app_factory_controls.c')),
             'the verifier failing': change(lambda q: q['checks']['verifier'].update(status='fail')),
             'evidence pending': change(lambda q: q['checks']['verifier'].update(pendingEvidence=['codec probe'])),
             'no dual-bank record': change(lambda q: q['image'].pop('dualBankMarginBytes')),
