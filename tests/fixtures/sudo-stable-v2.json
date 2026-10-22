@@ -1,6 +1,6 @@
 {
-  "note": "Write tests/fixtures/sudo-stable-v2.json: two stable version 2 releases, 1.0 (revision 119) and 1.1 (revision 120), staged, published and promoted by these tools with a throwaway key over made-up packages. ShopItalic/app's RingFirmwareReleaseTests decode the same file. Run it again only when the statement format changes, then copy the file into the app's tests.",
-  "publicKey": "BC0emd1R9AMa7ubKdtMiIBQ23frsGlDUj8oktGa4bm4sXpPWQ1/y8/7qk4t9ZxXL2Gtrfg3dkSLSPhkzlPZuMVM=",
+  "note": "Write tests/fixtures/sudo-stable-v2.json: two stable version 2 releases, Sudo 1.119 (revision 119) and Sudo 1.120 (revision 120), staged, published and promoted by these tools with a throwaway key over made-up packages. ShopItalic/app's RingFirmwareReleaseTests decode the same file. Run it again only when the statement format changes, then copy the file into the app's tests.",
+  "publicKey": "BKTU9EdMl1zzWwWYhA3TMrMLrSQcy9TqvfJGch0kXCEpSIkVHdpwnTPvxoWvlK9LZDhvLOVfYrhVR0z3nDUOrD4=",
   "catalog": {
     "schemaVersion": 1,
     "product": "sudo",
@@ -50,18 +50,18 @@
           "promotedFrom": {
             "channel": "test",
             "schema": "italic-firmware-release/1",
-            "issuedAt": "2026-10-22T19:15:59Z",
-            "statementSHA256": "707af338da74e1723f717e3bbf5bc23feb5ebbefd26234ddaef0fcfc3887d110"
+            "issuedAt": "2026-10-22T21:54:06Z",
+            "statementSHA256": "ddcc65ec5f0bdbdeee3edf0d966f49b373b75f79c886c98280e9bf266f7a54eb"
           },
-          "releaseNotes": "Ring firmware 1.1 notes."
+          "releaseNotes": "Sudo 1.120 notes."
         },
-        "statement": "eyJhcHBsaWNhdGlvbk9ubHkiOnRydWUsImFzc2V0Ijp7ImJ5dGVzIjo0NjE4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiODc4MmUzZGY2ZmExOGRjZTNkMjc0NjU3ZTk5MzlhMjUzZTViNmU5ZDQxMTBmMDY0NDMyYjRkZTEzMGU3MjJmYiJ9LCJhdXRvSW5zdGFsbCI6dHJ1ZSwiYnVpbGRJZGVudGl0eSI6eyJidWlsZElEIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNzgiLCJjb2RlYyI6MSwiZ2VuZXJhdGlvbiI6MjEsInJldmlzaW9uIjoxMjAsInNldHRpbmdzU2NoZW1hIjo2fSwiY2hhbmdlTm90ZSI6InNob3J0ZXIgc3RhcnQgYW5kIHN0b3AgYnV6emVzIiwiY2hhbm5lbCI6InN0YWJsZSIsImN1c3RvbWVyVmVyc2lvbiI6IjEuMSIsImVyYXNlc1N0b3JhZ2UiOnRydWUsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTIwIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMlQxOToxNTo1OVoiLCJtaW5pbXVtQXBwQnVpbGQiOjI2MywicGFja2FnZVJldmlzaW9uIjoxMjAsInByb2R1Y3QiOiJzdWRvIiwic2NoZW1hIjoiaXRhbGljLWZpcm13YXJlLXJlbGVhc2UvMiIsInNvdXJjZVZlcnNpb25zIjpbIjYuMC4zLjNQMjEiXSwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+        "statement": "eyJhcHBsaWNhdGlvbk9ubHkiOnRydWUsImFzc2V0Ijp7ImJ5dGVzIjo0NjE4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiODc4MmUzZGY2ZmExOGRjZTNkMjc0NjU3ZTk5MzlhMjUzZTViNmU5ZDQxMTBmMDY0NDMyYjRkZTEzMGU3MjJmYiJ9LCJhdXRvSW5zdGFsbCI6dHJ1ZSwiYnVpbGRJZGVudGl0eSI6eyJidWlsZElEIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNzgiLCJjb2RlYyI6MSwiZ2VuZXJhdGlvbiI6MjEsInJldmlzaW9uIjoxMjAsInNldHRpbmdzU2NoZW1hIjo2fSwiY2hhbmdlTm90ZSI6InNob3J0ZXIgc3RhcnQgYW5kIHN0b3AgYnV6emVzIiwiY2hhbm5lbCI6InN0YWJsZSIsImN1c3RvbWVyVmVyc2lvbiI6IjEuMTIwIiwiZXJhc2VzU3RvcmFnZSI6dHJ1ZSwiaGFyZHdhcmUiOiI2MDNWMS4yMy4yIiwiaWQiOiI2LjAuMy4zUDIxLXIxMjAiLCJpbnN0YWxsYWJsZSI6dHJ1ZSwiaXNzdWVkQXQiOiIyMDI2LTEwLTIyVDIxOjU0OjA2WiIsIm1pbmltdW1BcHBCdWlsZCI6MjYzLCJwYWNrYWdlUmV2aXNpb24iOjEyMCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8yIiwic291cmNlVmVyc2lvbnMiOlsiNi4wLjMuM1AyMSJdLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMSJ9",
         "signature": {
           "alg": "ES256",
           "keyId": "sudo-release-1",
-          "der": "MEUCIQCXdIjaY+Hn5PQ1cpamjsc4T4+y3f1IlIVXfZ9vaPLAEAIgULTDI85iQFwiNBkq7pstnwFoBXXV5NcBrbHzr4eXvz8="
+          "der": "MEQCICZ98+lXwpor2SpYb9uKr05HY+CWwirV3oFfqHH1Qhh2AiB58uCosTDDxaS1RmdS2qT8cQocyw9JkF2LniA4d4tC0w=="
         },
-        "releaseNotes": "Ring firmware 1.1 notes.",
+        "releaseNotes": "Sudo 1.120 notes.",
         "rollout": {
           "percent": 100,
           "since": "2026-11-02"
@@ -111,18 +111,18 @@
           "promotedFrom": {
             "channel": "test",
             "schema": "italic-firmware-release/1",
-            "issuedAt": "2026-10-22T19:15:59Z",
-            "statementSHA256": "300e9b0e25f002fb929def9cdfd37a814d5e4576f6fd2a1c9effd2d2fc3e3d81"
+            "issuedAt": "2026-10-22T21:54:06Z",
+            "statementSHA256": "a94501b4ce28e21c6de77d2bd6183b2908c4d0cd9006cdf5f725c780285ff53e"
           },
-          "releaseNotes": "Ring firmware 1.0 notes."
+          "releaseNotes": "Sudo 1.119 notes."
         },
-        "statement": "eyJhcHBsaWNhdGlvbk9ubHkiOnRydWUsImFzc2V0Ijp7ImJ5dGVzIjo0NjE4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiODQ0YjljZjI5YTgxZjE5OTYwMmVhMGI2MTYxOTQyNTNjNjg3NDhjNGM4MjljMzhhYTJkYmFjOTkxZDgyY2U5OCJ9LCJhdXRvSW5zdGFsbCI6dHJ1ZSwiYnVpbGRJZGVudGl0eSI6eyJidWlsZElEIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNzciLCJjb2RlYyI6MSwiZ2VuZXJhdGlvbiI6MjEsInJldmlzaW9uIjoxMTksInNldHRpbmdzU2NoZW1hIjo2fSwiY2hhbm5lbCI6InN0YWJsZSIsImN1c3RvbWVyVmVyc2lvbiI6IjEuMCIsImVyYXNlc1N0b3JhZ2UiOnRydWUsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTE5IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMlQxOToxNTo1OVoiLCJtaW5pbXVtQXBwQnVpbGQiOjI2MywicGFja2FnZVJldmlzaW9uIjoxMTksInByb2R1Y3QiOiJzdWRvIiwic2NoZW1hIjoiaXRhbGljLWZpcm13YXJlLXJlbGVhc2UvMiIsInNvdXJjZVZlcnNpb25zIjpbIjYuMC4zLjNQMjEiXSwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+        "statement": "eyJhcHBsaWNhdGlvbk9ubHkiOnRydWUsImFzc2V0Ijp7ImJ5dGVzIjo0NjE4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiODQ0YjljZjI5YTgxZjE5OTYwMmVhMGI2MTYxOTQyNTNjNjg3NDhjNGM4MjljMzhhYTJkYmFjOTkxZDgyY2U5OCJ9LCJhdXRvSW5zdGFsbCI6dHJ1ZSwiYnVpbGRJZGVudGl0eSI6eyJidWlsZElEIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNzciLCJjb2RlYyI6MSwiZ2VuZXJhdGlvbiI6MjEsInJldmlzaW9uIjoxMTksInNldHRpbmdzU2NoZW1hIjo2fSwiY2hhbm5lbCI6InN0YWJsZSIsImN1c3RvbWVyVmVyc2lvbiI6IjEuMTE5IiwiZXJhc2VzU3RvcmFnZSI6dHJ1ZSwiaGFyZHdhcmUiOiI2MDNWMS4yMy4yIiwiaWQiOiI2LjAuMy4zUDIxLXIxMTkiLCJpbnN0YWxsYWJsZSI6dHJ1ZSwiaXNzdWVkQXQiOiIyMDI2LTEwLTIyVDIxOjU0OjA2WiIsIm1pbmltdW1BcHBCdWlsZCI6MjYzLCJwYWNrYWdlUmV2aXNpb24iOjExOSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8yIiwic291cmNlVmVyc2lvbnMiOlsiNi4wLjMuM1AyMSJdLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMSJ9",
         "signature": {
           "alg": "ES256",
           "keyId": "sudo-release-1",
-          "der": "MEUCIQDiifnlurZyj6mah9SCcU6rpsh4Fl2R0+Pko6LvYgTBoQIgGBygeWQDAnBMs9zISp/i7OD/TefygwiYL1BB8Cfb1fM="
+          "der": "MEUCIQCsnpbIeDQ+3Su0qi3T+c3FRXif4PPJpcld/dVD5scwKgIgVM+TA2IPt0xUZkCuha3oyQJewkmMatQZrN30B8RUOtQ="
         },
-        "releaseNotes": "Ring firmware 1.0 notes.",
+        "releaseNotes": "Sudo 1.119 notes.",
         "rollout": {
           "percent": 10,
           "since": "2026-11-02"

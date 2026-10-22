@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Write tests/fixtures/sudo-stable-v2.json: two stable version 2 releases,
-1.0 (revision 119) and 1.1 (revision 120), staged, published and promoted by
+Sudo 1.119 (revision 119) and Sudo 1.120 (revision 120), staged, published and promoted by
 these tools with a throwaway key over made-up packages. ShopItalic/app's
 RingFirmwareReleaseTests decode the same file. Run it again only when the
 statement format changes, then copy the file into the app's tests."""
@@ -42,7 +42,7 @@ def main():
         root = Path(folder)
         (root / 'keys').mkdir(); (root / 'keys' / 'sudo-release-1.x963').write_bytes(public)
         (root / 'products' / 'sudo').mkdir(parents=True)
-        releases = [(119, '1.0', None, 0x19, 10), (120, '1.1', 'shorter start and stop buzzes', 0x20, 100)]
+        releases = [(119, '1.119', None, 0x19, 10), (120, '1.120', 'shorter start and stop buzzes', 0x20, 100)]
         for revision, name, note, fill, percent in releases:
             zip_path = package(root / str(revision) / 'BCL603S2P_6.0.3.3P21.zip', fill)
             identity = {'generation': 21, 'revision': revision, 'codec': 1, 'settingsSchema': 6,
@@ -73,7 +73,7 @@ def main():
             promoted = root / 'promote' / str(revision)
             release.promote('sudo', entry['id'], 'stable', zip_path, promoted, 263, True, auto_install=True,
                             customer_version=name, change_note=note, source_versions=['6.0.3.3P21'],
-                            qualification=record, notes=f'Ring firmware {name} notes.', signer=sign, keys=keys)
+                            qualification=record, notes=f'Sudo {name} notes.', signer=sign, keys=keys)
             with mock.patch.object(release, 'anonymous_get', return_value=zip_path.read_bytes()):
                 release.publish(promoted)
             release.set_rollout('sudo', entry['id'], percent, '2026-11-02')

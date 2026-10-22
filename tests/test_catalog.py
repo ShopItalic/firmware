@@ -421,7 +421,7 @@ class AppFixtureTest(unittest.TestCase):
         keys = {'sudo-release-1': base64.b64decode(fixture['publicKey'])}
         self.assertEqual(catalog.validate_catalog('sudo', fixture['catalog'], keys), 2)
         statements = [json.loads(base64.b64decode(e['statement'])) for e in fixture['catalog']['releases']]
-        self.assertEqual([(s['customerVersion'], s['autoInstall']) for s in statements], [('1.1', True), ('1.0', True)])
+        self.assertEqual([(s['customerVersion'], s['autoInstall']) for s in statements], [('1.120', True), ('1.119', True)])
 
 
 class P256Test(unittest.TestCase):

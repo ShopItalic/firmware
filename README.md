@@ -54,7 +54,7 @@ are signed:
 | `applicationOnly` | the package replaces the application, never the bootloader or SoftDevice |
 | `buildIdentity` | generation, revision, codec, settings schema and build ID the Ring reports after the update |
 | `minimumSourceRevision` | optional: the oldest revision of its generation it may replace |
-| `customerVersion` | optional, never on `test`: the name people see, such as `1.1` |
+| `customerVersion` | optional, never on `test`: the version people see, `1.<revision>` (the app shows `Sudo 1.119`; Jeremy, October 22, 2026) |
 | `changeNote` | optional: one line (60 characters at most) of what people will feel or see |
 
 Two unsigned fields are honoured because they can only narrow a signed
@@ -112,12 +112,12 @@ matches. A stable release's customers read `--notes`, and a test build's tester
 `notice` is dropped:
 
 ```sh
-python3 tools/release.py promote --product sudo --id 6.0.3.3P21-r118 --channel stable \
+python3 tools/release.py promote --product sudo --id 6.0.3.3P21-r119 --channel stable \
   --asset path/to/BCL603S2P_6.0.3.3P21.zip --minimum-app-build BUILD --erases-storage yes \
-  --auto --customer-version 1.0 --source-version 6.0.3.3P21 \
-  --qualification ../sudo/docs/reference/p21-r118-qualification.json \
-  --notes "What people get" --out .staging/sudo-r118-stable
-python3 tools/release.py publish .staging/sudo-r118-stable --push
+  --auto --customer-version 1.119 --source-version 6.0.3.3P21 \
+  --qualification ../sudo/docs/reference/p21-r119-qualification.json \
+  --notes "What people get" --out .staging/sudo-r119-stable
+python3 tools/release.py publish .staging/sudo-r119-stable --push
 # Automatic installs, staged: 1%, 10%, 50%, 100%. Unsigned; commit and push each change.
 python3 tools/release.py rollout --product sudo --id 6.0.3.3P21-r117 --percent 1
 python3 tools/release.py pause-automatic --product sudo [--background]
