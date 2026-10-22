@@ -4,6 +4,84 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r118",
+      "version": "6.0.3.3P21",
+      "packageRevision": 118,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r118",
+      "asset": {
+        "bytes": 327552,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "a8c1fb615358ca1c8157d03419cd42163d6f0048ac7083347d245a8cede127c7",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r118/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "39a79e7d150aa1b944e33a06564882ee",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/666443733"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "dual-bank-budget.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Only the top of the Ring responds to touch now, so a finger resting beside the Ring no longer counts as a tap or a hold. Updating erases recordings still on the Ring, so sync first. Includes everything in revision 117.",
+      "notice": "P21 revision 118 tester update, the factory image: only the top of the Ring takes touches. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 118,
+        "buildIdentity": {
+          "revision": 118,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "4a5a96928bd52869b36ea3dbf974bae4",
+          "generation": 21
+        },
+        "sourceCommit": "7af37f447868d5509ec53227906769ebc7b71e4e",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "f824a3f4958933e2b108375a774fe0130c91c780d87908515c59fee2e273d6a3",
+          "command.json": "834946caa982ce90bba90088fdaaf51b201d7f33ee225f72ca125c3476313a48",
+          "dual-bank-budget.json": "0c41e1f5ddbed3c7421ab5cf8a0ad1fd94500ed6983166d74a863c0d1ca244a4",
+          "inputs-after.json": "a35dc437518546ff6894130fa65a841be536f69b826243232837e95121fbd367",
+          "inputs-before.json": "95fff1097795f79afe999053e8ddf15ad89b907748faec81800daa73204e7960",
+          "p21-preparation.json": "28b3c83c92ee73b18c057595d3af118143b5ed0ffa9784067ceeacedd8124365",
+          "result.json": "85decd35e2cb31dae1c78390ad927874a497b7d3f3bb6b26f0f57c6bbfe2638c",
+          "runtime-verification.json": "8e91328f62833019fc04ba672e4b1d15834ca9afbe62eb596d2cad2e7f311832",
+          "signed-package.json": "fcefee308ed3619876d833e2261153c6a2f311a9beb4569fc0cd29fbc66e1047",
+          "source-load-verification.json": "b5b85d2cd3f40f957793f38f1d3efda2133f21011a8c5b912c57f793e491d7c5"
+        },
+        "notice": "P21 revision 118 tester update, the factory image: only the top of the Ring takes touches. Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Only the top of the Ring responds to touch now, so a finger resting beside the Ring no longer counts as a tap or a hold. Updating erases recordings still on the Ring, so sync first. Includes everything in revision 117."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI3NTUyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiYThjMWZiNjE1MzU4Y2ExYzgxNTdkMDM0MTljZDQyMTYzZDZmMDA0OGFjNzA4MzM0N2QyNDVhOGNlZGUxMjdjNyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTE4IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMlQxNjozOTo0NloiLCJwYWNrYWdlUmV2aXNpb24iOjExOCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIEj/OMm7XLtau+16XxZ7zxRl67x7Ri1zwjZYfa/NrFJGAiEAniA9DYVhk6KjXIQXWcgzDBlJknCv1LlgRf/1jxR7waA="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r117",
       "version": "6.0.3.3P21",
       "packageRevision": 117,
