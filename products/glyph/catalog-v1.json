@@ -10,7 +10,7 @@
       "hardware": "PKS3-101",
       "channel": "test",
       "installable": true,
-      "withdrawn": false,
+      "withdrawn": true,
       "tag": "glyph-P18-rc.9",
       "asset": {
         "bytes": 11303840,
@@ -49,7 +49,8 @@
         "alg": "ES256",
         "keyId": "glyph-release-1",
         "der": "MEUCIQCFbXIWXe7jjRDOqr5Ubr6IPe79Yc3KYLzfzQwde7oxxQIgTm/3ozO5szckhNOJy57Ax9pWQLwttFtsahqP5oWubqI="
-      }
+      },
+      "withdrawnReason": "Never installed. Replaced by P19-rc.1, the first Bluetooth install, which also carries UI fixes."
     },
     {
       "id": "P17-rc.7",
