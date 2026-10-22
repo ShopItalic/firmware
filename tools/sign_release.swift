@@ -53,9 +53,12 @@ case ("public", 4):
 case ("sign", 5):
     let statement = try Data(contentsOf: URL(fileURLWithPath: args[3]))
     // Domain separation: only sign release statements for this key's product.
+    // Version 2 (automatic installs) is Sudo's only: Glyph firmware reads version 1.
+    let schemas = product == "sudo" ? ["italic-firmware-release/1", "italic-firmware-release/2"]
+        : ["italic-firmware-release/1"]
     guard statement.count <= 4096,
           let object = try? JSONSerialization.jsonObject(with: statement) as? [String: Any],
-          object["schema"] as? String == "italic-firmware-release/1",
+          let schema = object["schema"] as? String, schemas.contains(schema),
           object["product"] as? String == product else { fail("Refusing to sign: not a \(product) release statement") }
     var error: Unmanaged<CFError>?
     guard let signature = SecKeyCreateSignature(key, .ecdsaSignatureMessageX962SHA256, statement as CFData, &error) else {

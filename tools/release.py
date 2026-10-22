@@ -8,12 +8,32 @@
            directory, verify every asset anonymously, then add the signed entry
            to products/<product>/catalog-v1.json and commit. Order matters:
            assets are public and verified before the catalog offers them.
+           A promotion's directory replaces its release's entry instead.
+  promote  Sign a published release again for the beta or stable channel, with
+           a version 2 statement: the oldest app build that may install it,
+           whether it may install itself, and the rest of section 9 of
+           ShopItalic/app docs/design/ring-firmware-auto-update.md. The tag and
+           assets stay as they are; the statement names no URL. No network.
+  rollout  Admit devices whose bucket is below a percentage to a release's
+           automatic installs. Unsigned: it can only narrow a signed autoInstall.
+  pause-automatic / resume-automatic
+           The catalog's pause switch for automatic installs, for every release
+           ("all", or with --background only installs started in the background).
+  withdraw Mark a release withdrawn. Unsigned: it only removes an offer.
+  record-images
+           Record the application image inside packages for the dual-bank check.
+
+Sudo packages pass the dual-bank check before they are staged installable and
+before they may install themselves: every image a Ring may run must leave room
+for the new one beside it, and the new one for every installable image, below
+the Ring's settings (products/sudo/package-images.json).
 
 Qualification gates live in each product's source repo; this tool refuses
 anything that is not signed, hashed and uniquely tagged.
 """
 import argparse
 import base64
+import copy
 import hashlib
 import json
 import shutil
@@ -22,6 +42,7 @@ import sys
 import tempfile
 import time
 import urllib.request
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -56,14 +77,94 @@ def sign(product, statement_path, signature_path, signer=None):
                        check=True, stdout=subprocess.DEVNULL)
 
 
+# The Ring (603V1.23.2) runs Nordic's SDK 17 secure bootloader. It stages an
+# application update in bank 1, right after the running image rounded up to
+# a 4 KiB page, and takes flash up to itself as free, but bonds and settings
+# (FDS) start at 0xE0000. A copy past that overwrites them, and one that
+# doesn't fit beside the running image makes the bootloader delete that image
+# first, so an interrupted update leaves a Ring that can only wait in its
+# bootloader. ShopItalic/sudo's tools/firmware/check_dual_bank_budget.py has
+# the derivation; this is its rule, run where packages are published.
+DUAL_BANK = {'sudo': {'applicationStart': 0x27000, 'settingsStart': 0xE0000}}
+PAGE = 0x1000
+
+
+def images_path(product):
+    return catalog.ROOT / 'products' / product / 'package-images.json'
+
+
+def load_images(product):
+    path = images_path(product)
+    return json.loads(path.read_text()) if path.exists() else {'schema': 1, 'note': '', 'packages': {}}
+
+
+def write_images(product, images):
+    """One line per package, ordered by version and revision, as sudo's own record."""
+    rows = sorted(images['packages'].items(), key=lambda item: (
+        item[1]['version'], item[1]['packageRevision'], item[1]['release'], item[0]))
+    lines = ['{', '  "schema": 1,', f'  "note": {json.dumps(images.get("note", ""))},', '  "packages": {']
+    for i, (digest, row) in enumerate(rows):
+        lines.append(f'    {json.dumps(digest)}: {json.dumps(row)}' + (',' if i < len(rows) - 1 else ''))
+    images_path(product).write_text('\n'.join(lines + ['  }', '}']) + '\n')
+
+
+def package_parts(path):
+    """The parts a Nordic DFU package replaces, and its application image if that is all."""
+    with zipfile.ZipFile(path) as archive:
+        manifest = json.loads(archive.read('manifest.json')).get('manifest', {})
+        parts = set(manifest)
+        image = archive.read(manifest['application']['bin_file']) if parts == {'application'} else None
+        return parts, (manifest['application']['bin_file'], image) if image is not None else None
+
+
+def image_record(release_tag, s, path):
+    parts, application = package_parts(path)
+    catalog.require(application is not None, f'{path.name}: the package replaces {sorted(parts)}, not only the application')
+    name, image = application
+    return {'release': release_tag, 'version': s['version'], 'packageRevision': s['packageRevision'],
+            'packageBytes': s['asset']['bytes'], 'image': name, 'imageBytes': len(image),
+            'imageSha256': hashlib.sha256(image).hexdigest()}
+
+
+def dual_bank(product, package_sha, image_bytes, current, images):
+    """The margin the worst staged copy involving this package leaves below the
+    Ring's settings, or CatalogError. The images a Ring may run are every one
+    recorded (withdrawn and retired ones too) and this one, since reinstalling
+    is an update too; this package is staged over each of them, and every
+    installable catalog package over this one. Every catalog package must have
+    a record, so nothing a Ring runs goes unchecked."""
+    layout = DUAL_BANK.get(product)
+    if layout is None:
+        return None
+    limit = layout['settingsStart'] - layout['applicationStart']
+    records = images['packages']
+    installable = [image_bytes]
+    for entry in current['releases']:
+        s = json.loads(base64.b64decode(entry['statement']))
+        row = records.get(s['asset']['sha256'])
+        catalog.require(row is not None, f"{s['id']}: its package has no recorded image; run record-images")
+        catalog.require(row['packageBytes'] == s['asset']['bytes'], f"{s['id']}: its recorded package size differs")
+        if s['installable'] and not entry['withdrawn'] and s['asset']['sha256'] != package_sha:
+            installable.append(row['imageBytes'])
+    def staged(old, new):
+        return (old + PAGE - 1) // PAGE * PAGE + new
+    running = [row['imageBytes'] for row in records.values()] + [image_bytes]
+    worst = max([staged(old, image_bytes) for old in running] + [staged(image_bytes, new) for new in installable])
+    catalog.require(worst <= limit, f'dual-bank budget: a staged copy would end {worst - limit} bytes into the '
+                                    f'Ring\'s settings (limit {limit} bytes from the application start)')
+    return limit - worst
+
+
 def stage(product, release_id, version, revision, channel, installable, asset, extras, out,
-          source_versions=None, display=None, details=None, key_id=None, signer=None, keys=None):
+          source_versions=None, display=None, details=None, key_id=None, signer=None, keys=None,
+          automatic=None, images=None):
+    """`automatic` holds version 2's statement fields (catalog.check_automatic)."""
     catalog.require(product in catalog.PRODUCTS, 'unknown product')
     key_id = key_id or catalog.PRODUCTS[product]['keys'][0]
     keys = keys or catalog.load_keys()
     names = [asset.name] + [p.name for p in extras]
     catalog.require(len(set(names)) == len(names), 'duplicate asset names')
-    catalog.require(not {'statement.json', 'signature.der', 'SHA256SUMS'} & set(names),
+    catalog.require(not {'statement.json', 'signature.der', 'SHA256SUMS', 'image.json'} & set(names),
                     'asset name collides with a release-level file')
     out.mkdir(parents=True, exist_ok=False)
     files = out / 'assets'; files.mkdir()
@@ -72,7 +173,15 @@ def stage(product, release_id, version, revision, channel, installable, asset, e
         shutil.copyfile(path, files / path.name)
         catalog.require(sha256(files / path.name) == sha256(path), f'copy changed {path.name}')
     statement = catalog.make_statement(product, release_id, version, revision, channel, installable,
-                                       record(files / asset.name), utc_seconds(), source_versions)
+                                       record(files / asset.name), utc_seconds(), source_versions, automatic)
+    if product in DUAL_BANK:
+        image = image_record(catalog.tag(product, release_id), statement, files / asset.name)
+        if installable:
+            current = catalog.read(product) if catalog.catalog_path(product).exists() else catalog.empty(product)
+            margin = dual_bank(product, statement['asset']['sha256'], image['imageBytes'], current,
+                               images or load_images(product))
+            print(f'dual-bank budget: {margin} bytes to spare')
+        (out / 'image.json').write_text(json.dumps(image, indent=2) + '\n')
     raw = catalog.encode_statement(statement)
     (out / 'statement.json').write_bytes(raw)
     sign(product, out / 'statement.json', out / 'signature.der', signer)
@@ -125,7 +234,17 @@ def anonymous_get(url, accept=None, attempts=6):
             time.sleep(5 * (attempt + 1))
 
 
+def commit(paths, message, push):
+    for path in paths:
+        subprocess.run(['git', '-C', str(catalog.ROOT), 'add', str(path.relative_to(catalog.ROOT))], check=True)
+    subprocess.run(['git', '-C', str(catalog.ROOT), 'commit', '-q', '-m', message], check=True)
+    if push:
+        subprocess.run(['git', '-C', str(catalog.ROOT), 'push', '-q'], check=True)
+
+
 def publish(directory, notes=None, push=False, dry_run=False):
+    if json.loads((directory / 'entry.json').read_text()).get('promotes'):
+        return publish_promotion(directory, push=push, dry_run=dry_run)
     product, entry, s = load_stage(directory)
     current = catalog.read(product) if catalog.catalog_path(product).exists() else catalog.empty(product)
     catalog.require(all(e['id'] != s['id'] for e in current['releases']), f"{s['id']} already in catalog")
@@ -157,12 +276,120 @@ def publish(directory, notes=None, push=False, dry_run=False):
     entry['asset']['apiURL'] = api_url
     current['releases'].insert(0, entry)
     catalog.write(product, current)
-    path = catalog.catalog_path(product).relative_to(catalog.ROOT)
-    subprocess.run(['git', '-C', str(catalog.ROOT), 'add', str(path)], check=True)
-    subprocess.run(['git', '-C', str(catalog.ROOT), 'commit', '-q', '-m', f'Publish {product} {s["id"]}'], check=True)
-    if push:
-        subprocess.run(['git', '-C', str(catalog.ROOT), 'push', '-q'], check=True)
+    paths = [catalog.catalog_path(product)]
+    if (directory / 'image.json').exists():
+        # Every published package keeps its record: Rings may run it long after.
+        images = load_images(product)
+        images['packages'][s['asset']['sha256']] = json.loads((directory / 'image.json').read_text())
+        write_images(product, images)
+        paths.append(images_path(product))
+    commit(paths, f'Publish {product} {s["id"]}', push)
     print(f'published {release_tag}: {entry["asset"]["url"]}')
+    return entry
+
+
+def promote(product, release_id, channel, asset, out, minimum_app_build, erases_storage, auto_install=False,
+            customer_version=None, change_note=None, minimum_source_revision=None, source_versions=None,
+            settings_compatibility=None, notes=None, notice=None, key_id=None, signer=None, keys=None, images=None):
+    """Stage a version 2 statement for a published release on `channel`.
+
+    Channels are signed and tags never change, so a release moves to beta or
+    stable by being signed again: same ID, revision and package, a new
+    statement. `asset` is a copy of the published package, checked against the
+    signed statement. The entry keeps its tag, URLs and unsigned display fields;
+    a test build's tester `notice` is dropped unless `notice` replaces it, and
+    `notes` replaces its release notes. `publish` of `out` replaces the entry."""
+    catalog.require(channel in ('beta', 'stable'), 'promote signs a release for beta or stable')
+    catalog.require(catalog.SCHEMA_V2 in catalog.PRODUCTS[product]['schemas'], f'{product} has no version 2 statements')
+    key_id = key_id or catalog.PRODUCTS[product]['keys'][0]
+    keys = keys or catalog.load_keys()
+    current = catalog.read(product)
+    old = next((e for e in current['releases'] if e['id'] == release_id), None)
+    catalog.require(old is not None, f'{release_id} is not in the {product} catalog')
+    s = catalog.verify_entry(product, old, keys)
+    catalog.require(s['installable'] and not old['withdrawn'], f'{release_id} is withdrawn or not installable')
+    catalog.require(asset.is_file() and record(asset) == s['asset'], f'{asset} is not the package {release_id} signed')
+    details = copy.deepcopy(old.get('details') or {})
+    identity = details.get('buildIdentity')
+    catalog.require(isinstance(identity, dict), f'{release_id}: its details carry no build identity')
+    parts, application = package_parts(asset)
+    automatic = {'autoInstall': auto_install, 'minimumAppBuild': minimum_app_build, 'erasesStorage': erases_storage,
+                 'applicationOnly': application is not None, 'buildIdentity': identity}
+    for field, value in (('customerVersion', customer_version), ('changeNote', change_note),
+                         ('minimumSourceRevision', minimum_source_revision)):
+        if value is not None:
+            automatic[field] = value
+    if source_versions is not None:
+        catalog.require(isinstance(settings_compatibility, dict)
+                        and settings_compatibility.get('sourceVersions') == list(source_versions)
+                        and settings_compatibility.get('packageSHA256') == s['asset']['sha256'],
+                        'signed source versions need settings evidence for exactly those versions and this package')
+        details['settingsCompatibility'] = settings_compatibility
+    else:
+        catalog.require(settings_compatibility is None, 'settings evidence without signed source versions grants nothing')
+    if auto_install and product in DUAL_BANK:
+        row = (images or load_images(product))['packages'].get(s['asset']['sha256'])
+        catalog.require(row is not None, f'{release_id}: its package has no recorded image; run record-images')
+        margin = dual_bank(product, s['asset']['sha256'], row['imageBytes'], current, images or load_images(product))
+        print(f'dual-bank budget: {margin} bytes to spare')
+    statement = catalog.make_statement(product, s['id'], s['version'], s['packageRevision'], channel, True,
+                                       s['asset'], utc_seconds(), source_versions, automatic)
+    raw = catalog.encode_statement(statement)
+    out.mkdir(parents=True, exist_ok=False)
+    (out / 'statement.json').write_bytes(raw)
+    sign(product, out / 'statement.json', out / 'signature.der', signer)
+    der = (out / 'signature.der').read_bytes()
+    catalog.require(p256.verify(keys[key_id], raw, der), 'fresh signature does not verify with the published key')
+    entry = copy.deepcopy(old)
+    entry['channel'] = channel
+    entry['statement'] = base64.b64encode(raw).decode()
+    entry['signature'] = {'alg': 'ES256', 'keyId': key_id, 'der': base64.b64encode(der).decode()}
+    if details.get('status') == 'signed-test-ota':
+        details['status'] = 'supplier-signed-ota'  # what apps read as an installable release, not a test build
+    details['promotedFrom'] = {'channel': s['channel'], 'schema': s['schema'], 'issuedAt': s['issuedAt'],
+                               'statementSHA256': hashlib.sha256(base64.b64decode(old['statement'])).hexdigest()}
+    for field, value in (('notice', notice), ('releaseNotes', notes)):
+        if value is not None:
+            entry[field] = details[field] = value
+        elif field == 'notice':
+            entry.pop(field, None); details.pop(field, None)
+    entry['details'] = details
+    catalog.verify_entry(product, entry, keys)
+    (out / 'entry.json').write_text(json.dumps({'product': product, 'promotes': release_id, 'entry': entry},
+                                               indent=2) + '\n')
+    return entry
+
+
+def publish_promotion(directory, push=False, dry_run=False):
+    """Replace a release's entry with its promotion, once its package is still
+    publicly the signed bytes. Nothing on GitHub changes."""
+    data = json.loads((directory / 'entry.json').read_text())
+    product, entry = data['product'], data['entry']
+    keys = catalog.load_keys()
+    s = catalog.verify_entry(product, entry, keys)
+    catalog.require(data['promotes'] == s['id'], 'promotion names another release')
+    catalog.require(base64.b64decode(entry['statement']) == (directory / 'statement.json').read_bytes(),
+                    'statement file differs from entry')
+    current = catalog.read(product)
+    index = next((i for i, e in enumerate(current['releases']) if e['id'] == s['id']), None)
+    catalog.require(index is not None, f"{s['id']} is no longer in the catalog")
+    old = current['releases'][index]
+    old_s = catalog.verify_entry(product, old, keys)
+    catalog.require(not old['withdrawn'], f"{s['id']} was withdrawn since it was promoted")
+    catalog.require(old_s['asset'] == s['asset'] and old['tag'] == entry['tag']
+                    and old['asset'].get('url') == entry['asset'].get('url')
+                    and old['asset'].get('apiURL') == entry['asset'].get('apiURL'),
+                    f"{s['id']}: the promotion's package or URLs differ from the published entry")
+    if dry_run:
+        print(f"would promote {s['id']} from {old_s['channel']} to {s['channel']}"); return entry
+    for url, accept in ((entry['asset']['url'], None), (entry['asset'].get('apiURL'), 'application/octet-stream')):
+        if url:
+            catalog.require(hashlib.sha256(anonymous_get(url, accept)).hexdigest() == s['asset']['sha256'],
+                            f'public download mismatch: {url}')
+    current['releases'][index] = entry
+    catalog.write(product, current)
+    commit([catalog.catalog_path(product)], f"Promote {product} {s['id']} to {s['channel']}", push)
+    print(f"promoted {s['id']} to {s['channel']}")
     return entry
 
 
@@ -172,6 +399,65 @@ def withdraw(product, release_id, reason):
     entry = next(e for e in current['releases'] if e['id'] == release_id)
     entry['withdrawn'] = True; entry['withdrawnReason'] = reason
     catalog.write(product, current)
+
+
+def set_rollout(product, release_id, percent, since=None):
+    """Devices whose bucket is below `percent` may install this release by
+    themselves. The catalog refuses a rollout without a signed autoInstall."""
+    current = catalog.read(product)
+    entry = next((e for e in current['releases'] if e['id'] == release_id), None)
+    catalog.require(entry is not None, f'{release_id} is not in the {product} catalog')
+    entry['rollout'] = {'percent': percent,
+                        'since': since or datetime.now(timezone.utc).strftime('%Y-%m-%d')}
+    catalog.write(product, current)
+
+
+def set_pause(product, pause):
+    """`pause`: "all", "background" or None (automatic installs resume)."""
+    current = catalog.read(product)
+    releases = current.pop('releases')
+    current.pop('automaticUpdatesPaused', None)
+    if pause is not None:
+        current['automaticUpdatesPaused'] = pause
+    current['releases'] = releases
+    catalog.write(product, current)
+
+
+def record_images(product, packages=(), download=False, import_from=None):
+    """Record the application image of catalog packages: from local copies, by
+    downloading those without a record, or from another record (ShopItalic/sudo's
+    tools/firmware-hosting/package-images.json). Each package is checked
+    against its signed statement first; a record never changes."""
+    catalog.require(product in DUAL_BANK, f'{product} has no dual-bank check')
+    current = catalog.read(product)
+    statements = {json.loads(base64.b64decode(e['statement']))['asset']['sha256']: e for e in current['releases']}
+    images = load_images(product)
+    rows = images['packages']
+    def add(digest, row):
+        catalog.require(rows.get(digest, row) == row, f'{digest[:12]}: a different record exists')
+        rows[digest] = row
+    for digest, row in ((import_from and json.loads(Path(import_from).read_text())['packages']) or {}).items():
+        catalog.require(catalog.SHA.fullmatch(digest) and type(row.get('imageBytes')) is int
+                        and type(row.get('packageBytes')) is int, f'{digest[:12]}: bad imported record')
+        add(digest, row)
+    for path in packages:
+        entry = statements.get(sha256(path))
+        catalog.require(entry is not None, f'{path}: not a package in the {product} catalog')
+        s = json.loads(base64.b64decode(entry['statement']))
+        add(s['asset']['sha256'], image_record(entry['tag'], s, path))
+    if download:
+        for digest, entry in statements.items():
+            if digest in rows:
+                continue
+            s = json.loads(base64.b64decode(entry['statement']))
+            with tempfile.TemporaryDirectory() as folder:
+                path = Path(folder) / s['asset']['name']
+                path.write_bytes(anonymous_get(entry['asset']['url']))
+                catalog.require(record(path) == s['asset'], f"{s['id']}: the download is not the signed package")
+                add(digest, image_record(entry['tag'], s, path))
+    write_images(product, images)
+    missing = [e['id'] for d, e in statements.items() if d not in rows]
+    print(f'{product}: {len(rows)} images recorded' + (f'; no record for {", ".join(missing)}' if missing else ''))
 
 
 def main(argv=None):
@@ -190,8 +476,33 @@ def main(argv=None):
     s.add_argument('--out', type=Path, required=True)
     p = sub.add_parser('publish'); p.add_argument('directory', type=Path)
     p.add_argument('--push', action='store_true'); p.add_argument('--dry-run', action='store_true')
+    m = sub.add_parser('promote', help='sign a published release again for beta or stable (version 2)')
+    m.add_argument('--product', required=True, choices=sorted(catalog.PRODUCTS))
+    m.add_argument('--id', required=True)
+    m.add_argument('--channel', required=True, choices=('beta', 'stable'))
+    m.add_argument('--asset', type=Path, required=True, help='a copy of the published package')
+    m.add_argument('--minimum-app-build', type=int, required=True)
+    m.add_argument('--erases-storage', required=True, choices=('yes', 'no'),
+                   help="whether the release's first boot formats the recording storage")
+    m.add_argument('--auto', action='store_true', help='the release may install itself (stable only)')
+    m.add_argument('--customer-version', help='the name people see, such as 1.1')
+    m.add_argument('--change-note', help='one line of what people will feel or see')
+    m.add_argument('--minimum-source-revision', type=int)
+    m.add_argument('--source-version', action='append')
+    m.add_argument('--settings-evidence', type=Path, help='settingsCompatibility JSON for the source versions')
+    m.add_argument('--notes', help='release notes for the people who install it (required for stable)')
+    m.add_argument('--notice', help='a notice shown under the notes; a test build\'s is dropped otherwise')
+    m.add_argument('--out', type=Path, required=True)
     w = sub.add_parser('withdraw'); w.add_argument('--product', required=True); w.add_argument('--id', required=True)
     w.add_argument('--reason', required=True)
+    r = sub.add_parser('rollout'); r.add_argument('--product', required=True); r.add_argument('--id', required=True)
+    r.add_argument('--percent', type=int, required=True); r.add_argument('--since')
+    a = sub.add_parser('pause-automatic'); a.add_argument('--product', required=True)
+    a.add_argument('--background', action='store_true', help='pause only installs started in the background')
+    u = sub.add_parser('resume-automatic'); u.add_argument('--product', required=True)
+    i = sub.add_parser('record-images'); i.add_argument('--product', required=True)
+    i.add_argument('packages', type=Path, nargs='*'); i.add_argument('--download', action='store_true')
+    i.add_argument('--import', dest='import_from', type=Path)
     args = parser.parse_args(argv)
     if args.command == 'stage':
         entry = stage(args.product, args.id, args.version, args.revision, args.channel, args.installable,
@@ -200,6 +511,23 @@ def main(argv=None):
         print(json.dumps({'staged': str(args.out), 'tag': entry['tag'], 'asset': entry['asset']}, indent=2))
     elif args.command == 'publish':
         publish(args.directory, push=args.push, dry_run=args.dry_run)
+    elif args.command == 'promote':
+        catalog.require(args.channel != 'stable' or args.notes, 'a stable release needs --notes for its customers')
+        entry = promote(args.product, args.id, args.channel, args.asset, args.out, args.minimum_app_build,
+                        args.erases_storage == 'yes', auto_install=args.auto, customer_version=args.customer_version,
+                        change_note=args.change_note, minimum_source_revision=args.minimum_source_revision,
+                        source_versions=args.source_version,
+                        settings_compatibility=json.loads(args.settings_evidence.read_text()) if args.settings_evidence else None,
+                        notes=args.notes, notice=args.notice)
+        print(json.dumps({'staged': str(args.out), 'tag': entry['tag'], 'channel': entry['channel']}, indent=2))
+    elif args.command == 'rollout':
+        set_rollout(args.product, args.id, args.percent, args.since)
+    elif args.command == 'pause-automatic':
+        set_pause(args.product, 'background' if args.background else 'all')
+    elif args.command == 'resume-automatic':
+        set_pause(args.product, None)
+    elif args.command == 'record-images':
+        record_images(args.product, args.packages, args.download, args.import_from)
     else:
         withdraw(args.product, args.id, args.reason)
 
