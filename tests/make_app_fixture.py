@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Write tests/fixtures/sudo-stable-v2.json: two stable version 2 releases,
-1.0 (revision 117) and 1.1 (revision 118), staged, published and promoted by
+1.0 (revision 118) and 1.1 (revision 119), staged, published and promoted by
 these tools with a throwaway key over made-up packages. ShopItalic/app's
 RingFirmwareReleaseTests decode the same file. Run it again only when the
 statement format changes, then copy the file into the app's tests."""
@@ -42,7 +42,7 @@ def main():
         root = Path(folder)
         (root / 'keys').mkdir(); (root / 'keys' / 'sudo-release-1.x963').write_bytes(public)
         (root / 'products' / 'sudo').mkdir(parents=True)
-        releases = [(117, '1.0', None, 0x17, 10), (118, '1.1', 'shorter start and stop buzzes', 0x18, 100)]
+        releases = [(118, '1.0', None, 0x18, 10), (119, '1.1', 'shorter start and stop buzzes', 0x19, 100)]
         for revision, name, note, fill, percent in releases:
             zip_path = package(root / str(revision) / 'BCL603S2P_6.0.3.3P21.zip', fill)
             identity = {'generation': 21, 'revision': revision, 'codec': 1, 'settingsSchema': 6,
@@ -60,8 +60,7 @@ def main():
             images = release.load_images('sudo')
             images['packages'][entry['asset']['sha256']] = json.loads((out / 'image.json').read_text())
             release.write_images('sudo', images)
-            # A made-up qualification record (release.stable_evidence): the
-            # committed fixture predates them, so its evidence digests differ.
+            # A made-up qualification record (release.stable_evidence).
             record = json.dumps({
                 'wireVersion': '6.0.3.3P21', 'packageRevision': revision, 'generation': 21, 'buildID': identity['buildID'],
                 'recipe': {'settingsContract': release.SETTINGS_CONTRACT},
