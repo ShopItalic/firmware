@@ -114,8 +114,8 @@ def qualification(revision, image, change=None):
         'checks': {'verifier': {'status': 'pass-source-and-binary-checks', 'pendingEvidence': [], 'stackBudgetFailures': []}},
         'image': {'sha256': hashlib.sha256(image).hexdigest(), 'dualBankMarginBytes': 57_896},
         'stableEvidence': {'rings': [
-            {'ring': 'Ring A (5B31)', 'buildID': build, 'settings': 'same', 'bonds': 'kept'},
-            {'ring': 'Ring B (C34A)', 'buildID': build, 'settings': 'same', 'bonds': 'kept'}]},
+            {'ring': 'Ring A (C34A)', 'buildID': build, 'settings': 'same', 'bonds': 'kept'},
+            {'ring': 'Ring B (5B31)', 'buildID': build, 'settings': 'same', 'bonds': 'kept'}]},
     }
     if change:
         change(record)

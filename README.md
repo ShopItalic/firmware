@@ -138,8 +138,8 @@ this release, build and image and shows:
 
 ```json
 "stableEvidence": {"rings": [
-  {"ring": "Ring A (5B31)", "buildID": "<the release's build ID>", "settings": "same", "bonds": "kept"},
-  {"ring": "Ring B (C34A)", "buildID": "<the release's build ID>", "settings": "same", "bonds": "kept"}
+  {"ring": "Ring A (C34A)", "buildID": "<the release's build ID>", "settings": "same", "bonds": "kept"},
+  {"ring": "Ring B (5B31)", "buildID": "<the release's build ID>", "settings": "same", "bonds": "kept"}
 ]}
 ```
 
