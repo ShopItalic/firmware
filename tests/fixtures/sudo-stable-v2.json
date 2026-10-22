@@ -1,11 +1,72 @@
 {
-  "note": "Write tests/fixtures/sudo-stable-v2.json: two stable version 2 releases, 1.0 (revision 118) and 1.1 (revision 119), staged, published and promoted by these tools with a throwaway key over made-up packages. ShopItalic/app's RingFirmwareReleaseTests decode the same file. Run it again only when the statement format changes, then copy the file into the app's tests.",
-  "publicKey": "BG789Q3vFDjLuHZttbrfeLMeUXsyR+v+h2tG2k6wIRPEP+QsBkiaj1JS3N6LJLe+yf11XqabnukCMeo+a40vaAc=",
+  "note": "Write tests/fixtures/sudo-stable-v2.json: two stable version 2 releases, 1.0 (revision 119) and 1.1 (revision 120), staged, published and promoted by these tools with a throwaway key over made-up packages. ShopItalic/app's RingFirmwareReleaseTests decode the same file. Run it again only when the statement format changes, then copy the file into the app's tests.",
+  "publicKey": "BC0emd1R9AMa7ubKdtMiIBQ23frsGlDUj8oktGa4bm4sXpPWQ1/y8/7qk4t9ZxXL2Gtrfg3dkSLSPhkzlPZuMVM=",
   "catalog": {
     "schemaVersion": 1,
     "product": "sudo",
     "hardware": "603V1.23.2",
     "releases": [
+      {
+        "id": "6.0.3.3P21-r120",
+        "version": "6.0.3.3P21",
+        "packageRevision": 120,
+        "hardware": "603V1.23.2",
+        "channel": "stable",
+        "installable": true,
+        "withdrawn": false,
+        "tag": "sudo-6.0.3.3P21-r120",
+        "asset": {
+          "bytes": 4618,
+          "name": "BCL603S2P_6.0.3.3P21.zip",
+          "sha256": "8782e3df6fa18dce3d274657e9939a253e5b6e9d4110f064432b4de130e722fb",
+          "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r120/BCL603S2P_6.0.3.3P21.zip",
+          "md5": "81e8d410892e0596cc8c9dfa4a1c539c",
+          "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/660000120"
+        },
+        "extraAssets": [],
+        "details": {
+          "schemaVersion": 1,
+          "hardware": "603V1.23.2",
+          "version": "6.0.3.3P21",
+          "packageRevision": 120,
+          "buildIdentity": {
+            "generation": 21,
+            "revision": 120,
+            "codec": 1,
+            "settingsSchema": 6,
+            "buildID": "00000000000000000000000000000078"
+          },
+          "status": "supplier-signed-ota",
+          "otaAvailable": true,
+          "settingsCompatibility": {
+            "contract": "factory-settings-v1",
+            "packageSHA256": "8782e3df6fa18dce3d274657e9939a253e5b6e9d4110f064432b4de130e722fb",
+            "evidenceSHA256": "e70c732ef12370f6a0dcb17251fd7a69ccf79844ff59c79087ad0e0304e7a88b",
+            "sourceVersions": [
+              "6.0.3.3P21"
+            ],
+            "preservesAllSettings": true
+          },
+          "promotedFrom": {
+            "channel": "test",
+            "schema": "italic-firmware-release/1",
+            "issuedAt": "2026-10-22T19:15:59Z",
+            "statementSHA256": "707af338da74e1723f717e3bbf5bc23feb5ebbefd26234ddaef0fcfc3887d110"
+          },
+          "releaseNotes": "Ring firmware 1.1 notes."
+        },
+        "statement": "eyJhcHBsaWNhdGlvbk9ubHkiOnRydWUsImFzc2V0Ijp7ImJ5dGVzIjo0NjE4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiODc4MmUzZGY2ZmExOGRjZTNkMjc0NjU3ZTk5MzlhMjUzZTViNmU5ZDQxMTBmMDY0NDMyYjRkZTEzMGU3MjJmYiJ9LCJhdXRvSW5zdGFsbCI6dHJ1ZSwiYnVpbGRJZGVudGl0eSI6eyJidWlsZElEIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNzgiLCJjb2RlYyI6MSwiZ2VuZXJhdGlvbiI6MjEsInJldmlzaW9uIjoxMjAsInNldHRpbmdzU2NoZW1hIjo2fSwiY2hhbmdlTm90ZSI6InNob3J0ZXIgc3RhcnQgYW5kIHN0b3AgYnV6emVzIiwiY2hhbm5lbCI6InN0YWJsZSIsImN1c3RvbWVyVmVyc2lvbiI6IjEuMSIsImVyYXNlc1N0b3JhZ2UiOnRydWUsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTIwIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMlQxOToxNTo1OVoiLCJtaW5pbXVtQXBwQnVpbGQiOjI2MywicGFja2FnZVJldmlzaW9uIjoxMjAsInByb2R1Y3QiOiJzdWRvIiwic2NoZW1hIjoiaXRhbGljLWZpcm13YXJlLXJlbGVhc2UvMiIsInNvdXJjZVZlcnNpb25zIjpbIjYuMC4zLjNQMjEiXSwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+        "signature": {
+          "alg": "ES256",
+          "keyId": "sudo-release-1",
+          "der": "MEUCIQCXdIjaY+Hn5PQ1cpamjsc4T4+y3f1IlIVXfZ9vaPLAEAIgULTDI85iQFwiNBkq7pstnwFoBXXV5NcBrbHzr4eXvz8="
+        },
+        "releaseNotes": "Ring firmware 1.1 notes.",
+        "rollout": {
+          "percent": 100,
+          "since": "2026-11-02"
+        }
+      },
       {
         "id": "6.0.3.3P21-r119",
         "version": "6.0.3.3P21",
@@ -50,77 +111,16 @@
           "promotedFrom": {
             "channel": "test",
             "schema": "italic-firmware-release/1",
-            "issuedAt": "2026-10-22T16:22:01Z",
-            "statementSHA256": "74a8a9867f2ec5bf26ee3489471f9c900eab49b97623626edec5f1e28cc597d9"
-          },
-          "releaseNotes": "Ring firmware 1.1 notes."
-        },
-        "statement": "eyJhcHBsaWNhdGlvbk9ubHkiOnRydWUsImFzc2V0Ijp7ImJ5dGVzIjo0NjE4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiODQ0YjljZjI5YTgxZjE5OTYwMmVhMGI2MTYxOTQyNTNjNjg3NDhjNGM4MjljMzhhYTJkYmFjOTkxZDgyY2U5OCJ9LCJhdXRvSW5zdGFsbCI6dHJ1ZSwiYnVpbGRJZGVudGl0eSI6eyJidWlsZElEIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNzciLCJjb2RlYyI6MSwiZ2VuZXJhdGlvbiI6MjEsInJldmlzaW9uIjoxMTksInNldHRpbmdzU2NoZW1hIjo2fSwiY2hhbmdlTm90ZSI6InNob3J0ZXIgc3RhcnQgYW5kIHN0b3AgYnV6emVzIiwiY2hhbm5lbCI6InN0YWJsZSIsImN1c3RvbWVyVmVyc2lvbiI6IjEuMSIsImVyYXNlc1N0b3JhZ2UiOnRydWUsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTE5IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMlQxNjoyMjowMVoiLCJtaW5pbXVtQXBwQnVpbGQiOjI2MywicGFja2FnZVJldmlzaW9uIjoxMTksInByb2R1Y3QiOiJzdWRvIiwic2NoZW1hIjoiaXRhbGljLWZpcm13YXJlLXJlbGVhc2UvMiIsInNvdXJjZVZlcnNpb25zIjpbIjYuMC4zLjNQMjEiXSwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
-        "signature": {
-          "alg": "ES256",
-          "keyId": "sudo-release-1",
-          "der": "MEUCIQD2AkwCx7YccoVTC+UzIfDZHRyRonxQCT2umhxa7q7JTQIgC62n7qJuzpxFG2TNcH1OG09EVo8RLP7EfL+wKMywwU8="
-        },
-        "releaseNotes": "Ring firmware 1.1 notes.",
-        "rollout": {
-          "percent": 100,
-          "since": "2026-11-02"
-        }
-      },
-      {
-        "id": "6.0.3.3P21-r118",
-        "version": "6.0.3.3P21",
-        "packageRevision": 118,
-        "hardware": "603V1.23.2",
-        "channel": "stable",
-        "installable": true,
-        "withdrawn": false,
-        "tag": "sudo-6.0.3.3P21-r118",
-        "asset": {
-          "bytes": 4618,
-          "name": "BCL603S2P_6.0.3.3P21.zip",
-          "sha256": "85617e39a5dc48830061a90309962bfd779c9b946d6e6a69933dc273e19626e8",
-          "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r118/BCL603S2P_6.0.3.3P21.zip",
-          "md5": "a93e9263ed57e9181ab8d2e2a7ae1408",
-          "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/660000118"
-        },
-        "extraAssets": [],
-        "details": {
-          "schemaVersion": 1,
-          "hardware": "603V1.23.2",
-          "version": "6.0.3.3P21",
-          "packageRevision": 118,
-          "buildIdentity": {
-            "generation": 21,
-            "revision": 118,
-            "codec": 1,
-            "settingsSchema": 6,
-            "buildID": "00000000000000000000000000000076"
-          },
-          "status": "supplier-signed-ota",
-          "otaAvailable": true,
-          "settingsCompatibility": {
-            "contract": "factory-settings-v1",
-            "packageSHA256": "85617e39a5dc48830061a90309962bfd779c9b946d6e6a69933dc273e19626e8",
-            "evidenceSHA256": "ca0b99604089242cd47d2de8827a62a9d32b74f63a0e3f59ad7bdfaf68006c1d",
-            "sourceVersions": [
-              "6.0.3.3P21"
-            ],
-            "preservesAllSettings": true
-          },
-          "promotedFrom": {
-            "channel": "test",
-            "schema": "italic-firmware-release/1",
-            "issuedAt": "2026-10-22T16:22:01Z",
-            "statementSHA256": "fa29603855bc0cff49819b091e958222bd7c67aefbe81f411bea25f70e861a38"
+            "issuedAt": "2026-10-22T19:15:59Z",
+            "statementSHA256": "300e9b0e25f002fb929def9cdfd37a814d5e4576f6fd2a1c9effd2d2fc3e3d81"
           },
           "releaseNotes": "Ring firmware 1.0 notes."
         },
-        "statement": "eyJhcHBsaWNhdGlvbk9ubHkiOnRydWUsImFzc2V0Ijp7ImJ5dGVzIjo0NjE4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiODU2MTdlMzlhNWRjNDg4MzAwNjFhOTAzMDk5NjJiZmQ3NzljOWI5NDZkNmU2YTY5OTMzZGMyNzNlMTk2MjZlOCJ9LCJhdXRvSW5zdGFsbCI6dHJ1ZSwiYnVpbGRJZGVudGl0eSI6eyJidWlsZElEIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNzYiLCJjb2RlYyI6MSwiZ2VuZXJhdGlvbiI6MjEsInJldmlzaW9uIjoxMTgsInNldHRpbmdzU2NoZW1hIjo2fSwiY2hhbm5lbCI6InN0YWJsZSIsImN1c3RvbWVyVmVyc2lvbiI6IjEuMCIsImVyYXNlc1N0b3JhZ2UiOnRydWUsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTE4IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMlQxNjoyMjowMVoiLCJtaW5pbXVtQXBwQnVpbGQiOjI2MywicGFja2FnZVJldmlzaW9uIjoxMTgsInByb2R1Y3QiOiJzdWRvIiwic2NoZW1hIjoiaXRhbGljLWZpcm13YXJlLXJlbGVhc2UvMiIsInNvdXJjZVZlcnNpb25zIjpbIjYuMC4zLjNQMjEiXSwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+        "statement": "eyJhcHBsaWNhdGlvbk9ubHkiOnRydWUsImFzc2V0Ijp7ImJ5dGVzIjo0NjE4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiODQ0YjljZjI5YTgxZjE5OTYwMmVhMGI2MTYxOTQyNTNjNjg3NDhjNGM4MjljMzhhYTJkYmFjOTkxZDgyY2U5OCJ9LCJhdXRvSW5zdGFsbCI6dHJ1ZSwiYnVpbGRJZGVudGl0eSI6eyJidWlsZElEIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNzciLCJjb2RlYyI6MSwiZ2VuZXJhdGlvbiI6MjEsInJldmlzaW9uIjoxMTksInNldHRpbmdzU2NoZW1hIjo2fSwiY2hhbm5lbCI6InN0YWJsZSIsImN1c3RvbWVyVmVyc2lvbiI6IjEuMCIsImVyYXNlc1N0b3JhZ2UiOnRydWUsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTE5IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMlQxOToxNTo1OVoiLCJtaW5pbXVtQXBwQnVpbGQiOjI2MywicGFja2FnZVJldmlzaW9uIjoxMTksInByb2R1Y3QiOiJzdWRvIiwic2NoZW1hIjoiaXRhbGljLWZpcm13YXJlLXJlbGVhc2UvMiIsInNvdXJjZVZlcnNpb25zIjpbIjYuMC4zLjNQMjEiXSwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
         "signature": {
           "alg": "ES256",
           "keyId": "sudo-release-1",
-          "der": "MEQCIFF8ClBdJ34qk3umt0gwiYmr2LLHRol+g++T5YLo0PKxAiAOtZl3zTgPqcy4J8WrTb0zkStjP35S6g3jCczccWBSbw=="
+          "der": "MEUCIQDiifnlurZyj6mah9SCcU6rpsh4Fl2R0+Pko6LvYgTBoQIgGBygeWQDAnBMs9zISp/i7OD/TefygwiYL1BB8Cfb1fM="
         },
         "releaseNotes": "Ring firmware 1.0 notes.",
         "rollout": {

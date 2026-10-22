@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Write tests/fixtures/sudo-stable-v2.json: two stable version 2 releases,
-1.0 (revision 118) and 1.1 (revision 119), staged, published and promoted by
+1.0 (revision 119) and 1.1 (revision 120), staged, published and promoted by
 these tools with a throwaway key over made-up packages. ShopItalic/app's
 RingFirmwareReleaseTests decode the same file. Run it again only when the
 statement format changes, then copy the file into the app's tests."""
@@ -42,7 +42,7 @@ def main():
         root = Path(folder)
         (root / 'keys').mkdir(); (root / 'keys' / 'sudo-release-1.x963').write_bytes(public)
         (root / 'products' / 'sudo').mkdir(parents=True)
-        releases = [(118, '1.0', None, 0x18, 10), (119, '1.1', 'shorter start and stop buzzes', 0x19, 100)]
+        releases = [(119, '1.0', None, 0x19, 10), (120, '1.1', 'shorter start and stop buzzes', 0x20, 100)]
         for revision, name, note, fill, percent in releases:
             zip_path = package(root / str(revision) / 'BCL603S2P_6.0.3.3P21.zip', fill)
             identity = {'generation': 21, 'revision': revision, 'codec': 1, 'settingsSchema': 6,
