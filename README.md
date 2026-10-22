@@ -112,19 +112,45 @@ matches. A stable release's customers read `--notes`, and a test build's tester
 `notice` is dropped:
 
 ```sh
-python3 tools/release.py promote --product sudo --id 6.0.3.3P21-r117 --channel stable \
-  --asset path/to/BCL603S2P_6.0.3.3P21.zip --minimum-app-build 263 --erases-storage yes \
-  --auto --customer-version 1.0 --source-version 6.0.3.3P21 --settings-evidence evidence.json \
-  --notes "What people get" --out .staging/sudo-r117-stable
-python3 tools/release.py publish .staging/sudo-r117-stable --push
+python3 tools/release.py promote --product sudo --id 6.0.3.3P21-r118 --channel stable \
+  --asset path/to/BCL603S2P_6.0.3.3P21.zip --minimum-app-build BUILD --erases-storage yes \
+  --auto --customer-version 1.0 --source-version 6.0.3.3P21 \
+  --qualification ../sudo/docs/reference/p21-r118-qualification.json \
+  --notes "What people get" --out .staging/sudo-r118-stable
+python3 tools/release.py publish .staging/sudo-r118-stable --push
 # Automatic installs, staged: 1%, 10%, 50%, 100%. Unsigned; commit and push each change.
 python3 tools/release.py rollout --product sudo --id 6.0.3.3P21-r117 --percent 1
 python3 tools/release.py pause-automatic --product sudo [--background]
 python3 tools/release.py resume-automatic --product sudo
 ```
 
-Sudo packages pass the **dual-bank check** before they are staged installable
-and before `--auto`: the Ring's bootloader stages an update right after the
+A stable release's **settings evidence** is its qualification record in
+ShopItalic/sudo (`docs/reference/p21-r<revision>-qualification.json`; Jeremy's
+option (a), October 22, 2026). `promote` refuses it unless the record is for
+this release, build and image and shows:
+
+- the verifier's settings contract: `recipe.settingsContract` starting
+  "unchanged: no protected source is edited and no FDS record is added", and
+  `checks.verifier` passing with nothing pending;
+- the dual-bank record, `image.dualBankMarginBytes`, beside this tool's own
+  check;
+- the release on Rings A and B with their settings and bonds intact:
+
+```json
+"stableEvidence": {"rings": [
+  {"ring": "Ring A (5B31)", "buildID": "<the release's build ID>", "settings": "same", "bonds": "kept"},
+  {"ring": "Ring B (C34A)", "buildID": "<the release's build ID>", "settings": "same", "bonds": "kept"}
+]}
+```
+
+"settings": "same" is what the app's readback logs after the update ("Settings
+after updating to P21-r118: all the same as before: …"); "bonds": "kept" means
+the Ring reconnected to its iPhones without pairing again. The catalog's
+`settingsCompatibility` names the record's SHA-256, never the record itself. A
+hand-written `--settings-evidence` is for beta only.
+
+Sudo packages pass the **dual-bank check** before they are staged installable,
+and before any stable release: the Ring's bootloader stages an update right after the
 running image and takes flash up to itself as free, but bonds and settings
 start at `0xE0000`. Every image a Ring may run (each package recorded in
 `products/sudo/package-images.json`, withdrawn and retired ones too) must leave

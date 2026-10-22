@@ -288,9 +288,64 @@ def publish(directory, notes=None, push=False, dry_run=False):
     return entry
 
 
+# Stable settings evidence, option (a) (Jeremy, October 22, 2026). A stable
+# release's evidence is its ShopItalic/sudo qualification record
+# (docs/reference/p21-r<revision>-qualification.json), which shows
+#   - the verifier's settings contract: no protected source edited, no FDS
+#     record added, and the verifier passing with nothing pending;
+#   - the dual-bank budget record, beside this tool's own check;
+#   - the release on Rings A and B with their settings and bonds intact:
+#     `stableEvidence.rings`, one entry a Ring, each naming the release's
+#     build ID, "settings": "same" as the app's readback logged it ("Settings
+#     after updating to …: all the same as before"), and "bonds": "kept".
+# The catalog names the record's SHA-256; the record itself stays private.
+SETTINGS_CONTRACT = 'unchanged: no protected source is edited and no FDS record is added'
+
+
+def stable_evidence(s, identity, asset, record_bytes, source_versions):
+    """The settingsCompatibility a stable release publishes, from its qualification record."""
+    try:
+        q = json.loads(record_bytes)
+    except ValueError:
+        raise catalog.CatalogError('the qualification record is not JSON')
+    catalog.require(isinstance(q, dict), 'the qualification record is not an object')
+    catalog.require(q.get('wireVersion') == s['version'] and q.get('packageRevision') == s['packageRevision'],
+                    f"the qualification record is for {q.get('wireVersion')} revision {q.get('packageRevision')}, not {s['id']}")
+    catalog.require(q.get('generation') == 21, 'stable settings evidence (option (a)) covers P21 releases only')
+    catalog.require(isinstance(identity.get('buildID'), str) and q.get('buildID') == identity['buildID'],
+                    'the qualification record names another build')
+    contract = (q.get('recipe') or {}).get('settingsContract')
+    catalog.require(isinstance(contract, str) and contract.startswith(SETTINGS_CONTRACT),
+                    "the record doesn't show the verifier's settings contract unchanged")
+    verifier = (q.get('checks') or {}).get('verifier') or {}
+    catalog.require(verifier.get('status') == 'pass-source-and-binary-checks' and verifier.get('pendingEvidence') == []
+                    and verifier.get('stackBudgetFailures') == [], "the record doesn't show the verifier passing")
+    _, application = package_parts(asset)
+    catalog.require(application is not None, 'a stable release replaces only the application')
+    image = q.get('image') or {}
+    catalog.require(image.get('sha256') == hashlib.sha256(application[1]).hexdigest(),
+                    'the qualification record is for another image')
+    margin = image.get('dualBankMarginBytes')
+    catalog.require(type(margin) is int and margin >= 0, 'the record has no dual-bank budget')
+    rings = (q.get('stableEvidence') or {}).get('rings')
+    catalog.require(isinstance(rings, list) and all(isinstance(r, dict) for r in rings), 'the record names no Rings')
+    names = [r.get('ring') for r in rings]
+    catalog.require(all(isinstance(n, str) and n for n in names) and len(set(names)) == len(names) >= 2,
+                    'the release must run on Rings A and B')
+    for ring in rings:
+        catalog.require(ring.get('buildID') == identity['buildID'] and ring.get('settings') == 'same'
+                        and ring.get('bonds') == 'kept',
+                        f"{ring['ring']}: not this build with its settings and bonds intact")
+    catalog.require(bool(source_versions), 'a stable release names the versions it replaces (--source-version)')
+    return {'contract': 'factory-settings-v1', 'packageSHA256': s['asset']['sha256'],
+            'evidenceSHA256': hashlib.sha256(record_bytes).hexdigest(), 'sourceVersions': list(source_versions),
+            'preservesAllSettings': True}
+
+
 def promote(product, release_id, channel, asset, out, minimum_app_build, erases_storage, auto_install=False,
             customer_version=None, change_note=None, minimum_source_revision=None, source_versions=None,
-            settings_compatibility=None, notes=None, notice=None, key_id=None, signer=None, keys=None, images=None):
+            settings_compatibility=None, qualification=None, notes=None, notice=None, key_id=None, signer=None,
+            keys=None, images=None):
     """Stage a version 2 statement for a published release on `channel`.
 
     Channels are signed and tags never change, so a release moves to beta or
@@ -298,8 +353,11 @@ def promote(product, release_id, channel, asset, out, minimum_app_build, erases_
     statement. `asset` is a copy of the published package, checked against the
     signed statement. The entry keeps its tag, URLs and unsigned display fields;
     a test build's tester `notice` is dropped unless `notice` replaces it, and
-    `notes` replaces its release notes. `publish` of `out` replaces the entry."""
+    `notes` replaces its release notes. `publish` of `out` replaces the entry.
+    A stable release's settings evidence comes from its qualification record
+    (`qualification`, its bytes; `stable_evidence`), never a hand-written one."""
     catalog.require(channel in ('beta', 'stable'), 'promote signs a release for beta or stable')
+    catalog.require(channel == 'stable' or qualification is None, 'a qualification record is for stable releases')
     catalog.require(catalog.SCHEMA_V2 in catalog.PRODUCTS[product]['schemas'], f'{product} has no version 2 statements')
     key_id = key_id or catalog.PRODUCTS[product]['keys'][0]
     keys = keys or catalog.load_keys()
@@ -319,6 +377,10 @@ def promote(product, release_id, channel, asset, out, minimum_app_build, erases_
                          ('minimumSourceRevision', minimum_source_revision)):
         if value is not None:
             automatic[field] = value
+    if channel == 'stable':
+        catalog.require(settings_compatibility is None, 'a stable release takes its settings evidence from its qualification record')
+        catalog.require(qualification is not None, 'a stable release needs its qualification record (--qualification)')
+        settings_compatibility = stable_evidence(s, identity, asset, qualification, source_versions)
     if source_versions is not None:
         catalog.require(isinstance(settings_compatibility, dict)
                         and settings_compatibility.get('sourceVersions') == list(source_versions)
@@ -327,7 +389,7 @@ def promote(product, release_id, channel, asset, out, minimum_app_build, erases_
         details['settingsCompatibility'] = settings_compatibility
     else:
         catalog.require(settings_compatibility is None, 'settings evidence without signed source versions grants nothing')
-    if auto_install and product in DUAL_BANK:
+    if (auto_install or channel == 'stable') and product in DUAL_BANK:
         row = (images or load_images(product))['packages'].get(s['asset']['sha256'])
         catalog.require(row is not None, f'{release_id}: its package has no recorded image; run record-images')
         margin = dual_bank(product, s['asset']['sha256'], row['imageBytes'], current, images or load_images(product))
@@ -489,7 +551,9 @@ def main(argv=None):
     m.add_argument('--change-note', help='one line of what people will feel or see')
     m.add_argument('--minimum-source-revision', type=int)
     m.add_argument('--source-version', action='append')
-    m.add_argument('--settings-evidence', type=Path, help='settingsCompatibility JSON for the source versions')
+    m.add_argument('--settings-evidence', type=Path, help='settingsCompatibility JSON for the source versions (beta)')
+    m.add_argument('--qualification', type=Path,
+                   help="the release's ShopItalic/sudo qualification record: a stable release's settings evidence")
     m.add_argument('--notes', help='release notes for the people who install it (required for stable)')
     m.add_argument('--notice', help='a notice shown under the notes; a test build\'s is dropped otherwise')
     m.add_argument('--out', type=Path, required=True)
@@ -518,6 +582,7 @@ def main(argv=None):
                         change_note=args.change_note, minimum_source_revision=args.minimum_source_revision,
                         source_versions=args.source_version,
                         settings_compatibility=json.loads(args.settings_evidence.read_text()) if args.settings_evidence else None,
+                        qualification=args.qualification.read_bytes() if args.qualification else None,
                         notes=args.notes, notice=args.notice)
         print(json.dumps({'staged': str(args.out), 'tag': entry['tag'], 'channel': entry['channel']}, indent=2))
     elif args.command == 'rollout':

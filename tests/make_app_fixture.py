@@ -6,6 +6,7 @@ RingFirmwareReleaseTests decode the same file. Run it again only when the
 statement format changes, then copy the file into the app's tests."""
 import base64
 import contextlib
+import hashlib
 import io
 import json
 import sys
@@ -59,14 +60,21 @@ def main():
             images = release.load_images('sudo')
             images['packages'][entry['asset']['sha256']] = json.loads((out / 'image.json').read_text())
             release.write_images('sudo', images)
-            sha = entry['asset']['sha256']
-            evidence = {'contract': 'factory-settings-v1', 'packageSHA256': sha, 'evidenceSHA256': f'{revision:064x}',
-                        'sourceVersions': ['6.0.3.3P21'], 'preservesAllSettings': True}
+            # A made-up qualification record (release.stable_evidence): the
+            # committed fixture predates them, so its evidence digests differ.
+            record = json.dumps({
+                'wireVersion': '6.0.3.3P21', 'packageRevision': revision, 'generation': 21, 'buildID': identity['buildID'],
+                'recipe': {'settingsContract': release.SETTINGS_CONTRACT},
+                'checks': {'verifier': {'status': 'pass-source-and-binary-checks', 'pendingEvidence': [],
+                                        'stackBudgetFailures': []}},
+                'image': {'sha256': hashlib.sha256(bytes([fill]) * 4096).hexdigest(), 'dualBankMarginBytes': 0},
+                'stableEvidence': {'rings': [{'ring': ring, 'buildID': identity['buildID'], 'settings': 'same',
+                                              'bonds': 'kept'} for ring in ('Ring A', 'Ring B')]},
+            }).encode()
             promoted = root / 'promote' / str(revision)
             release.promote('sudo', entry['id'], 'stable', zip_path, promoted, 263, True, auto_install=True,
                             customer_version=name, change_note=note, source_versions=['6.0.3.3P21'],
-                            settings_compatibility=evidence, notes=f'Ring firmware {name} notes.',
-                            signer=sign, keys=keys)
+                            qualification=record, notes=f'Ring firmware {name} notes.', signer=sign, keys=keys)
             with mock.patch.object(release, 'anonymous_get', return_value=zip_path.read_bytes()):
                 release.publish(promoted)
             release.set_rollout('sudo', entry['id'], percent, '2026-11-02')

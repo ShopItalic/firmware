@@ -102,6 +102,26 @@ IDENTITY = {'generation': 21, 'revision': 117, 'codec': 1, 'settingsSchema': 6,
             'buildID': '4270004e53ba5b9c1da4e026411d4aa8'}
 
 
+def qualification(revision, image, change=None):
+    """A ShopItalic/sudo qualification record as a stable release needs it
+    (option (a)): the verifier's settings contract, the dual-bank record and
+    Rings A and B on the build with their settings and bonds intact."""
+    build = IDENTITY['buildID']
+    record = {
+        'release': f'P21 revision {revision}', 'wireVersion': '6.0.3.3P21', 'packageRevision': revision,
+        'generation': 21, 'buildID': build,
+        'recipe': {'settingsContract': release.SETTINGS_CONTRACT + "; the receipt's source contract passes"},
+        'checks': {'verifier': {'status': 'pass-source-and-binary-checks', 'pendingEvidence': [], 'stackBudgetFailures': []}},
+        'image': {'sha256': hashlib.sha256(image).hexdigest(), 'dualBankMarginBytes': 57_896},
+        'stableEvidence': {'rings': [
+            {'ring': 'Ring A (5B31)', 'buildID': build, 'settings': 'same', 'bonds': 'kept'},
+            {'ring': 'Ring B (C34A)', 'buildID': build, 'settings': 'same', 'bonds': 'kept'}]},
+    }
+    if change:
+        change(record)
+    return json.dumps(record).encode()
+
+
 def sudo_package(path, image_bytes=2048, parts=None):
     """A Nordic DFU package as Sudo's: one application image and its init packet."""
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -147,9 +167,16 @@ class SudoAutomaticTest(unittest.TestCase):
         release.write_images('sudo', images)
         return entry
 
+    def record(self, release_id='6.0.3.3P21-r117', package=None, change=None):
+        """The release's qualification record, for the image in its package."""
+        with zipfile.ZipFile(package or self.package) as archive:
+            image = archive.read('app.bin')
+        return qualification(int(release_id.rsplit('-r', 1)[1]), image, change)
+
     def promote(self, release_id='6.0.3.3P21-r117', package=None, **options):
         options = {'minimum_app_build': 263, 'erases_storage': True, 'auto_install': True,
-                   'customer_version': '1.0', 'notes': 'The firmware Rings ship with.', **options}
+                   'customer_version': '1.0', 'notes': 'The firmware Rings ship with.',
+                   'source_versions': ['6.0.3.3P21'], 'qualification': self.record(release_id, package), **options}
         out = self.root / 'promote' / f'{release_id}-{len(list((self.root / "promote").glob("*"))) if (self.root / "promote").exists() else 0}'
         return release.promote('sudo', release_id, 'stable', package or self.package, out, signer=self.sign,
                                keys=self.keys, **options), out
@@ -189,25 +216,71 @@ class SudoAutomaticTest(unittest.TestCase):
 
     def test_promotion_refuses_what_it_cannot_vouch_for(self):
         other = sudo_package(self.root / 'other' / 'BCL603S2P_6.0.3.3P21.zip', image_bytes=4096)
+        stable = dict(source_versions=['6.0.3.3P21'], qualification=self.record())
         cases = {
-            'another package': dict(package=other),
+            'another package': dict(package=other, **stable),
             'automatic beta': dict(channel='beta'),
-            'source versions without evidence': dict(source_versions=['6.0.3.3P21']),
-            'evidence without source versions': dict(settings_compatibility={'sourceVersions': ['6.0.3.3P21']}),
-            'evidence for another package': dict(source_versions=['6.0.3.3P21'], settings_compatibility={
-                'sourceVersions': ['6.0.3.3P21'], 'packageSHA256': '0' * 64}),
-            'a long change note': dict(change_note='x' * 61),
-            'a two-line change note': dict(change_note='shorter\nbuzzes'),
-            'a bad customer version': dict(customer_version='v1.1'),
-            'no app build': dict(minimum_app_build=0),
+            'beta source versions without evidence': dict(channel='beta', auto=False, source_versions=['6.0.3.3P21']),
+            'beta evidence without source versions': dict(channel='beta', auto=False,
+                                                          settings_compatibility={'sourceVersions': ['6.0.3.3P21']}),
+            'beta evidence for another package': dict(channel='beta', auto=False, source_versions=['6.0.3.3P21'],
+                                                      settings_compatibility={'sourceVersions': ['6.0.3.3P21'],
+                                                                              'packageSHA256': '0' * 64}),
+            'a qualification record for beta': dict(channel='beta', auto=False, **stable),
+            'a long change note': dict(change_note='x' * 61, **stable),
+            'a two-line change note': dict(change_note='shorter\nbuzzes', **stable),
+            'a bad customer version': dict(customer_version='v1.1', **stable),
+            'no app build': dict(minimum_app_build=0, **stable),
         }
         for name, options in cases.items():
             channel = options.pop('channel', 'stable')
             package = options.pop('package', self.package)
             build = options.pop('minimum_app_build', 263)
+            auto = options.pop('auto', True)
             with self.subTest(name), self.assertRaises(catalog.CatalogError):
                 release.promote('sudo', '6.0.3.3P21-r117', channel, package, self.root / 'x' / name.replace(' ', '-'),
-                                build, True, auto_install=True, signer=self.sign, keys=self.keys, **options)
+                                build, True, auto_install=auto, signer=self.sign, keys=self.keys, **options)
+
+    def test_a_stable_release_publishes_its_qualification_records_evidence(self):
+        record = self.record()
+        entry, _ = self.promote(qualification=record)
+        self.assertEqual(entry['details']['settingsCompatibility'], {
+            'contract': 'factory-settings-v1', 'packageSHA256': self.entry['asset']['sha256'],
+            'evidenceSHA256': hashlib.sha256(record).hexdigest(), 'sourceVersions': ['6.0.3.3P21'],
+            'preservesAllSettings': True})
+        self.assertEqual(catalog.verify_entry('sudo', entry, self.keys)['sourceVersions'], ['6.0.3.3P21'])
+
+    def test_a_stable_release_needs_option_a_evidence(self):
+        """Jeremy, October 22: the verifier's settings contract, the dual-bank
+        record and Rings A and B on the build with settings and bonds intact.
+        A hand-written settingsCompatibility never stands in for it."""
+        def change(edit):
+            return dict(qualification=self.record(change=edit))
+        rings = lambda q: q['stableEvidence']['rings']  # noqa: E731
+        cases = {
+            'no record': dict(qualification=None),
+            'not JSON': dict(qualification=b'{'),
+            'hand-written evidence': dict(settings_compatibility={
+                'contract': 'factory-settings-v1', 'packageSHA256': self.entry['asset']['sha256'], 'evidenceSHA256': '0' * 64,
+                'sourceVersions': ['6.0.3.3P21'], 'preservesAllSettings': True}),
+            'no source versions': dict(source_versions=None),
+            'another revision': change(lambda q: q.update(packageRevision=118)),
+            'another build': change(lambda q: q.update(buildID='0' * 32)),
+            'another image': change(lambda q: q['image'].update(sha256='0' * 64)),
+            'a P20 record': change(lambda q: q.update(generation=20)),
+            'a protected source edited': change(lambda q: q['recipe'].update(settingsContract='edited: bc_device_info.c')),
+            'the verifier failing': change(lambda q: q['checks']['verifier'].update(status='fail')),
+            'evidence pending': change(lambda q: q['checks']['verifier'].update(pendingEvidence=['codec probe'])),
+            'no dual-bank record': change(lambda q: q['image'].pop('dualBankMarginBytes')),
+            'one Ring': change(lambda q: rings(q).pop()),
+            'one Ring twice': change(lambda q: rings(q)[1].update(ring=rings(q)[0]['ring'])),
+            'a Ring on another build': change(lambda q: rings(q)[0].update(buildID='0' * 32)),
+            'changed settings': change(lambda q: rings(q)[1].update(settings='changed')),
+            'a lost bond': change(lambda q: rings(q)[0].update(bonds='lost')),
+        }
+        for name, options in cases.items():
+            with self.subTest(name), self.assertRaises(catalog.CatalogError):
+                self.promote(**options)
 
     def test_a_package_that_replaces_the_bootloader_never_installs_itself(self):
         parts = {'application': {'bin_file': 'app.bin', 'dat_file': 'app.dat'},
@@ -295,8 +368,11 @@ class SudoAutomaticTest(unittest.TestCase):
         release.write_images('sudo', {'schema': 1, 'note': '', 'packages': {}})
         with self.assertRaisesRegex(catalog.CatalogError, 'no recorded image'):
             self.promote()
-        # Without automatic installs the check doesn't stand in the way of a manual stable release.
-        entry, _ = self.promote(auto_install=False)
+        # Every stable release is checked, a manual one too; a manual beta isn't.
+        with self.assertRaisesRegex(catalog.CatalogError, 'no recorded image'):
+            self.promote(auto_install=False)
+        entry = release.promote('sudo', '6.0.3.3P21-r117', 'beta', self.package, self.root / 'beta', 263, True,
+                                signer=self.sign, keys=self.keys)
         self.assertFalse(json.loads(base64.b64decode(entry['statement']))['autoInstall'])
 
     def test_record_images_checks_each_package_against_its_statement(self):
