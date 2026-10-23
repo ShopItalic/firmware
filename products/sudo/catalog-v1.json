@@ -4,6 +4,84 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r120",
+      "version": "6.0.3.3P21",
+      "packageRevision": 120,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r120",
+      "asset": {
+        "bytes": 328584,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "6cea2a26dd7c5d1069e5cae9997263f8446ad67cb0d7e5ff95233a01062d9635",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r120/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "3fa4b75dbdd8f8b6120a8ca90cb4ab14",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/667904551"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "dual-bank-budget.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Choose how much of your Ring responds to touch, in its settings in the app. Small responds only at the very top of the Ring. Medium, the new default, covers a longer stretch from the top. Large is the whole touch strip. A Ring set to Large keeps Large; one set to Small moves to Medium. Updating erases recordings still on the Ring, so sync first. Includes everything in Sudo 1.119.",
+      "notice": "P21 revision 120 tester update, Sudo 1.120, the factory image: three touch-area sizes, Small (the very top of the Ring), Medium (the default) and Large (the whole strip). Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 120,
+        "buildIdentity": {
+          "revision": 120,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "d83faeed60e63ebb2333c75861c58071",
+          "generation": 21
+        },
+        "sourceCommit": "4827b37b2fadb3235f2954b1b10d0fc9561a3abb",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "87682e1adc65ab2566f518a4a4b05ddb7cc512f4f0e84143e21e0001e0cb4352",
+          "command.json": "0bb636fa913ddefc0b84f5c572b539cf60fe959b47978c56b4b90e64a63df4d9",
+          "dual-bank-budget.json": "0278809afba6831a0fbce6c4d11cac0156e6e613797b487069198f037b784797",
+          "inputs-after.json": "d223dfae01dc1544f7c476e2050b5d97bb2f285ac9c3a27be34b399717f070a3",
+          "inputs-before.json": "1394d7a449023aa7988f0dfa16c1d386a140e5e536b175f018bd46f36f262bf4",
+          "p21-preparation.json": "db19abe9fcbab1a59d36982a309a6bcdbe2310220faa1d5c5451f3ce0c9e3331",
+          "result.json": "89eceec6cea9fdcfb4c2d52ba3d08018751465d969222dc98bcde2b57ad28e82",
+          "runtime-verification.json": "22442a1d87c769a3eb69ee0e9cb49f8c012641a36af117fbaec3542115f9f1c7",
+          "signed-package.json": "ba45af8f445aa3ba84ae337250c9525fb6e8a48abeb6653cfa1c1dffbd35e50d",
+          "source-load-verification.json": "1b3b1ab29ed92955e80fee4fed2f90adb63e98cdbc31022b4a4a02d8254fbaa1"
+        },
+        "notice": "P21 revision 120 tester update, Sudo 1.120, the factory image: three touch-area sizes, Small (the very top of the Ring), Medium (the default) and Large (the whole strip). Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Choose how much of your Ring responds to touch, in its settings in the app. Small responds only at the very top of the Ring. Medium, the new default, covers a longer stretch from the top. Large is the whole touch strip. A Ring set to Large keeps Large; one set to Small moves to Medium. Updating erases recordings still on the Ring, so sync first. Includes everything in Sudo 1.119."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI4NTg0LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiNmNlYTJhMjZkZDdjNWQxMDY5ZTVjYWU5OTk3MjYzZjg0NDZhZDY3Y2IwZDdlNWZmOTUyMzNhMDEwNjJkOTYzNSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTIwIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yM1QwMzo1OTozMloiLCJwYWNrYWdlUmV2aXNpb24iOjEyMCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQCK5Q4hGq3Dvq6c+8KbEaL+yYgWD7vghjbt7+F1OXJUEQIgSCGg2i8vxLpOStSw+Vxh+hYJYr05F+1RqhKCSw8RoFg="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r119",
       "version": "6.0.3.3P21",
       "packageRevision": 119,
