@@ -4,6 +4,58 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r122",
+      "version": "6.0.3.3P21",
+      "packageRevision": 122,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r122",
+      "asset": {
+        "bytes": 329624,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "16b481542da0579b0f83011c0ce6a6cae841745bef810f841682881f4b1d2b1c",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r122/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "e3334e5d2bafe1c189e9b5c9a774dab1",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/672950407"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Keeps a connected thumb contact together in Small, Medium and Large instead of splitting it into fingers. Retains Sudo 1.121 recording-light strength and existing gesture timing, touch areas and saved settings. Requires an Italic app build that admits Sudo 1.122 test firmware. Sync before updating: recordings still on the Ring are erased. Full-thumb taps and holds, first touch after idle and settings persistence still need physical verification. Revision 120 remains the factory image.",
+      "notice": "Test build Sudo 1.122. Connected-thumb contact fix; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 122,
+        "buildIdentity": {
+          "revision": 122,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "f15d2a4920d26de260e83c11678eeffa",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "notice": "Test build Sudo 1.122. Connected-thumb contact fix; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Keeps a connected thumb contact together in Small, Medium and Large instead of splitting it into fingers. Retains Sudo 1.121 recording-light strength and existing gesture timing, touch areas and saved settings. Requires an Italic app build that admits Sudo 1.122 test firmware. Sync before updating: recordings still on the Ring are erased. Full-thumb taps and holds, first touch after idle and settings persistence still need physical verification. Revision 120 remains the factory image."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI5NjI0LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiMTZiNDgxNTQyZGEwNTc5YjBmODMwMTFjMGNlNmE2Y2FlODQxNzQ1YmVmODEwZjg0MTY4Mjg4MWY0YjFkMmIxYyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTIyIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yNFQxODowODozMVoiLCJwYWNrYWdlUmV2aXNpb24iOjEyMiwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIEGVUuFBvwCbY2YC1qbvCJXMePLcpiYUQKLQ3YPuXUwkAiBMew+b7hxqBPJ7KQ2ZzjfR7nZIBUpX8sZPmMPUT+GzAw=="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r121",
       "version": "6.0.3.3P21",
       "packageRevision": 121,
