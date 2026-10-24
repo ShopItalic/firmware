@@ -4,6 +4,64 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r121",
+      "version": "6.0.3.3P21",
+      "packageRevision": 121,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r121",
+      "asset": {
+        "bytes": 329624,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "8089a4054b5bc7d5750d9a01e001506e16891aa54e131200a60a2a8a9018331c",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r121/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "e2772a3db69148107620f94239a22bbf",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/671215666"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Choose Soft, Medium or Bright for your recording light in Ring settings. Medium is the default and matches the previous brightness. Connection, charging and Find indicators keep their existing behavior. Requires an Italic app build with recording-light-strength controls. Sync before updating: recordings still on the Ring are erased. Physical brightness, current and settings persistence across reboot/update remain pending.",
+      "notice": "Test build Sudo 1.121: recording-light strength. Sync your recordings before updating; this update erases recordings still stored on the Ring. Physical qualification is in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 121,
+        "buildIdentity": {
+          "revision": 121,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "baa16d5ed60b08f9001ad1b85b5efa8e",
+          "generation": 21
+        },
+        "sourceCommit": "bee5c6dc1c3a069712d07ed73914c7f3781022db",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "releaseNotes": "Choose Soft, Medium or Bright for your recording light in Ring settings. Medium is the default and matches the previous brightness. Connection, charging and Find indicators keep their existing behavior. Requires an Italic app build with recording-light-strength controls. Sync before updating: recordings still on the Ring are erased. Physical brightness, current and settings persistence across reboot/update remain pending.",
+        "notice": "Test build Sudo 1.121: recording-light strength. Sync your recordings before updating; this update erases recordings still stored on the Ring. Physical qualification is in progress.",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/40058655479",
+        "privateManifestSha256": "fc1a74d97aa6173418d3bf959a6a28358b3cc684929f84140f03ba3987d2a33e",
+        "keyProvenance": "supplier-dfu-key",
+        "locallyPackaged": true,
+        "supplierAcceptance": false
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI5NjI0LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiODA4OWE0MDU0YjViYzdkNTc1MGQ5YTAxZTAwMTUwNmUxNjg5MWFhNTRlMTMxMjAwYTYwYTJhOGE5MDE4MzMxYyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTIxIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yNFQwNDowNDoyM1oiLCJwYWNrYWdlUmV2aXNpb24iOjEyMSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIHXcDrKGoCifX6IeyFXo8itzM0/xA7U2tKxrmnf5q+RUAiBLJG5XsgOpoccZ+tJnopYgbaHfnqET8P4clA462PP7AQ=="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r120",
       "version": "6.0.3.3P21",
       "packageRevision": 120,
