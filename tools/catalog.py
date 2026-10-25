@@ -43,7 +43,8 @@ STATEMENT_KEYS = {'schema', 'product', 'hardware', 'id', 'version', 'packageRevi
 #   applicationOnly      the package replaces the application only, never the bootloader or SoftDevice
 #   buildIdentity        what the device reports once it runs this release
 #   minimumSourceRevision  (optional) the oldest revision of its generation it may replace
-#   customerVersion      (optional, never on test) the name people see, such as "1.1"
+#   customerVersion      (optional, never on test) the name people see, major.subrelease.increment
+#                        ("1.0.124"); the app also reads the two-part form ("1.120") of earlier fixtures
 #   changeNote           (optional) one short line of what people will feel or see
 V2_REQUIRED = {'autoInstall', 'minimumAppBuild', 'erasesStorage', 'applicationOnly', 'buildIdentity'}
 V2_OPTIONAL = {'minimumSourceRevision', 'customerVersion', 'changeNote'}
@@ -142,8 +143,8 @@ def check_automatic(s):
                 'bad minimumSourceRevision')
     if 'customerVersion' in s:
         require(s['channel'] != 'test' and isinstance(s['customerVersion'], str)
-                and re.fullmatch(r'[1-9][0-9]{0,2}\.[0-9]{1,3}', s['customerVersion']),
-                'customerVersion must look like 1.1, and never on the test channel')
+                and re.fullmatch(r'[1-9][0-9]{0,2}\.[0-9]{1,3}(?:\.[0-9]{1,3})?', s['customerVersion']),
+                'customerVersion must look like 1.0.124, and never on the test channel')
     if 'changeNote' in s:
         note = s['changeNote']
         require(isinstance(note, str) and 0 < len(note) <= 60 and note == note.strip() and note.isprintable(),

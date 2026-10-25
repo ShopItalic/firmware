@@ -243,7 +243,7 @@ def commit(paths, message, push):
         subprocess.run(['git', '-C', str(catalog.ROOT), 'push', '-q'], check=True)
 
 
-def release_title(statement, firmware_version=None):
+def release_title(statement, firmware_version=None, option='--firmware-version'):
     """Display title from a verified statement; never changes release identity."""
     product, revision = statement['product'], statement['packageRevision']
     sudo_version = '6.0.3.3P21'
@@ -252,13 +252,13 @@ def release_title(statement, firmware_version=None):
                   and statement['id'] == f'{sudo_version}-r{revision}')
     if firmware_version is None:
         return f'Sudo 1.0.{revision}' if named_sudo else f"{product.capitalize()} {statement['id']}"
-    catalog.require(named_sudo, '--firmware-version requires a canonical Sudo P21 release at revision 107 or later')
+    catalog.require(named_sudo, f'{option} requires a canonical Sudo P21 release at revision 107 or later')
     catalog.require(isinstance(firmware_version, str) and
                     re.fullmatch(r'[1-9][0-9]{0,2}\.[0-9]{1,3}(?:\.[0-9]{1,3})?', firmware_version),
-                    '--firmware-version must be major.release.increment or legacy major.increment')
+                    f'{option} must be major.release.increment or legacy major.increment')
     parts = [int(part) for part in firmware_version.split('.')]
     major, release_number, increment = parts if len(parts) == 3 else (parts[0], 0, parts[1])
-    catalog.require(increment == revision, '--firmware-version increment must match the signed packageRevision')
+    catalog.require(increment == revision, f'{option} increment must match the signed packageRevision')
     return f'Sudo {major}.{release_number}.{increment}'
 
 
@@ -419,6 +419,12 @@ def promote(product, release_id, channel, asset, out, minimum_app_build, erases_
     parts, application = package_parts(asset)
     automatic = {'autoInstall': auto_install, 'minimumAppBuild': minimum_app_build, 'erasesStorage': erases_storage,
                  'applicationOnly': application is not None, 'buildIdentity': identity}
+    if customer_version is not None:
+        # What the app calls it is what GitHub calls it (release_title): Sudo
+        # major.subrelease.increment, the increment its signed revision.
+        catalog.require(isinstance(customer_version, str) and customer_version.count('.') == 2,
+                        '--customer-version must be major.subrelease.increment, such as 1.0.124')
+        release_title(s, customer_version, option='--customer-version')
     for field, value in (('customerVersion', customer_version), ('changeNote', change_note),
                          ('minimumSourceRevision', minimum_source_revision)):
         if value is not None:
@@ -594,7 +600,7 @@ def main(argv=None):
     m.add_argument('--erases-storage', required=True, choices=('yes', 'no'),
                    help="whether the release's first boot formats the recording storage")
     m.add_argument('--auto', action='store_true', help='the release may install itself (stable only)')
-    m.add_argument('--customer-version', help='the name people see, such as 1.1')
+    m.add_argument('--customer-version', help='the name people see, such as 1.0.124: its increment is the revision')
     m.add_argument('--change-note', help='one line of what people will feel or see')
     m.add_argument('--minimum-source-revision', type=int)
     m.add_argument('--source-version', action='append')

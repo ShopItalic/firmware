@@ -134,10 +134,11 @@ def sudo_package(path, image_bytes=2048, parts=None):
     """A Nordic DFU package as Sudo's: one application image and its init packet."""
     path.parent.mkdir(parents=True, exist_ok=True)
     manifest = parts or {'application': {'bin_file': 'app.bin', 'dat_file': 'app.dat'}}
+    # Fixed entry times, so building one again gives the same package.
     with zipfile.ZipFile(path, 'w') as archive:
-        archive.writestr('manifest.json', json.dumps({'manifest': manifest}))
-        archive.writestr('app.bin', b'\x11' * image_bytes)
-        archive.writestr('app.dat', b'\x00' * 141)
+        for name, data in (('manifest.json', json.dumps({'manifest': manifest})), ('app.bin', b'\x11' * image_bytes),
+                           ('app.dat', b'\x00' * 141)):
+            archive.writestr(zipfile.ZipInfo(name, (2026, 10, 22, 0, 0, 0)), data)
     return path
 
 
@@ -183,7 +184,7 @@ class SudoAutomaticTest(unittest.TestCase):
 
     def promote(self, release_id='6.0.3.3P21-r117', package=None, **options):
         options = {'minimum_app_build': 263, 'erases_storage': True, 'auto_install': True,
-                   'customer_version': '1.0', 'notes': 'The firmware Rings ship with.',
+                   'customer_version': f"1.0.{release_id.rsplit('-r', 1)[1]}", 'notes': 'The firmware Rings ship with.',
                    'source_versions': ['6.0.3.3P21'], 'qualification': self.record(release_id, package), **options}
         out = self.root / 'promote' / f'{release_id}-{len(list((self.root / "promote").glob("*"))) if (self.root / "promote").exists() else 0}'
         return release.promote('sudo', release_id, 'stable', package or self.package, out, signer=self.sign,
@@ -197,7 +198,7 @@ class SudoAutomaticTest(unittest.TestCase):
         self.assertEqual((s['autoInstall'], s['minimumAppBuild'], s['erasesStorage'], s['applicationOnly']),
                          (True, 263, True, True))
         self.assertEqual((s['buildIdentity'], s['customerVersion'], s['changeNote']),
-                         (IDENTITY, '1.0', 'shorter start and stop buzzes'))
+                         (IDENTITY, '1.0.117', 'shorter start and stop buzzes'))
         self.assertEqual(s['asset'], json.loads(base64.b64decode(self.entry['statement']))['asset'])
         self.assertEqual((entry['tag'], entry['asset']['url']), (self.entry['tag'], self.entry['asset']['url']))
         # Apps read an installable release, not a test build, and customers no tester notice.
@@ -212,6 +213,23 @@ class SudoAutomaticTest(unittest.TestCase):
         current = catalog.read('sudo')
         self.assertEqual([e['channel'] for e in current['releases']], ['stable'])
         self.assertEqual(commit.call_args[0][1], 'Promote sudo 6.0.3.3P21-r117 to stable')
+
+    def test_a_promotion_takes_no_github_title(self):
+        _, out = self.promote()
+        with mock.patch.object(release, 'anonymous_get') as download, mock.patch.object(release, 'commit') as commit:
+            with self.assertRaisesRegex(catalog.CatalogError, 'no GitHub release'):
+                release.publish(out, firmware_version='1.0.117')
+        download.assert_not_called(); commit.assert_not_called()
+
+    def test_customer_versions_have_three_parts_and_the_app_reads_two(self):
+        entry, _ = self.promote()
+        good = json.loads(base64.b64decode(entry['statement']))
+        for name in ('1.0.117', '1.1.117', '1.117'):  # the app reads each; promote signs only the first two
+            with self.subTest(name):
+                catalog.check_statement({**good, 'customerVersion': name}, 'sudo')
+        for name in ('1.0.117.0', '1.0.', 'v1.0.117', '1.0.1170', ''):
+            with self.subTest(name), self.assertRaises(catalog.CatalogError):
+                catalog.check_statement({**good, 'customerVersion': name}, 'sudo')
 
     def test_a_promotion_whose_public_package_changed_is_not_published(self):
         _, out = self.promote()
@@ -238,6 +256,9 @@ class SudoAutomaticTest(unittest.TestCase):
             'a long change note': dict(change_note='x' * 61, **stable),
             'a two-line change note': dict(change_note='shorter\nbuzzes', **stable),
             'a bad customer version': dict(customer_version='v1.1', **stable),
+            # People see "Sudo 1.0.117", as GitHub's title names it: three parts, the revision last.
+            'a two-part customer version': dict(customer_version='1.117', **stable),
+            'a customer version for another revision': dict(customer_version='1.0.118', **stable),
             'no app build': dict(minimum_app_build=0, **stable),
         }
         for name, options in cases.items():
