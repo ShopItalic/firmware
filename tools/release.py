@@ -455,6 +455,9 @@ def promote(product, release_id, channel, asset, out, minimum_app_build, erases_
     der = (out / 'signature.der').read_bytes()
     catalog.require(p256.verify(keys[key_id], raw, der), 'fresh signature does not verify with the published key')
     entry = copy.deepcopy(old)
+    # The rollout is the catalog's live control (`rollout`), never part of a
+    # promotion: publish_promotion keeps whatever the catalog has by then.
+    entry.pop('rollout', None)
     entry['channel'] = channel
     entry['statement'] = base64.b64encode(raw).decode()
     entry['signature'] = {'alg': 'ES256', 'keyId': key_id, 'der': base64.b64encode(der).decode()}
@@ -494,6 +497,12 @@ def publish_promotion(directory, push=False, dry_run=False):
                     and old['asset'].get('url') == entry['asset'].get('url')
                     and old['asset'].get('apiURL') == entry['asset'].get('apiURL'),
                     f"{s['id']}: the promotion's package or URLs differ from the published entry")
+    # A rollout changed after staging (lowered to stop installs) stays as it
+    # is now. It needs a signed autoInstall, so signing one away drops it.
+    entry.pop('rollout', None)
+    if 'rollout' in old and s['schema'] == catalog.SCHEMA_V2 and s['autoInstall']:
+        entry['rollout'] = copy.deepcopy(old['rollout'])
+    catalog.verify_entry(product, entry, keys)
     if dry_run:
         print(f"would promote {s['id']} from {old_s['channel']} to {s['channel']}"); return entry
     for url, accept in ((entry['asset']['url'], None), (entry['asset'].get('apiURL'), 'application/octet-stream')):

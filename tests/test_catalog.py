@@ -384,6 +384,26 @@ class SudoAutomaticTest(unittest.TestCase):
         with self.assertRaises(catalog.CatalogError):
             catalog.verify_entry('sudo', forged, self.keys)
 
+    def test_publishing_a_promotion_keeps_the_rollout_the_catalog_has_now(self):
+        """The rollout is the catalog's live control, not part of a promotion:
+        one lowered after a promotion was staged stays lowered when it is published."""
+        def publish(out):
+            with mock.patch.object(release, 'anonymous_get', return_value=self.package.read_bytes()), \
+                    mock.patch.object(release, 'commit'):
+                release.publish(out)
+        _, out = self.promote()
+        publish(out)
+        release.set_rollout('sudo', '6.0.3.3P21-r117', 100, '2026-11-02')
+        _, again = self.promote(notes='Notes, signed again.')    # staged at 100%
+        release.set_rollout('sudo', '6.0.3.3P21-r117', 0, '2026-11-03')  # stopped since
+        publish(again)
+        entry = catalog.read('sudo')['releases'][0]
+        self.assertEqual((entry['releaseNotes'], entry['rollout']), ('Notes, signed again.', {'percent': 0, 'since': '2026-11-03'}))
+        # Signed again without autoInstall, the release has nothing left to roll out.
+        _, manual = self.promote(auto_install=False)
+        publish(manual)
+        self.assertNotIn('rollout', catalog.read('sudo')['releases'][0])
+
     def test_withdrawal_keeps_the_catalog_valid(self):
         release.withdraw('sudo', '6.0.3.3P21-r117', 'charger regression')
         entry = catalog.read('sudo')['releases'][0]
