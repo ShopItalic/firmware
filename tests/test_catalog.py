@@ -464,6 +464,17 @@ class RepositoryTest(unittest.TestCase):
             if path.exists():
                 catalog.validate_catalog(product, json.loads(path.read_text()), keys)
 
+    def test_every_sudo_package_has_its_image_recorded(self):
+        """promote's dual-bank check refuses while a catalog package has no record,
+        so a publication that skipped record-images shows here, not at a stable release."""
+        images = release.load_images('sudo')['packages']
+        for entry in catalog.read('sudo')['releases']:
+            s = json.loads(base64.b64decode(entry['statement']))
+            with self.subTest(s['id']):
+                row = images.get(s['asset']['sha256'])
+                self.assertIsNotNone(row, 'no recorded image; run record-images')
+                self.assertEqual(row['packageBytes'], s['asset']['bytes'])  # older rows keep sudo's own tags
+
 
 if __name__ == '__main__':
     unittest.main()
