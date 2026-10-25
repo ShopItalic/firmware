@@ -36,6 +36,7 @@ import base64
 import copy
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -242,10 +243,31 @@ def commit(paths, message, push):
         subprocess.run(['git', '-C', str(catalog.ROOT), 'push', '-q'], check=True)
 
 
-def publish(directory, notes=None, push=False, dry_run=False):
+def release_title(statement, firmware_version=None):
+    """Display title from a verified statement; never changes release identity."""
+    product, revision = statement['product'], statement['packageRevision']
+    sudo_version = '6.0.3.3P21'
+    named_sudo = (product == 'sudo' and statement['version'] == sudo_version
+                  and type(revision) is int and 107 <= revision <= 999
+                  and statement['id'] == f'{sudo_version}-r{revision}')
+    if firmware_version is None:
+        return f'Sudo 1.0.{revision}' if named_sudo else f"{product.capitalize()} {statement['id']}"
+    catalog.require(named_sudo, '--firmware-version requires a canonical Sudo P21 release at revision 107 or later')
+    catalog.require(isinstance(firmware_version, str) and
+                    re.fullmatch(r'[1-9][0-9]{0,2}\.[0-9]{1,3}(?:\.[0-9]{1,3})?', firmware_version),
+                    '--firmware-version must be major.release.increment or legacy major.increment')
+    parts = [int(part) for part in firmware_version.split('.')]
+    major, release_number, increment = parts if len(parts) == 3 else (parts[0], 0, parts[1])
+    catalog.require(increment == revision, '--firmware-version increment must match the signed packageRevision')
+    return f'Sudo {major}.{release_number}.{increment}'
+
+
+def publish(directory, notes=None, push=False, dry_run=False, firmware_version=None):
     if json.loads((directory / 'entry.json').read_text()).get('promotes'):
+        catalog.require(firmware_version is None, 'a promotion publishes no GitHub release, so it has no title to set')
         return publish_promotion(directory, push=push, dry_run=dry_run)
     product, entry, s = load_stage(directory)
+    title = release_title(s, firmware_version)
     current = catalog.read(product) if catalog.catalog_path(product).exists() else catalog.empty(product)
     catalog.require(all(e['id'] != s['id'] for e in current['releases']), f"{s['id']} already in catalog")
     release_tag = entry['tag']
@@ -254,7 +276,6 @@ def publish(directory, notes=None, push=False, dry_run=False):
     catalog.require(existing.returncode != 0, f'tag {release_tag} already exists; tags are never reused')
     files = sorted((directory / 'assets').iterdir()) + [directory / 'SHA256SUMS', directory / 'statement.json',
                                                          directory / 'signature.der']
-    title = f"{product.capitalize()} {s['id']}"
     body = notes or entry.get('releaseNotes') or entry.get('notice') or title
     body += f"\n\nPackage `{s['asset']['name']}`: {s['asset']['bytes']} bytes, SHA-256 `{s['asset']['sha256']}`." \
             f"\nSigned statement `statement.json` / `signature.der` (key `{entry['signature']['keyId']}`)."
@@ -563,6 +584,7 @@ def main(argv=None):
     s.add_argument('--out', type=Path, required=True)
     p = sub.add_parser('publish'); p.add_argument('directory', type=Path)
     p.add_argument('--push', action='store_true'); p.add_argument('--dry-run', action='store_true')
+    p.add_argument('--firmware-version', help='Sudo display version: major.release.increment; increment must match the signed revision')
     m = sub.add_parser('promote', help='sign a published release again for beta or stable (version 2)')
     m.add_argument('--product', required=True, choices=sorted(catalog.PRODUCTS))
     m.add_argument('--id', required=True)
@@ -599,7 +621,7 @@ def main(argv=None):
                       display={'releaseNotes': args.notes} if args.notes else None)
         print(json.dumps({'staged': str(args.out), 'tag': entry['tag'], 'asset': entry['asset']}, indent=2))
     elif args.command == 'publish':
-        publish(args.directory, push=args.push, dry_run=args.dry_run)
+        publish(args.directory, push=args.push, dry_run=args.dry_run, firmware_version=args.firmware_version)
     elif args.command == 'promote':
         catalog.require(args.channel != 'stable' or args.notes, 'a stable release needs --notes for its customers')
         entry = promote(args.product, args.id, args.channel, args.asset, args.out, args.minimum_app_build,

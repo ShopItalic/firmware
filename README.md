@@ -105,6 +105,25 @@ python3 tools/release.py stage --product glyph --id P12-rc.1 --version P12-rc.1 
 python3 tools/release.py publish .staging/glyph-P12-rc.1 --push
 ```
 
+Sudo P21 releases from revision 107 onward use the customer title
+`Sudo 1.0.<revision>`. For example, publishing the signed identity
+`6.0.3.3P21-r123` produces **Sudo 1.0.123**. The publisher derives this title
+from the verified statement's product, wire version, revision and matching
+release ID. Earlier Sudo families and Glyph keep their existing titles.
+
+For a later customer release or major version, provide its display version:
+
+```sh
+python3 tools/release.py publish .staging/sudo-6.0.3.3P21-r123 --firmware-version 1.1.123 --push
+```
+
+`--firmware-version` applies to the same Sudo P21 identities. Its increment
+must match the signed package revision; legacy input such as `1.123` is
+displayed as `1.0.123`. This option changes the GitHub title only. It does not
+alter the signed statement, channel, installability, release tag or package,
+and unsigned entry metadata does not select the title. Existing published
+releases are not renamed.
+
 A tested release reaches customers by being signed again for `stable`: the
 same ID, tag and package, a version 2 statement. `promote` stages it without
 network access; `publish` replaces the entry once the public package still

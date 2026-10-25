@@ -4,6 +4,325 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r123",
+      "version": "6.0.3.3P21",
+      "packageRevision": 123,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r123",
+      "asset": {
+        "bytes": 329960,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "d3356338985283f9c607c9e9e67535076ea646f92abbcf999b11f0b6540f7bef",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r123/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "3ad0a81dadb508ded1b62804b7e1e630",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/674119063"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.123 verifies a durable storage build stamp before accepting recordings, preventing the reviewed same-build reboot recording-loss path. Recovery validates or safely retries that stamp without formatting; transient I/O failures do not authorize erasure. It also corrects the SPI completion callback type. Retains 1.0.122 connected-thumb handling, all three touch areas, recording-light presets, saved settings and bonds. Requires a companion app that supports revision 123; Italic 1.0 (279) was validated locally. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical retention/reboot, touch, light, long-recording and factory qualification remain pending. Revision 120 remains the selected factory image.",
+      "notice": "Test build Sudo 1.0.123. Durable storage readiness and typed SPI completion; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 123,
+        "buildIdentity": {
+          "revision": 123,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "446b6f23f07239b5c68b439a179221ef",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.123",
+        "notice": "Test build Sudo 1.0.123. Durable storage readiness and typed SPI completion; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.123 verifies a durable storage build stamp before accepting recordings, preventing the reviewed same-build reboot recording-loss path. Recovery validates or safely retries that stamp without formatting; transient I/O failures do not authorize erasure. It also corrects the SPI completion callback type. Retains 1.0.122 connected-thumb handling, all three touch areas, recording-light presets, saved settings and bonds. Requires a companion app that supports revision 123; Italic 1.0 (279) was validated locally. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical retention/reboot, touch, light, long-recording and factory qualification remain pending. Revision 120 remains the selected factory image."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI5OTYwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiZDMzNTYzMzg5ODUyODNmOWM2MDdjOWU5ZTY3NTM1MDc2ZWE2NDZmOTJhYmJjZjk5OWIxMWYwYjY1NDBmN2JlZiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTIzIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yNVQwNDo0NjowN1oiLCJwYWNrYWdlUmV2aXNpb24iOjEyMywicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIGc5+Y+JQMJeJM2a2fobMeSIyF96cjqZaO28EvjoA390AiAkCeFckRYKdtmMUEyTWyyu5snLtk/Oc/RLkKNnqE9U+Q=="
+      }
+    },
+    {
+      "id": "6.0.3.3P21-r122",
+      "version": "6.0.3.3P21",
+      "packageRevision": 122,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r122",
+      "asset": {
+        "bytes": 329624,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "16b481542da0579b0f83011c0ce6a6cae841745bef810f841682881f4b1d2b1c",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r122/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "e3334e5d2bafe1c189e9b5c9a774dab1",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/672950407"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Keeps a connected thumb contact together in Small, Medium and Large instead of splitting it into fingers. Retains Sudo 1.121 recording-light strength and existing gesture timing, touch areas and saved settings. Requires an Italic app build that admits Sudo 1.122 test firmware. Sync before updating: recordings still on the Ring are erased. Full-thumb taps and holds, first touch after idle and settings persistence still need physical verification. Revision 120 remains the factory image.",
+      "notice": "Test build Sudo 1.122. Connected-thumb contact fix; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 122,
+        "buildIdentity": {
+          "revision": 122,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "f15d2a4920d26de260e83c11678eeffa",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "notice": "Test build Sudo 1.122. Connected-thumb contact fix; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Keeps a connected thumb contact together in Small, Medium and Large instead of splitting it into fingers. Retains Sudo 1.121 recording-light strength and existing gesture timing, touch areas and saved settings. Requires an Italic app build that admits Sudo 1.122 test firmware. Sync before updating: recordings still on the Ring are erased. Full-thumb taps and holds, first touch after idle and settings persistence still need physical verification. Revision 120 remains the factory image."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI5NjI0LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiMTZiNDgxNTQyZGEwNTc5YjBmODMwMTFjMGNlNmE2Y2FlODQxNzQ1YmVmODEwZjg0MTY4Mjg4MWY0YjFkMmIxYyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTIyIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yNFQxODowODozMVoiLCJwYWNrYWdlUmV2aXNpb24iOjEyMiwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIEGVUuFBvwCbY2YC1qbvCJXMePLcpiYUQKLQ3YPuXUwkAiBMew+b7hxqBPJ7KQ2ZzjfR7nZIBUpX8sZPmMPUT+GzAw=="
+      }
+    },
+    {
+      "id": "6.0.3.3P21-r121",
+      "version": "6.0.3.3P21",
+      "packageRevision": 121,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r121",
+      "asset": {
+        "bytes": 329624,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "8089a4054b5bc7d5750d9a01e001506e16891aa54e131200a60a2a8a9018331c",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r121/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "e2772a3db69148107620f94239a22bbf",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/671215666"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Choose Soft, Medium or Bright for your recording light in Ring settings. Medium is the default and matches the previous brightness. Connection, charging and Find indicators keep their existing behavior. Requires an Italic app build with recording-light-strength controls. Sync before updating: recordings still on the Ring are erased. Physical brightness, current and settings persistence across reboot/update remain pending.",
+      "notice": "Test build Sudo 1.121: recording-light strength. Sync your recordings before updating; this update erases recordings still stored on the Ring. Physical qualification is in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 121,
+        "buildIdentity": {
+          "revision": 121,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "baa16d5ed60b08f9001ad1b85b5efa8e",
+          "generation": 21
+        },
+        "sourceCommit": "bee5c6dc1c3a069712d07ed73914c7f3781022db",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "releaseNotes": "Choose Soft, Medium or Bright for your recording light in Ring settings. Medium is the default and matches the previous brightness. Connection, charging and Find indicators keep their existing behavior. Requires an Italic app build with recording-light-strength controls. Sync before updating: recordings still on the Ring are erased. Physical brightness, current and settings persistence across reboot/update remain pending.",
+        "notice": "Test build Sudo 1.121: recording-light strength. Sync your recordings before updating; this update erases recordings still stored on the Ring. Physical qualification is in progress.",
+        "ciRunURL": "https://github.com/ShopItalic/sudo/actions/runs/40058655479",
+        "privateManifestSha256": "fc1a74d97aa6173418d3bf959a6a28358b3cc684929f84140f03ba3987d2a33e",
+        "keyProvenance": "supplier-dfu-key",
+        "locallyPackaged": true,
+        "supplierAcceptance": false
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI5NjI0LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiODA4OWE0MDU0YjViYzdkNTc1MGQ5YTAxZTAwMTUwNmUxNjg5MWFhNTRlMTMxMjAwYTYwYTJhOGE5MDE4MzMxYyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTIxIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yNFQwNDowNDoyM1oiLCJwYWNrYWdlUmV2aXNpb24iOjEyMSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIHXcDrKGoCifX6IeyFXo8itzM0/xA7U2tKxrmnf5q+RUAiBLJG5XsgOpoccZ+tJnopYgbaHfnqET8P4clA462PP7AQ=="
+      }
+    },
+    {
+      "id": "6.0.3.3P21-r120",
+      "version": "6.0.3.3P21",
+      "packageRevision": 120,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r120",
+      "asset": {
+        "bytes": 328584,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "6cea2a26dd7c5d1069e5cae9997263f8446ad67cb0d7e5ff95233a01062d9635",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r120/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "3fa4b75dbdd8f8b6120a8ca90cb4ab14",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/667904551"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "dual-bank-budget.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Choose how much of your Ring responds to touch, in its settings in the app. Small responds only at the very top of the Ring. Medium, the new default, covers a longer stretch from the top. Large is the whole touch strip. A Ring set to Large keeps Large; one set to Small moves to Medium. Updating erases recordings still on the Ring, so sync first. Includes everything in Sudo 1.119.",
+      "notice": "P21 revision 120 tester update, Sudo 1.120, the factory image: three touch-area sizes, Small (the very top of the Ring), Medium (the default) and Large (the whole strip). Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 120,
+        "buildIdentity": {
+          "revision": 120,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "d83faeed60e63ebb2333c75861c58071",
+          "generation": 21
+        },
+        "sourceCommit": "4827b37b2fadb3235f2954b1b10d0fc9561a3abb",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "87682e1adc65ab2566f518a4a4b05ddb7cc512f4f0e84143e21e0001e0cb4352",
+          "command.json": "0bb636fa913ddefc0b84f5c572b539cf60fe959b47978c56b4b90e64a63df4d9",
+          "dual-bank-budget.json": "0278809afba6831a0fbce6c4d11cac0156e6e613797b487069198f037b784797",
+          "inputs-after.json": "d223dfae01dc1544f7c476e2050b5d97bb2f285ac9c3a27be34b399717f070a3",
+          "inputs-before.json": "1394d7a449023aa7988f0dfa16c1d386a140e5e536b175f018bd46f36f262bf4",
+          "p21-preparation.json": "db19abe9fcbab1a59d36982a309a6bcdbe2310220faa1d5c5451f3ce0c9e3331",
+          "result.json": "89eceec6cea9fdcfb4c2d52ba3d08018751465d969222dc98bcde2b57ad28e82",
+          "runtime-verification.json": "22442a1d87c769a3eb69ee0e9cb49f8c012641a36af117fbaec3542115f9f1c7",
+          "signed-package.json": "ba45af8f445aa3ba84ae337250c9525fb6e8a48abeb6653cfa1c1dffbd35e50d",
+          "source-load-verification.json": "1b3b1ab29ed92955e80fee4fed2f90adb63e98cdbc31022b4a4a02d8254fbaa1"
+        },
+        "notice": "P21 revision 120 tester update, Sudo 1.120, the factory image: three touch-area sizes, Small (the very top of the Ring), Medium (the default) and Large (the whole strip). Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Choose how much of your Ring responds to touch, in its settings in the app. Small responds only at the very top of the Ring. Medium, the new default, covers a longer stretch from the top. Large is the whole touch strip. A Ring set to Large keeps Large; one set to Small moves to Medium. Updating erases recordings still on the Ring, so sync first. Includes everything in Sudo 1.119."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI4NTg0LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiNmNlYTJhMjZkZDdjNWQxMDY5ZTVjYWU5OTk3MjYzZjg0NDZhZDY3Y2IwZDdlNWZmOTUyMzNhMDEwNjJkOTYzNSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTIwIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yM1QwMzo1OTozMloiLCJwYWNrYWdlUmV2aXNpb24iOjEyMCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQCK5Q4hGq3Dvq6c+8KbEaL+yYgWD7vghjbt7+F1OXJUEQIgSCGg2i8vxLpOStSw+Vxh+hYJYr05F+1RqhKCSw8RoFg="
+      }
+    },
+    {
+      "id": "6.0.3.3P21-r119",
+      "version": "6.0.3.3P21",
+      "packageRevision": 119,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r119",
+      "asset": {
+        "bytes": 328280,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "4d5955c02bd6b6c3530236fc690ba326a65675105448eaccd0428eb206517e03",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r119/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "e39f9784e13c77b4c8c6c3db702c47df",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/666962841"
+      },
+      "extraAssets": [
+        "actual-compiler-inputs.json",
+        "app.bin",
+        "app.hex",
+        "command.json",
+        "compiler-version.txt",
+        "dual-bank-budget.json",
+        "inputs-after.json",
+        "inputs-before.json",
+        "manifest.json",
+        "p21-preparation.json",
+        "result.json",
+        "runtime-verification.json",
+        "signed-package.json",
+        "source-load-verification.json",
+        "upstream-SHA256SUMS"
+      ],
+      "releaseNotes": "Choose where your Ring responds to touch in its settings in the app: Small, the default, is the top of the Ring only, so a finger resting beside it no longer counts as a tap or a hold; Large is the whole touch strip. Updating erases recordings still on the Ring, so sync first. Includes everything in revision 118.",
+      "notice": "P21 revision 119 tester update, the factory image: a touch-area setting, Small (the top of the Ring, the default) or Large (the whole strip). Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 119,
+        "buildIdentity": {
+          "revision": 119,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "aad142521028e061f1920639c12a4a4b",
+          "generation": 21
+        },
+        "sourceCommit": "da6edcc5886353c7814304bf457a79cb07d069e8",
+        "sourceWorktreeDirty": false,
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "evidence": {
+          "actual-compiler-inputs.json": "68dc26cbc3391349f33f82ab09aafc8c6d436c2a7c0446c2808afa7553b72ae0",
+          "command.json": "475205ba747a5dc536c8d7ef27cb7d1b103cea4095c02bdbf8b18bb239bd7a6d",
+          "dual-bank-budget.json": "2a5f17330a595a426c0becfe3eeb8133960969a9a7793f56c7925a2bb85ea157",
+          "inputs-after.json": "0b5ad7faa4126d53bb0057ed06d00ff63198a246879f56735775b523f7c36ccf",
+          "inputs-before.json": "ec3b067dda7e6dbbdc3dc34640f0d42038a9b1640530a4f27db28d75936f83b7",
+          "p21-preparation.json": "91bd2ffb54f565861e21e1fc0e6efa2198247fe6872514d34f2cb0b3c4eaf7b2",
+          "result.json": "8c282d6d3a55ff45b7fc8e9a0e645a6efd674c4e1a2da213ad009847beb4af7a",
+          "runtime-verification.json": "fbfda9dc93ed4737aa589e10bad8af352adafbc90bce6e85665324883944d600",
+          "signed-package.json": "ffe01bb88f6d3eff9db82922738fa2d34f5fca3f82e906061d682153d4208308",
+          "source-load-verification.json": "42d90de13afbd49d113ec0cc8e7759b91dbcdb3824c2ce40f6cc11a4505da881"
+        },
+        "notice": "P21 revision 119 tester update, the factory image: a touch-area setting, Small (the top of the Ring, the default) or Large (the whole strip). Updating erases recordings still on the Ring; sync first. Physical qualification remains in progress.",
+        "releaseNotes": "Choose where your Ring responds to touch in its settings in the app: Small, the default, is the top of the Ring only, so a finger resting beside it no longer counts as a tap or a hold; Large is the whole touch strip. Updating erases recordings still on the Ring, so sync first. Includes everything in revision 118."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI4MjgwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiNGQ1OTU1YzAyYmQ2YjZjMzUzMDIzNmZjNjkwYmEzMjZhNjU2NzUxMDU0NDhlYWNjZDA0MjhlYjIwNjUxN2UwMyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTE5IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yMlQyMDoxMzoxMVoiLCJwYWNrYWdlUmV2aXNpb24iOjExOSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQCaaWmQ2oZrXc4K41Q0bE6D+RQsM20vJan+Jrk1hl1FhgIhAIUkkL8L25gG2Rxq3t91cqisFg/h8LAHsTtxruTdu+lS"
+      }
+    },
+    {
       "id": "6.0.3.3P21-r118",
       "version": "6.0.3.3P21",
       "packageRevision": 118,
