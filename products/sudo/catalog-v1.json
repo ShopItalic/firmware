@@ -4,6 +4,59 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r123",
+      "version": "6.0.3.3P21",
+      "packageRevision": 123,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r123",
+      "asset": {
+        "bytes": 329960,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "d3356338985283f9c607c9e9e67535076ea646f92abbcf999b11f0b6540f7bef",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r123/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "3ad0a81dadb508ded1b62804b7e1e630",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/674119063"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.123 verifies a durable storage build stamp before accepting recordings, preventing the reviewed same-build reboot recording-loss path. Recovery validates or safely retries that stamp without formatting; transient I/O failures do not authorize erasure. It also corrects the SPI completion callback type. Retains 1.0.122 connected-thumb handling, all three touch areas, recording-light presets, saved settings and bonds. Requires a companion app that supports revision 123; Italic 1.0 (279) was validated locally. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical retention/reboot, touch, light, long-recording and factory qualification remain pending. Revision 120 remains the selected factory image.",
+      "notice": "Test build Sudo 1.0.123. Durable storage readiness and typed SPI completion; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 123,
+        "buildIdentity": {
+          "revision": 123,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "446b6f23f07239b5c68b439a179221ef",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.123",
+        "notice": "Test build Sudo 1.0.123. Durable storage readiness and typed SPI completion; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.123 verifies a durable storage build stamp before accepting recordings, preventing the reviewed same-build reboot recording-loss path. Recovery validates or safely retries that stamp without formatting; transient I/O failures do not authorize erasure. It also corrects the SPI completion callback type. Retains 1.0.122 connected-thumb handling, all three touch areas, recording-light presets, saved settings and bonds. Requires a companion app that supports revision 123; Italic 1.0 (279) was validated locally. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical retention/reboot, touch, light, long-recording and factory qualification remain pending. Revision 120 remains the selected factory image."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzI5OTYwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiZDMzNTYzMzg5ODUyODNmOWM2MDdjOWU5ZTY3NTM1MDc2ZWE2NDZmOTJhYmJjZjk5OWIxMWYwYjY1NDBmN2JlZiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTIzIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yNVQwNDo0NjowN1oiLCJwYWNrYWdlUmV2aXNpb24iOjEyMywicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIGc5+Y+JQMJeJM2a2fobMeSIyF96cjqZaO28EvjoA390AiAkCeFckRYKdtmMUEyTWyyu5snLtk/Oc/RLkKNnqE9U+Q=="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r122",
       "version": "6.0.3.3P21",
       "packageRevision": 122,
