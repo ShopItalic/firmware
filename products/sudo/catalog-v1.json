@@ -4,6 +4,59 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r124",
+      "version": "6.0.3.3P21",
+      "packageRevision": 124,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r124",
+      "asset": {
+        "bytes": 331616,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "eec466b87bd7225608f9358364bcdba41106062a38689edd2772c42863e37964",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r124/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "d3244ee0490e1b0b07e90159b42f4176",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/676244827"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.124 makes any contact on the touch strip one press: the touch chip tracks two contact patches, a wide thumb the chip sees as two or three patches is still one press, and a hold lasts until every contact has lifted. Before, a thumb seen as more than one patch was discarded and could not start a hold. With the 0.25 s quick hold, a tap must lift within 0.2 s, so no touch is both a tap and a hold; the 0.5 s standard hold is unchanged. The low-power wake sensor recalibrates after every boot, chip reset and touch-area change. The Ring counts every touch report's flags and keeps its last eight presses for the app to log. A neighbouring finger resting on the strip after the thumb lifts now keeps a hold's recording going until it lifts too. Keeps 1.0.123's storage and SPI fixes, the three touch areas, light presets, settings and bonds. Requires an Italic build that admits revision 124. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical touch acceptance is pending. Revision 120 remains the selected factory image.",
+      "notice": "Test build Sudo 1.0.124. One press per contact, touch evidence, taps below the hold time; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 124,
+        "buildIdentity": {
+          "revision": 124,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "c343700c673eaf90300f08e2bd3b447c",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.124",
+        "notice": "Test build Sudo 1.0.124. One press per contact, touch evidence, taps below the hold time; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.124 makes any contact on the touch strip one press: the touch chip tracks two contact patches, a wide thumb the chip sees as two or three patches is still one press, and a hold lasts until every contact has lifted. Before, a thumb seen as more than one patch was discarded and could not start a hold. With the 0.25 s quick hold, a tap must lift within 0.2 s, so no touch is both a tap and a hold; the 0.5 s standard hold is unchanged. The low-power wake sensor recalibrates after every boot, chip reset and touch-area change. The Ring counts every touch report's flags and keeps its last eight presses for the app to log. A neighbouring finger resting on the strip after the thumb lifts now keeps a hold's recording going until it lifts too. Keeps 1.0.123's storage and SPI fixes, the three touch areas, light presets, settings and bonds. Requires an Italic build that admits revision 124. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical touch acceptance is pending. Revision 120 remains the selected factory image."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzMxNjE2LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiZWVjNDY2Yjg3YmQ3MjI1NjA4ZjkzNTgzNjRiY2RiYTQxMTA2MDYyYTM4Njg5ZWRkMjc3MmM0Mjg2M2UzNzk2NCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTI0IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yNVQyMjowNDowOVoiLCJwYWNrYWdlUmV2aXNpb24iOjEyNCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIElybAYWKNI4x7fUQUA8l3VfWToVDiQzIbqskThS7276AiAUBDwDSrQ1lBwr36hrAwucS+knd+zwm2xoIoNpQz5giQ=="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r123",
       "version": "6.0.3.3P21",
       "packageRevision": 123,
