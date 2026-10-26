@@ -9,8 +9,8 @@ grants: `withdrawn: true` removes an offer, an entry's `rollout` admits only
 some Rings to an automatic install the statement allows, and the catalog's
 `automaticUpdatesPaused` stops automatic installs.
 
-A product may also carry a signed policy (`policy-v1.json` beside its
-catalog): a floor below which nothing installs,
+A product may also carry a signed policy (`policy-v1.json`, and the same
+envelope as the catalog's `policy`): a floor below which nothing installs,
 withdrawals, and the signed ceiling of each automatic rollout. Apps remember
 the newest policy they have seen, so neither a push nor an older copy of the
 catalog can undo it.
@@ -233,8 +233,8 @@ def check_rollout(s, rollout):
 # old state. The policy is signed with the product's release key and carries a
 # sequence; apps keep the highest sequence they have seen, every withdrawal
 # (signed or not) and the highest floor, plus a baseline compiled into each
-# build. Apps fetch `policy-v1.json` beside the catalog; every catalog
-# change is checked against it.
+# build. `policy-v1.json` is its source, and the catalog carries the same
+# envelope under `policy`, so an app reads both in one fetch.
 POLICY_SCHEMA = 'italic-firmware-policy/1'
 POLICY_PRODUCTS = ('sudo',)
 POLICY_KEYS = {'schema', 'product', 'hardware', 'sequence', 'issuedAt', 'minimumRevision', 'withdrawn', 'rollout'}
@@ -387,8 +387,7 @@ def load_keys():
     return keys
 
 
-def validate_catalog(product, catalog, keys, policy=None):
-    """`policy`: the verified policy statement the catalog must agree with."""
+def validate_catalog(product, catalog, keys):
     require(product in PRODUCTS, f'unknown product {product}')
     require(catalog.get('schemaVersion') == 1 and catalog.get('product') == product, 'bad catalog header')
     require(catalog.get('hardware') == PRODUCTS[product]['hardware'], 'bad catalog hardware')
@@ -403,8 +402,8 @@ def validate_catalog(product, catalog, keys, policy=None):
         s = verify_entry(product, entry, keys)
         require(s['id'] not in seen, f"duplicate release id {s['id']}")
         seen.add(s['id'])
-    require('policy' not in catalog, 'the signed policy lives in policy-v1.json, not in the catalog')
-    if policy is not None:
+    if 'policy' in catalog:
+        policy, _ = verify_policy(product, catalog['policy'], keys)
         check_policy_against_catalog(product, policy, releases, keys)
     return len(releases)
 
@@ -415,7 +414,9 @@ def validate_catalog(product, catalog, keys, policy=None):
 # entries past it are dropped, oldest first.
 APP_LIMITS = {
     # RingFirmwareRelease.maximumCatalogBytes; RingSignedFirmwareCatalog.decode
-    # (entries.count <= 200, releases.prefix(100)).
+    # (entries.count <= 200, releases.prefix(100)). ShopItalic/app branch
+    # claude/wizardly-jennings-fddc3e raises them to 8 MiB and the newest 1,000
+    # entries; keep these until no build in use predates it.
     'sudo': {'bytes': 512 * 1024, 'entries': 200, 'kept': 100},
     # GlyphFirmwareCatalog.maximumCatalogBytes, entries.count <= 500.
     'glyph': {'bytes': 512 * 1024, 'entries': 500, 'kept': 500},
@@ -454,8 +455,8 @@ def previous_policy(product, ref, keys):
 
 
 def check_repository(keys, previous_ref=None):
-    """Every catalog, its size, and each policy, which must agree with its
-    catalog and replace only the policy at `previous_ref`."""
+    """Every catalog, its size, and each policy: the file and the catalog's
+    copy are one envelope, and it replaces only the policy at `previous_ref`."""
     report, warnings = [], []
     for product in PRODUCTS:
         path = catalog_path(product)
@@ -464,10 +465,12 @@ def check_repository(keys, previous_ref=None):
             continue
         raw = path.read_bytes()
         current = json.loads(raw)
-        policy = current_policy(product, keys)
-        count = validate_catalog(product, current, keys, policy)
+        envelope = read_policy(product)
+        require(envelope == current.get('policy'), f"{product}: policy-v1.json and the catalog's policy differ")
+        count = validate_catalog(product, current, keys)
         warnings += check_size(product, len(raw), count)
         report.append(f'{product}: {count} signed releases verified')
+        policy = verify_policy(product, envelope, keys)[0] if envelope is not None else None
         if previous_ref is not None:
             before = previous_policy(product, previous_ref, keys)
             require(before is None or policy is not None, f"{product}: the signed policy can't be removed")
@@ -482,16 +485,8 @@ def read(product):
     return json.loads(catalog_path(product).read_text())
 
 
-def current_policy(product, keys):
-    """The committed policy-v1.json's statement, verified, or None."""
-    envelope = read_policy(product)
-    return verify_policy(product, envelope, keys)[0] if envelope is not None else None
-
-
-def write(product, catalog, policy=None):
-    """Write a catalog that agrees with `policy`, by default the committed one."""
-    keys = load_keys()
-    validate_catalog(product, catalog, keys, policy if policy is not None else current_policy(product, keys))
+def write(product, catalog):
+    validate_catalog(product, catalog, load_keys())
     catalog_path(product).write_text(json.dumps(catalog, indent=2, ensure_ascii=False) + '\n')
 
 

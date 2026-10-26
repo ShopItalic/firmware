@@ -74,9 +74,8 @@ bring back an older state. The policy closes that (ShopItalic/app
 `docs/design/ring-firmware-stable-release.md`, 1.1).
 
 `products/sudo/policy-v1.json` is an envelope signed with `sudo-release-1`,
-like an entry's. Apps fetch it beside the catalog, from the same two hosts. A
-404 means none is published, and an unreadable policy leaves an app with the
-one it has:
+like an entry's. The catalog carries the same envelope as its `policy`, so an
+app reads both in one fetch:
 
 ```json
 {"schemaVersion": 1, "product": "sudo", "hardware": "603V1.23.2",
@@ -92,7 +91,7 @@ bytes. Its fields are exact:
 | `sequence` | 1 to 2,147,483,647; each policy is above the one it replaces |
 | `issuedAt` | UTC seconds |
 | `minimumRevision` | generation → package revision, such as `{"21": 124}`. Nothing ranked below the highest floor installs, in the app's order (generation, source revision, revision), so earlier generations and Z62 are below it too. Team builds may go below it |
-| `withdrawn` | `{"id", "sha256"}` pairs, sorted by `id`: withdrawn for good. Apps match the package SHA-256, whatever entry offers it |
+| `withdrawn` | `{"id", "sha256"}` pairs, sorted by `id`: withdrawn for good. Apps match the package SHA-256, whatever entry offers it, on every build |
 | `rollout` | release ID → the signed ceiling (0–100) of its automatic rollout |
 
 - **New fields:** apps apply the fields they know and ignore others, which
@@ -110,18 +109,18 @@ bytes. Its fields are exact:
   - each floor names an installable release;
   - each ceiling names a signed `autoInstall` release, and no entry's
     unsigned `rollout` is above its ceiling (missing is 0%);
+  - the file and the catalog's copy are one envelope;
   - against the base commit: a higher sequence, no withdrawal dropped, no
     lower floor, and no policy removed.
-- **Effective rollout**, once an app has a policy:
-  - It is the lower of the signed ceiling and the entry's `rollout`; a
-    release without a ceiling gets 0%.
-  - An entry without a `rollout` takes its ceiling.
-  - So the unsigned `rollout` only lowers, and the pause and `withdraw` work
-    at once without a signature.
-  - Before an app has any policy, the entry's `rollout` alone decides, as in
-    builds that predate the policy. So publish the first policy before the
-    first release that installs itself, and compile it into the App Store
-    build.
+- **Effective rollout:** the lower of the signed ceiling and the entry's
+  `rollout`, with a missing value on either side counting as 0%.
+  - An app that has no policy installs nothing by itself, so publish the first
+    policy before any release that installs itself, and compile it into the
+    App Store build.
+  - The unsigned `rollout` only lowers, and the pause and `withdraw` work at
+    once without a signature.
+- **Apps read only the catalog's copy** (`policy`), so one fetch gets both,
+  from one commit. `policy-v1.json` is the source file.
 - **Catalog size:** CI also refuses a catalog past what apps read (512 KiB;
   200 Sudo or 500 Glyph entries), and warns from 75%.
 
@@ -204,9 +203,9 @@ python3 tools/release.py pause-automatic --product sudo [--background]
 python3 tools/release.py resume-automatic --product sudo
 ```
 
-**A policy change** is signed with the Keychain key and committed together
-with the unsigned fields that builds before the policy read: a withdrawal's
-`withdrawn: true`, and a ceiling's `rollout`.
+**A policy change** is signed with the Keychain key and committed with the
+catalog's copy. It also writes the unsigned fields that builds before the
+policy read: a withdrawal's `withdrawn: true`, and a ceiling's `rollout`.
 `--dry-run` signs and changes nothing; it prints what the policy would do
 (`--out` also writes the unsigned statement):
 
