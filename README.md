@@ -34,10 +34,13 @@ makes it **trustworthy** is a signature from the product's release key:
   SHA-256. The unsigned entry fields (notes, `details`, URLs) are for display
   only. The one exception is `withdrawn: true`, which clients honour unsigned
   because it can only remove an offer.
-- Release keys live in the publisher's macOS Keychain and are only used through
-  `tools/sign_release.swift`. Each product has its own key. The signer refuses
-  anything that is not a release statement for that key's product. Glyph's key is
-  its firmware trust anchor (P10 onward), so it is never regenerated.
+- Release keys live in the Italic 1Password account's **Italic Release** vault,
+  never on a Mac, and are only used through `tools/sign_release.swift`. It reads
+  the key with the 1Password CLI (`op`) for each signature, holds it only in
+  memory, and checks it against `keys/<keyId>.x963` before signing. Each product
+  has its own key. The signer refuses anything that is not a release statement
+  for that key's product. Glyph's key is its firmware trust anchor (P10 onward),
+  so it is never regenerated; the vault is its backup.
 
 ### Version 2 statements: stable releases and automatic installs (Sudo)
 
@@ -140,7 +143,7 @@ products/sudo/policy-v1.json        the signed policy (floor, withdrawals, rollo
 products/sudo/package-images.json   application image sizes for the dual-bank check
 tools/catalog.py                    schema + verification (also run by CI)
 tools/p256.py                       dependency-free P-256 verification
-tools/sign_release.swift            Keychain signer
+tools/sign_release.swift            signer (key from 1Password)
 tools/migrate.py                    one-time import from ShopItalic/sudo and Glyph
 ```
 
@@ -156,7 +159,7 @@ repository only records and signs that decision.
 ## Publishing
 
 ```sh
-# 1. Stage and sign locally (Keychain prompt on first use).
+# 1. Stage and sign locally (Touch ID for 1Password on first use).
 python3 tools/release.py stage --product glyph --id P12-rc.1 --version P12-rc.1 \
   --channel test --asset path/to/glyph-pks3-101-P12-rc.1.ufw \
   --extra path/to/release-notes.md --notes "What changed" --out .staging/glyph-P12-rc.1
@@ -203,7 +206,7 @@ python3 tools/release.py pause-automatic --product sudo [--background]
 python3 tools/release.py resume-automatic --product sudo
 ```
 
-**A policy change** is signed with the Keychain key and committed with the
+**A policy change** is signed with the release key and committed with the
 catalog's copy. It also writes the unsigned fields that builds before the
 policy read: a withdrawal's `withdrawn: true`, and a ceiling's `rollout`.
 `--dry-run` signs and changes nothing; it prints what the policy would do

@@ -3,7 +3,7 @@
 
   stage    Copy the package and extra assets into a new staging directory,
            write the canonical release statement and sign it with the product's
-           Keychain key. No network access.
+           release key (1Password). No other network access.
   publish  Create an immutable GitHub prerelease/release for a staged
            directory, verify every asset anonymously, then add the signed entry
            to products/<product>/catalog-v1.json and commit. Order matters:
@@ -74,7 +74,7 @@ def utc_seconds():
 
 
 def sign(product, statement_path, signature_path, signer=None):
-    """Sign with the Keychain key (default) or an injected test signer."""
+    """Sign with the release key in 1Password (default) or an injected test signer."""
     if signer:
         signature_path.write_bytes(signer(statement_path.read_bytes()))
     else:
