@@ -22,8 +22,8 @@
   withdraw Mark a release withdrawn. Unsigned: it only removes an offer.
   policy   Sign the product's next policy: a floor below which nothing installs,
            withdrawals and each automatic rollout's ceiling, which apps keep
-           and a push can't undo. It commits the policy, the catalog's copy and
-           the unsigned fields older apps read. --dry-run signs nothing.
+           and a push can't undo. It commits the policy and the unsigned
+           fields older apps read. --dry-run signs nothing.
   record-images
            Record the application image inside packages for the dual-bank check.
 
@@ -585,8 +585,8 @@ def policy_summary(product, before, after, releases):
 
 def policy(product, withdraw=(), reason=None, floors=(), rollouts=(), out=None, dry_run=False, push=False,
            signer=None, keys=None):
-    """Sign `product`'s next policy and commit it with the catalog's copy and
-    the unsigned fields builds before the policy read: a policy withdrawal is
+    """Sign `product`'s next policy and commit it with the unsigned fields
+    builds before the policy read: a policy withdrawal is
     also `withdrawn: true`, and a ceiling the entry's `rollout`. `floors` are
     (generation, revision) pairs, `rollouts` (release ID, percent). `dry_run`
     signs and changes nothing; it prints, and with `out` writes, the unsigned
@@ -594,9 +594,7 @@ def policy(product, withdraw=(), reason=None, floors=(), rollouts=(), out=None, 
     catalog.require(product in catalog.POLICY_PRODUCTS, f'{product} has no signed policy')
     keys = keys or catalog.load_keys()
     current = catalog.read(product)
-    envelope = catalog.read_policy(product)
-    catalog.require(envelope == current.get('policy'), "policy-v1.json and the catalog's policy differ")
-    before = catalog.verify_policy(product, envelope, keys)[0] if envelope else None
+    before = catalog.current_policy(product, keys)
     floor = dict(before['minimumRevision']) if before else {}
     withdrawn = {w['id']: w for w in before['withdrawn']} if before else {}
     ceilings = dict(before['rollout']) if before else {}
@@ -651,10 +649,7 @@ def policy(product, withdraw=(), reason=None, floors=(), rollouts=(), out=None, 
     envelope = {'schemaVersion': 1, 'product': product, 'hardware': catalog.PRODUCTS[product]['hardware'],
                 'statement': base64.b64encode(raw).decode(),
                 'signature': {'alg': 'ES256', 'keyId': key_id, 'der': base64.b64encode(der).decode()}}
-    releases = current.pop('releases')
-    current['policy'] = envelope
-    current['releases'] = releases
-    catalog.write(product, current)
+    catalog.write(product, current, policy=after)
     catalog.policy_path(product).write_text(json.dumps(envelope, indent=2) + '\n')
     commit([catalog.catalog_path(product), catalog.policy_path(product)],
            f"Policy {product} {after['sequence']}", push)

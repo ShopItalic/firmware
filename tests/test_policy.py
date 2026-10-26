@@ -87,9 +87,8 @@ class PolicyTest(unittest.TestCase):
                          (1, {'21': 118}, {'6.0.3.3P21-r119': 1}))
         self.assertEqual(statement['withdrawn'], [{'id': '6.0.3.3P21-r117', 'sha256': self.entry('6.0.3.3P21-r117')['asset']['sha256']}])
         envelope = catalog.read_policy('sudo')
-        self.assertEqual(envelope, catalog.read('sudo')['policy'])
         self.assertEqual(catalog.verify_policy('sudo', envelope, self.keys)[0], statement)
-        self.assertEqual(list(catalog.read('sudo'))[-2:], ['policy', 'releases'])
+        self.assertNotIn('policy', catalog.read('sudo'))  # apps fetch the file
         # The unsigned fields builds before the policy read say the same.
         self.assertEqual((self.entry('6.0.3.3P21-r117')['withdrawn'], self.entry('6.0.3.3P21-r117')['withdrawnReason']),
                          (True, 'Touch fault'))
@@ -165,7 +164,7 @@ class PolicyTest(unittest.TestCase):
     def test_the_catalog_check_refuses_a_policy_it_disagrees_with(self):
         self.policy(withdraw=['6.0.3.3P21-r117'], reason='Touch fault', rollouts=[('6.0.3.3P21-r119', 5)])
         current = catalog.read('sudo')
-        good, _ = catalog.verify_policy('sudo', current['policy'], self.keys)
+        good = catalog.current_policy('sudo', self.keys)
 
         def check(policy=None, edit=None):
             releases = copy.deepcopy(current['releases'])
@@ -230,16 +229,20 @@ class PolicyTest(unittest.TestCase):
         for name, bad in cases.items():
             with self.subTest(name), self.assertRaises(catalog.CatalogError):
                 catalog.verify_policy('sudo', bad, self.keys)
-        # Glyph has no policy.
+        # Glyph has no policy, and no catalog carries one.
         with self.assertRaises(catalog.CatalogError):
-            catalog.validate_catalog('glyph', {**catalog.empty('glyph'), 'policy': envelope}, self.keys)
+            catalog.verify_policy('glyph', {**envelope, 'product': 'glyph', 'hardware': 'PKS3-101'}, self.keys)
+        with self.assertRaisesRegex(catalog.CatalogError, 'lives in policy-v1.json'):
+            catalog.validate_catalog('sudo', {**catalog.read('sudo'), 'policy': envelope}, self.keys)
 
-    def test_the_file_and_the_catalogs_copy_are_one(self):
-        self.policy(floors=[(21, 118)])
+    def test_every_catalog_change_is_checked_against_the_committed_policy(self):
+        self.policy(withdraw=['6.0.3.3P21-r117'], reason='Touch fault')
         current = catalog.read('sudo')
-        current['policy'] = {**current['policy'], 'statement': current['policy']['statement'][:-4] + 'AAA='}
+        next(e for e in current['releases'] if e['id'] == '6.0.3.3P21-r117')['withdrawn'] = False
+        with self.assertRaisesRegex(catalog.CatalogError, 'withdrawn: true too'):
+            catalog.write('sudo', current)
         catalog.catalog_path('sudo').write_text(json.dumps(current, indent=2) + '\n')
-        with self.assertRaisesRegex(catalog.CatalogError, 'differ'):
+        with self.assertRaisesRegex(catalog.CatalogError, 'withdrawn: true too'):
             catalog.check_repository(self.keys)
 
     def test_ci_checks_the_policy_against_the_base_commit(self):
@@ -260,8 +263,6 @@ class PolicyTest(unittest.TestCase):
         # Or the policy removed.
         git('checkout', '-q', 'HEAD', '--', 'products')
         catalog.policy_path('sudo').unlink()
-        current = catalog.read('sudo'); current.pop('policy')
-        catalog.catalog_path('sudo').write_text(json.dumps(current, indent=2) + '\n')
         with self.assertRaisesRegex(catalog.CatalogError, "can't be removed"):
             catalog.check_repository(self.keys, 'HEAD')
         with self.assertRaisesRegex(catalog.CatalogError, 'not a commit'):
