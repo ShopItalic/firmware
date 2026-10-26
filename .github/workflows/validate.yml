@@ -9,10 +9,16 @@ jobs:
     runs-on: blacksmith-2vcpu-ubuntu-2404
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The policy check reads the base commit's policy: a policy may only
+          # follow an older one.
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Unit tests and signature verification
         run: python3 -m unittest discover -s tests -v
-      - name: Verify every catalog entry
-        run: python3 tools/catalog.py
+      - name: Verify every catalog entry, catalog size and signed policy
+        env:
+          PREVIOUS: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: python3 tools/catalog.py --previous "$PREVIOUS"

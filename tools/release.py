@@ -20,6 +20,10 @@
            The catalog's pause switch for automatic installs, for every release
            ("all", or with --background only installs started in the background).
   withdraw Mark a release withdrawn. Unsigned: it only removes an offer.
+  policy   Sign the product's next policy: a floor below which nothing installs,
+           withdrawals and each automatic rollout's ceiling, which apps keep
+           and a push can't undo. It commits the policy, the catalog's copy and
+           the unsigned fields older apps read. --dry-run signs nothing.
   record-images
            Record the application image inside packages for the dual-bank check.
 
@@ -526,7 +530,8 @@ def withdraw(product, release_id, reason):
 
 def set_rollout(product, release_id, percent, since=None):
     """Devices whose bucket is below `percent` may install this release by
-    themselves. The catalog refuses a rollout without a signed autoInstall."""
+    themselves. The catalog refuses a rollout without a signed autoInstall, and
+    above a signed policy's ceiling: then this only lowers (`policy` raises)."""
     current = catalog.read(product)
     entry = next((e for e in current['releases'] if e['id'] == release_id), None)
     catalog.require(entry is not None, f'{release_id} is not in the {product} catalog')
@@ -544,6 +549,117 @@ def set_pause(product, pause):
         current['automaticUpdatesPaused'] = pause
     current['releases'] = releases
     catalog.write(product, current)
+
+
+def release_name(s):
+    """What people call a release: "Sudo 1.0.124", or its ID before Sudo 1.0.107."""
+    title = release_title(s)
+    return title if title.startswith('Sudo 1.') else s['id']
+
+
+def policy_summary(product, before, after, releases):
+    """What a policy does, in words, for the review before it is signed."""
+    statements = [(e, json.loads(base64.b64decode(e['statement']))) for e in releases]
+    lines = [f"Policy {product} {after['sequence']}" + ('' if before else ' (the first)') + f", issued {after['issuedAt']}"]
+    cut = catalog.floor_cut(after)
+    if cut is None:
+        lines.append('Floor: none.')
+    else:
+        generation, revision = max(((int(g), r) for g, r in after['minimumRevision'].items()),
+                                   key=lambda item: catalog.rank(f'6.0.3.3P{item[0]:02d}', item[1]))
+        below = [s for e, s in statements if catalog.below_floor(after, s) and s['installable'] and not e['withdrawn']]
+        lines.append(f'Floor: P{generation} revision {revision}. Below it nothing installs on App Store or TestFlight '
+                     f'builds (team builds may go below): {len(below)} installable releases, from '
+                     + (f"{release_name(below[-1])} to {release_name(below[0])}." if below else 'none.'))
+    old = {w['id'] for w in before['withdrawn']} if before else set()
+    for w in after['withdrawn']:
+        lines.append(f"Withdrawn{'' if w['id'] in old else ' (new)'}: {w['id']}, package {w['sha256'][:12]}…")
+    if not after['withdrawn']:
+        lines.append('Withdrawn: none.')
+    for release_id, percent in sorted(after['rollout'].items()):
+        lines.append(f'Rollout ceiling: {release_id} {percent}%')
+    if not after['rollout']:
+        lines.append('Rollout ceilings: none, so no Ring updates itself.')
+    return '\n'.join(lines)
+
+
+def policy(product, withdraw=(), reason=None, floors=(), rollouts=(), out=None, dry_run=False, push=False,
+           signer=None, keys=None):
+    """Sign `product`'s next policy and commit it with the catalog's copy and
+    the unsigned fields builds before the policy read: a policy withdrawal is
+    also `withdrawn: true`, and a ceiling the entry's `rollout`. `floors` are
+    (generation, revision) pairs, `rollouts` (release ID, percent). `dry_run`
+    signs and changes nothing; it prints, and with `out` writes, the unsigned
+    statement and what it would do."""
+    catalog.require(product in catalog.POLICY_PRODUCTS, f'{product} has no signed policy')
+    keys = keys or catalog.load_keys()
+    current = catalog.read(product)
+    envelope = catalog.read_policy(product)
+    catalog.require(envelope == current.get('policy'), "policy-v1.json and the catalog's policy differ")
+    before = catalog.verify_policy(product, envelope, keys)[0] if envelope else None
+    floor = dict(before['minimumRevision']) if before else {}
+    withdrawn = {w['id']: w for w in before['withdrawn']} if before else {}
+    ceilings = dict(before['rollout']) if before else {}
+    entries = {e['id']: e for e in current['releases']}
+    signed = {i: json.loads(base64.b64decode(e['statement'])) for i, e in entries.items()}
+    for release_id in withdraw:
+        catalog.require(release_id in entries, f'{release_id} is not in the {product} catalog')
+        withdrawn[release_id] = {'id': release_id, 'sha256': signed[release_id]['asset']['sha256']}
+        if not entries[release_id]['withdrawn']:
+            catalog.require(reason, f'{release_id} is offered: give the withdrawal a --reason')
+            entries[release_id]['withdrawn'] = True; entries[release_id]['withdrawnReason'] = reason
+        ceilings.pop(release_id, None); entries[release_id].pop('rollout', None)
+    for generation, revision in floors:
+        floor[str(generation)] = revision
+    for release_id, percent in rollouts:
+        catalog.require(release_id in entries, f'{release_id} is not in the {product} catalog')
+        catalog.require(release_id not in withdrawn, f'{release_id} is withdrawn')
+        ceilings[release_id] = percent
+        entries[release_id]['rollout'] = {'percent': percent, 'since': datetime.now(timezone.utc).strftime('%Y-%m-%d')}
+    after = catalog.make_policy(product, (before['sequence'] if before else 0) + 1, utc_seconds(), floor,
+                                withdrawn.values(), ceilings)
+    unchanged = lambda s: {k: v for k, v in s.items() if k not in ('sequence', 'issuedAt')}  # noqa: E731
+    catalog.require(before is None or unchanged(after) != unchanged(before), 'the policy would not change')
+    catalog.check_policy_statement(after, product)
+    catalog.check_policy_against_catalog(product, after, current['releases'], keys)
+    catalog.check_policy_history(before, after)
+    # Signed now, so stricter than the catalog check: something is still
+    # offered at the floor, and each ceiling admits an offered release.
+    offered = [s for i, s in signed.items() if s['installable'] and not entries[i]['withdrawn'] and i not in withdrawn]
+    catalog.require(catalog.floor_cut(after) is None or any(not catalog.below_floor(after, s) for s in offered),
+                    'the floor is above every release still offered')
+    for release_id in ceilings:
+        catalog.require(signed[release_id] in offered and not catalog.below_floor(after, signed[release_id]),
+                        f'rollout {release_id}: withdrawn or below the floor; drop its ceiling')
+    raw = catalog.encode_statement(after)
+    catalog.require(len(raw) <= catalog.POLICY_STATEMENT_BYTES, f'the policy is over {catalog.POLICY_STATEMENT_BYTES} bytes')
+    summary = policy_summary(product, before, after, current['releases'])
+    print(summary)
+    if out:
+        out.mkdir(parents=True, exist_ok=False)
+        (out / 'statement.json').write_bytes(raw)
+        (out / 'summary.txt').write_text(summary + '\n')
+    if dry_run:
+        return after
+    with tempfile.TemporaryDirectory() as folder:
+        statement_path, der_path = Path(folder) / 'statement.json', Path(folder) / 'signature.der'
+        statement_path.write_bytes(raw)
+        sign(product, statement_path, der_path, signer)
+        der = der_path.read_bytes()
+    key_id = catalog.PRODUCTS[product]['keys'][0]
+    catalog.require(p256.verify(keys[key_id], raw, der), 'fresh signature does not verify with the published key')
+    envelope = {'schemaVersion': 1, 'product': product, 'hardware': catalog.PRODUCTS[product]['hardware'],
+                'statement': base64.b64encode(raw).decode(),
+                'signature': {'alg': 'ES256', 'keyId': key_id, 'der': base64.b64encode(der).decode()}}
+    releases = current.pop('releases')
+    current['policy'] = envelope
+    current['releases'] = releases
+    catalog.write(product, current)
+    catalog.policy_path(product).write_text(json.dumps(envelope, indent=2) + '\n')
+    commit([catalog.catalog_path(product), catalog.policy_path(product)],
+           f"Policy {product} {after['sequence']}", push)
+    print(f"signed and committed policy {after['sequence']}")
+    return after
 
 
 def record_images(product, packages=(), download=False, import_from=None):
@@ -626,6 +742,17 @@ def main(argv=None):
     a = sub.add_parser('pause-automatic'); a.add_argument('--product', required=True)
     a.add_argument('--background', action='store_true', help='pause only installs started in the background')
     u = sub.add_parser('resume-automatic'); u.add_argument('--product', required=True)
+    o = sub.add_parser('policy', help="sign the product's next policy (floor, withdrawals, rollout ceilings)")
+    o.add_argument('--product', required=True, choices=catalog.POLICY_PRODUCTS)
+    o.add_argument('--withdraw', action='append', default=[], metavar='ID', help='withdraw a release for good')
+    o.add_argument('--reason', help="a new withdrawal's reason, shown in the catalog")
+    o.add_argument('--floor', action='append', default=[], metavar='GENERATION:REVISION',
+                   help='nothing ranked below this installs, such as 21:124; it only rises')
+    o.add_argument('--rollout', action='append', default=[], metavar='ID:PERCENT',
+                   help="a release's signed rollout ceiling, also written as its entry's rollout")
+    o.add_argument('--out', type=Path, help='also write the statement and the summary here')
+    o.add_argument('--dry-run', action='store_true', help='sign nothing and change nothing')
+    o.add_argument('--push', action='store_true')
     i = sub.add_parser('record-images'); i.add_argument('--product', required=True)
     i.add_argument('packages', type=Path, nargs='*'); i.add_argument('--download', action='store_true')
     i.add_argument('--import', dest='import_from', type=Path)
@@ -655,6 +782,15 @@ def main(argv=None):
         set_pause(args.product, None)
     elif args.command == 'record-images':
         record_images(args.product, args.packages, args.download, args.import_from)
+    elif args.command == 'policy':
+        def pair(text, name):
+            left, sep, right = text.rpartition(':')
+            catalog.require(sep and left and right.isdigit(), f'--{name} takes {name.upper()}:NUMBER, got {text!r}')
+            return left, int(right)
+        floors = [(int(g), r) for g, r in (pair(text, 'floor') for text in args.floor) if g.isdigit()]
+        catalog.require(len(floors) == len(args.floor), '--floor takes GENERATION:REVISION, such as 21:124')
+        policy(args.product, args.withdraw, args.reason, floors, [pair(text, 'rollout') for text in args.rollout],
+               out=args.out, dry_run=args.dry_run, push=args.push)
     else:
         withdraw(args.product, args.id, args.reason)
 
