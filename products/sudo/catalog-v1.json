@@ -4,6 +4,59 @@
   "hardware": "603V1.23.2",
   "releases": [
     {
+      "id": "6.0.3.3P21-r125",
+      "version": "6.0.3.3P21",
+      "packageRevision": 125,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r125",
+      "asset": {
+        "bytes": 331560,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "eb122c4cfafdd162e76f8f79106b1da20c65ea55bc1eb160915805df410fade4",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r125/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "e4e68f6d5474b91e979bbde3b3c460a5",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/676684572"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.125 makes the Small touch area longer: it senses the top three of the strip's seven columns instead of two, about 14-51 degrees past the lip on a size-10 Ring instead of 14-39, so a thumb held in a fist lands on it. Medium and Large are unchanged. The Ring reports the longer Small so Italic draws it on the Touch area card. Keeps everything in Sudo 1.0.124: one press per contact, taps under the hold time, the wake sensor's recalibration and the touch evidence pages, with 1.0.123's storage and SPI fixes, light presets, settings and bonds. Requires an Italic build that admits revision 125. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical touch acceptance is pending. Revision 120 remains the selected factory image.",
+      "notice": "Test build Sudo 1.0.125. Small senses the top three touch columns; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 125,
+        "buildIdentity": {
+          "revision": 125,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "7fb7cf908910f3cd5f0721ed1f3cf206",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.125",
+        "notice": "Test build Sudo 1.0.125. Small senses the top three touch columns; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.125 makes the Small touch area longer: it senses the top three of the strip's seven columns instead of two, about 14-51 degrees past the lip on a size-10 Ring instead of 14-39, so a thumb held in a fist lands on it. Medium and Large are unchanged. The Ring reports the longer Small so Italic draws it on the Touch area card. Keeps everything in Sudo 1.0.124: one press per contact, taps under the hold time, the wake sensor's recalibration and the touch evidence pages, with 1.0.123's storage and SPI fixes, light presets, settings and bonds. Requires an Italic build that admits revision 125. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical touch acceptance is pending. Revision 120 remains the selected factory image."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzMxNTYwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiZWIxMjJjNGNmYWZkZDE2MmU3NmY4Zjc5MTA2YjFkYTIwYzY1ZWE1NWJjMWViMTYwOTE1ODA1ZGY0MTBmYWRlNCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTI1IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yNlQwMTo0OTozNloiLCJwYWNrYWdlUmV2aXNpb24iOjEyNSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIEpv2BWu+TPgIQ5GUu3OpP+ZHbzfTb5IklG0KzRN+zbAAiAaIHZUnenz6ImjkfTs/J2cUR777MgURE+wwGmgu+BgIw=="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r124",
       "version": "6.0.3.3P21",
       "packageRevision": 124,
