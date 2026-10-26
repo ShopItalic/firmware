@@ -240,6 +240,7 @@ POLICY_PRODUCTS = ('sudo',)
 POLICY_KEYS = {'schema', 'product', 'hardware', 'sequence', 'issuedAt', 'minimumRevision', 'withdrawn', 'rollout'}
 ENVELOPE_KEYS = {'schemaVersion', 'product', 'hardware', 'statement', 'signature'}
 POLICY_STATEMENT_BYTES = 4096  # tools/sign_release.swift signs nothing larger
+POLICY_SEQUENCE_MAX = 2**31 - 1  # the app's limit
 P_VERSION = re.compile(r'\d+\.\d+\.\d+\.\d+P(\d{2})')
 # A revision above 100 rebuilds source revision `revision - 100` with another
 # compiler (P21-rc.107 is rc.7), so it ranks with its source, as in the app.
@@ -257,13 +258,16 @@ def make_policy(product, sequence, issued_at, minimum_revision, withdrawn, rollo
 
 
 def check_policy_statement(s, product):
-    """The statement's own rules. Every field is exact: apps refuse a policy
-    with a field they don't know, so a new field is a new schema."""
+    """The statement's own rules, with every field exact. Apps apply the
+    fields they know and ignore others, which is safe because a field only
+    narrows. A field that changes how a known one reads goes in a new schema,
+    published beside version 1 for as long as apps read only version 1."""
     require(product in POLICY_PRODUCTS, f'{product} has no signed policy')
     require(isinstance(s, dict) and set(s) == POLICY_KEYS, 'policy fields missing or unexpected')
     require(s['schema'] == POLICY_SCHEMA, 'wrong policy schema')
     require(s['product'] == product and s['hardware'] == PRODUCTS[product]['hardware'], 'policy product/hardware mismatch')
-    require(type(s['sequence']) is int and 1 <= s['sequence'] <= 999_999_999, 'policy sequence must be 1 to 999999999')
+    require(type(s['sequence']) is int and 1 <= s['sequence'] <= POLICY_SEQUENCE_MAX,
+            f'policy sequence must be 1 to {POLICY_SEQUENCE_MAX}')
     require(isinstance(s['issuedAt'], str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ', s['issuedAt']),
             'policy issuedAt must be UTC seconds, e.g. 2026-10-26T12:00:00Z')
     floors = s['minimumRevision']

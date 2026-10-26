@@ -88,12 +88,17 @@ bytes. Its fields are exact:
 
 | Field | Meaning |
 |---|---|
-| `sequence` | 1 and up; each policy is above the one it replaces |
+| `sequence` | 1 to 2,147,483,647; each policy is above the one it replaces |
 | `issuedAt` | UTC seconds |
 | `minimumRevision` | generation → package revision, such as `{"21": 124}`. Nothing ranked below the highest floor installs, in the app's order (generation, source revision, revision), so earlier generations and Z62 are below it too. Team builds may go below it |
 | `withdrawn` | `{"id", "sha256"}` pairs, sorted by `id`: withdrawn for good |
 | `rollout` | release ID → the signed ceiling (0–100) of its automatic rollout |
 
+- **New fields:** apps apply the fields they know and ignore others, which
+  is safe because a field only narrows what installs. A field that changes
+  how a known one reads needs a new schema, published beside this file for
+  as long as apps read only version 1. There is no expiry: a floor that
+  lapsed would let older releases back in.
 - **What apps keep:** the highest sequence they have seen, every withdrawal
   (signed or not) and the highest floor, plus a baseline compiled into each
   build. So no push, and no older catalog, undoes a policy.

@@ -217,6 +217,7 @@ class PolicyTest(unittest.TestCase):
             'a release statement': signed({**statement, 'schema': catalog.SCHEMA}),
             'another product': signed({**statement, 'product': 'glyph'}),
             'sequence 0': signed({**statement, 'sequence': 0}),
+            'a sequence past the app\'s 2^31 - 1': signed({**statement, 'sequence': 2**31}),
             'a generation that is not a number': signed({**statement, 'minimumRevision': {'P21': 118}}),
             'withdrawals out of order': signed({**statement, 'withdrawn': [{'id': 'b', 'sha256': '1' * 64},
                                                                            {'id': 'a', 'sha256': '2' * 64}]}),
