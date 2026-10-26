@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "product": "sudo",
+  "hardware": "603V1.23.2",
+  "statement": "eyJoYXJkd2FyZSI6IjYwM1YxLjIzLjIiLCJpc3N1ZWRBdCI6IjIwMjYtMTAtMjZUMDQ6NTc6MzJaIiwibWluaW11bVJldmlzaW9uIjp7IjIxIjoxMjR9LCJwcm9kdWN0Ijoic3VkbyIsInJvbGxvdXQiOnt9LCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcG9saWN5LzEiLCJzZXF1ZW5jZSI6MSwid2l0aGRyYXduIjpbeyJpZCI6IjYuMC4zLjNQMjEtcjEwNyIsInNoYTI1NiI6Ijk2YzI1ZmI1ZDQzNWY3MjJiZTI3NTMwZWRhNzU4ZmM1N2I3NzYzMzc4ZTY2ZjEwOGU2OWVhOGNmNGFiN2ZiMWQifV19",
+  "signature": {
+    "alg": "ES256",
+    "keyId": "sudo-release-1",
+    "der": "MEUCIQDolI2QWthCGcZnKghWVubHzSxFGU4AAUXCu/6kWgY7fwIgbD9qgIeLd399C1WJ4iSXwMZiV0OxpQ4zearIjoHoJ/g="
+  }
+}
