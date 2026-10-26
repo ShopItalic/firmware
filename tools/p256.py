@@ -1,8 +1,8 @@
 """Dependency-free ECDSA P-256 / SHA-256 verification (NIST SP 800-186 curve).
 
 Verification only handles public data, so plain Python arithmetic is fine.
-`sign` exists for tests with throwaway keys; release keys live in the
-Keychain and are only ever used through tools/sign_release.swift.
+`sign` exists for tests with throwaway keys; release keys live in 1Password
+and are only ever used through tools/sign_release.swift.
 """
 import hashlib
 import secrets
