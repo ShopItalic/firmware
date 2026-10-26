@@ -15,6 +15,59 @@
   },
   "releases": [
     {
+      "id": "6.0.3.3P21-r126",
+      "version": "6.0.3.3P21",
+      "packageRevision": 126,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r126",
+      "asset": {
+        "bytes": 332680,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "8e041624e8e840bf9c54916122c65b542bb8b97b973c2fd01e256d56a16fcbbb",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r126/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "38571248574d477600761186f42636c5",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/677152573"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.126 is the factory candidate: Sudo 1.0.125 with the factory review's fixes that need no data from a Ring. A wake-sensor calibration error no longer throws touch reports away, and a stuck trackpad calibration error restarts the touch chip after 2 s (at most every 30 s). The 15 s hold on the charger that pairs a new phone no longer restarts on a wide thumb or a passing flag. If bond storage can't start, the Ring repairs foreign pages once and opens its recovery window instead of refusing pairing forever. On the charger, the charge voltage and current settings are checked every few minutes and restored if they drift, and over-voltage is detected. The low-battery cut writes its time once and has a fallback. A failed storage mount at boot no longer erases a Ring that has a filesystem. Keeps everything in Sudo 1.0.125. Requires an Italic build that admits revision 126. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending, and the touch retune waits for Ring data. Revision 120 remains the selected factory image.",
+      "notice": "Test build Sudo 1.0.126, the factory candidate: reliability fixes for touch flags, pairing recovery, bond storage, charging and storage; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 126,
+        "buildIdentity": {
+          "revision": 126,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "be4d9680daae550b07ab2b433f741f61",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.126",
+        "notice": "Test build Sudo 1.0.126, the factory candidate: reliability fixes for touch flags, pairing recovery, bond storage, charging and storage; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.126 is the factory candidate: Sudo 1.0.125 with the factory review's fixes that need no data from a Ring. A wake-sensor calibration error no longer throws touch reports away, and a stuck trackpad calibration error restarts the touch chip after 2 s (at most every 30 s). The 15 s hold on the charger that pairs a new phone no longer restarts on a wide thumb or a passing flag. If bond storage can't start, the Ring repairs foreign pages once and opens its recovery window instead of refusing pairing forever. On the charger, the charge voltage and current settings are checked every few minutes and restored if they drift, and over-voltage is detected. The low-battery cut writes its time once and has a fallback. A failed storage mount at boot no longer erases a Ring that has a filesystem. Keeps everything in Sudo 1.0.125. Requires an Italic build that admits revision 126. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending, and the touch retune waits for Ring data. Revision 120 remains the selected factory image."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzMyNjgwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiOGUwNDE2MjRlOGU4NDBiZjljNTQ5MTYxMjJjNjViNTQyYmI4Yjk3Yjk3M2MyZmQwMWUyNTZkNTZhMTZmY2JiYiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTI2IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yNlQwNTo0MjozMVoiLCJwYWNrYWdlUmV2aXNpb24iOjEyNiwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQCnZyIzurZAHcmCftILnTJtyLVjwoxbIlBlvM9AxxYegwIhAKGdB08M3qm7ntHvFr8DP+eAixEoW+J94X+/0ndpQC6d"
+      }
+    },
+    {
       "id": "6.0.3.3P21-r125",
       "version": "6.0.3.3P21",
       "packageRevision": 125,
