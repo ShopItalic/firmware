@@ -66,6 +66,64 @@ Two unsigned fields are honoured because they can only narrow a signed
 - the catalog's `automaticUpdatesPaused`: `"all"` stops every automatic
   install, `"background"` only those the app would start in a background window.
 
+### The signed policy (Sudo)
+
+Those controls are unsigned. So anyone who can push to `main`, or serve an
+older copy of the catalog, could un-withdraw a release, widen a rollout, or
+bring back an older state. The policy closes that (ShopItalic/app
+`docs/design/ring-firmware-stable-release.md`, 1.1).
+
+`products/sudo/policy-v1.json` is an envelope signed with `sudo-release-1`,
+like an entry's. The catalog carries the same envelope as its `policy`, so an
+app reads both in one fetch:
+
+```json
+{"schemaVersion": 1, "product": "sudo", "hardware": "603V1.23.2",
+ "statement": "<base64 of the exact signed bytes>",
+ "signature": {"alg": "ES256", "keyId": "sudo-release-1", "der": "<base64>"}}
+```
+
+The statement, `italic-firmware-policy/1`, is canonical JSON of at most 4,096
+bytes. Its fields are exact:
+
+| Field | Meaning |
+|---|---|
+| `sequence` | 1 to 2,147,483,647; each policy is above the one it replaces |
+| `issuedAt` | UTC seconds |
+| `minimumRevision` | generation → package revision, such as `{"21": 124}`. Nothing ranked below the highest floor installs, in the app's order (generation, source revision, revision), so earlier generations and Z62 are below it too. Team builds may go below it |
+| `withdrawn` | `{"id", "sha256"}` pairs, sorted by `id`: withdrawn for good. Apps match the package SHA-256, whatever entry offers it, on every build |
+| `rollout` | release ID → the signed ceiling (0–100) of its automatic rollout |
+
+- **New fields:** apps apply the fields they know and ignore others, which
+  is safe because a field only narrows what installs. A field that changes
+  how a known one reads needs a new schema, published beside this file for
+  as long as apps read only version 1. There is no expiry: a floor that
+  lapsed would let older releases back in.
+- **What apps keep:** the highest sequence they have seen, every withdrawal
+  (signed or not) and the highest floor, plus a baseline compiled into each
+  build. So no push, and no older catalog, undoes a policy.
+- **What CI checks** (`tools/catalog.py --previous <base>`):
+  - the signature and the exact fields;
+  - each withdrawal names a catalog entry with that package, whose own
+    `withdrawn` is `true`;
+  - each floor names an installable release;
+  - each ceiling names a signed `autoInstall` release, and no entry's
+    unsigned `rollout` is above its ceiling (missing is 0%);
+  - the file and the catalog's copy are one envelope;
+  - against the base commit: a higher sequence, no withdrawal dropped, no
+    lower floor, and no policy removed.
+- **Effective rollout:** the lower of the signed ceiling and the entry's
+  `rollout`, with a missing value on either side counting as 0%.
+  - An app that has no policy installs nothing by itself, so publish the first
+    policy before any release that installs itself, and compile it into the
+    App Store build.
+  - The unsigned `rollout` only lowers, and the pause and `withdraw` work at
+    once without a signature.
+- **Apps read only the catalog's copy** (`policy`), so one fetch gets both,
+  from one commit. `policy-v1.json` is the source file.
+- **Catalog size:** CI also refuses a catalog past what apps read (512 KiB;
+  200 Sudo or 500 Glyph entries), and warns from 75%.
+
 The Italic app fetches Glyph firmware from this catalog and delivers it over
 Bluetooth, or over a local Wi-Fi fast transfer the app opens. Glyph never
 downloads from here itself. Glyph checks this signature and the package SHA-256
@@ -77,7 +135,8 @@ before installing, because neither link authenticates the package.
 keys/<product>-release-<n>.x963     public keys (65-byte X9.63)
 products/<product>/catalog-v1.json  signed catalog, newest first
 tools/release.py                    stage | publish | promote | rollout | pause-automatic |
-                                    resume-automatic | withdraw | record-images
+                                    resume-automatic | withdraw | policy | record-images
+products/sudo/policy-v1.json        the signed policy (floor, withdrawals, rollout ceilings)
 products/sudo/package-images.json   application image sizes for the dual-bank check
 tools/catalog.py                    schema + verification (also run by CI)
 tools/p256.py                       dependency-free P-256 verification
@@ -142,6 +201,19 @@ python3 tools/release.py publish .staging/sudo-r120-stable --push
 python3 tools/release.py rollout --product sudo --id 6.0.3.3P21-r120 --percent 1
 python3 tools/release.py pause-automatic --product sudo [--background]
 python3 tools/release.py resume-automatic --product sudo
+```
+
+**A policy change** is signed with the Keychain key and committed with the
+catalog's copy. It also writes the unsigned fields that builds before the
+policy read: a withdrawal's `withdrawn: true`, and a ceiling's `rollout`.
+`--dry-run` signs and changes nothing; it prints what the policy would do
+(`--out` also writes the unsigned statement):
+
+```sh
+python3 tools/release.py policy --product sudo --dry-run --floor 21:124 --withdraw 6.0.3.3P21-r107
+python3 tools/release.py policy --product sudo --floor 21:124 --withdraw 6.0.3.3P21-r107 --push
+# Each rollout stage, signed; `rollout` alone can then only lower it.
+python3 tools/release.py policy --product sudo --rollout 6.0.3.3P21-r126:1 --push
 ```
 
 A stable release's **settings evidence** is its qualification record in
