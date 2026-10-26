@@ -7,6 +7,7 @@ import json
 import sys
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
@@ -30,7 +31,11 @@ class ReleaseTest(unittest.TestCase):
         self.gh = self.patch(release, 'gh', side_effect=AssertionError('unexpected GitHub mutation'))
         self.download = self.patch(release, 'anonymous_get', side_effect=AssertionError('unexpected download'))
         self.asset = self.root / 'BCL603S2P_6.0.3.3P21.zip'
-        self.asset.write_bytes(b'publisher-test-package')
+        # Staging a Sudo package reads its application image for the dual-bank check.
+        with zipfile.ZipFile(self.asset, 'w') as archive:
+            for name, data in (('manifest.json', b'{"manifest": {"application": {"bin_file": "app.bin", "dat_file": "app.dat"}}}'),
+                               ('app.bin', b'publisher-test-image'), ('app.dat', b'init')):
+                archive.writestr(zipfile.ZipInfo(name, (2026, 10, 25, 0, 0, 0)), data)
         self.stage_dir = self.root / 'stage'
         self.entry = release.stage('sudo', '6.0.3.3P21-r123', '6.0.3.3P21', 123, 'test', True,
                                    self.asset, [], self.stage_dir, ['6.0.3.3P21'],

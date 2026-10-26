@@ -4,8 +4,10 @@ Trust model: GitHub, TLS and this repository only decide *availability*.
 Every release carries a statement (exact JSON bytes) signed by the product's
 release key. Clients verify the signature over those bytes, parse them, and
 trust only what the statement says. Unsigned entry fields are display
-metadata; the one unsigned field clients honour is `withdrawn: true`, because
-it can only remove an offer.
+metadata. The unsigned fields clients honour can only narrow what a statement
+grants: `withdrawn: true` removes an offer, an entry's `rollout` admits only
+some Rings to an automatic install the statement allows, and the catalog's
+`automaticUpdatesPaused` stops automatic installs.
 """
 import base64
 import json
@@ -19,17 +21,35 @@ OWNER_REPO = 'ShopItalic/firmware'
 DOWNLOAD = f'https://github.com/{OWNER_REPO}/releases/download/'
 ASSET_API = f'https://api.github.com/repos/{OWNER_REPO}/releases/assets/'
 SCHEMA = 'italic-firmware-release/1'
+# Version 2 adds what an app needs to install a release by itself (ShopItalic/app
+# docs/design/ring-firmware-auto-update.md, section 9). Only Sudo uses it: Glyph
+# firmware checks its own statements and knows version 1 only.
+SCHEMA_V2 = 'italic-firmware-release/2'
 CHANNELS = ('test', 'beta', 'stable')
-# Product -> hardware and key IDs accepted in its catalog.
+# Product -> hardware, key IDs and statement schemas accepted in its catalog.
 PRODUCTS = {
-    'glyph': {'hardware': 'PKS3-101', 'keys': ('glyph-release-1',)},
-    'sudo': {'hardware': '603V1.23.2', 'keys': ('sudo-release-1',)},
+    'glyph': {'hardware': 'PKS3-101', 'keys': ('glyph-release-1',), 'schemas': (SCHEMA,)},
+    'sudo': {'hardware': '603V1.23.2', 'keys': ('sudo-release-1',), 'schemas': (SCHEMA, SCHEMA_V2)},
 }
 SHA = re.compile(r'[0-9a-f]{64}')
 RELEASE_ID = re.compile(r'[A-Za-z0-9][A-Za-z0-9.+-]{0,47}')
 ASSET_NAME = re.compile(r'[A-Za-z0-9][A-Za-z0-9._+-]{0,127}')
 STATEMENT_KEYS = {'schema', 'product', 'hardware', 'id', 'version', 'packageRevision', 'channel',
                   'installable', 'asset', 'sourceVersions', 'issuedAt'}
+# Version 2's required and optional fields:
+#   autoInstall          the release may install itself (stable, installable, application only)
+#   minimumAppBuild      the oldest app build that may install it
+#   erasesStorage        its first boot formats the device's recording storage
+#   applicationOnly      the package replaces the application only, never the bootloader or SoftDevice
+#   buildIdentity        what the device reports once it runs this release
+#   minimumSourceRevision  (optional) the oldest revision of its generation it may replace
+#   customerVersion      (optional, never on test) the name people see, major.subrelease.increment
+#                        ("1.0.124"); the app also reads the two-part form ("1.120") of earlier fixtures
+#   changeNote           (optional) one short line of what people will feel or see
+V2_REQUIRED = {'autoInstall', 'minimumAppBuild', 'erasesStorage', 'applicationOnly', 'buildIdentity'}
+V2_OPTIONAL = {'minimumSourceRevision', 'customerVersion', 'changeNote'}
+BUILD_IDENTITY_KEYS = {'generation', 'revision', 'codec', 'settingsSchema', 'buildID'}
+PAUSES = ('all', 'background')
 
 
 class CatalogError(ValueError):
@@ -59,12 +79,14 @@ def encode_statement(statement):
 
 
 def make_statement(product, release_id, version, revision, channel, installable, asset,
-                   issued_at, source_versions=None):
-    statement = {'schema': SCHEMA, 'product': product, 'hardware': PRODUCTS[product]['hardware'],
+                   issued_at, source_versions=None, automatic=None):
+    """`automatic` holds version 2's fields; without it the statement is version 1."""
+    statement = {'schema': SCHEMA if automatic is None else SCHEMA_V2, 'product': product,
+                 'hardware': PRODUCTS[product]['hardware'],
                  'id': release_id, 'version': version, 'packageRevision': revision,
                  'channel': channel, 'installable': installable,
                  'asset': {'name': asset['name'], 'bytes': asset['bytes'], 'sha256': asset['sha256']},
-                 'issuedAt': issued_at}
+                 'issuedAt': issued_at, **(automatic or {})}
     if source_versions is not None:
         statement['sourceVersions'] = list(source_versions)
     check_statement(statement, product)
@@ -72,8 +94,10 @@ def make_statement(product, release_id, version, revision, channel, installable,
 
 
 def check_statement(s, product):
-    require(isinstance(s, dict) and set(s) <= STATEMENT_KEYS, 'unexpected statement fields')
-    require(s.get('schema') == SCHEMA, 'wrong statement schema')
+    require(isinstance(s, dict), 'statement must be an object')
+    require(s.get('schema') in PRODUCTS[product]['schemas'], 'wrong statement schema')
+    allowed = STATEMENT_KEYS | (V2_REQUIRED | V2_OPTIONAL if s['schema'] == SCHEMA_V2 else set())
+    require(set(s) <= allowed, 'unexpected statement fields')
     require(s.get('product') == product and s.get('hardware') == PRODUCTS[product]['hardware'],
             'statement product/hardware mismatch')
     require(isinstance(s.get('id'), str) and RELEASE_ID.fullmatch(s['id']), 'bad release id')
@@ -92,6 +116,39 @@ def check_statement(s, product):
         v = s['sourceVersions']
         require(isinstance(v, list) and 0 < len(v) <= 100 and len(set(v)) == len(v)
                 and all(isinstance(x, str) and 0 < len(x) <= 32 for x in v), 'bad sourceVersions')
+    if s['schema'] == SCHEMA_V2:
+        check_automatic(s)
+
+
+def check_automatic(s):
+    """Version 2's fields. They decide installs nobody taps, so each is exact."""
+    require(V2_REQUIRED <= set(s), 'version 2 statement fields missing')
+    for field in ('autoInstall', 'erasesStorage', 'applicationOnly'):
+        require(type(s[field]) is bool, f'{field} must be boolean')
+    require(type(s['minimumAppBuild']) is int and 1 <= s['minimumAppBuild'] <= 999999, 'bad minimumAppBuild')
+    if s['autoInstall']:
+        require(s['channel'] == 'stable' and s['installable'] and s['applicationOnly'],
+                'autoInstall needs an installable, application-only stable release')
+    identity = s['buildIdentity']
+    require(isinstance(identity, dict) and set(identity) == BUILD_IDENTITY_KEYS, 'bad buildIdentity')
+    for field, top in (('generation', 99), ('revision', 999), ('codec', 255), ('settingsSchema', 255)):
+        require(type(identity[field]) is int and 0 <= identity[field] <= top, f'bad buildIdentity {field}')
+    require(isinstance(identity['buildID'], str) and re.fullmatch(r'[0-9a-f]{32}', identity['buildID']),
+            'bad buildIdentity buildID')
+    generation = re.fullmatch(r'\d+\.\d+\.\d+\.\d+P(\d{2})', s['version'])
+    require(generation is not None and int(generation.group(1)) == identity['generation']
+            and identity['revision'] == s['packageRevision'], 'buildIdentity disagrees with version or revision')
+    if 'minimumSourceRevision' in s:
+        require(type(s['minimumSourceRevision']) is int and 1 <= s['minimumSourceRevision'] <= 999,
+                'bad minimumSourceRevision')
+    if 'customerVersion' in s:
+        require(s['channel'] != 'test' and isinstance(s['customerVersion'], str)
+                and re.fullmatch(r'[1-9][0-9]{0,2}\.[0-9]{1,3}(?:\.[0-9]{1,3})?', s['customerVersion']),
+                'customerVersion must look like 1.0.124, and never on the test channel')
+    if 'changeNote' in s:
+        note = s['changeNote']
+        require(isinstance(note, str) and 0 < len(note) <= 60 and note == note.strip() and note.isprintable(),
+                'changeNote must be one printable line of at most 60 characters')
 
 
 def signed_entry(statement_bytes, key_id, der, url, api_url=None, display=None, details=None, extra_assets=()):
@@ -142,7 +199,25 @@ def verify_entry(product, entry, keys):
     require(isinstance(extra, list) and all(isinstance(n, str) and ASSET_NAME.fullmatch(n) for n in extra)
             and s['asset']['name'] not in extra and len(set(extra)) == len(extra), f"{s['id']}: bad extraAssets")
     require(isinstance(entry.get('details', {}), dict), 'details must be an object')
+    if s['schema'] == SCHEMA_V2 and 'buildIdentity' in entry.get('details', {}):
+        require(entry['details']['buildIdentity'] == s['buildIdentity'],
+                f"{s['id']}: details buildIdentity disagrees with statement")
+    if 'rollout' in entry:
+        check_rollout(s, entry['rollout'])
     return s
+
+
+def check_rollout(s, rollout):
+    """`rollout` admits devices whose bucket (0-99) is below `percent` to an
+    automatic install. Unsigned, so it means something only beside a signed
+    `autoInstall`; a missing rollout is 0%."""
+    require(s['schema'] == SCHEMA_V2 and s['autoInstall'], f"{s['id']}: rollout without a signed autoInstall")
+    require(isinstance(rollout, dict) and 'percent' in rollout and set(rollout) <= {'percent', 'since'},
+            f"{s['id']}: bad rollout")
+    require(type(rollout['percent']) is int and 0 <= rollout['percent'] <= 100, f"{s['id']}: bad rollout percent")
+    if 'since' in rollout:
+        require(isinstance(rollout['since'], str) and re.fullmatch(r'\d{4}-\d\d-\d\d', rollout['since']),
+                f"{s['id']}: rollout since must be a date, e.g. 2026-11-02")
 
 
 def load_keys():
@@ -158,6 +233,10 @@ def validate_catalog(product, catalog, keys):
     require(product in PRODUCTS, f'unknown product {product}')
     require(catalog.get('schemaVersion') == 1 and catalog.get('product') == product, 'bad catalog header')
     require(catalog.get('hardware') == PRODUCTS[product]['hardware'], 'bad catalog hardware')
+    # The pause switch: "all" stops every automatic install, "background" only
+    # those an app would start in a background window. Missing: not paused.
+    pause = catalog.get('automaticUpdatesPaused')
+    require(pause is None or pause in PAUSES, 'automaticUpdatesPaused must be "all" or "background"')
     releases = catalog.get('releases')
     require(isinstance(releases, list), 'releases must be a list')
     seen = set()

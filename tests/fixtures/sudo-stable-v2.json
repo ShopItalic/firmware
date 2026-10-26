@@ -1,0 +1,133 @@
+{
+  "note": "Write tests/fixtures/sudo-stable-v2.json: two stable version 2 releases, Sudo 1.120 (revision 120) and Sudo 1.121 (revision 121), staged, published and promoted by these tools with a throwaway key over made-up packages. ShopItalic/app's RingFirmwareReleaseTests decode the same file. Run it again only when the statement format changes, then copy the file into the app's tests.",
+  "publicKey": "BMacun5Me3cFvnWbLuqunJ875MlDQNXUttSzG1dQ9184L5g67BSUOT3JDt7wxsqpLpjbx/jo7JGetSqeWE40z2o=",
+  "catalog": {
+    "schemaVersion": 1,
+    "product": "sudo",
+    "hardware": "603V1.23.2",
+    "releases": [
+      {
+        "id": "6.0.3.3P21-r121",
+        "version": "6.0.3.3P21",
+        "packageRevision": 121,
+        "hardware": "603V1.23.2",
+        "channel": "stable",
+        "installable": true,
+        "withdrawn": false,
+        "tag": "sudo-6.0.3.3P21-r121",
+        "asset": {
+          "bytes": 4618,
+          "name": "BCL603S2P_6.0.3.3P21.zip",
+          "sha256": "a93407bdea68354d3732f737ef2b12790c290a3f6baa43f7f92eeab6ec802b46",
+          "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r121/BCL603S2P_6.0.3.3P21.zip",
+          "md5": "f0a9e46245d1b39634872d1e2fb4c957",
+          "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/660000121"
+        },
+        "extraAssets": [],
+        "details": {
+          "schemaVersion": 1,
+          "hardware": "603V1.23.2",
+          "version": "6.0.3.3P21",
+          "packageRevision": 121,
+          "buildIdentity": {
+            "generation": 21,
+            "revision": 121,
+            "codec": 1,
+            "settingsSchema": 6,
+            "buildID": "00000000000000000000000000000079"
+          },
+          "status": "supplier-signed-ota",
+          "otaAvailable": true,
+          "settingsCompatibility": {
+            "contract": "factory-settings-v1",
+            "packageSHA256": "a93407bdea68354d3732f737ef2b12790c290a3f6baa43f7f92eeab6ec802b46",
+            "evidenceSHA256": "f1c7fbc7dbf86c5c21d456b1dafec044b6e1a6ce383078ec0ec74589ce79a1ca",
+            "sourceVersions": [
+              "6.0.3.3P21"
+            ],
+            "preservesAllSettings": true
+          },
+          "promotedFrom": {
+            "channel": "test",
+            "schema": "italic-firmware-release/1",
+            "issuedAt": "2026-10-23T03:07:22Z",
+            "statementSHA256": "97979b4613dcca31bb58416440737f26e7158ee2450a4c1f6c4a0d54070adf87"
+          },
+          "releaseNotes": "Sudo 1.121 notes."
+        },
+        "statement": "eyJhcHBsaWNhdGlvbk9ubHkiOnRydWUsImFzc2V0Ijp7ImJ5dGVzIjo0NjE4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiYTkzNDA3YmRlYTY4MzU0ZDM3MzJmNzM3ZWYyYjEyNzkwYzI5MGEzZjZiYWE0M2Y3ZjkyZWVhYjZlYzgwMmI0NiJ9LCJhdXRvSW5zdGFsbCI6dHJ1ZSwiYnVpbGRJZGVudGl0eSI6eyJidWlsZElEIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNzkiLCJjb2RlYyI6MSwiZ2VuZXJhdGlvbiI6MjEsInJldmlzaW9uIjoxMjEsInNldHRpbmdzU2NoZW1hIjo2fSwiY2hhbmdlTm90ZSI6InNob3J0ZXIgc3RhcnQgYW5kIHN0b3AgYnV6emVzIiwiY2hhbm5lbCI6InN0YWJsZSIsImN1c3RvbWVyVmVyc2lvbiI6IjEuMTIxIiwiZXJhc2VzU3RvcmFnZSI6dHJ1ZSwiaGFyZHdhcmUiOiI2MDNWMS4yMy4yIiwiaWQiOiI2LjAuMy4zUDIxLXIxMjEiLCJpbnN0YWxsYWJsZSI6dHJ1ZSwiaXNzdWVkQXQiOiIyMDI2LTEwLTIzVDAzOjA3OjIyWiIsIm1pbmltdW1BcHBCdWlsZCI6MjYzLCJwYWNrYWdlUmV2aXNpb24iOjEyMSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8yIiwic291cmNlVmVyc2lvbnMiOlsiNi4wLjMuM1AyMSJdLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMSJ9",
+        "signature": {
+          "alg": "ES256",
+          "keyId": "sudo-release-1",
+          "der": "MEUCIQDAZVTNHzlco2BgCjpgzkuRGO4xe81Jwcuevg/YQJXTewIgCxQanyf8MinIalEKTGTLBGc/ZXWWlEQ2jaycKtPbAI0="
+        },
+        "releaseNotes": "Sudo 1.121 notes.",
+        "rollout": {
+          "percent": 100,
+          "since": "2026-11-02"
+        }
+      },
+      {
+        "id": "6.0.3.3P21-r120",
+        "version": "6.0.3.3P21",
+        "packageRevision": 120,
+        "hardware": "603V1.23.2",
+        "channel": "stable",
+        "installable": true,
+        "withdrawn": false,
+        "tag": "sudo-6.0.3.3P21-r120",
+        "asset": {
+          "bytes": 4618,
+          "name": "BCL603S2P_6.0.3.3P21.zip",
+          "sha256": "8782e3df6fa18dce3d274657e9939a253e5b6e9d4110f064432b4de130e722fb",
+          "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r120/BCL603S2P_6.0.3.3P21.zip",
+          "md5": "81e8d410892e0596cc8c9dfa4a1c539c",
+          "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/660000120"
+        },
+        "extraAssets": [],
+        "details": {
+          "schemaVersion": 1,
+          "hardware": "603V1.23.2",
+          "version": "6.0.3.3P21",
+          "packageRevision": 120,
+          "buildIdentity": {
+            "generation": 21,
+            "revision": 120,
+            "codec": 1,
+            "settingsSchema": 6,
+            "buildID": "00000000000000000000000000000078"
+          },
+          "status": "supplier-signed-ota",
+          "otaAvailable": true,
+          "settingsCompatibility": {
+            "contract": "factory-settings-v1",
+            "packageSHA256": "8782e3df6fa18dce3d274657e9939a253e5b6e9d4110f064432b4de130e722fb",
+            "evidenceSHA256": "e70c732ef12370f6a0dcb17251fd7a69ccf79844ff59c79087ad0e0304e7a88b",
+            "sourceVersions": [
+              "6.0.3.3P21"
+            ],
+            "preservesAllSettings": true
+          },
+          "promotedFrom": {
+            "channel": "test",
+            "schema": "italic-firmware-release/1",
+            "issuedAt": "2026-10-23T03:07:22Z",
+            "statementSHA256": "a6b2f1980fd328c9e27c1543d9226bbd0c7a0bab3d2a4108f927f8687b6dc2dc"
+          },
+          "releaseNotes": "Sudo 1.120 notes."
+        },
+        "statement": "eyJhcHBsaWNhdGlvbk9ubHkiOnRydWUsImFzc2V0Ijp7ImJ5dGVzIjo0NjE4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiODc4MmUzZGY2ZmExOGRjZTNkMjc0NjU3ZTk5MzlhMjUzZTViNmU5ZDQxMTBmMDY0NDMyYjRkZTEzMGU3MjJmYiJ9LCJhdXRvSW5zdGFsbCI6dHJ1ZSwiYnVpbGRJZGVudGl0eSI6eyJidWlsZElEIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNzgiLCJjb2RlYyI6MSwiZ2VuZXJhdGlvbiI6MjEsInJldmlzaW9uIjoxMjAsInNldHRpbmdzU2NoZW1hIjo2fSwiY2hhbm5lbCI6InN0YWJsZSIsImN1c3RvbWVyVmVyc2lvbiI6IjEuMTIwIiwiZXJhc2VzU3RvcmFnZSI6dHJ1ZSwiaGFyZHdhcmUiOiI2MDNWMS4yMy4yIiwiaWQiOiI2LjAuMy4zUDIxLXIxMjAiLCJpbnN0YWxsYWJsZSI6dHJ1ZSwiaXNzdWVkQXQiOiIyMDI2LTEwLTIzVDAzOjA3OjIyWiIsIm1pbmltdW1BcHBCdWlsZCI6MjYzLCJwYWNrYWdlUmV2aXNpb24iOjEyMCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8yIiwic291cmNlVmVyc2lvbnMiOlsiNi4wLjMuM1AyMSJdLCJ2ZXJzaW9uIjoiNi4wLjMuM1AyMSJ9",
+        "signature": {
+          "alg": "ES256",
+          "keyId": "sudo-release-1",
+          "der": "MEUCIQCVZS1jIg5Q9rEVPkENhMpVDnJ1gl5WDLihBu5KF7eXCQIgB02IFWioswliUbTZnzMxo4G7rlLJSJ8ay20jpC/Xm6c="
+        },
+        "releaseNotes": "Sudo 1.120 notes.",
+        "rollout": {
+          "percent": 10,
+          "since": "2026-11-02"
+        }
+      }
+    ]
+  }
+}
