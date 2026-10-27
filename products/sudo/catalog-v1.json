@@ -15,6 +15,59 @@
   },
   "releases": [
     {
+      "id": "6.0.3.3P21-r128",
+      "version": "6.0.3.3P21",
+      "packageRevision": 128,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r128",
+      "asset": {
+        "bytes": 321152,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "1e3a35db3c79d9b9186d2904e5b5c5c104a347de1c39a9c4d2fa8848067dadac",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r128/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "dc0aba89a2d7743841e72d06a593a437",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/682983486"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.128 is the factory candidate: Sudo 1.0.127 with the three code fixes from the October 27 review of 1.0.127. The flash bus is set up with no extra select pin for the nRF SDK to drive. A settings repair after a corrupt record reports success only when the old record is gone, so a saved setting such as the recording light cannot come back changed after a restart; if the old record is left, the next save removes it. A charger insertion and a firmware update no longer overlap: the Ring refuses to start an update while it writes the charger setup, and writes none once an update has started. Keeps everything in Sudo 1.0.127. Requires an Italic build that admits revision 128. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending, and the touch retune waits for Ring data.",
+      "notice": "Test build Sudo 1.0.128, the factory candidate: fixes for the flash bus setup, settings repair and charger setup during an update; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 128,
+        "buildIdentity": {
+          "revision": 128,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "705987b37df27b538c7740b0bc12cfbb",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.128",
+        "notice": "Test build Sudo 1.0.128, the factory candidate: fixes for the flash bus setup, settings repair and charger setup during an update; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.128 is the factory candidate: Sudo 1.0.127 with the three code fixes from the October 27 review of 1.0.127. The flash bus is set up with no extra select pin for the nRF SDK to drive. A settings repair after a corrupt record reports success only when the old record is gone, so a saved setting such as the recording light cannot come back changed after a restart; if the old record is left, the next save removes it. A charger insertion and a firmware update no longer overlap: the Ring refuses to start an update while it writes the charger setup, and writes none once an update has started. Keeps everything in Sudo 1.0.127. Requires an Italic build that admits revision 128. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending, and the touch retune waits for Ring data."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzIxMTUyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiMWUzYTM1ZGIzYzc5ZDliOTE4NmQyOTA0ZTViNWM1YzEwNGEzNDdkZTFjMzlhOWM0ZDJmYTg4NDgwNjdkYWRhYyJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTI4IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yN1QyMTo1MzoxOFoiLCJwYWNrYWdlUmV2aXNpb24iOjEyOCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQCoBGO+Kjl0cG2Y5ASActQoZa0peyshWIEGnVlqOTQQoAIhAMtCE+feKbz76V7MPADQqMHFmPNoExZSnrLdax6UuTot"
+      }
+    },
+    {
       "id": "6.0.3.3P21-r127",
       "version": "6.0.3.3P21",
       "packageRevision": 127,
