@@ -15,6 +15,59 @@
   },
   "releases": [
     {
+      "id": "6.0.3.3P21-r127",
+      "version": "6.0.3.3P21",
+      "packageRevision": 127,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r127",
+      "asset": {
+        "bytes": 320784,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "a8a2e3a28c955aec0e5b229a4e85a29d9b448b2478554238ea18ba6e10cee164",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r127/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "5de402de516c312e452533fd1bcbfe3e",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/679896324"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.127 is the factory candidate: Sudo 1.0.126 with every fix from the October 26 re-review that needs no data from a Ring. The 15 s charger pairing hold counts a second finger and survives a stuck trackpad calibration error; a finger left resting ends push-to-talk with the normal cue; the touch init checks its writes and reruns if one fails. Bonds stored before a bond-storage repair are known in the same boot. The Ring no longer enters System OFF, so a charger always revives it. Charger faults and setting drifts reach the app, and a corrupt controls record runs on the defaults until the next save repairs it. A failed boot mount is retried, only a foreign filesystem is formatted, and a failed read ends only its own operation. Unused vendor commands, release logging, the closed sleep library and nine unused vendor libraries are removed. Keeps everything in Sudo 1.0.126. Requires an Italic build that admits revision 127. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending, and the touch retune waits for Ring data.",
+      "notice": "Test build Sudo 1.0.127, the factory candidate: fixes for the pairing hold, bonds, power, charging, settings and storage, and unused vendor code removed; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 127,
+        "buildIdentity": {
+          "revision": 127,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "af018194e5aa0447267c720887433e78",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.127",
+        "notice": "Test build Sudo 1.0.127, the factory candidate: fixes for the pairing hold, bonds, power, charging, settings and storage, and unused vendor code removed; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.127 is the factory candidate: Sudo 1.0.126 with every fix from the October 26 re-review that needs no data from a Ring. The 15 s charger pairing hold counts a second finger and survives a stuck trackpad calibration error; a finger left resting ends push-to-talk with the normal cue; the touch init checks its writes and reruns if one fails. Bonds stored before a bond-storage repair are known in the same boot. The Ring no longer enters System OFF, so a charger always revives it. Charger faults and setting drifts reach the app, and a corrupt controls record runs on the defaults until the next save repairs it. A failed boot mount is retried, only a foreign filesystem is formatted, and a failed read ends only its own operation. Unused vendor commands, release logging, the closed sleep library and nine unused vendor libraries are removed. Keeps everything in Sudo 1.0.126. Requires an Italic build that admits revision 127. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending, and the touch retune waits for Ring data."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzIwNzg0LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiYThhMmUzYTI4Yzk1NWFlYzBlNWIyMjlhNGU4NWEyOWQ5YjQ0OGIyNDc4NTU0MjM4ZWExOGJhNmUxMGNlZTE2NCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTI3IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yN1QwMDowNzoxMloiLCJwYWNrYWdlUmV2aXNpb24iOjEyNywicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQCxVpUFSBbV0a0/oCbV0p8slDOh16g/eLyC0dc3H1kjkQIgDoOVI6GXs1pHOv8rKHZNtAXsqjbYbWW5GLze/zZLHk4="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r126",
       "version": "6.0.3.3P21",
       "packageRevision": 126,
