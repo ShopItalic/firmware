@@ -15,6 +15,59 @@
   },
   "releases": [
     {
+      "id": "6.0.3.3P21-r129",
+      "version": "6.0.3.3P21",
+      "packageRevision": 129,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r129",
+      "asset": {
+        "bytes": 323872,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "afe67d231a71aed0ec2f57425a2e0a36d0e30bcfc2c9d12b97a1219698133fef",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r129/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "c0ea138d42cedda9bc6389ade6ed4755",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/686253438"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.129 is the factory candidate: Sudo 1.0.128 with the Ring's own steady battery level and whole long recordings. The Ring reads 100% at its own full mark and works its level from rested readings only, so recording no longer makes it dip: off the charger it never rises, and it falls at most a point every 30 seconds. While charging it gives an estimate that reaches 100 at charged. Page 58 and capability word 2 bit 5 carry the level and its full mark. The audio encoder now runs above the storage writer, so a long recording no longer splits at the PCM buffer deadline when the flash is slow; if the writer falls 4 seconds behind, the encoder steps back to the writer's priority until it catches up. Keeps everything in Sudo 1.0.128. Requires an Italic build that admits revision 129. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending, and the touch retune waits for Ring data.",
+      "notice": "Test build Sudo 1.0.129, the factory candidate: the Ring's own steady battery level, and long recordings that stay whole; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 129,
+        "buildIdentity": {
+          "revision": 129,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "ad30bd89a24fc830c36d02d3a97d7985",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.129",
+        "notice": "Test build Sudo 1.0.129, the factory candidate: the Ring's own steady battery level, and long recordings that stay whole; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.129 is the factory candidate: Sudo 1.0.128 with the Ring's own steady battery level and whole long recordings. The Ring reads 100% at its own full mark and works its level from rested readings only, so recording no longer makes it dip: off the charger it never rises, and it falls at most a point every 30 seconds. While charging it gives an estimate that reaches 100 at charged. Page 58 and capability word 2 bit 5 carry the level and its full mark. The audio encoder now runs above the storage writer, so a long recording no longer splits at the PCM buffer deadline when the flash is slow; if the writer falls 4 seconds behind, the encoder steps back to the writer's priority until it catches up. Keeps everything in Sudo 1.0.128. Requires an Italic build that admits revision 129. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending, and the touch retune waits for Ring data."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzIzODcyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiYWZlNjdkMjMxYTcxYWVkMGVjMmY1NzQyNWEyZTBhMzZkMGUzMGJjZmMyYzlkMTJiOTdhMTIxOTY5ODEzM2ZlZiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTI5IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yOFQxOTo0MjoyNloiLCJwYWNrYWdlUmV2aXNpb24iOjEyOSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQDaqKWxU2TffzNgvrT6bp/AeI7OeFLqbwxqeYNWP+x8RwIgdrDRcAP74C6X8O4lgwAv5vasYR/EcnBCqz3zr+uu27E="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r128",
       "version": "6.0.3.3P21",
       "packageRevision": 128,
