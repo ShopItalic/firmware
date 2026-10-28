@@ -15,6 +15,59 @@
   },
   "releases": [
     {
+      "id": "6.0.3.3P21-r130",
+      "version": "6.0.3.3P21",
+      "packageRevision": 130,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r130",
+      "asset": {
+        "bytes": 321808,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "7562f82b03632ecf78653c9a899a8ce9f14a031786411d8dc64bacac31a44ebd",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r130/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "f9ca6a83d7abcaf247fccd54d4dc44e9",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/686253947"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.130 is a test candidate: Sudo 1.0.129 with a cheaper recording, measured by the Ring. The Opus encoder runs on the Cortex-M4's DSP instructions and hardware divider, so the same speech takes about a quarter fewer encoder instructions with every packet identical. The storage writer uses a 256-byte flash cache and sleeps through sector erases instead of spinning; the storage format and the 6-second sync are unchanged. Pages 59-61 and capability word 2 bit 6 report each recording's capture, CPU, encoder and writer time and its flash operations, so the saving can be measured on the Ring. Expected: about 28 more minutes of recording per charge, pending an A/B against 1.0.129. Keeps everything in Sudo 1.0.129. Requires an Italic build that admits revision 130. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending.",
+      "notice": "Test build Sudo 1.0.130: Sudo 1.0.129 with a cheaper recording, measured by the Ring; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 130,
+        "buildIdentity": {
+          "revision": 130,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "dfe020dfcc9968490cf620c8b12c8033",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.130",
+        "notice": "Test build Sudo 1.0.130: Sudo 1.0.129 with a cheaper recording, measured by the Ring; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.130 is a test candidate: Sudo 1.0.129 with a cheaper recording, measured by the Ring. The Opus encoder runs on the Cortex-M4's DSP instructions and hardware divider, so the same speech takes about a quarter fewer encoder instructions with every packet identical. The storage writer uses a 256-byte flash cache and sleeps through sector erases instead of spinning; the storage format and the 6-second sync are unchanged. Pages 59-61 and capability word 2 bit 6 report each recording's capture, CPU, encoder and writer time and its flash operations, so the saving can be measured on the Ring. Expected: about 28 more minutes of recording per charge, pending an A/B against 1.0.129. Keeps everything in Sudo 1.0.129. Requires an Italic build that admits revision 130. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MzIxODA4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiNzU2MmY4MmIwMzYzMmVjZjc4NjUzYzlhODk5YThjZTlmMTRhMDMxNzg2NDExZDhkYzY0YmFjYWMzMWE0NGViZCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTMwIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yOFQxOTo0MjozNloiLCJwYWNrYWdlUmV2aXNpb24iOjEzMCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQDGmt8AvUObZEEh/EsmPPwV9+KV9vD0MGk5xcJ0v8+rMgIgD7Naii0BAc9VlE1y5TS0tUvwcgrR13bynkocGspd8WE="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r129",
       "version": "6.0.3.3P21",
       "packageRevision": 129,
