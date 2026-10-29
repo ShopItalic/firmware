@@ -15,6 +15,59 @@
   },
   "releases": [
     {
+      "id": "6.0.3.3P21-r131",
+      "version": "6.0.3.3P21",
+      "packageRevision": 131,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r131",
+      "asset": {
+        "bytes": 268760,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "40f7c834d98b44704bcc80666acb57edd2f02cc98ec51340e7929986677f2e19",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r131/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "995b864194caaf80fe472c47eddd143a",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/687236346"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.131 is a test candidate: Sudo 1.0.130 with a quieter standby and a smaller image. The vendor clock wakes the processor once a second instead of eight times, a battery sample sleeps through the converter's waits instead of spinning, and storage reads flash at least 64 bytes at a time. CELT, Opus's music codec, which the Ring never used, is no longer linked: the encoder codes speech with SILK as it always has, every packet identical, and the image is 53 KB smaller. Expected: about 1 uA less at rest, worth +0.6 to +1.5 standby-hours per charge. Keeps everything in Sudo 1.0.130. Requires an Italic build that admits revision 131. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending.",
+      "notice": "Test build Sudo 1.0.131: Sudo 1.0.130 with a quieter standby and a smaller image; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 131,
+        "buildIdentity": {
+          "revision": 131,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "5e6b87346205e5283c7a54d8464dfbe8",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.131",
+        "notice": "Test build Sudo 1.0.131: Sudo 1.0.130 with a quieter standby and a smaller image; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.131 is a test candidate: Sudo 1.0.130 with a quieter standby and a smaller image. The vendor clock wakes the processor once a second instead of eight times, a battery sample sleeps through the converter's waits instead of spinning, and storage reads flash at least 64 bytes at a time. CELT, Opus's music codec, which the Ring never used, is no longer linked: the encoder codes speech with SILK as it always has, every packet identical, and the image is 53 KB smaller. Expected: about 1 uA less at rest, worth +0.6 to +1.5 standby-hours per charge. Keeps everything in Sudo 1.0.130. Requires an Italic build that admits revision 131. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MjY4NzYwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiNDBmN2M4MzRkOThiNDQ3MDRiY2M4MDY2NmFjYjU3ZWRkMmYwMmNjOThlYzUxMzQwZTc5Mjk5ODY2NzdmMmUxOSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTMxIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yOVQwMjo0MjoyOVoiLCJwYWNrYWdlUmV2aXNpb24iOjEzMSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQCHGHI9eFGUS98VzDGG6rsS40Fdav6MWLZ3qfZ8dxxWUwIgS4ewE922KWzVOhQFlBr4Bxsuyj4ti0zbmu6AFdIOFYE="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r130",
       "version": "6.0.3.3P21",
       "packageRevision": 130,
