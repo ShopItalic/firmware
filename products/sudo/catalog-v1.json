@@ -15,6 +15,59 @@
   },
   "releases": [
     {
+      "id": "6.0.3.3P21-r132",
+      "version": "6.0.3.3P21",
+      "packageRevision": 132,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r132",
+      "asset": {
+        "bytes": 268760,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "14fc3a102a74e7024e728c17b163d6432c78a2e0b784a8153c0d315138f878d5",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r132/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "6060db85183e35d1efac6dd3ff66ebf0",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/689447262"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.132 is a test candidate: Sudo 1.0.131 with the supplier's unused Opus 1.5.2 folders taken off the build's include path. No 1.5.2 code was ever compiled, and every file reads the same headers without them, so the Ring runs 1.0.131's code: the image differs from 1.0.131's only in its build ID and revision number. Nothing changes that a user can see, hear or measure. Keeps everything in Sudo 1.0.131. Requires an Italic build that admits revision 132. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending.",
+      "notice": "Test build Sudo 1.0.132: Sudo 1.0.131's code with an unused Opus copy off the build's include path; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 132,
+        "buildIdentity": {
+          "revision": 132,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "6e9a670d81cf00ca3f00c0a099a6968d",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.132",
+        "notice": "Test build Sudo 1.0.132: Sudo 1.0.131's code with an unused Opus copy off the build's include path; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.132 is a test candidate: Sudo 1.0.131 with the supplier's unused Opus 1.5.2 folders taken off the build's include path. No 1.5.2 code was ever compiled, and every file reads the same headers without them, so the Ring runs 1.0.131's code: the image differs from 1.0.131's only in its build ID and revision number. Nothing changes that a user can see, hear or measure. Keeps everything in Sudo 1.0.131. Requires an Italic build that admits revision 132. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MjY4NzYwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiMTRmYzNhMTAyYTc0ZTcwMjRlNzI4YzE3YjE2M2Q2NDMyYzc4YTJlMGI3ODRhODE1M2MwZDMxNTEzOGY4NzhkNSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTMyIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0yOVQxODowODoyMFoiLCJwYWNrYWdlUmV2aXNpb24iOjEzMiwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQCVQe28OQU2+VaxM/7h3EO9GYIMBqcF737af8RR/mlDNwIgYWzfUmZqFNJdq8F0U/TotHKCPA4aazVK6vS1vrpwiqs="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r131",
       "version": "6.0.3.3P21",
       "packageRevision": 131,

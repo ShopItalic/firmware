@@ -60,6 +60,7 @@
     "afe67d231a71aed0ec2f57425a2e0a36d0e30bcfc2c9d12b97a1219698133fef": {"release": "sudo-6.0.3.3P21-r129", "version": "6.0.3.3P21", "packageRevision": 129, "packageBytes": 323872, "image": "app.bin", "imageBytes": 323360, "imageSha256": "4c631e55c4f3d806a4b8be04f05d96fe9a25eadaaa90cd9e21ae278ed6a16cf6"},
     "7562f82b03632ecf78653c9a899a8ce9f14a031786411d8dc64bacac31a44ebd": {"release": "sudo-6.0.3.3P21-r130", "version": "6.0.3.3P21", "packageRevision": 130, "packageBytes": 321808, "image": "app.bin", "imageBytes": 321296, "imageSha256": "fc579204ed443eaeed36e8a9c0e666030b8ab2ada32e19ce97e9250b0be1d058"},
     "40f7c834d98b44704bcc80666acb57edd2f02cc98ec51340e7929986677f2e19": {"release": "sudo-6.0.3.3P21-r131", "version": "6.0.3.3P21", "packageRevision": 131, "packageBytes": 268760, "image": "app.bin", "imageBytes": 268248, "imageSha256": "e6667c5cd7f67a056243bf192f5ea4dad775f2578d81af0f4f9e303db9101a6b"},
+    "14fc3a102a74e7024e728c17b163d6432c78a2e0b784a8153c0d315138f878d5": {"release": "sudo-6.0.3.3P21-r132", "version": "6.0.3.3P21", "packageRevision": 132, "packageBytes": 268760, "image": "app.bin", "imageBytes": 268248, "imageSha256": "5e198a695f05131d3e6ce16f7f150d4f7f0fdceaead4c563e0302e7fc4ea0d29"},
     "3e928afdfcb402450aea7a527093dba102d08650cc9ffed52cf41cd9f8d1a38f": {"release": "v6.0.3.3Z62", "version": "6.0.3.3Z62", "packageRevision": 1, "packageBytes": 184715, "image": "app.bin", "imageBytes": 184132, "imageSha256": "96f1186e20f09ea2b97f48090626965437fb5e8cc4ff8b87679294cea8d853bf"}
   }
 }
