@@ -15,6 +15,59 @@
   },
   "releases": [
     {
+      "id": "6.0.3.3P21-r133",
+      "version": "6.0.3.3P21",
+      "packageRevision": 133,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r133",
+      "asset": {
+        "bytes": 269256,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "223bc4d366e8536041001634067c7b96b58539cf62a61b7b254c94f2a673a5f5",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r133/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "2bafb194948c45b6a84d7d6d08157632",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/692462434"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.133 is a test candidate: putting the Ring on its charger opens pairing for 2 minutes, with no touch. For the first 30 seconds the Ring also closes an idle paired phone's link and refuses paired phones, so a phone holding the Ring can't keep a new one out; sync after docking waits up to that long. A Ring already on its charger is lifted and put back. Keeps everything in Sudo 1.0.132. Requires an Italic build that admits revision 133. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending.",
+      "notice": "Test build Sudo 1.0.133: the charger opens pairing with no touch; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 133,
+        "buildIdentity": {
+          "revision": 133,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "beb6d17f9c1ecbc2ed0b649bcba92b32",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.133",
+        "notice": "Test build Sudo 1.0.133: the charger opens pairing with no touch; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.133 is a test candidate: putting the Ring on its charger opens pairing for 2 minutes, with no touch. For the first 30 seconds the Ring also closes an idle paired phone's link and refuses paired phones, so a phone holding the Ring can't keep a new one out; sync after docking waits up to that long. A Ring already on its charger is lifted and put back. Keeps everything in Sudo 1.0.132. Requires an Italic build that admits revision 133. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MjY5MjU2LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiMjIzYmM0ZDM2NmU4NTM2MDQxMDAxNjM0MDY3YzdiOTZiNTg1MzljZjYyYTYxYjdiMjU0Yzk0ZjJhNjczYTVmNSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTMzIiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0zMFQxNDo1OTowNFoiLCJwYWNrYWdlUmV2aXNpb24iOjEzMywicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIGKlk//BVGUqHhWlEbDre/2kfWOecxySNNahOWT0jmVcAiEAhbDFJ1DLFMqU3tJL9r2gQgKvG6UmrjCngEkuQlk7wD8="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r132",
       "version": "6.0.3.3P21",
       "packageRevision": 132,
