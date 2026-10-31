@@ -15,6 +15,59 @@
   },
   "releases": [
     {
+      "id": "6.0.3.3P21-r134",
+      "version": "6.0.3.3P21",
+      "packageRevision": 134,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r134",
+      "asset": {
+        "bytes": 269248,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "a5d771992f8aba2d6e40b54fe17d2c0e393d03dc31748dbc6825766928922f3e",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r134/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "a2de4b6e961ac07752ca1133afe42820",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/694157278"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.134 is a test candidate: it fixes a bug in the Ring's watchdog that could restart the Ring during a long recording and cut the memo off. Keeps everything in Sudo 1.0.133. Requires an Italic build that admits revision 134. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending.",
+      "notice": "Test build Sudo 1.0.134: long recordings no longer restart the Ring; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 134,
+        "buildIdentity": {
+          "revision": 134,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "48419d675b79c1ec848aecb964c26800",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.134",
+        "notice": "Test build Sudo 1.0.134: long recordings no longer restart the Ring; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.134 is a test candidate: it fixes a bug in the Ring's watchdog that could restart the Ring during a long recording and cut the memo off. Keeps everything in Sudo 1.0.133. Requires an Italic build that admits revision 134. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MjY5MjQ4LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiYTVkNzcxOTkyZjhhYmEyZDZlNDBiNTRmZTE3ZDJjMGUzOTNkMDNkYzMxNzQ4ZGJjNjgyNTc2NjkyODkyMmYzZSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTM0IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMC0zMVQwMTozOToxMloiLCJwYWNrYWdlUmV2aXNpb24iOjEzNCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIA2ZKBW1EkgsqhOaGfU5twnX5DoJXTMg0wb3F8tyqnkTAiALNXifz2dvOoZGOSQV1TM4HCHaB+S+NN0NDjkcZnBgWQ=="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r133",
       "version": "6.0.3.3P21",
       "packageRevision": 133,
