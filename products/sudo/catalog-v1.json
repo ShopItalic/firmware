@@ -15,6 +15,59 @@
   },
   "releases": [
     {
+      "id": "6.0.3.3P21-r135",
+      "version": "6.0.3.3P21",
+      "packageRevision": 135,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r135",
+      "asset": {
+        "bytes": 269752,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "3cdbfc9fb7a6cdfade9870f885ddff662d944584273755838095ff61bcb9e3d6",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r135/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "5b55ed8d1b0a50e72f8ea5ba1a93ad3d",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/700266661"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.135 is a test candidate: a full Ring topping off on its charger no longer drops the phone or reopens pairing. To open pairing on a Ring that's already on its charger, lift it for about 10 seconds and put it back. The level reaches 100 a little later and means it, and one failed storage read no longer blocks recordings. Keeps everything in Sudo 1.0.134. Requires an Italic build that admits revision 135. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending.",
+      "notice": "Test build Sudo 1.0.135: a full Ring on its charger stays connected; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 135,
+        "buildIdentity": {
+          "revision": 135,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "5a6875c6d1cd88e1b8fdc0168755d871",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.135",
+        "notice": "Test build Sudo 1.0.135: a full Ring on its charger stays connected; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.135 is a test candidate: a full Ring topping off on its charger no longer drops the phone or reopens pairing. To open pairing on a Ring that's already on its charger, lift it for about 10 seconds and put it back. The level reaches 100 a little later and means it, and one failed storage read no longer blocks recordings. Keeps everything in Sudo 1.0.134. Requires an Italic build that admits revision 135. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MjY5NzUyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiM2NkYmZjOWZiN2E2Y2RmYWRlOTg3MGY4ODVkZGZmNjYyZDk0NDU4NDI3Mzc1NTgzODA5NWZmNjFiY2I5ZTNkNiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTM1IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMS0wMlQwMTozNzowMVoiLCJwYWNrYWdlUmV2aXNpb24iOjEzNSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEUCIQChaRN0AU4eByiPgLI+qrO9ZhYP6e8jciP/E5qR4tP6ZgIgB+89EJwkivb4LKRdRvkRXKWCrQSkhxikPXaBh/+YO1Y="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r134",
       "version": "6.0.3.3P21",
       "packageRevision": 134,
