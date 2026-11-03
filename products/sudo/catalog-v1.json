@@ -15,6 +15,59 @@
   },
   "releases": [
     {
+      "id": "6.0.3.3P21-r137",
+      "version": "6.0.3.3P21",
+      "packageRevision": 137,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r137",
+      "asset": {
+        "bytes": 279992,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "bc287bffb21cf49f035fd81ae973dcf383c70d8252c29d0a3ab5720699b7ee6b",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r137/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "2c4713cd456d633185c93015da9d69ff",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/706478609"
+      },
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.137 is a test candidate with every fix from the firmware audits of November 2 (Sudo 1.0.136 was never published). The first hold after a settings change or a restart now records, the start buzz always means a recording, and a release the touch chip flags ends a memo normally. A memo goes on past a storage error, and a failed cleanup write no longer stops recording. A full Ring on its charger keeps its level at 100. Removing an older phone's pairing from a newer phone needs a touch on the Ring after it asks, and an update off the charger needs 20%. Keeps everything in Sudo 1.0.135. Requires an Italic build that admits revision 137. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending.",
+      "notice": "Test build Sudo 1.0.137: the November 2 audits' fixes; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 137,
+        "buildIdentity": {
+          "revision": 137,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "38761ca6eb46498c70b35ba5ce87dafb",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.137",
+        "notice": "Test build Sudo 1.0.137: the November 2 audits' fixes; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+        "releaseNotes": "Sudo 1.0.137 is a test candidate with every fix from the firmware audits of November 2 (Sudo 1.0.136 was never published). The first hold after a settings change or a restart now records, the start buzz always means a recording, and a release the touch chip flags ends a memo normally. A memo goes on past a storage error, and a failed cleanup write no longer stops recording. A full Ring on its charger keeps its level at 100. Removing an older phone's pairing from a newer phone needs a touch on the Ring after it asks, and an update off the charger needs 20%. Keeps everything in Sudo 1.0.135. Requires an Italic build that admits revision 137. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6Mjc5OTkyLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiYmMyODdiZmZiMjFjZjQ5ZjAzNWZkODFhZTk3M2RjZjM4M2M3MGQ4MjUyYzI5ZDBhM2FiNTcyMDY5OWI3ZWU2YiJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTM3IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMS0wM1QxNTo0NjozMFoiLCJwYWNrYWdlUmV2aXNpb24iOjEzNywicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEQCIG8KXgmS+iNsEjjiKtGVgAuycMNsofx5+VT5kpi7vmH8AiASqTvjHMZ6wtwz1nHgW2zWZBg6/EUiugCGmsHuqticJQ=="
+      }
+    },
+    {
       "id": "6.0.3.3P21-r135",
       "version": "6.0.3.3P21",
       "packageRevision": 135,
