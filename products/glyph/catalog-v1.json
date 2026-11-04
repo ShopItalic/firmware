@@ -4,6 +4,37 @@
   "hardware": "PKS3-101",
   "releases": [
     {
+      "id": "1.0.57",
+      "version": "1.0.57",
+      "packageRevision": 1,
+      "hardware": "PKS3-101",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "glyph-1.0.57",
+      "asset": {
+        "bytes": 11303840,
+        "name": "glyph-1.0.57-install.glyphota",
+        "sha256": "e1e2d3cbf8681ad2584bee6a4c735280c50d9161694f9d34879ee9c9ae168e31",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/glyph-1.0.57/glyph-1.0.57-install.glyphota",
+        "md5": "6e7411ce1877ddc0a5a0ea360645f1b8",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/710890630"
+      },
+      "extraAssets": [
+        "release-notes.md",
+        "release.json",
+        "test-plan.md"
+      ],
+      "releaseNotes": "The first Glyph update over Wi-Fi: 1.0.56 with only its version changed. Development build.",
+      "details": {},
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6MTEzMDM4NDAsIm5hbWUiOiJnbHlwaC0xLjAuNTctaW5zdGFsbC5nbHlwaG90YSIsInNoYTI1NiI6ImUxZTJkM2NiZjg2ODFhZDI1ODRiZWU2YTRjNzM1MjgwYzUwZDkxNjE2OTRmOWQzNDg3OWVlOWM5YWUxNjhlMzEifSwiY2hhbm5lbCI6InRlc3QiLCJoYXJkd2FyZSI6IlBLUzMtMTAxIiwiaWQiOiIxLjAuNTciLCJpbnN0YWxsYWJsZSI6dHJ1ZSwiaXNzdWVkQXQiOiIyMDI2LTExLTA0VDE5OjUzOjU1WiIsInBhY2thZ2VSZXZpc2lvbiI6MSwicHJvZHVjdCI6ImdseXBoIiwic2NoZW1hIjoiaXRhbGljLWZpcm13YXJlLXJlbGVhc2UvMSIsInNvdXJjZVZlcnNpb25zIjpbIjEuMC41NiJdLCJ2ZXJzaW9uIjoiMS4wLjU3In0=",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "glyph-release-1",
+        "der": "MEQCIAi8yFHjfOlW98hfrog9bPqQC0DMHDs3RKMhSna2hdUEAiADUk0+n26NrkLGv7g9oSF3BTl1Y/xIf3bc+DeQLtiSvQ=="
+      }
+    },
+    {
       "id": "P19-rc.1",
       "version": "P19-rc.1",
       "packageRevision": 1,
