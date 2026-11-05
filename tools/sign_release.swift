@@ -7,8 +7,10 @@
 //   swift tools/sign_release.swift public <product> <out.x963>
 //   swift tools/sign_release.swift sign <product> <statement.json> <out.der>
 //
-// Keys are never created here. Glyph's is its firmware trust anchor (P10
-// onward) and the Italic app pins Sudo's, so a missing key is an error.
+// It signs a product's release statements, signed policy and package
+// statements, and nothing else. Keys are never created here. Glyph's is its
+// firmware trust anchor (P10 onward) and the Italic app pins Sudo's, so a
+// missing key is an error.
 import CryptoKit
 import Foundation
 
@@ -52,9 +54,11 @@ case ("public", 4):
 case ("sign", 5):
     let statement = try Data(contentsOf: URL(fileURLWithPath: args[3]))
     // Domain separation: only sign release statements for this key's product.
-    // Version 2 (automatic installs) and the signed policy are Sudo's only:
-    // Glyph firmware reads version 1.
-    let schemas = product == "sudo" ? ["italic-firmware-release/1", "italic-firmware-release/2", "italic-firmware-policy/1"]
+    // Version 2 (automatic installs), the signed policy and package statements
+    // (a release's application signed for another DFU key, `dfuPackages`) are
+    // Sudo's only: Glyph firmware reads version 1.
+    let schemas = product == "sudo"
+        ? ["italic-firmware-release/1", "italic-firmware-release/2", "italic-firmware-policy/1", "italic-firmware-package/1"]
         : ["italic-firmware-release/1"]
     guard statement.count <= 4096,
           let object = try? JSONSerialization.jsonObject(with: statement) as? [String: Any],

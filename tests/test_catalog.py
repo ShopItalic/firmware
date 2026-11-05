@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Catalog, signing and staging tests with throwaway keys. No Keychain or network."""
 import base64
+import contextlib
 import copy
 import hashlib
+import io
 import json
+import shutil
 import sys
 import tempfile
 import unittest
@@ -139,6 +142,40 @@ def sudo_package(path, image_bytes=2048, parts=None):
         for name, data in (('manifest.json', json.dumps({'manifest': manifest})), ('app.bin', b'\x11' * image_bytes),
                            ('app.dat', b'\x00' * 141)):
             archive.writestr(zipfile.ZipInfo(name, (2026, 10, 22, 0, 0, 0)), data)
+    return path
+
+
+def varint(number):
+    out = b''
+    while number > 0x7F:
+        out += bytes([number & 0x7F | 0x80]); number >>= 7
+    return out + bytes([number])
+
+
+def length_field(number, data):
+    return varint(number << 3 | 2) + varint(len(data)) + data
+
+
+# An init command (the init packet's signed part) and two 64-byte signatures of it.
+COMMAND = b'\x08\x01\x12\x36\x08\x01\x10\x34' + bytes(50)
+SUPPLIER = b'\x5a' * 64
+ITALIC = b'\xa5' * 64
+
+
+def init_packet(signature, command=COMMAND):
+    """A Nordic init packet (app.dat) as nrfutil writes it: Packet, field 2 its
+    SignedCommand {command (1), signature type (2) ECDSA P-256, signature (3)}."""
+    return length_field(2, length_field(1, command) + varint(2 << 3) + varint(0) + length_field(3, signature))
+
+
+def signed_package(path, signature, image=b'\x11' * 2048, command=COMMAND, manifest=None, dat=None):
+    """A Sudo package whose init packet is signed for one DFU key (`signature`)."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    manifest = manifest or json.dumps({'manifest': {'application': {'bin_file': 'app.bin', 'dat_file': 'app.dat'}}})
+    dat = init_packet(signature, command) if dat is None else dat
+    with zipfile.ZipFile(path, 'w') as archive:
+        for name, data in (('manifest.json', manifest), ('app.bin', image), ('app.dat', dat)):
+            archive.writestr(zipfile.ZipInfo(name, (2026, 11, 5, 0, 0, 0)), data)
     return path
 
 
@@ -452,6 +489,288 @@ class SudoAutomaticTest(unittest.TestCase):
             release.record_images('sudo', download=True)
 
 
+class DfuPackageTest(unittest.TestCase):
+    """A Sudo release's second package: the same application signed for
+    italic-dfu-1, which production Rings trust, in `dfuPackages` with its own
+    package statement (ShopItalic/app and ShopItalic/sudo read the same format)."""
+
+    def setUp(self):
+        self.private, public = p256.generate()
+        self.keys = {'sudo-release-1': public}
+        self.tmp = tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        (self.root / 'keys').mkdir()
+        (self.root / 'keys' / 'sudo-release-1.x963').write_bytes(public)
+        (self.root / 'products' / 'sudo').mkdir(parents=True)
+        patch = mock.patch.object(catalog, 'ROOT', self.root); patch.start(); self.addCleanup(patch.stop)
+        self.signed = []
+        self.sign = lambda raw: self.signed.append(raw) or p256.sign(self.private, raw)
+        self.main = signed_package(self.root / 'pkg' / 'BCL603S2P_6.0.3.3P21.zip', SUPPLIER)
+        self.italic = signed_package(self.root / 'pkg' / 'BCL603S2P_6.0.3.3P21-italic-dfu-1.zip', ITALIC)
+
+    def stage(self, release_id='6.0.3.3P21-r139', main=None, packages=None, product='sudo', keys=None):
+        revision = int(release_id.rsplit('-r', 1)[1])
+        out = self.root / 'stage' / f'{release_id}-{len(list((self.root / "stage").glob("*"))) if (self.root / "stage").exists() else 0}'
+        details = {'schemaVersion': 1, 'hardware': '603V1.23.2', 'version': '6.0.3.3P21', 'packageRevision': revision,
+                   'buildIdentity': {**IDENTITY, 'revision': revision}, 'status': 'signed-test-ota'}
+        with contextlib.redirect_stdout(io.StringIO()):
+            entry = release.stage(product, release_id, '6.0.3.3P21', revision, 'test', True, main or self.main, [], out,
+                                  details=details, signer=self.sign, keys=keys or self.keys,
+                                  dfu_packages={'italic-dfu-1': self.italic} if packages is None else packages)
+        return entry, out
+
+    def publish(self, release_id='6.0.3.3P21-r139'):
+        """What `publish` leaves in the catalog, without GitHub: the entry with
+        both asset API URLs, and the main package's image record."""
+        entry, out = self.stage(release_id)
+        entry['asset']['apiURL'] = catalog.ASSET_API + '700000001'
+        entry['dfuPackages'][0]['asset']['apiURL'] = catalog.ASSET_API + '700000002'
+        current = catalog.read('sudo') if catalog.catalog_path('sudo').exists() else catalog.empty('sudo')
+        current['releases'].insert(0, entry)
+        catalog.write('sudo', current)
+        images = release.load_images('sudo')
+        images['packages'][entry['asset']['sha256']] = json.loads((out / 'image.json').read_text())
+        release.write_images('sudo', images)
+        return entry
+
+    def sign_package(self, entry, **changes):
+        """`entry`'s package object with its statement changed and signed again with the release key."""
+        package = copy.deepcopy(entry['dfuPackages'][0])
+        p = json.loads(base64.b64decode(package['statement']))
+        for field, value in changes.items():
+            p[field] = value
+        raw = catalog.encode_statement(p)
+        package['statement'] = base64.b64encode(raw).decode()
+        package['signature']['der'] = base64.b64encode(p256.sign(self.private, raw)).decode()
+        package['asset'].update(p['asset'])
+        package['asset']['url'] = catalog.DOWNLOAD + entry['tag'] + '/' + p['asset']['name']
+        return package
+
+    def test_the_init_command_reader_reads_nrfutils_layout(self):
+        # app.dat of the published sudo-6.0.3.3P21-r138 package: its SignedCommand is 128 bytes long.
+        dat = bytes.fromhex(
+            '1280010a3a08011236080110341a028002200038c0e6104224080312208a3ed62e9d4565e98ce345e6fd31ea632afdac029e'
+            '94a45fa5af9478ee2ef261480010001a406270a4c32d538d58bea23fdd56c69dcf17fa861665f2ca2ea5c5d886c2c463126c'
+            '45a0e36403f7d8d087704c63ba31de64d602e44aa84d4a3c5d7779be67f361')
+        command = release.init_command(dat)
+        self.assertEqual((len(command), command[:4]), (58, b'\x08\x01\x12\x36'))
+        self.assertEqual(release.init_command(init_packet(ITALIC)), COMMAND)
+        for bad in (b'', bytes(141), b'init', b'\x0a\x02\x08\x01', b'\x12\x05abc', b'\x13', b'\x12\x02\x10\x00',
+                    init_packet(ITALIC) * 2):
+            with self.subTest(bad), self.assertRaises(catalog.CatalogError):
+                release.init_command(bad)
+
+    def test_a_package_for_italic_dfu_1_is_staged_and_verifies(self):
+        entry, out = self.stage()
+        image = json.loads((out / 'image.json').read_text())
+        p = catalog.dfu_package_statements('sudo', entry, self.keys)['italic-dfu-1']
+        self.assertEqual({k: v for k, v in p.items() if k != 'issuedAt'}, {
+            'schema': 'italic-firmware-package/1', 'product': 'sudo', 'hardware': '603V1.23.2',
+            'id': '6.0.3.3P21-r139', 'dfuKey': 'italic-dfu-1', 'asset': release.record(self.italic),
+            'imageSha256': hashlib.sha256(b'\x11' * 2048).hexdigest()})
+        self.assertEqual(p['imageSha256'], image['imageSha256'])  # the main package's record covers it
+        package = entry['dfuPackages'][0]
+        self.assertEqual(list(package), ['dfuKey', 'asset', 'statement', 'signature'])
+        self.assertEqual(package['asset'], {
+            **release.record(self.italic), 'md5': hashlib.md5(self.italic.read_bytes()).hexdigest(),
+            'url': 'https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r139/'
+                   'BCL603S2P_6.0.3.3P21-italic-dfu-1.zip'})
+        self.assertEqual(package['signature']['keyId'], 'sudo-release-1')
+        self.assertEqual(base64.b64decode(package['statement']), (out / 'statement-italic-dfu-1.json').read_bytes())
+        self.assertEqual(base64.b64decode(package['statement']), catalog.encode_statement(p))
+        # The release statement and its asset are the supplier package's, as before.
+        s = catalog.verify_entry('sudo', entry, self.keys)
+        self.assertEqual((s['schema'], s['asset']), (catalog.SCHEMA, release.record(self.main)))
+        self.assertEqual(release.load_stage(out, self.keys)[2], s)
+        self.assertIn('BCL603S2P_6.0.3.3P21-italic-dfu-1.zip', (out / 'SHA256SUMS').read_text())
+        self.assertEqual(catalog.validate_catalog('sudo', {**catalog.empty('sudo'), 'releases': [entry]}, self.keys), 1)
+
+    def test_staging_refuses_a_package_that_is_not_the_same_application(self):
+        named = lambda folder: self.root / folder / self.italic.name  # noqa: E731
+        boot = {'manifest': {'application': {'bin_file': 'app.bin', 'dat_file': 'app.dat'},
+                             'bootloader': {'bin_file': 'app.bin', 'dat_file': 'app.dat'}}}
+        cases = {
+            'another image': signed_package(named('image'), ITALIC, image=b'\x22' * 2048),
+            'another manifest': signed_package(named('manifest'), ITALIC, manifest=json.dumps(
+                {'manifest': {'application': {'dat_file': 'app.dat', 'bin_file': 'app.bin'}}})),
+            'another init command': signed_package(named('command'), ITALIC, command=COMMAND[:-1] + b'\x01'),
+            'not only the application': signed_package(named('boot'), ITALIC, manifest=json.dumps(boot)),
+            'the main package itself': signed_package(named('same'), SUPPLIER),
+            'an unreadable init packet': signed_package(named('dat'), ITALIC, dat=bytes(141)),
+            'no init packet': signed_package(named('nodat'), ITALIC, manifest=json.dumps(
+                {'manifest': {'application': {'bin_file': 'app.bin', 'dat_file': 'missing.dat'}}})),
+        }
+        for name, path in cases.items():
+            with self.subTest(name), self.assertRaises(catalog.CatalogError):
+                self.stage(packages={'italic-dfu-1': path})
+        self.assertEqual(self.signed, [], 'nothing is signed for a package that is not the same application')
+        renamed = self.root / 'renamed' / 'BCL603S2P_6.0.3.3P21-italic.zip'; renamed.parent.mkdir()
+        shutil.copyfile(self.italic, renamed)
+        with self.assertRaisesRegex(catalog.CatalogError, 'must be named BCL603S2P_6.0.3.3P21-italic-dfu-1.zip'):
+            self.stage(packages={'italic-dfu-1': renamed})
+        other = self.root / 'other' / 'BCL603S2P_6.0.3.3P21-italic-dfu-2.zip'; other.parent.mkdir()
+        shutil.copyfile(self.italic, other)
+        with self.assertRaisesRegex(catalog.CatalogError, 'unknown DFU key'):
+            self.stage(packages={'italic-dfu-2': other})
+        ufw = self.root / 'glyph-pks3-101-P12-rc.9.ufw'; ufw.write_bytes(b'\x5a' * 4096)
+        _, glyph = p256.generate()
+        with self.assertRaisesRegex(catalog.CatalogError, 'glyph releases carry no packages'):
+            release.stage('glyph', 'P12-rc.9', 'P12-rc.9', 1, 'test', True, ufw, [], self.root / 'glyph',
+                          signer=self.sign, keys={'glyph-release-1': glyph}, dfu_packages={'italic-dfu-1': self.italic})
+        self.assertFalse((self.root / 'glyph').exists())
+        self.assertEqual(self.signed, [])
+
+    def test_the_catalog_refuses_a_forged_or_moved_package(self):
+        entry, _ = self.stage()
+        other, _ = self.stage('6.0.3.3P21-r140')
+        good = entry['dfuPackages'][0]
+        s = json.loads(base64.b64decode(entry['statement']))
+        p = json.loads(base64.b64decode(good['statement']))
+
+        def changed(**fields):
+            package = copy.deepcopy(good)
+            for path, value in fields.items():
+                target = package
+                *parents, last = path.split('__')
+                for part in parents:
+                    target = target[part]
+                if value is None:
+                    target.pop(last)
+                else:
+                    target[last] = value
+            return package
+        tampered = base64.b64encode(catalog.encode_statement({**p, 'imageSha256': '0' * 64})).decode()
+        cases = {
+            'a tampered statement': [changed(statement=tampered)],
+            'a statement moved from another release': other['dfuPackages'],
+            'a statement moved, its URL fixed': [{**copy.deepcopy(other['dfuPackages'][0]),
+                                                 'asset': copy.deepcopy(good['asset'])}],
+            'a statement for another release, signed': [self.sign_package(entry, id='6.0.3.3P21-r140')],
+            'another URL': [changed(asset__url='https://example.com/' + good['asset']['name'])],
+            'another tag in the URL': [changed(asset__url=good['asset']['url'].replace('r139', 'r140'))],
+            'another name': [changed(asset__name='BCL603S2P_6.0.3.3P21-italic.zip')],
+            'another size': [changed(asset__bytes=good['asset']['bytes'] + 1)],
+            'another SHA-256': [changed(asset__sha256='0' * 64)],
+            'a noncanonical name, signed': [self.sign_package(entry, asset={**p['asset'], 'name': 'italic-dfu-1.zip'})],
+            "the main package's SHA-256, signed": [self.sign_package(entry, asset={**p['asset'], 'sha256': s['asset']['sha256']})],
+            'an unknown key, signed': [self.sign_package(entry, dfuKey='italic-dfu-2')],
+            'an unknown object key': [changed(dfuKey='supplier')],
+            'the same key twice': [good, good],
+            'an extra object key': [{**good, 'notes': 'x'}],
+            'no signature': [changed(signature=None)],
+            'an extra asset field': [changed(asset__size=1)],
+            'no URL': [changed(asset__url=None)],
+            'a bad md5': [changed(asset__md5='x')],
+            'a bad apiURL': [changed(asset__apiURL='https://example.com/1')],
+            'another signing key': [changed(signature__keyId='glyph-release-1')],
+            'another algorithm': [changed(signature__alg='ES384')],
+            'an extra statement field, signed': [self.sign_package(entry, channel='stable')],
+            'the release statement in its place': [changed(statement=entry['statement'], signature=entry['signature'])],
+            'an empty list': [],
+        }
+        for name, packages in cases.items():
+            forged = {**copy.deepcopy(entry), 'dfuPackages': packages}
+            with self.subTest(name), self.assertRaises(catalog.CatalogError):
+                catalog.verify_entry('sudo', forged, self.keys)
+        for name, value in (('not a list', good), ('null', None)):
+            with self.subTest(name), self.assertRaises(catalog.CatalogError):
+                catalog.verify_entry('sudo', {**entry, 'dfuPackages': value}, self.keys)
+        with self.subTest('also an extra asset'), self.assertRaises(catalog.CatalogError):
+            catalog.verify_entry('sudo', {**entry, 'extraAssets': [good['asset']['name']]}, self.keys)
+        with self.subTest('a package statement as the release statement'), self.assertRaises(catalog.CatalogError):
+            catalog.verify_entry('sudo', {**entry, 'statement': good['statement'], 'signature': good['signature']}, self.keys)
+        # The object names one key and its statement another.
+        with mock.patch.dict(catalog.PRODUCTS['sudo'], {'dfuKeys': ('italic-dfu-1', 'italic-dfu-2')}), \
+                self.assertRaisesRegex(catalog.CatalogError, 'statement is for italic-dfu-1'):
+            catalog.verify_entry('sudo', {**entry, 'dfuPackages': [changed(dfuKey='italic-dfu-2')]}, self.keys)
+        # A Glyph entry carries none.
+        ufw = self.root / 'glyph-pks3-101-P12-rc.9.ufw'; ufw.write_bytes(b'\x5a' * 4096)
+        glyph_private, glyph_public = p256.generate()
+        glyph_entry = release.stage('glyph', 'P12-rc.9', 'P12-rc.9', 1, 'test', True, ufw, [], self.root / 'glyph',
+                                    signer=lambda raw: p256.sign(glyph_private, raw), keys={'glyph-release-1': glyph_public})
+        with self.assertRaisesRegex(catalog.CatalogError, 'glyph releases carry no dfuPackages'):
+            catalog.verify_entry('glyph', {**glyph_entry, 'dfuPackages': [good]}, {'glyph-release-1': glyph_public})
+        # What still verifies: the object as staged, withdrawn, and with an asset API URL.
+        withdrawn = {**copy.deepcopy(entry), 'withdrawn': True}
+        withdrawn['dfuPackages'][0]['asset']['apiURL'] = catalog.ASSET_API + '700000002'
+        self.assertEqual(catalog.dfu_package_statements('sudo', withdrawn, self.keys), {'italic-dfu-1': p})
+
+    def test_load_stage_notices_a_changed_staged_package(self):
+        def staged(change):
+            _, out = self.stage()
+            change(out)
+            return out
+        def edit_entry(out, change):
+            data = json.loads((out / 'entry.json').read_text()); change(data['entry'])
+            (out / 'entry.json').write_text(json.dumps(data))
+        name = self.italic.name
+        cases = {
+            'staged italic-dfu-1 package changed': lambda out: (out / 'assets' / name).write_bytes(b'PK changed'),
+            'staged asset set changed': lambda out: (out / 'assets' / name).unlink(),
+            'staged italic-dfu-1 md5 mismatch': lambda out: edit_entry(
+                out, lambda e: e['dfuPackages'][0]['asset'].update(md5='0' * 32)),
+            'italic-dfu-1 package statement file differs': lambda out: (out / 'statement-italic-dfu-1.json').write_bytes(b'{}'),
+        }
+        for message, change in cases.items():
+            out = staged(change)
+            with self.subTest(message), self.assertRaisesRegex(catalog.CatalogError, message):
+                release.load_stage(out, self.keys)
+        # An entry that lost its dfuPackages no longer matches its staged files.
+        out = staged(lambda out: edit_entry(out, lambda e: e.pop('dfuPackages')))
+        with self.assertRaisesRegex(catalog.CatalogError, 'staged asset set changed'):
+            release.load_stage(out, self.keys)
+
+    def promote(self, out_name, **options):
+        with zipfile.ZipFile(self.main) as archive:
+            record = qualification(139, archive.read('app.bin'))
+        options = {'auto_install': True, 'customer_version': '1.0.139', 'notes': 'The firmware Rings ship with.',
+                   'source_versions': ['6.0.3.3P21'], 'qualification': record, **options}
+        out = self.root / 'promote' / out_name
+        with contextlib.redirect_stdout(io.StringIO()):
+            entry = release.promote('sudo', '6.0.3.3P21-r139', 'stable', self.main, out, 263, True, signer=self.sign,
+                                    keys=self.keys, **options)
+        return entry, out
+
+    def downloads(self, published, italic=None):
+        """anonymous_get for the published entry's URLs, each package at its own."""
+        packages = {published['asset']['url']: self.main, published['asset']['apiURL']: self.main,
+                    published['dfuPackages'][0]['asset']['url']: italic or self.italic,
+                    published['dfuPackages'][0]['asset']['apiURL']: italic or self.italic}
+        return lambda url, accept=None: packages[url].read_bytes()
+
+    def test_a_promotion_keeps_dfu_packages_and_publishing_refuses_a_changed_one(self):
+        published = self.publish()
+        entry, out = self.promote('stable')
+        self.assertEqual(entry['dfuPackages'], published['dfuPackages'])
+        self.assertEqual(catalog.dfu_package_statements('sudo', entry, self.keys),
+                         catalog.dfu_package_statements('sudo', published, self.keys))
+        self.assertEqual(json.loads(base64.b64decode(entry['statement']))['schema'], catalog.SCHEMA_V2)
+        # A changed dfuPackages, or a public package that is no longer the signed one, is not published.
+        for name, change in (('dropped', lambda e: e.pop('dfuPackages')),
+                             ('another apiURL', lambda e: e['dfuPackages'][0]['asset'].update(
+                                 apiURL=catalog.ASSET_API + '700000003'))):
+            _, changed = self.promote(name)
+            data = json.loads((changed / 'entry.json').read_text()); change(data['entry'])
+            (changed / 'entry.json').write_text(json.dumps(data))
+            with self.subTest(name), mock.patch.object(release, 'anonymous_get', side_effect=self.downloads(published)), \
+                    mock.patch.object(release, 'commit') as commit, \
+                    self.assertRaisesRegex(catalog.CatalogError, "dfuPackages differ from the published entry's"):
+                release.publish(changed)
+            commit.assert_not_called()
+        with mock.patch.object(release, 'anonymous_get', side_effect=self.downloads(published, italic=self.main)), \
+                mock.patch.object(release, 'commit') as commit, \
+                self.assertRaisesRegex(catalog.CatalogError, 'public download mismatch: .*italic-dfu-1'):
+            release.publish(out)
+        commit.assert_not_called()
+        self.assertEqual(catalog.read('sudo')['releases'][0]['channel'], 'test')
+        with mock.patch.object(release, 'anonymous_get', side_effect=self.downloads(published)) as download, \
+                mock.patch.object(release, 'commit'), contextlib.redirect_stdout(io.StringIO()):
+            release.publish(out)
+        self.assertEqual(download.call_count, 4)
+        promoted = catalog.read('sudo')['releases'][0]
+        self.assertEqual((promoted['channel'], promoted['dfuPackages']), ('stable', published['dfuPackages']))
+
+
 class AppFixtureTest(unittest.TestCase):
     """tests/fixtures/sudo-stable-v2.json was made by these tools with a
     throwaway key. The app's RingFirmwareReleaseTests decode the same bytes, so
@@ -494,6 +813,17 @@ class RepositoryTest(unittest.TestCase):
                 row = images.get(s['asset']['sha256'])
                 self.assertIsNotNone(row, 'no recorded image; run record-images')
                 self.assertEqual(row['packageBytes'], s['asset']['bytes'])  # older rows keep sudo's own tags
+
+    def test_every_dfu_package_carries_its_main_packages_image(self):
+        """A package for another DFU key has no image record of its own: its
+        signed imageSha256 must be the one recorded for the main package."""
+        images = release.load_images('sudo')['packages']
+        keys = catalog.load_keys()
+        for entry in catalog.read('sudo')['releases']:
+            s, packages = catalog.verify_release('sudo', entry, keys)
+            for dfu_key, p in packages.items():
+                with self.subTest(s['id'], key=dfu_key):
+                    self.assertEqual(p['imageSha256'], images[s['asset']['sha256']]['imageSha256'])
 
 
 if __name__ == '__main__':

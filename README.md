@@ -38,9 +38,10 @@ makes it **trustworthy** is a signature from the product's release key:
   never on a Mac, and are only used through `tools/sign_release.swift`. It reads
   the key with the 1Password CLI (`op`) for each signature, holds it only in
   memory, and checks it against `keys/<keyId>.x963` before signing. Each product
-  has its own key. The signer refuses anything that is not a release statement
-  for that key's product. Glyph's key is its firmware trust anchor (P10 onward),
-  so it is never regenerated; the vault is its backup.
+  has its own key. The signer refuses anything that is not a release statement,
+  policy or package statement for that key's product. Glyph's key is its
+  firmware trust anchor (P10 onward), so it is never regenerated; the vault is
+  its backup.
 
 ### Version 2 statements: stable releases and automatic installs (Sudo)
 
@@ -68,6 +69,62 @@ Two unsigned fields are honoured because they can only narrow a signed
   may install it by itself. No `rollout` means 0%.
 - the catalog's `automaticUpdatesPaused`: `"all"` stops every automatic
   install, `"background"` only those the app would start in a background window.
+
+### Two packages per release: `dfuPackages` (Sudo)
+
+A Ring's bootloader installs a package only when its init packet is signed with
+the DFU key that Ring trusts. Production Rings (Bravechip's factory run, Sudo
+1.0.138) trust only Italic's `italic-dfu-1`; earlier Rings trust only the
+supplier's batch key. So a Sudo release may carry the same application twice:
+
+- `asset` is the supplier-signed package, as before. The release statement
+  names it, and policy withdrawals, floors and rollouts stay keyed by it.
+- `dfuPackages` lists the same application signed for other DFU keys, at most
+  one object per key. Today the only one is `italic-dfu-1`:
+
+```json
+{"dfuKey": "italic-dfu-1",
+ "asset": {"name": "BCL603S2P_6.0.3.3P21-italic-dfu-1.zip", "bytes": 275776, "sha256": "<hex>",
+           "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r139/BCL603S2P_6.0.3.3P21-italic-dfu-1.zip",
+           "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/<n>", "md5": "<hex>"},
+ "statement": "<base64 of the exact signed bytes>",
+ "signature": {"alg": "ES256", "keyId": "sudo-release-1", "der": "<base64>"}}
+```
+
+Its statement, `italic-firmware-package/1`, is canonical JSON signed with the
+release key. Its fields are exact:
+
+| Field | Meaning |
+|---|---|
+| `schema`, `product`, `hardware` | as in a release statement |
+| `id` | the entry's signed release ID, so the statement can't be moved to another release |
+| `dfuKey` | the key the package's init packet is signed for, the same as the object's |
+| `asset` | the package's name, size and SHA-256 |
+| `imageSha256` | the SHA-256 of the application image both packages carry |
+| `issuedAt` | UTC seconds |
+
+- A package statement grants nothing. Channel, installability, automatic
+  installs, source versions, the minimum app build and the build identity come
+  only from the release statement. It says only: this release's application,
+  signed for that key, is this file.
+- The name is the main package's with `-<dfuKey>` before `.zip`, and the URL
+  is canonical: the release's own tag, then the name. The name is not in
+  `extraAssets`, and the SHA-256 differs from the main package's. `md5` and
+  `apiURL` are optional, as on the main asset. The unsigned `asset` fields must
+  equal the statement's.
+- `stage` signs a package statement only when the package is application-only
+  and its manifest, application image and init command (the signed command in
+  `app.dat`, without its signature) are byte for byte the main package's. So
+  the main package's dual-bank record covers it, and it has no row of its own.
+- A promotion signs only the release statement again. `dfuPackages` carries
+  over unchanged and stays valid.
+- Withdrawing a release withdraws both packages.
+- The app verifies each package statement and skips an object that fails; the
+  release stays offered with its supplier package. For each Ring it tries the
+  key that Ring last updated with (`italic-dfu-1` when there is none), and the
+  other package once if the bootloader refuses the init packet.
+- **Older app builds ignore `dfuPackages`.** They offer only the supplier
+  package, which a production Ring refuses harmlessly: nothing is written.
 
 ### The signed policy (Sudo)
 
@@ -166,6 +223,23 @@ python3 tools/release.py stage --product glyph --id P12-rc.1 --version P12-rc.1 
 # 2. Upload, verify the public copies anonymously, add to the catalog, commit.
 python3 tools/release.py publish .staging/glyph-P12-rc.1 --push
 ```
+
+A Sudo release can also carry its application signed for `italic-dfu-1`, for
+production Rings. Give the package its canonical name first, the main
+package's with `-italic-dfu-1` before `.zip`:
+
+```sh
+python3 tools/release.py stage --product sudo --id 6.0.3.3P21-r139 --version 6.0.3.3P21 --revision 139 \
+  --channel test --installable --asset path/to/BCL603S2P_6.0.3.3P21.zip \
+  --dfu-package italic-dfu-1=path/to/BCL603S2P_6.0.3.3P21-italic-dfu-1.zip \
+  --notes "What changed" --out .staging/sudo-6.0.3.3P21-r139
+```
+
+`stage` refuses a package that is not the same application (see
+`dfuPackages` above). `publish` uploads it with its signed statement
+(`statement-italic-dfu-1.json` / `signature-italic-dfu-1.der`), checks it
+anonymously and through the asset API like the main package, and records its
+`apiURL`.
 
 Sudo P21 releases from revision 107 onward use the customer title
 `Sudo 1.0.<revision>`. For example, publishing the signed identity

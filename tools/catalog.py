@@ -9,6 +9,11 @@ grants: `withdrawn: true` removes an offer, an entry's `rollout` admits only
 some Rings to an automatic install the statement allows, and the catalog's
 `automaticUpdatesPaused` stops automatic installs.
 
+A Sudo entry may also carry `dfuPackages`: the same release's application in
+packages signed for other DFU keys (`italic-dfu-1`, which production Rings
+trust), each with a package statement signed by the release key. A package
+statement grants nothing: the release's terms come only from its statement.
+
 A product may also carry a signed policy (`policy-v1.json`, and the same
 envelope as the catalog's `policy`): a floor below which nothing installs,
 withdrawals, and the signed ceiling of each automatic rollout. Apps remember
@@ -33,10 +38,16 @@ SCHEMA = 'italic-firmware-release/1'
 # firmware checks its own statements and knows version 1 only.
 SCHEMA_V2 = 'italic-firmware-release/2'
 CHANNELS = ('test', 'beta', 'stable')
-# Product -> hardware, key IDs and statement schemas accepted in its catalog.
+# A package statement: this release's application, signed for another DFU key, is this file.
+PACKAGE_SCHEMA = 'italic-firmware-package/1'
+# Product -> hardware, key IDs and statement schemas accepted in its catalog, and
+# the DFU keys besides the supplier's an entry's `dfuPackages` may carry packages for.
+# Production Rings (Bravechip's factory run, Sudo 1.0.138) trust only
+# `italic-dfu-1`; earlier Rings only the supplier's batch key, the entry's `asset`.
 PRODUCTS = {
-    'glyph': {'hardware': 'PKS3-101', 'keys': ('glyph-release-1',), 'schemas': (SCHEMA,)},
-    'sudo': {'hardware': '603V1.23.2', 'keys': ('sudo-release-1',), 'schemas': (SCHEMA, SCHEMA_V2)},
+    'glyph': {'hardware': 'PKS3-101', 'keys': ('glyph-release-1',), 'schemas': (SCHEMA,), 'dfuKeys': ()},
+    'sudo': {'hardware': '603V1.23.2', 'keys': ('sudo-release-1',), 'schemas': (SCHEMA, SCHEMA_V2),
+             'dfuKeys': ('italic-dfu-1',)},
 }
 SHA = re.compile(r'[0-9a-f]{64}')
 RELEASE_ID = re.compile(r'[A-Za-z0-9][A-Za-z0-9.+-]{0,47}')
@@ -56,6 +67,9 @@ STATEMENT_KEYS = {'schema', 'product', 'hardware', 'id', 'version', 'packageRevi
 V2_REQUIRED = {'autoInstall', 'minimumAppBuild', 'erasesStorage', 'applicationOnly', 'buildIdentity'}
 V2_OPTIONAL = {'minimumSourceRevision', 'customerVersion', 'changeNote'}
 BUILD_IDENTITY_KEYS = {'generation', 'revision', 'codec', 'settingsSchema', 'buildID'}
+PACKAGE_STATEMENT_KEYS = {'schema', 'product', 'hardware', 'id', 'dfuKey', 'asset', 'imageSha256', 'issuedAt'}
+DFU_PACKAGE_KEYS = {'dfuKey', 'asset', 'statement', 'signature'}
+UTC_SECONDS = re.compile(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ')
 PAUSES = ('all', 'background')
 
 
@@ -112,12 +126,8 @@ def check_statement(s, product):
     require(type(s.get('packageRevision')) is int and 1 <= s['packageRevision'] <= 999, 'bad packageRevision')
     require(s.get('channel') in CHANNELS, 'bad channel')
     require(type(s.get('installable')) is bool, 'installable must be boolean')
-    a = s.get('asset')
-    require(isinstance(a, dict) and set(a) == {'name', 'bytes', 'sha256'}, 'bad statement asset')
-    require(isinstance(a['name'], str) and ASSET_NAME.fullmatch(a['name']), 'bad asset name')
-    require(type(a['bytes']) is int and 0 < a['bytes'] <= 64 * 1024 * 1024, 'bad asset size')
-    require(isinstance(a['sha256'], str) and SHA.fullmatch(a['sha256']), 'bad asset sha256')
-    require(isinstance(s.get('issuedAt'), str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ', s['issuedAt']),
+    check_statement_asset(s.get('asset'))
+    require(isinstance(s.get('issuedAt'), str) and UTC_SECONDS.fullmatch(s['issuedAt']),
             'issuedAt must be UTC seconds, e.g. 2026-09-24T12:00:00Z')
     if 'sourceVersions' in s:
         v = s['sourceVersions']
@@ -125,6 +135,14 @@ def check_statement(s, product):
                 and all(isinstance(x, str) and 0 < len(x) <= 32 for x in v), 'bad sourceVersions')
     if s['schema'] == SCHEMA_V2:
         check_automatic(s)
+
+
+def check_statement_asset(a):
+    """A signed package record: exactly its name, size and SHA-256."""
+    require(isinstance(a, dict) and set(a) == {'name', 'bytes', 'sha256'}, 'bad statement asset')
+    require(isinstance(a['name'], str) and ASSET_NAME.fullmatch(a['name']), 'bad asset name')
+    require(type(a['bytes']) is int and 0 < a['bytes'] <= 64 * 1024 * 1024, 'bad asset size')
+    require(isinstance(a['sha256'], str) and SHA.fullmatch(a['sha256']), 'bad asset sha256')
 
 
 def check_automatic(s):
@@ -158,13 +176,116 @@ def check_automatic(s):
                 'changeNote must be one printable line of at most 60 characters')
 
 
-def signed_entry(statement_bytes, key_id, der, url, api_url=None, display=None, details=None, extra_assets=()):
+def dfu_package_name(main_name, dfu_key):
+    """The package signed for `dfu_key`: the main package's name with `-<dfuKey>` before `.zip`."""
+    require(isinstance(main_name, str) and main_name.endswith('.zip'), f'{main_name}: a DFU package is a .zip')
+    return f'{main_name[:-len(".zip")]}-{dfu_key}.zip'
+
+
+def make_package_statement(product, release_id, dfu_key, asset, image_sha256, issued_at):
+    statement = {'schema': PACKAGE_SCHEMA, 'product': product, 'hardware': PRODUCTS[product]['hardware'],
+                 'id': release_id, 'dfuKey': dfu_key,
+                 'asset': {'name': asset['name'], 'bytes': asset['bytes'], 'sha256': asset['sha256']},
+                 'imageSha256': image_sha256, 'issuedAt': issued_at}
+    check_package_statement(statement, product)
+    return statement
+
+
+def check_package_statement(s, product):
+    """A package statement's own rules, every field exact. It names a release,
+    a DFU key and a file; the release's terms come only from its statement."""
+    require(PRODUCTS[product]['dfuKeys'], f'{product} releases carry no packages for other DFU keys')
+    require(isinstance(s, dict) and set(s) == PACKAGE_STATEMENT_KEYS, 'package statement fields missing or unexpected')
+    require(s['schema'] == PACKAGE_SCHEMA, 'wrong package statement schema')
+    require(s['product'] == product and s['hardware'] == PRODUCTS[product]['hardware'],
+            'package statement product/hardware mismatch')
+    require(isinstance(s['id'], str) and RELEASE_ID.fullmatch(s['id']), 'bad package statement release id')
+    require(isinstance(s['dfuKey'], str) and s['dfuKey'] in PRODUCTS[product]['dfuKeys'],
+            f"unknown DFU key {s['dfuKey']!r}")
+    check_statement_asset(s['asset'])
+    require(isinstance(s['imageSha256'], str) and SHA.fullmatch(s['imageSha256']), 'bad package imageSha256')
+    require(isinstance(s['issuedAt'], str) and UTC_SECONDS.fullmatch(s['issuedAt']),
+            'package statement issuedAt must be UTC seconds, e.g. 2026-11-05T12:00:00Z')
+
+
+def check_transport(release_id, asset):
+    """The unsigned transport fields of a package: `md5` and the asset API URL."""
+    if 'md5' in asset:  # unsigned transport check required by Glyph's factory update card
+        require(isinstance(asset['md5'], str) and re.fullmatch(r'[0-9a-f]{32}', asset['md5']), f'{release_id}: bad md5')
+    if 'apiURL' in asset:
+        require(isinstance(asset['apiURL'], str)
+                and re.fullmatch(re.escape(ASSET_API) + r'[1-9][0-9]{0,11}', asset['apiURL']), f'{release_id}: bad apiURL')
+
+
+def verify_dfu_packages(product, entry, s, keys):
+    """Verify an entry's `dfuPackages` against its verified statement `s`;
+    return {dfuKey: package statement}. Each object is the same release's
+    application signed for another DFU key: its own statement, signed by the
+    release key, names this release, that key and the file."""
+    if 'dfuPackages' not in entry:
+        return {}
+    release_id = s['id']
+    require(PRODUCTS[product]['dfuKeys'], f'{release_id}: {product} releases carry no dfuPackages')
+    packages = entry['dfuPackages']
+    require(isinstance(packages, list) and packages, f'{release_id}: dfuPackages must be a non-empty list')
+    main = s['asset']
+    statements = {}
+    for package in packages:
+        require(isinstance(package, dict) and set(package) == DFU_PACKAGE_KEYS,
+                f'{release_id}: a dfuPackages object has exactly dfuKey, asset, statement and signature')
+        dfu_key = package['dfuKey']
+        require(isinstance(dfu_key, str) and dfu_key in PRODUCTS[product]['dfuKeys'],
+                f'{release_id}: unknown DFU key {dfu_key!r}')
+        require(dfu_key not in statements, f'{release_id}: two dfuPackages for {dfu_key}')
+        sig = package['signature']
+        require(isinstance(sig, dict) and set(sig) == {'alg', 'keyId', 'der'} and sig['alg'] == 'ES256',
+                f'{release_id}: unsupported {dfu_key} package signature')
+        require(sig['keyId'] in PRODUCTS[product]['keys'] and sig['keyId'] in keys, f"untrusted key {sig['keyId']!r}")
+        try:
+            raw = base64.b64decode(package['statement'], validate=True)
+            der = base64.b64decode(sig['der'], validate=True)
+        except (TypeError, ValueError) as error:
+            raise CatalogError(f'{release_id}: bad {dfu_key} package base64: {error}') from error
+        require(p256.verify(keys[sig['keyId']], raw, der), f'{release_id}: bad {dfu_key} package signature')
+        try:
+            p = json.loads(raw)
+        except ValueError as error:
+            raise CatalogError(f'{release_id}: the {dfu_key} package statement is not JSON') from error
+        try:
+            check_package_statement(p, product)
+        except CatalogError as error:
+            raise CatalogError(f'{release_id}: {dfu_key} package statement: {error}') from error
+        # Signed with the release's ID, so it can't be moved to another release.
+        require(p['id'] == release_id, f"{release_id}: the {dfu_key} package statement is for {p['id']}")
+        require(p['dfuKey'] == dfu_key, f"{release_id}: the {dfu_key} package statement is for {p['dfuKey']}")
+        asset = package['asset']
+        require(isinstance(asset, dict) and {'name', 'bytes', 'sha256', 'url'} <= set(asset)
+                <= {'name', 'bytes', 'sha256', 'url', 'apiURL', 'md5'}, f'{release_id}: bad {dfu_key} package asset')
+        for field in ('name', 'bytes', 'sha256'):
+            require(asset[field] == p['asset'][field],
+                    f'{release_id}: {dfu_key} asset {field} disagrees with its statement')
+        name = p['asset']['name']
+        require(name == dfu_package_name(main['name'], dfu_key),
+                f'{release_id}: noncanonical {dfu_key} package name {name}')
+        require(asset['url'] == DOWNLOAD + tag(product, release_id) + '/' + name,
+                f'{release_id}: noncanonical {dfu_key} package URL')
+        check_transport(release_id, asset)
+        require(name not in entry.get('extraAssets', []), f'{release_id}: {name} is also an extra asset')
+        require(p['asset']['sha256'] not in {main['sha256'], *(q['asset']['sha256'] for q in statements.values())},
+                f'{release_id}: the {dfu_key} package is the main package or another one')
+        statements[dfu_key] = p
+    return statements
+
+
+def signed_entry(statement_bytes, key_id, der, url, api_url=None, display=None, details=None, extra_assets=(),
+                 dfu_packages=()):
     s = json.loads(statement_bytes)
     entry = {
         'id': s['id'], 'version': s['version'], 'packageRevision': s['packageRevision'],
         'hardware': s['hardware'], 'channel': s['channel'], 'installable': s['installable'],
         'withdrawn': False, 'tag': tag(s['product'], s['id']),
         'asset': {**s['asset'], 'url': url, **({'apiURL': api_url} if api_url else {})},
+        **({'dfuPackages': list(dfu_packages)} if dfu_packages else {}),
         'extraAssets': sorted(extra_assets),
         **(display or {}),
         'details': details or {},
@@ -176,6 +297,17 @@ def signed_entry(statement_bytes, key_id, der, url, api_url=None, display=None, 
 
 def verify_entry(product, entry, keys):
     """Verify one entry; return its parsed statement."""
+    return verify_release(product, entry, keys)[0]
+
+
+def dfu_package_statements(product, entry, keys):
+    """Verify one entry; return its verified package statements, {dfuKey: statement}."""
+    return verify_release(product, entry, keys)[1]
+
+
+def verify_release(product, entry, keys):
+    """Verify one entry, its `dfuPackages` too; return its parsed statement and
+    {dfuKey: package statement}."""
     require(isinstance(entry, dict), 'entry must be an object')
     sig = entry.get('signature') or {}
     require(sig.get('alg') == 'ES256', 'unsupported signature algorithm')
@@ -197,10 +329,7 @@ def verify_entry(product, entry, keys):
         require(asset.get(field) == s['asset'][field], f"{s['id']}: asset {field} disagrees with statement")
     require(entry.get('tag') == tag(product, s['id']), f"{s['id']}: tag mismatch")
     require(asset.get('url') == DOWNLOAD + entry['tag'] + '/' + s['asset']['name'], f"{s['id']}: noncanonical asset URL")
-    if 'md5' in asset:  # unsigned transport check required by Glyph's factory update card
-        require(isinstance(asset['md5'], str) and re.fullmatch(r'[0-9a-f]{32}', asset['md5']), f"{s['id']}: bad md5")
-    if 'apiURL' in asset:
-        require(re.fullmatch(re.escape(ASSET_API) + r'[1-9][0-9]{0,11}', asset['apiURL'] or ''), f"{s['id']}: bad apiURL")
+    check_transport(s['id'], asset)
     require(type(entry.get('withdrawn')) is bool, 'withdrawn must be boolean')
     extra = entry.get('extraAssets', [])
     require(isinstance(extra, list) and all(isinstance(n, str) and ASSET_NAME.fullmatch(n) for n in extra)
@@ -211,7 +340,7 @@ def verify_entry(product, entry, keys):
                 f"{s['id']}: details buildIdentity disagrees with statement")
     if 'rollout' in entry:
         check_rollout(s, entry['rollout'])
-    return s
+    return s, verify_dfu_packages(product, entry, s, keys)
 
 
 def check_rollout(s, rollout):

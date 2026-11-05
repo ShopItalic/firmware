@@ -3,7 +3,11 @@
 
   stage    Copy the package and extra assets into a new staging directory,
            write the canonical release statement and sign it with the product's
-           release key (1Password). No other network access.
+           release key (1Password). No other network access. A Sudo release
+           may carry the same application signed for another DFU key
+           (--dfu-package italic-dfu-1=PATH): its package statement is signed
+           too, once its manifest, image and init command are the main
+           package's.
   publish  Create an immutable GitHub prerelease/release for a staged
            directory, verify every asset anonymously, then add the signed entry
            to products/<product>/catalog-v1.json and commit. Order matters:
@@ -122,6 +126,83 @@ def package_parts(path):
         return parts, (manifest['application']['bin_file'], image) if image is not None else None
 
 
+def protobuf_fields(data):
+    """The fields of one protobuf message, [(number, wire type, value)]: just
+    enough to read a Nordic DFU init packet, with no dependency."""
+    fields, offset = [], 0
+
+    def varint():
+        nonlocal offset
+        value = shift = 0
+        while True:
+            catalog.require(offset < len(data) and shift < 64, 'bad protobuf varint')
+            byte = data[offset]; offset += 1
+            value |= (byte & 0x7F) << shift; shift += 7
+            if byte < 0x80:
+                return value
+
+    while offset < len(data):
+        key = varint()
+        number, wire = key >> 3, key & 7
+        catalog.require(number > 0, 'bad protobuf field number')
+        if wire == 0:
+            value = varint()
+        elif wire in (1, 2, 5):
+            length = {1: 8, 5: 4}.get(wire) or varint()
+            catalog.require(offset + length <= len(data), 'truncated protobuf field')
+            value = data[offset:offset + length]; offset += length
+        else:
+            raise catalog.CatalogError(f'unsupported protobuf wire type {wire}')
+        fields.append((number, wire, value))
+    return fields
+
+
+def init_command(dat):
+    """The init command of a DFU init packet (`app.dat`): Nordic's Packet holds
+    the SignedCommand as field 2, whose field 1 is the command. The rest of the
+    SignedCommand (the signature type and the signature) is what the DFU key
+    changes."""
+    signed = [value for number, wire, value in protobuf_fields(dat) if number == 2 and wire == 2]
+    catalog.require(len(signed) == 1, 'the init packet carries no single signed command')
+    command = [value for number, wire, value in protobuf_fields(signed[0]) if number == 1 and wire == 2]
+    catalog.require(len(command) == 1, 'the signed command carries no single init command')
+    return command[0]
+
+
+def dfu_contents(path):
+    """What two packages of one release must share: the manifest bytes, the
+    application image and the init command. Application-only packages only."""
+    try:
+        with zipfile.ZipFile(path) as archive:
+            raw = archive.read('manifest.json')
+            manifest = json.loads(raw).get('manifest', {})
+            catalog.require(set(manifest) == {'application'},
+                            f'{path.name}: the package replaces {sorted(manifest)}, not only the application')
+            application = manifest['application']
+            image, dat = archive.read(application['bin_file']), archive.read(application['dat_file'])
+    except catalog.CatalogError:
+        raise
+    except (AttributeError, KeyError, TypeError, ValueError, zipfile.BadZipFile) as error:
+        raise catalog.CatalogError(f'{path.name}: not a readable DFU package ({error!r})') from error
+    return raw, image, init_command(dat)
+
+
+def check_same_application(main, other):
+    """`other` is `main`'s application signed for another DFU key: the same
+    manifest, image and init command, byte for byte. Return the image's SHA-256."""
+    manifest, image, command = dfu_contents(main)
+    for part, mine, theirs in zip(('manifest', 'application image', 'init command'),
+                                  (manifest, image, command), dfu_contents(other)):
+        catalog.require(theirs == mine, f"{other.name}: its {part} differs from {main.name}'s")
+    catalog.require(sha256(other) != sha256(main), f'{other.name} is the same file as {main.name}')
+    return hashlib.sha256(image).hexdigest()
+
+
+def package_files(dfu_key):
+    """The staged statement and signature of the package signed for `dfu_key`."""
+    return f'statement-{dfu_key}.json', f'signature-{dfu_key}.der'
+
+
 def image_record(release_tag, s, path):
     parts, application = package_parts(path)
     catalog.require(application is not None, f'{path.name}: the package replaces {sorted(parts)}, not only the application')
@@ -137,7 +218,9 @@ def dual_bank(product, package_sha, image_bytes, current, images):
     recorded (withdrawn and retired ones too) and this one, since reinstalling
     is an update too; this package is staged over each of them, and every
     installable catalog package over this one. Every catalog package must have
-    a record, so nothing a Ring runs goes unchecked."""
+    a record, so nothing a Ring runs goes unchecked. A release's packages for
+    other DFU keys (`dfuPackages`) carry the same image as its main package
+    (stage checks it), so the main package's record covers them."""
     layout = DUAL_BANK.get(product)
     if layout is None:
         return None
@@ -162,21 +245,37 @@ def dual_bank(product, package_sha, image_bytes, current, images):
 
 def stage(product, release_id, version, revision, channel, installable, asset, extras, out,
           source_versions=None, display=None, details=None, key_id=None, signer=None, keys=None,
-          automatic=None, images=None):
-    """`automatic` holds version 2's statement fields (catalog.check_automatic)."""
+          automatic=None, images=None, dfu_packages=None):
+    """`automatic` holds version 2's statement fields (catalog.check_automatic).
+    `dfu_packages` maps another DFU key to a package of the same application
+    signed for it, already named catalog.dfu_package_name(asset.name, key)."""
     catalog.require(product in catalog.PRODUCTS, 'unknown product')
     key_id = key_id or catalog.PRODUCTS[product]['keys'][0]
     keys = keys or catalog.load_keys()
-    names = [asset.name] + [p.name for p in extras]
+    dfu_packages = dict(dfu_packages or {})
+    allowed = catalog.PRODUCTS[product]['dfuKeys']
+    catalog.require(not dfu_packages or allowed, f'{product} releases carry no packages for other DFU keys')
+    for dfu_key, path in dfu_packages.items():
+        catalog.require(dfu_key in allowed, f"unknown DFU key {dfu_key!r}; {product} takes {', '.join(allowed)}")
+        canonical = catalog.dfu_package_name(asset.name, dfu_key)
+        catalog.require(path.name == canonical, f'{path.name}: the {dfu_key} package must be named {canonical}')
+    names = [asset.name] + [p.name for p in extras] + [p.name for p in dfu_packages.values()]
     catalog.require(len(set(names)) == len(names), 'duplicate asset names')
-    catalog.require(not {'statement.json', 'signature.der', 'SHA256SUMS', 'image.json'} & set(names),
-                    'asset name collides with a release-level file')
+    reserved = {'statement.json', 'signature.der', 'SHA256SUMS', 'image.json'}
+    reserved.update(name for dfu_key in allowed for name in package_files(dfu_key))
+    catalog.require(not reserved & set(names), 'asset name collides with a release-level file')
     out.mkdir(parents=True, exist_ok=False)
     files = out / 'assets'; files.mkdir()
-    for path in [asset, *extras]:
+    for path in [asset, *extras, *dfu_packages.values()]:
         catalog.require(path.is_file() and not path.is_symlink(), f'not a regular file: {path}')
         shutil.copyfile(path, files / path.name)
         catalog.require(sha256(files / path.name) == sha256(path), f'copy changed {path.name}')
+    # Each package for another DFU key carries the main package's manifest,
+    # image and init command; only the init packet's signature differs. So the
+    # main package's image record (the dual-bank check below, image.json)
+    # covers it, and it gets no record of its own. Checked before any signing.
+    image_shas = {dfu_key: check_same_application(files / asset.name, files / path.name)
+                  for dfu_key, path in dfu_packages.items()}
     statement = catalog.make_statement(product, release_id, version, revision, channel, installable,
                                        record(files / asset.name), utc_seconds(), source_versions, automatic)
     if product in DUAL_BANK:
@@ -192,9 +291,27 @@ def stage(product, release_id, version, revision, channel, installable, asset, e
     sign(product, out / 'statement.json', out / 'signature.der', signer)
     der = (out / 'signature.der').read_bytes()
     catalog.require(p256.verify(keys[key_id], raw, der), 'fresh signature does not verify with the published key')
+    packages = []
+    for dfu_key, path in sorted(dfu_packages.items()):
+        staged = files / path.name
+        package = catalog.make_package_statement(product, release_id, dfu_key, record(staged), image_shas[dfu_key],
+                                                 utc_seconds())
+        package_raw = catalog.encode_statement(package)
+        statement_name, signature_name = package_files(dfu_key)
+        (out / statement_name).write_bytes(package_raw)
+        sign(product, out / statement_name, out / signature_name, signer)
+        package_der = (out / signature_name).read_bytes()
+        catalog.require(p256.verify(keys[key_id], package_raw, package_der),
+                        f'fresh {dfu_key} package signature does not verify with the published key')
+        packages.append({
+            'dfuKey': dfu_key,
+            'asset': {**package['asset'], 'url': catalog.DOWNLOAD + catalog.tag(product, release_id) + '/' + path.name,
+                      'md5': hashlib.md5(staged.read_bytes()).hexdigest()},
+            'statement': base64.b64encode(package_raw).decode(),
+            'signature': {'alg': 'ES256', 'keyId': key_id, 'der': base64.b64encode(package_der).decode()}})
     url = catalog.DOWNLOAD + catalog.tag(product, release_id) + '/' + asset.name
     entry = catalog.signed_entry(raw, key_id, der, url, display=display, details=details,
-                                 extra_assets=[p.name for p in extras])
+                                 extra_assets=[p.name for p in extras], dfu_packages=packages)
     entry['asset']['md5'] = hashlib.md5((files / asset.name).read_bytes()).hexdigest()
     catalog.verify_entry(product, entry, keys)
     (out / 'entry.json').write_text(json.dumps({'product': product, 'entry': entry}, indent=2) + '\n')
@@ -204,21 +321,35 @@ def stage(product, release_id, version, revision, channel, installable, asset, e
 
 
 def load_stage(directory, keys=None):
+    product, entry, s, _ = load_stage_packages(directory, keys)
+    return product, entry, s
+
+
+def load_stage_packages(directory, keys=None):
+    """load_stage, and the verified package statements, {dfuKey: statement}."""
     data = json.loads((directory / 'entry.json').read_text())
     product, entry = data['product'], data['entry']
-    s = catalog.verify_entry(product, entry, keys or catalog.load_keys())
+    s, packages = catalog.verify_release(product, entry, keys or catalog.load_keys())
     catalog.require(base64.b64decode(entry['statement']) == (directory / 'statement.json').read_bytes(),
                     'statement file differs from entry')
     files = directory / 'assets'
-    expected = {s['asset']['name'], *entry['extraAssets']}
+    expected = {s['asset']['name'], *entry['extraAssets'], *(p['asset']['name'] for p in packages.values())}
     catalog.require({p.name for p in files.iterdir()} == expected, 'staged asset set changed')
     catalog.require(record(files / s['asset']['name']) == s['asset'], 'staged package changed')
     if 'md5' in entry['asset']:
         catalog.require(hashlib.md5((files / s['asset']['name']).read_bytes()).hexdigest() == entry['asset']['md5'],
                         'staged md5 mismatch')
+    for package in entry.get('dfuPackages', []):
+        dfu_key, signed = package['dfuKey'], packages[package['dfuKey']]['asset']
+        catalog.require(record(files / signed['name']) == signed, f'staged {dfu_key} package changed')
+        if 'md5' in package['asset']:
+            catalog.require(hashlib.md5((files / signed['name']).read_bytes()).hexdigest() == package['asset']['md5'],
+                            f'staged {dfu_key} md5 mismatch')
+        catalog.require(base64.b64decode(package['statement']) == (directory / package_files(dfu_key)[0]).read_bytes(),
+                        f'{dfu_key} package statement file differs from entry')
     sums = ''.join(f'{sha256(p)}  {p.name}\n' for p in sorted(files.iterdir()))
     catalog.require((directory / 'SHA256SUMS').read_text() == sums, 'staged SHA256SUMS mismatch')
-    return product, entry, s
+    return product, entry, s, packages
 
 
 def gh(*args, capture=True):
@@ -270,7 +401,7 @@ def publish(directory, notes=None, push=False, dry_run=False, firmware_version=N
     if json.loads((directory / 'entry.json').read_text()).get('promotes'):
         catalog.require(firmware_version is None, 'a promotion publishes no GitHub release, so it has no title to set')
         return publish_promotion(directory, push=push, dry_run=dry_run)
-    product, entry, s = load_stage(directory)
+    product, entry, s, packages = load_stage_packages(directory)
     title = release_title(s, firmware_version)
     current = catalog.read(product) if catalog.catalog_path(product).exists() else catalog.empty(product)
     catalog.require(all(e['id'] != s['id'] for e in current['releases']), f"{s['id']} already in catalog")
@@ -280,9 +411,14 @@ def publish(directory, notes=None, push=False, dry_run=False, firmware_version=N
     catalog.require(existing.returncode != 0, f'tag {release_tag} already exists; tags are never reused')
     files = sorted((directory / 'assets').iterdir()) + [directory / 'SHA256SUMS', directory / 'statement.json',
                                                          directory / 'signature.der']
+    files += [directory / name for dfu_key in sorted(packages) for name in package_files(dfu_key)]
     body = notes or entry.get('releaseNotes') or entry.get('notice') or title
-    body += f"\n\nPackage `{s['asset']['name']}`: {s['asset']['bytes']} bytes, SHA-256 `{s['asset']['sha256']}`." \
-            f"\nSigned statement `statement.json` / `signature.der` (key `{entry['signature']['keyId']}`)."
+    body += f"\n\nPackage `{s['asset']['name']}`: {s['asset']['bytes']} bytes, SHA-256 `{s['asset']['sha256']}`."
+    for dfu_key, p in sorted(packages.items()):
+        statement_name, signature_name = package_files(dfu_key)
+        body += f"\nPackage `{p['asset']['name']}`, for Rings that trust `{dfu_key}`: {p['asset']['bytes']} bytes, " \
+                f"SHA-256 `{p['asset']['sha256']}`; signed statement `{statement_name}` / `{signature_name}`."
+    body += f"\nSigned statement `statement.json` / `signature.der` (key `{entry['signature']['keyId']}`)."
     command = ['release', 'create', release_tag, '--repo', catalog.OWNER_REPO, '--title', title,
                '--notes', body, *([] if s['channel'] == 'stable' else ['--prerelease']), *map(str, files)]
     if dry_run:
@@ -294,11 +430,18 @@ def publish(directory, notes=None, push=False, dry_run=False, firmware_version=N
         catalog.require(hashlib.sha256(anonymous_get(url)).hexdigest() == sha256(path),
                         f'public download mismatch: {path.name}')
     assets = json.loads(gh('api', f'repos/{catalog.OWNER_REPO}/releases/tags/{release_tag}'))['assets']
-    asset_id = next(a['id'] for a in assets if a['name'] == s['asset']['name'])
-    api_url = f'{catalog.ASSET_API}{asset_id}'
-    catalog.require(hashlib.sha256(anonymous_get(api_url, 'application/octet-stream')).hexdigest()
-                    == s['asset']['sha256'], 'asset API download mismatch')
-    entry['asset']['apiURL'] = api_url
+
+    def api_url(signed):
+        """The package's asset API URL, once its download there is the signed bytes."""
+        asset_id = next((a['id'] for a in assets if a['name'] == signed['name']), None)
+        catalog.require(asset_id is not None, f"{signed['name']} is not on the release")
+        url = f'{catalog.ASSET_API}{asset_id}'
+        catalog.require(hashlib.sha256(anonymous_get(url, 'application/octet-stream')).hexdigest() == signed['sha256'],
+                        f"asset API download mismatch: {signed['name']}")
+        return url
+    entry['asset']['apiURL'] = api_url(s['asset'])
+    for package in entry.get('dfuPackages', []):
+        package['asset']['apiURL'] = api_url(packages[package['dfuKey']]['asset'])
     current['releases'].insert(0, entry)
     catalog.write(product, current)
     paths = [catalog.catalog_path(product)]
@@ -458,6 +601,8 @@ def promote(product, release_id, channel, asset, out, minimum_app_build, erases_
     sign(product, out / 'statement.json', out / 'signature.der', signer)
     der = (out / 'signature.der').read_bytes()
     catalog.require(p256.verify(keys[key_id], raw, der), 'fresh signature does not verify with the published key')
+    # The copy keeps `dfuPackages` as published: a package statement names the
+    # release ID and file, never the channel or terms, so it stays valid.
     entry = copy.deepcopy(old)
     # The rollout is the catalog's live control (`rollout`), never part of a
     # promotion: publish_promotion keeps whatever the catalog has by then.
@@ -487,7 +632,7 @@ def publish_promotion(directory, push=False, dry_run=False):
     data = json.loads((directory / 'entry.json').read_text())
     product, entry = data['product'], data['entry']
     keys = catalog.load_keys()
-    s = catalog.verify_entry(product, entry, keys)
+    s, packages = catalog.verify_release(product, entry, keys)
     catalog.require(data['promotes'] == s['id'], 'promotion names another release')
     catalog.require(base64.b64decode(entry['statement']) == (directory / 'statement.json').read_bytes(),
                     'statement file differs from entry')
@@ -501,6 +646,8 @@ def publish_promotion(directory, push=False, dry_run=False):
                     and old['asset'].get('url') == entry['asset'].get('url')
                     and old['asset'].get('apiURL') == entry['asset'].get('apiURL'),
                     f"{s['id']}: the promotion's package or URLs differ from the published entry")
+    catalog.require(old.get('dfuPackages') == entry.get('dfuPackages'),
+                    f"{s['id']}: the promotion's dfuPackages differ from the published entry's")
     # A rollout changed after staging (lowered to stop installs) stays as it
     # is now. It needs a signed autoInstall, so signing one away drops it.
     entry.pop('rollout', None)
@@ -509,10 +656,13 @@ def publish_promotion(directory, push=False, dry_run=False):
     catalog.verify_entry(product, entry, keys)
     if dry_run:
         print(f"would promote {s['id']} from {old_s['channel']} to {s['channel']}"); return entry
-    for url, accept in ((entry['asset']['url'], None), (entry['asset'].get('apiURL'), 'application/octet-stream')):
-        if url:
-            catalog.require(hashlib.sha256(anonymous_get(url, accept)).hexdigest() == s['asset']['sha256'],
-                            f'public download mismatch: {url}')
+    signed = [(entry['asset'], s['asset'])] + [(package['asset'], packages[package['dfuKey']]['asset'])
+                                               for package in entry.get('dfuPackages', [])]
+    for asset, statement_asset in signed:
+        for url, accept in ((asset['url'], None), (asset.get('apiURL'), 'application/octet-stream')):
+            if url:
+                catalog.require(hashlib.sha256(anonymous_get(url, accept)).hexdigest() == statement_asset['sha256'],
+                                f'public download mismatch: {url}')
     current['releases'][index] = entry
     catalog.write(product, current)
     commit([catalog.catalog_path(product)], f"Promote {product} {s['id']} to {s['channel']}", push)
@@ -711,6 +861,9 @@ def main(argv=None):
     s.add_argument('--asset', type=Path, required=True)
     s.add_argument('--extra', type=Path, action='append', default=[])
     s.add_argument('--source-version', action='append')
+    s.add_argument('--dfu-package', action='append', default=[], metavar='KEY=PATH',
+                   help='the same application signed for another DFU key (Sudo: italic-dfu-1), '
+                        'named like the package with -KEY before .zip')
     s.add_argument('--notes', help='release notes shown to users')
     s.add_argument('--out', type=Path, required=True)
     p = sub.add_parser('publish'); p.add_argument('directory', type=Path)
@@ -758,10 +911,18 @@ def main(argv=None):
     i.add_argument('--import', dest='import_from', type=Path)
     args = parser.parse_args(argv)
     if args.command == 'stage':
+        dfu_packages = {}
+        for text in args.dfu_package:
+            dfu_key, sep, path = text.partition('=')
+            catalog.require(sep and dfu_key and path, f'--dfu-package takes KEY=PATH, got {text!r}')
+            catalog.require(dfu_key not in dfu_packages, f'--dfu-package {dfu_key} given twice')
+            dfu_packages[dfu_key] = Path(path)
         entry = stage(args.product, args.id, args.version, args.revision, args.channel, args.installable,
                       args.asset, args.extra, args.out, args.source_version,
-                      display={'releaseNotes': args.notes} if args.notes else None)
-        print(json.dumps({'staged': str(args.out), 'tag': entry['tag'], 'asset': entry['asset']}, indent=2))
+                      display={'releaseNotes': args.notes} if args.notes else None, dfu_packages=dfu_packages)
+        print(json.dumps({'staged': str(args.out), 'tag': entry['tag'], 'asset': entry['asset'],
+                          **({'dfuPackages': [p['asset'] for p in entry['dfuPackages']]}
+                             if 'dfuPackages' in entry else {})}, indent=2))
     elif args.command == 'publish':
         publish(args.directory, push=args.push, dry_run=args.dry_run, firmware_version=args.firmware_version)
     elif args.command == 'promote':
