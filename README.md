@@ -116,6 +116,11 @@ release key. Its fields are exact:
   and its manifest, application image and init command (the signed command in
   `app.dat`, without its signature) are byte for byte the main package's. So
   the main package's dual-bank record covers it, and it has no row of its own.
+- From P21 revision 139 an installable Sudo release must carry the
+  `italic-dfu-1` package: `stage` refuses one without it before anything is
+  signed, and the catalog check refuses the entry. Apps offer production Rings
+  no supplier-only release, so a release without its twin would reach none of
+  them. Earlier releases stay as published, with the supplier package alone.
 - A promotion signs only the release statement again. `dfuPackages` carries
   over unchanged and stays valid.
 - Withdrawing a release withdraws both packages.

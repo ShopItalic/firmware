@@ -264,6 +264,11 @@ def stage(product, release_id, version, revision, channel, installable, asset, e
     reserved = {'statement.json', 'signature.der', 'SHA256SUMS', 'image.json'}
     reserved.update(name for dfu_key in allowed for name in package_files(dfu_key))
     catalog.require(not reserved & set(names), 'asset name collides with a release-level file')
+    # Before anything is signed: from P21 revision 139 an installable release needs its twin (catalog.verify_release).
+    for dfu_key in catalog.required_dfu_keys(product, {'version': version, 'packageRevision': revision,
+                                                        'installable': installable}):
+        catalog.require(dfu_key in dfu_packages, f'{release_id}: from P21 revision 139 an installable release carries '
+                                                 f'the {dfu_key} package (stage --dfu-package {dfu_key}=PATH)')
     out.mkdir(parents=True, exist_ok=False)
     files = out / 'assets'; files.mkdir()
     for path in [asset, *extras, *dfu_packages.values()]:

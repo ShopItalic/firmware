@@ -305,6 +305,22 @@ def dfu_package_statements(product, entry, keys):
     return verify_release(product, entry, keys)[1]
 
 
+# From Sudo 1.0.139 (P21 revision 139) an installable Sudo release carries the
+# italic-dfu-1 package: Rings from the factory run trust only that key, and an
+# app offers them no supplier-only release. ShopItalic/sudo's stage_p16_candidate
+# requires it from the same revision (ITALIC_PACKAGE_FROM).
+REQUIRED_DFU_PACKAGES = {'sudo': {'from': (21, 139), 'keys': ('italic-dfu-1',)}}
+
+
+def required_dfu_keys(product, s):
+    """The DFU keys whose packages an entry with statement `s` must carry."""
+    rule = REQUIRED_DFU_PACKAGES.get(product)
+    match = P_VERSION.fullmatch(s['version'])
+    if not rule or not s['installable'] or not match:
+        return ()
+    return rule['keys'] if (int(match.group(1)), s['packageRevision']) >= rule['from'] else ()
+
+
 def verify_release(product, entry, keys):
     """Verify one entry, its `dfuPackages` too; return its parsed statement and
     {dfuKey: package statement}."""
@@ -340,7 +356,11 @@ def verify_release(product, entry, keys):
                 f"{s['id']}: details buildIdentity disagrees with statement")
     if 'rollout' in entry:
         check_rollout(s, entry['rollout'])
-    return s, verify_dfu_packages(product, entry, s, keys)
+    packages = verify_dfu_packages(product, entry, s, keys)
+    for dfu_key in required_dfu_keys(product, s):
+        require(dfu_key in packages, f"{s['id']}: from P21 revision 139 an installable release carries the {dfu_key} "
+                                     f"package (stage --dfu-package {dfu_key}=PATH)")
+    return s, packages
 
 
 def check_rollout(s, rollout):

@@ -519,6 +519,23 @@ class DfuPackageTest(unittest.TestCase):
                                   dfu_packages={'italic-dfu-1': self.italic} if packages is None else packages)
         return entry, out
 
+    def test_from_revision_139_an_installable_release_carries_the_twin(self):
+        """Factory-run Rings trust only italic-dfu-1 and are offered no supplier-only release: from P21 revision 139
+        an installable Sudo release can't be staged or verified without its twin. Earlier ones stay as published."""
+        with self.assertRaisesRegex(catalog.CatalogError, 'from P21 revision 139 an installable release carries the italic-dfu-1'):
+            self.stage('6.0.3.3P21-r139', packages={})
+        self.assertEqual(self.signed, [], 'refused before anything is signed')
+        entry, _ = self.stage('6.0.3.3P21-r138', packages={})
+        self.assertNotIn('dfuPackages', entry)
+        s = {'version': '6.0.3.3P21', 'packageRevision': 139, 'installable': True}
+        self.assertEqual(catalog.required_dfu_keys('sudo', s), ('italic-dfu-1',))
+        self.assertEqual(catalog.required_dfu_keys('sudo', {**s, 'installable': False}), (), 'a download only')
+        self.assertEqual(catalog.required_dfu_keys('sudo', {**s, 'packageRevision': 138}), ())
+        self.assertEqual(catalog.required_dfu_keys('sudo', {**s, 'version': '6.0.3.3P22', 'packageRevision': 1}),
+                         ('italic-dfu-1',), 'a later generation too')
+        self.assertEqual(catalog.required_dfu_keys('sudo', {**s, 'version': '6.0.3.3Z62', 'packageRevision': 1}), ())
+        self.assertEqual(catalog.required_dfu_keys('glyph', {**s, 'version': 'P21-rc.1'}), ())
+
     def publish(self, release_id='6.0.3.3P21-r139'):
         """What `publish` leaves in the catalog, without GitHub: the entry with
         both asset API URLs, and the main package's image record."""
@@ -715,9 +732,9 @@ class DfuPackageTest(unittest.TestCase):
             out = staged(change)
             with self.subTest(message), self.assertRaisesRegex(catalog.CatalogError, message):
                 release.load_stage(out, self.keys)
-        # An entry that lost its dfuPackages no longer matches its staged files.
+        # An r139 entry that lost its dfuPackages is refused: from 139 it must carry one.
         out = staged(lambda out: edit_entry(out, lambda e: e.pop('dfuPackages')))
-        with self.assertRaisesRegex(catalog.CatalogError, 'staged asset set changed'):
+        with self.assertRaisesRegex(catalog.CatalogError, 'from P21 revision 139 an installable release carries the italic-dfu-1'):
             release.load_stage(out, self.keys)
 
     def promote(self, out_name, **options):
@@ -746,15 +763,16 @@ class DfuPackageTest(unittest.TestCase):
                          catalog.dfu_package_statements('sudo', published, self.keys))
         self.assertEqual(json.loads(base64.b64decode(entry['statement']))['schema'], catalog.SCHEMA_V2)
         # A changed dfuPackages, or a public package that is no longer the signed one, is not published.
-        for name, change in (('dropped', lambda e: e.pop('dfuPackages')),
-                             ('another apiURL', lambda e: e['dfuPackages'][0]['asset'].update(
-                                 apiURL=catalog.ASSET_API + '700000003'))):
+        for name, change, refusal in (
+                ('dropped', lambda e: e.pop('dfuPackages'), 'from P21 revision 139 an installable release carries'),
+                ('another apiURL', lambda e: e['dfuPackages'][0]['asset'].update(apiURL=catalog.ASSET_API + '700000003'),
+                 "dfuPackages differ from the published entry's")):
             _, changed = self.promote(name)
             data = json.loads((changed / 'entry.json').read_text()); change(data['entry'])
             (changed / 'entry.json').write_text(json.dumps(data))
             with self.subTest(name), mock.patch.object(release, 'anonymous_get', side_effect=self.downloads(published)), \
                     mock.patch.object(release, 'commit') as commit, \
-                    self.assertRaisesRegex(catalog.CatalogError, "dfuPackages differ from the published entry's"):
+                    self.assertRaisesRegex(catalog.CatalogError, refusal):
                 release.publish(changed)
             commit.assert_not_called()
         with mock.patch.object(release, 'anonymous_get', side_effect=self.downloads(published, italic=self.main)), \
