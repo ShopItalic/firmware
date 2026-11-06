@@ -19,7 +19,7 @@
       "version": "6.0.3.3P21",
       "packageRevision": 138,
       "hardware": "603V1.23.2",
-      "channel": "test",
+      "channel": "stable",
       "installable": true,
       "withdrawn": false,
       "tag": "sudo-6.0.3.3P21-r138",
@@ -36,8 +36,7 @@
         "release.json",
         "signed-package.json"
       ],
-      "releaseNotes": "Sudo 1.0.138 is the factory candidate: Sudo 1.0.137 with the fixes from its firmware audit and the final pre-factory review, mostly by removing code. Removing another phone's pairing, including moving the Ring to a new iPhone, works only while the Ring is on its charger, with no touch. The 15-second charger pairing hold is gone: put the Ring on its charger to pair. A full Ring lifted off its charger shows its battery light on a double tap. A cleanup or discard that fails remounts the Ring's storage and carries on, and a Ring whose storage chip was never formatted formats it. Keeps everything else in Sudo 1.0.137. Requires an Italic build that admits revision 138. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending.",
-      "notice": "Test build Sudo 1.0.138: the factory candidate; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
+      "releaseNotes": "Sudo 1.0.138 is the first stable release for Sudo Ring. Pairing and moving to a new iPhone happen with the Ring on its charger, a double tap shows the battery light, and the Ring recovers from storage faults on its own. Sync your recordings before updating: recordings still on the Ring are erased when it restarts on the new version.",
       "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
       "details": {
         "schemaVersion": 1,
@@ -53,18 +52,33 @@
         },
         "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
         "physicallyQualified": false,
-        "status": "signed-test-ota",
+        "status": "supplier-signed-ota",
         "otaAvailable": true,
         "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
         "firmwareVersion": "1.0.138",
-        "notice": "Test build Sudo 1.0.138: the factory candidate; physical acceptance pending. Sync before updating: recordings still on the Ring are erased.",
-        "releaseNotes": "Sudo 1.0.138 is the factory candidate: Sudo 1.0.137 with the fixes from its firmware audit and the final pre-factory review, mostly by removing code. Removing another phone's pairing, including moving the Ring to a new iPhone, works only while the Ring is on its charger, with no touch. The 15-second charger pairing hold is gone: put the Ring on its charger to pair. A full Ring lifted off its charger shows its battery light on a double tap. A cleanup or discard that fails remounts the Ring's storage and carries on, and a Ring whose storage chip was never formatted formats it. Keeps everything else in Sudo 1.0.137. Requires an Italic build that admits revision 138. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build. Physical acceptance is pending."
+        "releaseNotes": "Sudo 1.0.138 is the first stable release for Sudo Ring. Pairing and moving to a new iPhone happen with the Ring on its charger, a double tap shows the battery light, and the Ring recovers from storage faults on its own. Sync your recordings before updating: recordings still on the Ring are erased when it restarts on the new version.",
+        "settingsCompatibility": {
+          "contract": "factory-settings-v1",
+          "packageSHA256": "930701e9670b34d65ebf2eb78d75f20fd98af4e9f5417db2e69033f815a9197a",
+          "evidenceSHA256": "7d50b75bd109224debcee2c4ec40a506c81dd3fbe1824a797c6fe35b818b2f74",
+          "sourceVersions": [
+            "6.0.3.3P20",
+            "6.0.3.3P21"
+          ],
+          "preservesAllSettings": true
+        },
+        "promotedFrom": {
+          "channel": "test",
+          "schema": "italic-firmware-release/1",
+          "issuedAt": "2026-11-04T13:21:19Z",
+          "statementSHA256": "eb076d01d7a695621c6cdeebafb9ee9e6c7249db52681730cb42e3abd50cea2c"
+        }
       },
-      "statement": "eyJhc3NldCI6eyJieXRlcyI6Mjc1Nzc2LCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiOTMwNzAxZTk2NzBiMzRkNjVlYmYyZWI3OGQ3NWYyMGZkOThhZjRlOWY1NDE3ZGIyZTY5MDMzZjgxNWE5MTk3YSJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTM4IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMS0wNFQxMzoyMToxOVoiLCJwYWNrYWdlUmV2aXNpb24iOjEzOCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "statement": "eyJhcHBsaWNhdGlvbk9ubHkiOnRydWUsImFzc2V0Ijp7ImJ5dGVzIjoyNzU3NzYsIm5hbWUiOiJCQ0w2MDNTMlBfNi4wLjMuM1AyMS56aXAiLCJzaGEyNTYiOiI5MzA3MDFlOTY3MGIzNGQ2NWViZjJlYjc4ZDc1ZjIwZmQ5OGFmNGU5ZjU0MTdkYjJlNjkwMzNmODE1YTkxOTdhIn0sImF1dG9JbnN0YWxsIjpmYWxzZSwiYnVpbGRJZGVudGl0eSI6eyJidWlsZElEIjoiMzlhYzQ5NjliM2RlN2Q3YTc1ODA3YjA5MmIzNjI3ODAiLCJjb2RlYyI6MSwiZ2VuZXJhdGlvbiI6MjEsInJldmlzaW9uIjoxMzgsInNldHRpbmdzU2NoZW1hIjo2fSwiY2hhbmdlTm90ZSI6IlRoZSBmaXJzdCBzdGFibGUgU3VkbyByZWxlYXNlLiIsImNoYW5uZWwiOiJzdGFibGUiLCJjdXN0b21lclZlcnNpb24iOiIxLjAuMTM4IiwiZXJhc2VzU3RvcmFnZSI6dHJ1ZSwiaGFyZHdhcmUiOiI2MDNWMS4yMy4yIiwiaWQiOiI2LjAuMy4zUDIxLXIxMzgiLCJpbnN0YWxsYWJsZSI6dHJ1ZSwiaXNzdWVkQXQiOiIyMDI2LTExLTA2VDAzOjU1OjAxWiIsIm1pbmltdW1BcHBCdWlsZCI6MzMwLCJwYWNrYWdlUmV2aXNpb24iOjEzOCwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8yIiwic291cmNlVmVyc2lvbnMiOlsiNi4wLjMuM1AyMCIsIjYuMC4zLjNQMjEiXSwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
       "signature": {
         "alg": "ES256",
         "keyId": "sudo-release-1",
-        "der": "MEYCIQC62/dw9YzaOjkbrhFmIdNZtPH3SDIASAWcy3tr9TZUQQIhAP56EpMiHi3O6Q3j1iqLkk7zvKyDY8CEhbbtcs22/QXb"
+        "der": "MEQCIAf+eTE8WPNGUdeuM6OXb+TwKJbUkIEELbBUveg/fB2nAiB5B4WhSGdGngv7ehgR/Dab5DKnHuDIX8zkAF+6DvXbBQ=="
       }
     },
     {
