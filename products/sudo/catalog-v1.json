@@ -15,6 +15,79 @@
   },
   "releases": [
     {
+      "id": "6.0.3.3P21-r139",
+      "version": "6.0.3.3P21",
+      "packageRevision": 139,
+      "hardware": "603V1.23.2",
+      "channel": "test",
+      "installable": true,
+      "withdrawn": false,
+      "tag": "sudo-6.0.3.3P21-r139",
+      "asset": {
+        "bytes": 275600,
+        "name": "BCL603S2P_6.0.3.3P21.zip",
+        "sha256": "6bbc4f8d0bb6364a178e1890a4ec412c9928b5093ce7b9681da51ca8f2d5b880",
+        "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r139/BCL603S2P_6.0.3.3P21.zip",
+        "md5": "3d51e1c597a59c7fc2b672091013006a",
+        "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/722577032"
+      },
+      "dfuPackages": [
+        {
+          "dfuKey": "italic-dfu-1",
+          "asset": {
+            "name": "BCL603S2P_6.0.3.3P21-italic-dfu-1.zip",
+            "bytes": 275600,
+            "sha256": "d1b550ec7bb3ef37cd28418083fd07990e3e359f4c9c153535021dd0ac02bb61",
+            "url": "https://github.com/ShopItalic/firmware/releases/download/sudo-6.0.3.3P21-r139/BCL603S2P_6.0.3.3P21-italic-dfu-1.zip",
+            "md5": "857b3010423977b2d8f864a0b8319f2d",
+            "apiURL": "https://api.github.com/repos/ShopItalic/firmware/releases/assets/722577037"
+          },
+          "statement": "eyJhc3NldCI6eyJieXRlcyI6Mjc1NjAwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEtaXRhbGljLWRmdS0xLnppcCIsInNoYTI1NiI6ImQxYjU1MGVjN2JiM2VmMzdjZDI4NDE4MDgzZmQwNzk5MGUzZTM1OWY0YzljMTUzNTM1MDIxZGQwYWMwMmJiNjEifSwiZGZ1S2V5IjoiaXRhbGljLWRmdS0xIiwiaGFyZHdhcmUiOiI2MDNWMS4yMy4yIiwiaWQiOiI2LjAuMy4zUDIxLXIxMzkiLCJpbWFnZVNoYTI1NiI6ImQyMzc2NWJlYjc3ODlhYzdmM2U4M2E0MmQwYzJhZDFhYjc0NjBlZjBkZjNjMTg1MWI0YjYyODkxMWQxYmZlMzgiLCJpc3N1ZWRBdCI6IjIwMjYtMTEtMDhUMDE6NTc6MjZaIiwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcGFja2FnZS8xIn0=",
+          "signature": {
+            "alg": "ES256",
+            "keyId": "sudo-release-1",
+            "der": "MEUCIB98HF3BXXx20W/70mQwhVROiFDAjdNga1Uwhm2uMtxfAiEAw63OTJwtibd+d3dLg6GBjSF1JqSb/UFmNLw/JJG69m8="
+          }
+        }
+      ],
+      "extraAssets": [
+        "NOTICES.txt",
+        "release.json",
+        "signed-package-italic-dfu-1.json",
+        "signed-package.json"
+      ],
+      "releaseNotes": "Sudo 1.0.139 removes the one-second recording minimum after the start buzz. A clean lift should stop a short Clip sooner; a lift during the buzz still saves a short Clip. The hold needed to start recording stays the same: 250 ms on Quick, or the selected delay on Standard. This is a test build; physical timing and recording checks are pending. Requires an Italic app that supports revision 139. It is the candidate for the first update after factory delivery; the factory image stays 1.0.138. Both update-key packages contain the same application. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build.",
+      "notice": "Test build Sudo 1.0.139. Physical acceptance pending. Sync first: updating erases recordings still on the Ring.",
+      "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+      "details": {
+        "schemaVersion": 1,
+        "hardware": "603V1.23.2",
+        "version": "6.0.3.3P21",
+        "packageRevision": 139,
+        "buildIdentity": {
+          "revision": 139,
+          "codec": 1,
+          "settingsSchema": 6,
+          "buildID": "b752754d63470c0ef233fe46b70ddd02",
+          "generation": 21
+        },
+        "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
+        "physicallyQualified": false,
+        "status": "signed-test-ota",
+        "otaAvailable": true,
+        "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
+        "firmwareVersion": "1.0.139",
+        "notice": "Test build Sudo 1.0.139. Physical acceptance pending. Sync first: updating erases recordings still on the Ring.",
+        "releaseNotes": "Sudo 1.0.139 removes the one-second recording minimum after the start buzz. A clean lift should stop a short Clip sooner; a lift during the buzz still saves a short Clip. The hold needed to start recording stays the same: 250 ms on Quick, or the selected delay on Standard. This is a test build; physical timing and recording checks are pending. Requires an Italic app that supports revision 139. It is the candidate for the first update after factory delivery; the factory image stays 1.0.138. Both update-key packages contain the same application. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build."
+      },
+      "statement": "eyJhc3NldCI6eyJieXRlcyI6Mjc1NjAwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiNmJiYzRmOGQwYmI2MzY0YTE3OGUxODkwYTRlYzQxMmM5OTI4YjUwOTNjZTdiOTY4MWRhNTFjYThmMmQ1Yjg4MCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTM5IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMS0wOFQwMTo1NzoxOVoiLCJwYWNrYWdlUmV2aXNpb24iOjEzOSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "signature": {
+        "alg": "ES256",
+        "keyId": "sudo-release-1",
+        "der": "MEYCIQCpz94Us/JWG0/jPDlFkyQX+sQYfvDLLh3thOjapdnpVAIhALOH+eacEtyi6g6B0N4WSMAhVurMTSkG25udFTV3IeEV"
+      }
+    },
+    {
       "id": "6.0.3.3P21-r138",
       "version": "6.0.3.3P21",
       "packageRevision": 138,
