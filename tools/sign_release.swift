@@ -1,5 +1,5 @@
 // Sign firmware release statements with a per-product P-256 key kept in the
-// Italic 1Password account's "Italic Release" vault, never on a Mac. The key
+// Italic 1Password account's "Release Keys" vault, never on a Mac. The key
 // is read with the 1Password CLI (`op`) for each signature, held only in this
 // process and checked against keys/<keyId>.x963 before it signs. Only public
 // keys and signatures leave it.
@@ -19,7 +19,10 @@ let keys: [String: (item: String, keyId: String)] = [
     "sudo": ("Sudo firmware release key sudo-release-1", "sudo-release-1"),
 ]
 let account = "italic.1password.com"
-let vault = "Italic Release"
+// The vault's name, for messages; `op` finds it by its ID, which a rename keeps
+// (it was "Italic Release" until November 2026).
+let vault = "Release Keys"
+let vaultID = "yp6kujcjnggiu5lzkohfmt3b7e"
 func fail(_ text: String) -> Never { fputs(text + "\n", stderr); exit(1) }
 
 let args = CommandLine.arguments
@@ -35,7 +38,7 @@ guard let pinned = try? Data(contentsOf: root.appendingPathComponent("keys/\(spe
 // `op` asks for Touch ID when this terminal has no 1Password session yet.
 let op = Process()
 op.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-op.arguments = ["op", "document", "get", spec.item, "--vault", vault, "--account", account]
+op.arguments = ["op", "document", "get", spec.item, "--vault", vaultID, "--account", account]
 let pipe = Pipe()
 op.standardOutput = pipe
 do { try op.run() } catch { fail("The 1Password CLI (op) isn't available") }

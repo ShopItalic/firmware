@@ -34,7 +34,7 @@ makes it **trustworthy** is a signature from the product's release key:
   SHA-256. The unsigned entry fields (notes, `details`, URLs) are for display
   only. The one exception is `withdrawn: true`, which clients honour unsigned
   because it can only remove an offer.
-- Release keys live in the Italic 1Password account's **Italic Release** vault,
+- Release keys live in the Italic 1Password account's **Release Keys** vault,
   never on a Mac, and are only used through `tools/sign_release.swift`. It reads
   the key with the 1Password CLI (`op`) for each signature, holds it only in
   memory, and checks it against `keys/<keyId>.x963` before signing. Each product
