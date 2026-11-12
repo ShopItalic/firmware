@@ -19,7 +19,7 @@
       "version": "6.0.3.3P21",
       "packageRevision": 139,
       "hardware": "603V1.23.2",
-      "channel": "test",
+      "channel": "stable",
       "installable": true,
       "withdrawn": false,
       "tag": "sudo-6.0.3.3P21-r139",
@@ -56,8 +56,7 @@
         "signed-package-italic-dfu-1.json",
         "signed-package.json"
       ],
-      "releaseNotes": "Sudo 1.0.139 removes the one-second recording minimum after the start buzz. A clean lift should stop a short Clip sooner; a lift during the buzz still saves a short Clip. The hold needed to start recording stays the same: 250 ms on Quick, or the selected delay on Standard. This is a test build; physical timing and recording checks are pending. Requires an Italic app that supports revision 139. It is the candidate for the first update after factory delivery; the factory image stays 1.0.138. Both update-key packages contain the same application. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build.",
-      "notice": "Test build Sudo 1.0.139. Physical acceptance pending. Sync first: updating erases recordings still on the Ring.",
+      "releaseNotes": "Short Clips stop recording sooner when you let go. A lift during the start buzz still saves a short Clip. Your hold-to-start delay and saved settings stay the same. This is the first automatic update from the factory firmware, Sudo 1.0.138. Automatic installation requires Italic App 346 or later and happens while Sudo charges nearby, after its recordings have synced. Updating erases recording copies still on the Ring.",
       "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
       "details": {
         "schemaVersion": 1,
@@ -73,18 +72,32 @@
         },
         "toolchain": "Arm Compiler 6.24, Keil MDK Community (non-commercial free of charge)",
         "physicallyQualified": false,
-        "status": "signed-test-ota",
+        "status": "supplier-signed-ota",
         "otaAvailable": true,
         "qualification": "Software checks only. Physical recording, pairing, recovery, power and settings matrix pending.",
         "firmwareVersion": "1.0.139",
-        "notice": "Test build Sudo 1.0.139. Physical acceptance pending. Sync first: updating erases recordings still on the Ring.",
-        "releaseNotes": "Sudo 1.0.139 removes the one-second recording minimum after the start buzz. A clean lift should stop a short Clip sooner; a lift during the buzz still saves a short Clip. The hold needed to start recording stays the same: 250 ms on Quick, or the selected delay on Standard. This is a test build; physical timing and recording checks are pending. Requires an Italic app that supports revision 139. It is the candidate for the first update after factory delivery; the factory image stays 1.0.138. Both update-key packages contain the same application. Sync and verify recordings before updating: recordings still on the Ring are erased on the first boot of a different build."
+        "releaseNotes": "Short Clips stop recording sooner when you let go. A lift during the start buzz still saves a short Clip. Your hold-to-start delay and saved settings stay the same. This is the first automatic update from the factory firmware, Sudo 1.0.138. Automatic installation requires Italic App 346 or later and happens while Sudo charges nearby, after its recordings have synced. Updating erases recording copies still on the Ring.",
+        "settingsCompatibility": {
+          "contract": "factory-settings-v1",
+          "packageSHA256": "6bbc4f8d0bb6364a178e1890a4ec412c9928b5093ce7b9681da51ca8f2d5b880",
+          "evidenceSHA256": "bdc40772596f49f3c6c565ee4af26d3c132052bf94dac7a9e14a99d346577f57",
+          "sourceVersions": [
+            "6.0.3.3P21"
+          ],
+          "preservesAllSettings": true
+        },
+        "promotedFrom": {
+          "channel": "test",
+          "schema": "italic-firmware-release/1",
+          "issuedAt": "2026-11-08T01:57:19Z",
+          "statementSHA256": "be4cb84006dd1424d2beb9bd36c203cee97739a3f805f76d3728126c91b2cdca"
+        }
       },
-      "statement": "eyJhc3NldCI6eyJieXRlcyI6Mjc1NjAwLCJuYW1lIjoiQkNMNjAzUzJQXzYuMC4zLjNQMjEuemlwIiwic2hhMjU2IjoiNmJiYzRmOGQwYmI2MzY0YTE3OGUxODkwYTRlYzQxMmM5OTI4YjUwOTNjZTdiOTY4MWRhNTFjYThmMmQ1Yjg4MCJ9LCJjaGFubmVsIjoidGVzdCIsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTM5IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMS0wOFQwMTo1NzoxOVoiLCJwYWNrYWdlUmV2aXNpb24iOjEzOSwicHJvZHVjdCI6InN1ZG8iLCJzY2hlbWEiOiJpdGFsaWMtZmlybXdhcmUtcmVsZWFzZS8xIiwidmVyc2lvbiI6IjYuMC4zLjNQMjEifQ==",
+      "statement": "eyJhcHBsaWNhdGlvbk9ubHkiOnRydWUsImFzc2V0Ijp7ImJ5dGVzIjoyNzU2MDAsIm5hbWUiOiJCQ0w2MDNTMlBfNi4wLjMuM1AyMS56aXAiLCJzaGEyNTYiOiI2YmJjNGY4ZDBiYjYzNjRhMTc4ZTE4OTBhNGVjNDEyYzk5MjhiNTA5M2NlN2I5NjgxZGE1MWNhOGYyZDViODgwIn0sImF1dG9JbnN0YWxsIjp0cnVlLCJidWlsZElkZW50aXR5Ijp7ImJ1aWxkSUQiOiJiNzUyNzU0ZDYzNDcwYzBlZjIzM2ZlNDZiNzBkZGQwMiIsImNvZGVjIjoxLCJnZW5lcmF0aW9uIjoyMSwicmV2aXNpb24iOjEzOSwic2V0dGluZ3NTY2hlbWEiOjZ9LCJjaGFuZ2VOb3RlIjoiU2hvcnQgQ2xpcHMgc3RvcCBzb29uZXIgYWZ0ZXIgeW91IGxldCBnby4iLCJjaGFubmVsIjoic3RhYmxlIiwiY3VzdG9tZXJWZXJzaW9uIjoiMS4wLjEzOSIsImVyYXNlc1N0b3JhZ2UiOnRydWUsImhhcmR3YXJlIjoiNjAzVjEuMjMuMiIsImlkIjoiNi4wLjMuM1AyMS1yMTM5IiwiaW5zdGFsbGFibGUiOnRydWUsImlzc3VlZEF0IjoiMjAyNi0xMS0xMVQyMzo1OTo0MFoiLCJtaW5pbXVtQXBwQnVpbGQiOjM0NiwibWluaW11bVNvdXJjZVJldmlzaW9uIjoxMzgsInBhY2thZ2VSZXZpc2lvbiI6MTM5LCJwcm9kdWN0Ijoic3VkbyIsInNjaGVtYSI6Iml0YWxpYy1maXJtd2FyZS1yZWxlYXNlLzIiLCJzb3VyY2VWZXJzaW9ucyI6WyI2LjAuMy4zUDIxIl0sInZlcnNpb24iOiI2LjAuMy4zUDIxIn0=",
       "signature": {
         "alg": "ES256",
         "keyId": "sudo-release-1",
-        "der": "MEYCIQCpz94Us/JWG0/jPDlFkyQX+sQYfvDLLh3thOjapdnpVAIhALOH+eacEtyi6g6B0N4WSMAhVurMTSkG25udFTV3IeEV"
+        "der": "MEQCID/idduOkHxV0gsQdHutLGLCJIk9eRvz+lhZiqHeYJYoAiB2IziR5Gh3DrGMyqJ1uuMfGgWo6PepCFasFx1wMNxR3A=="
       }
     },
     {
