@@ -194,6 +194,26 @@ Bluetooth, or over a local Wi-Fi fast transfer the app opens. Glyph never
 downloads from here itself. Glyph checks this signature and the package SHA-256
 before installing, because neither link authenticates the package.
 
+## Dex: vendor firmware without a catalog
+
+Dex firmware is written and signed by its maker, JWD, not by Italic. Italic
+holds no Dex release key, so Dex has **no catalog and no signed statement
+here**. Its images are published only as GitHub Release assets, tagged
+`dex-<version>`, exactly as JWD supplied them:
+
+`https://github.com/ShopItalic/firmware/releases/download/dex-<version>/<image>.ufw`
+
+The trust anchor is the Italic app build. Each build carries the Dex releases
+it will install: the version, the versions it may replace, and each image's
+name, size and SHA-256 in the order Dex must receive them (ShopItalic/app,
+`DexFirmwareCatalog`). The app sends Dex only bytes that match those pins, so
+changing or adding a file here changes nothing until an app release names it.
+
+| Release | Images, in send order | SHA-256 |
+|---|---|---|
+| `dex-1.1.6` (test build) | `Dex_7911-261112-1.1.6-ota.ufw` | `81a585a415118da87a8bd4fd47d12e0852a77f925fc61f515c61624b8a591c13` |
+| | `Dex_7012_261112-1.1.5-KEY.ufw` | `131ee96654e347a65004e06cdab63dc64a2d42dc90bab58bb788de105149df76` |
+
 ## Layout
 
 ```
